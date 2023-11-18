@@ -16,7 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = ViewController()
+        let home = TabBar()
+        window?.rootViewController = home
         window?.rootViewController?.view.backgroundColor = .white
         window?.makeKeyAndVisible()
     }
