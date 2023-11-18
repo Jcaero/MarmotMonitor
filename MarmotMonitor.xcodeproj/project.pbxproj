@@ -1,0 +1,623 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		475071D82B09462000DAB527 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071D72B09462000DAB527 /* AppDelegate.swift */; };
+		475071DA2B09462000DAB527 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071D92B09462000DAB527 /* SceneDelegate.swift */; };
+		475071DC2B09462000DAB527 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071DB2B09462000DAB527 /* ViewController.swift */; };
+		475071DF2B09462000DAB527 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 475071DD2B09462000DAB527 /* Main.storyboard */; };
+		475071E22B09462000DAB527 /* MarmotMonitor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 475071E02B09462000DAB527 /* MarmotMonitor.xcdatamodeld */; };
+		475071E42B09462100DAB527 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 475071E32B09462100DAB527 /* Assets.xcassets */; };
+		475071E72B09462100DAB527 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 475071E52B09462100DAB527 /* LaunchScreen.storyboard */; };
+		475071F22B09462100DAB527 /* MarmotMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071F12B09462100DAB527 /* MarmotMonitorTests.swift */; };
+		475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */; };
+		475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		475071EE2B09462100DAB527 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 475071CC2B09462000DAB527 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 475071D32B09462000DAB527;
+			remoteInfo = MarmotMonitor;
+		};
+		475071F82B09462100DAB527 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 475071CC2B09462000DAB527 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 475071D32B09462000DAB527;
+			remoteInfo = MarmotMonitor;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		475071D42B09462000DAB527 /* MarmotMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarmotMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		475071D72B09462000DAB527 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		475071D92B09462000DAB527 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		475071DB2B09462000DAB527 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		475071DE2B09462000DAB527 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		475071E12B09462000DAB527 /* MarmotMonitor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MarmotMonitor.xcdatamodel; sourceTree = "<group>"; };
+		475071E32B09462100DAB527 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		475071E62B09462100DAB527 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		475071E82B09462100DAB527 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		475071ED2B09462100DAB527 /* MarmotMonitorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarmotMonitorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		475071F12B09462100DAB527 /* MarmotMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorTests.swift; sourceTree = "<group>"; };
+		475071F72B09462100DAB527 /* MarmotMonitorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarmotMonitorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITests.swift; sourceTree = "<group>"; };
+		475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		475071D12B09462000DAB527 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		475071EA2B09462100DAB527 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		475071F42B09462100DAB527 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		475071CB2B09462000DAB527 = {
+			isa = PBXGroup;
+			children = (
+				475071D62B09462000DAB527 /* MarmotMonitor */,
+				475071F02B09462100DAB527 /* MarmotMonitorTests */,
+				475071FA2B09462100DAB527 /* MarmotMonitorUITests */,
+				475071D52B09462000DAB527 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		475071D52B09462000DAB527 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				475071D42B09462000DAB527 /* MarmotMonitor.app */,
+				475071ED2B09462100DAB527 /* MarmotMonitorTests.xctest */,
+				475071F72B09462100DAB527 /* MarmotMonitorUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		475071D62B09462000DAB527 /* MarmotMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				475071D72B09462000DAB527 /* AppDelegate.swift */,
+				475071D92B09462000DAB527 /* SceneDelegate.swift */,
+				475071DB2B09462000DAB527 /* ViewController.swift */,
+				475071DD2B09462000DAB527 /* Main.storyboard */,
+				475071E32B09462100DAB527 /* Assets.xcassets */,
+				475071E52B09462100DAB527 /* LaunchScreen.storyboard */,
+				475071E82B09462100DAB527 /* Info.plist */,
+				475071E02B09462000DAB527 /* MarmotMonitor.xcdatamodeld */,
+			);
+			path = MarmotMonitor;
+			sourceTree = "<group>";
+		};
+		475071F02B09462100DAB527 /* MarmotMonitorTests */ = {
+			isa = PBXGroup;
+			children = (
+				475071F12B09462100DAB527 /* MarmotMonitorTests.swift */,
+			);
+			path = MarmotMonitorTests;
+			sourceTree = "<group>";
+		};
+		475071FA2B09462100DAB527 /* MarmotMonitorUITests */ = {
+			isa = PBXGroup;
+			children = (
+				475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */,
+				475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */,
+			);
+			path = MarmotMonitorUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		475071D32B09462000DAB527 /* MarmotMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 475072012B09462100DAB527 /* Build configuration list for PBXNativeTarget "MarmotMonitor" */;
+			buildPhases = (
+				475071D02B09462000DAB527 /* Sources */,
+				475071D12B09462000DAB527 /* Frameworks */,
+				475071D22B09462000DAB527 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MarmotMonitor;
+			productName = MarmotMonitor;
+			productReference = 475071D42B09462000DAB527 /* MarmotMonitor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		475071EC2B09462100DAB527 /* MarmotMonitorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 475072042B09462100DAB527 /* Build configuration list for PBXNativeTarget "MarmotMonitorTests" */;
+			buildPhases = (
+				475071E92B09462100DAB527 /* Sources */,
+				475071EA2B09462100DAB527 /* Frameworks */,
+				475071EB2B09462100DAB527 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				475071EF2B09462100DAB527 /* PBXTargetDependency */,
+			);
+			name = MarmotMonitorTests;
+			productName = MarmotMonitorTests;
+			productReference = 475071ED2B09462100DAB527 /* MarmotMonitorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		475071F62B09462100DAB527 /* MarmotMonitorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 475072072B09462100DAB527 /* Build configuration list for PBXNativeTarget "MarmotMonitorUITests" */;
+			buildPhases = (
+				475071F32B09462100DAB527 /* Sources */,
+				475071F42B09462100DAB527 /* Frameworks */,
+				475071F52B09462100DAB527 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				475071F92B09462100DAB527 /* PBXTargetDependency */,
+			);
+			name = MarmotMonitorUITests;
+			productName = MarmotMonitorUITests;
+			productReference = 475071F72B09462100DAB527 /* MarmotMonitorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		475071CC2B09462000DAB527 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					475071D32B09462000DAB527 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					475071EC2B09462100DAB527 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 475071D32B09462000DAB527;
+					};
+					475071F62B09462100DAB527 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 475071D32B09462000DAB527;
+					};
+				};
+			};
+			buildConfigurationList = 475071CF2B09462000DAB527 /* Build configuration list for PBXProject "MarmotMonitor" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 475071CB2B09462000DAB527;
+			productRefGroup = 475071D52B09462000DAB527 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				475071D32B09462000DAB527 /* MarmotMonitor */,
+				475071EC2B09462100DAB527 /* MarmotMonitorTests */,
+				475071F62B09462100DAB527 /* MarmotMonitorUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		475071D22B09462000DAB527 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				475071E72B09462100DAB527 /* LaunchScreen.storyboard in Resources */,
+				475071E42B09462100DAB527 /* Assets.xcassets in Resources */,
+				475071DF2B09462000DAB527 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		475071EB2B09462100DAB527 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		475071F52B09462100DAB527 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		475071D02B09462000DAB527 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				475071DC2B09462000DAB527 /* ViewController.swift in Sources */,
+				475071D82B09462000DAB527 /* AppDelegate.swift in Sources */,
+				475071E22B09462000DAB527 /* MarmotMonitor.xcdatamodeld in Sources */,
+				475071DA2B09462000DAB527 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		475071E92B09462100DAB527 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				475071F22B09462100DAB527 /* MarmotMonitorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		475071F32B09462100DAB527 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */,
+				475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		475071EF2B09462100DAB527 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 475071D32B09462000DAB527 /* MarmotMonitor */;
+			targetProxy = 475071EE2B09462100DAB527 /* PBXContainerItemProxy */;
+		};
+		475071F92B09462100DAB527 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 475071D32B09462000DAB527 /* MarmotMonitor */;
+			targetProxy = 475071F82B09462100DAB527 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		475071DD2B09462000DAB527 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				475071DE2B09462000DAB527 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		475071E52B09462100DAB527 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				475071E62B09462100DAB527 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		475071FF2B09462100DAB527 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		475072002B09462100DAB527 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		475072022B09462100DAB527 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MarmotMonitor/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pierrick.MarmotMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		475072032B09462100DAB527 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MarmotMonitor/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pierrick.MarmotMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		475072052B09462100DAB527 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pierrick.MarmotMonitorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MarmotMonitor.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MarmotMonitor";
+			};
+			name = Debug;
+		};
+		475072062B09462100DAB527 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pierrick.MarmotMonitorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MarmotMonitor.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MarmotMonitor";
+			};
+			name = Release;
+		};
+		475072082B09462100DAB527 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pierrick.MarmotMonitorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MarmotMonitor;
+			};
+			name = Debug;
+		};
+		475072092B09462100DAB527 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pierrick.MarmotMonitorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MarmotMonitor;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		475071CF2B09462000DAB527 /* Build configuration list for PBXProject "MarmotMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				475071FF2B09462100DAB527 /* Debug */,
+				475072002B09462100DAB527 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		475072012B09462100DAB527 /* Build configuration list for PBXNativeTarget "MarmotMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				475072022B09462100DAB527 /* Debug */,
+				475072032B09462100DAB527 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		475072042B09462100DAB527 /* Build configuration list for PBXNativeTarget "MarmotMonitorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				475072052B09462100DAB527 /* Debug */,
+				475072062B09462100DAB527 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		475072072B09462100DAB527 /* Build configuration list for PBXNativeTarget "MarmotMonitorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				475072082B09462100DAB527 /* Debug */,
+				475072092B09462100DAB527 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		475071E02B09462000DAB527 /* MarmotMonitor.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				475071E12B09462000DAB527 /* MarmotMonitor.xcdatamodel */,
+			);
+			currentVersion = 475071E12B09462000DAB527 /* MarmotMonitor.xcdatamodel */;
+			path = MarmotMonitor.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 475071CC2B09462000DAB527 /* Project object */;
+}
