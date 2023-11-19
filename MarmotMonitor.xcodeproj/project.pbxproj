@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4712D4332B0A62210085035C /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D4322B0A62210085035C /* TodayViewController.swift */; };
-		4712D4352B0A72130085035C /* GradienView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D4342B0A72130085035C /* GradienView.swift */; };
 		475071D82B09462000DAB527 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071D72B09462000DAB527 /* AppDelegate.swift */; };
 		475071DA2B09462000DAB527 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071D92B09462000DAB527 /* SceneDelegate.swift */; };
 		475071DC2B09462000DAB527 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071DB2B09462000DAB527 /* ViewController.swift */; };
@@ -40,7 +39,6 @@
 
 /* Begin PBXFileReference section */
 		4712D4322B0A62210085035C /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		4712D4342B0A72130085035C /* GradienView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradienView.swift; sourceTree = "<group>"; };
 		475071D42B09462000DAB527 /* MarmotMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarmotMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		475071D72B09462000DAB527 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		475071D92B09462000DAB527 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 				475071D72B09462000DAB527 /* AppDelegate.swift */,
 				475071D92B09462000DAB527 /* SceneDelegate.swift */,
 				4750720D2B09576900DAB527 /* TapBarController.swift */,
-				4712D4342B0A72130085035C /* GradienView.swift */,
 				4712D4312B0A61040085035C /* Todday */,
 				4750720B2B09471000DAB527 /* Ressources */,
 				4750720C2B09477000DAB527 /* CoreData */,
@@ -312,7 +309,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4712D4352B0A72130085035C /* GradienView.swift in Sources */,
 				475071DC2B09462000DAB527 /* ViewController.swift in Sources */,
 				4750720E2B09576900DAB527 /* TapBarController.swift in Sources */,
 				4712D4332B0A62210085035C /* TodayViewController.swift in Sources */,

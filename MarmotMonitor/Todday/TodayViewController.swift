@@ -23,7 +23,7 @@ class TodayViewController: UIViewController {
         let label = UILabel()
         label.text = "Baby Name"
         label.font = UIFont(name: "Courier New", size: 30)
-        label.textColor = .black
+        label.textColor = .white
         label.textAlignment = .center
         return label
     }()
@@ -32,7 +32,7 @@ class TodayViewController: UIViewController {
         let label = UILabel()
         label.text = "Baby Year"
         label.font = UIFont(name: "Courier New", size: 20)
-        label.textColor = .black
+        label.textColor = .white
         label.textAlignment = .center
         return label
     }()
@@ -41,7 +41,7 @@ class TodayViewController: UIViewController {
         let label = UILabel()
         label.text = "Baby Month"
         label.font = UIFont(name: "Courier New", size: 20)
-        label.textColor = .black
+        label.textColor = .white
         label.textAlignment = .center
         return label
     }()
@@ -90,8 +90,14 @@ class TodayViewController: UIViewController {
         ])
     }
 
-    //MARK: - Gesture of BabyView
     private func setupBabyView() {
+        setupAction()
+
+        addGradientToButton(babyView)
+    }
+
+    // MARK: - Gesture of BabyView
+    private func setupAction() {
         let tapAction = UIAction { [weak self] action in
             self?.tappedButton(action.sender as? UIButton ?? UIButton())
         }
@@ -111,5 +117,17 @@ class TodayViewController: UIViewController {
     private func holdDown(_ sender: UIButton) {
         sender.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
         sender.layer.shadowOpacity = 0
+    }
+
+    // MARK: - GradientLayer
+    private func addGradientToButton(_ button: UIButton) {
+        guard let imageView = button.imageView else { return }
+
+        let gradient = CAGradientLayer()
+        gradient.frame = imageView.bounds
+        gradient.colors = [UIColor.black.cgColor, UIColor.clear.cgColor, UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradient.locations = [0.0, 0.3, 0.7, 1.0]
+
+        imageView.layer.insertSublayer(gradient, at: 0)
     }
 }
