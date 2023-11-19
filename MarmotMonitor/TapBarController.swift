@@ -15,7 +15,7 @@ class TabBar: UITabBarController {
     }
 
     func setupVCs() {
-        let todayController = UINavigationController(rootViewController: ViewController())
+        let todayController = UINavigationController(rootViewController: TodayViewController())
         let monitorController = UINavigationController(rootViewController: ViewController())
         let doctorController = UINavigationController(rootViewController: ViewController())
         let settingsController = UINavigationController(rootViewController: ViewController())
