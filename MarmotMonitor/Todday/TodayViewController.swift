@@ -126,7 +126,7 @@ class TodayViewController: UIViewController {
         let gradient = CAGradientLayer()
         gradient.frame = imageView.bounds
         gradient.colors = [UIColor.black.cgColor, UIColor.clear.cgColor, UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradient.locations = [0.0, 0.3, 0.7, 1.0]
+        gradient.locations = [0.0, 0.25, 0.8, 1.0]
 
         imageView.layer.insertSublayer(gradient, at: 0)
     }
