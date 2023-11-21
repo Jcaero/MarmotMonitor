@@ -25,6 +25,16 @@ class NameController: UIViewController {
          return label
     }()
 
+    let area: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 20
+        view.layer.shadowColor = UIColor.white.cgColor
+        view.layer.shadowOpacity = 0.8
+        view.layer.shadowRadius = 30
+        view.backgroundColor = .white
+        return view
+    }()
+
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -34,10 +44,10 @@ class NameController: UIViewController {
         return stackView
     }()
 
-    let name: UITextField = {
+    let babyName: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Nom du bébé"
-        textField.textColor = .white
+        textField.textColor = .black
         textField.textAlignment = .left
         textField.borderStyle = .roundedRect
         textField.adjustsFontSizeToFitWidth = true
@@ -62,19 +72,23 @@ class NameController: UIViewController {
     let boyButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "boy"), for: .normal)
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 2
         return button
     }()
 
     let girlButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "girl"), for: .normal)
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 2
         return button
     }()
 
     let parentsName: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Nom du parent"
-        textField.textColor = .white
+        textField.textColor = .black
         textField.textAlignment = .left
         textField.borderStyle = .roundedRect
         textField.adjustsFontSizeToFitWidth = true
@@ -106,9 +120,9 @@ class NameController: UIViewController {
 
     let saveButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        button.backgroundColor = .lightGray
-        button.layer.cornerRadius = 10
+        button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
+        button.tintColor = .black
+        button.backgroundColor = .clear
         return button
     }()
 
@@ -118,6 +132,8 @@ class NameController: UIViewController {
         setupView()
         setupContraints()
         setupAction()
+
+        setColorwith(pastel: .pastelBrown, dark: .darkBrown)
     }
 
     override func viewDidLayoutSubviews() {
@@ -134,17 +150,19 @@ class NameController: UIViewController {
             genderStackView.addArrangedSubview($0)
         }
 
-        [name, genderStackView, parentsName, dateOfBirth, timeOfBirth].forEach {
+        [babyName, genderStackView, parentsName, dateOfBirth, timeOfBirth].forEach {
             stackView.addArrangedSubview($0)
         }
 
-        [roundedImage, titre, stackView, saveButton].forEach {
+        [area, roundedImage, titre, saveButton].forEach {
             view.addSubview($0)
         }
+
+        area.addSubview(stackView)
     }
 
     private func setupContraints() {
-        [titre, name, parentsName, dateOfBirth, timeOfBirth, saveButton, stackView, roundedImage].forEach {
+        [titre, babyName, parentsName, dateOfBirth, timeOfBirth, saveButton, stackView, roundedImage, area].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -165,15 +183,22 @@ class NameController: UIViewController {
         NSLayoutConstraint.activate([
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            saveButton.heightAnchor.constraint(equalToConstant: 50),
+            saveButton.heightAnchor.constraint(equalToConstant: 40),
             saveButton.widthAnchor.constraint(equalTo: saveButton.heightAnchor)
         ])
 
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: roundedImage.bottomAnchor, constant: 10),
-            stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
-            stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            stackView.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: -30)
+            area.topAnchor.constraint(equalTo: titre.bottomAnchor, constant: 10),
+            area.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
+            area.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
+            area.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: -30)
+        ])
+
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: area.topAnchor, constant: 10),
+            stackView.leftAnchor.constraint(equalTo: area.leftAnchor, constant: 10),
+            stackView.rightAnchor.constraint(equalTo: area.rightAnchor, constant: -10),
+            stackView.bottomAnchor.constraint(equalTo: area.bottomAnchor, constant: -10)
         ])
 
         NSLayoutConstraint.activate([
@@ -187,6 +212,9 @@ class NameController: UIViewController {
     private func setupImage() {
         roundedImage.layer.cornerRadius = roundedImage.bounds.height / 2
         roundedImage.clipsToBounds = true
+
+        boyButton.layer.cornerRadius = boyButton.frame.width / 2
+        girlButton.layer.cornerRadius = boyButton.frame.width / 2
     }
 
     // MARK: - Gesture of BabyView
@@ -203,10 +231,24 @@ class NameController: UIViewController {
     }
 
     private func boyButtonTapped() {
-        view.backgroundColor = .blue // Changez la couleur en bleu
+        setColorwith(pastel: .pastelBlue, dark: .darkBlue)
+
+        boyButton.layer.borderColor = UIColor.darkBlue.cgColor
+        girlButton.layer.borderColor = UIColor.white.cgColor
     }
 
     private func girlButtonTapped() {
-        view.backgroundColor = .systemPink // Changez la couleur en rose
+        setColorwith(pastel: .pastelPink, dark: .darkPink)
+
+        girlButton.layer.borderColor = UIColor.darkPink.cgColor
+        boyButton.layer.borderColor = UIColor.white.cgColor
+    }
+
+    // MARK: - Color Views
+    private func setColorwith( pastel: UIColor, dark: UIColor) {
+        area.layer.shadowColor = pastel.cgColor
+        titre.textColor = dark
+        babyName.textColor = dark
+        saveButton.tintColor = dark
     }
 }
