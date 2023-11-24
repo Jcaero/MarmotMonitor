@@ -16,6 +16,7 @@ class BabyNameController: UIViewController {
         label.textColor = .black
         label.textAlignment = .left
         label.numberOfLines = 0
+        label.setAccessibility(with: .header, label: "Quel est le nom de la petite marmotte ?", hint: "")
         return label
     }()
 
@@ -36,7 +37,7 @@ class BabyNameController: UIViewController {
         textField.adjustsFontSizeToFitWidth = true
         textField.textContentType = .name
         textField.backgroundColor = .pastelBrown
-        textField.setAccessibility(with: .header, label: "Nom du bébé", hint: "inserer le nom de Bébé")
+        textField.setAccessibility(with: .keyboardKey, label: "", hint: "inserer le nom de Bébé")
         return textField
     }()
 
@@ -51,6 +52,7 @@ class BabyNameController: UIViewController {
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
         button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         button.isSelected = false
+        button.setAccessibility(with: .button, label: "Suivant", hint: "Appuyer pour passer à la suite")
         return button
     }()
 
@@ -95,6 +97,8 @@ class BabyNameController: UIViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        navigationItem.backButtonDisplayMode = .minimal
     }
 
     override func viewDidLayoutSubviews() {
@@ -209,6 +213,11 @@ class BabyNameController: UIViewController {
     private func setupTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
         view.addGestureRecognizer(tapGesture)
+    }
+
+    // MARK: - action
+    @objc private func backButtonTapped() {
+      print("OK transition")
     }
 }
 

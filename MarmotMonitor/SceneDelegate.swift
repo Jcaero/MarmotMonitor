@@ -18,9 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
 //        let home = TabBar()
 //        let home = NameController()
-        let home = BabyNameController()
-        window?.rootViewController = home
-        window?.rootViewController?.view.backgroundColor = .white
+        let home = WelcomeController()
+       let navController = UINavigationController(rootViewController: home)
+        window?.rootViewController = navController
+//        window?.rootViewController?.view.backgroundColor = .white
         window?.makeKeyAndVisible()
+
     }
 }
