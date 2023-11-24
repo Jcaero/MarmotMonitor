@@ -7,8 +7,26 @@
 
 import UIKit
 
-class BabyNameController: UIViewController {
+class WelcomeController: UIViewController {
     // MARK: - Properties
+    let titre: UILabel = {
+        let label = UILabel()
+        label.text = "Bonjour"
+        label.setupDynamicTextWith(policeName: "Symbol", size: 40, style: .body)
+        label.textColor = .black
+        label.textAlignment = .left
+        return label
+    }()
+
+    let sousTitre: UILabel = {
+        let label = UILabel()
+        label.text = "Nous allons créer ton espace personnalisé"
+        label.setupDynamicTextWith(policeName: "Symbol", size: 17, style: .body)
+        label.textColor = .black
+        label.textAlignment = .left
+        return label
+    }()
+
     let babyNameTitre: UILabel = {
         let label = UILabel()
         label.text = "Quel est le nom de la petite marmotte ?"
@@ -22,10 +40,6 @@ class BabyNameController: UIViewController {
     let babyName: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Nom du bébé"
-        let font = UIFont(name: "Symbol", size: 20)
-        let fontMetrics = UIFontMetrics(forTextStyle: .body)
-        textField.font = fontMetrics.scaledFont(for: font!)
-        textField.adjustsFontForContentSizeCategory = true
         textField.textColor = .black
         textField.textAlignment = .left
         textField.borderStyle = .roundedRect
@@ -36,6 +50,7 @@ class BabyNameController: UIViewController {
         textField.adjustsFontSizeToFitWidth = true
         textField.textContentType = .name
         textField.backgroundColor = .pastelBrown
+        
         textField.setAccessibility(with: .header, label: "Nom du bébé", hint: "inserer le nom de Bébé")
         return textField
     }()
@@ -43,14 +58,12 @@ class BabyNameController: UIViewController {
     let nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("Suivant", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 10
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
-        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        button.isSelected = false
         return button
     }()
 
@@ -77,7 +90,7 @@ class BabyNameController: UIViewController {
     }()
 
     let pastelArea: UIView = {
-        let view = UIView()
+       let view = UIView()
         view.backgroundColor = .pastelBrown
         view.layer.cornerRadius = 20
         return view
@@ -89,12 +102,6 @@ class BabyNameController: UIViewController {
         setupViews()
         setupContraints()
         setupGradient()
-
-        setupTapGesture()
-        babyName.delegate = self
-
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     override func viewDidLayoutSubviews() {
@@ -112,7 +119,7 @@ class BabyNameController: UIViewController {
             view.addSubview($0)
         }
 
-        [babyNameTitre, babyName].forEach {
+        [titre,sousTitre, babyNameTitre, babyName].forEach {
             stackView.addArrangedSubview($0)
         }
 
@@ -123,7 +130,7 @@ class BabyNameController: UIViewController {
     }
 
     private func setupContraints() {
-        [nextButton, roundedImage, babyName, babyNameTitre, schrollView, stackView, pastelArea, nextButton].forEach {
+        [nextButton, roundedImage, titre, sousTitre, babyName, babyNameTitre, schrollView, stackView, pastelArea, nextButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -136,7 +143,7 @@ class BabyNameController: UIViewController {
 
         NSLayoutConstraint.activate([
             schrollView.topAnchor.constraint(equalTo: roundedImage.bottomAnchor, constant: -20),
-            schrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            schrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor , constant: -20),
             schrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
             schrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10)
         ])
@@ -145,7 +152,8 @@ class BabyNameController: UIViewController {
             pastelArea.topAnchor.constraint(equalTo: schrollView.topAnchor, constant: 10),
             pastelArea.rightAnchor.constraint(equalTo: schrollView.rightAnchor, constant: -10),
             pastelArea.leftAnchor.constraint(equalTo: schrollView.leftAnchor, constant: 10),
-            pastelArea.widthAnchor.constraint(equalToConstant: (view.frame.width - 40))
+            pastelArea.widthAnchor.constraint(equalToConstant: (view.frame.width - 40)),
+//            pastelArea.bottomAnchor.constraint(equalTo: schrollView.bottomAnchor, constant: -10)
         ])
 
         NSLayoutConstraint.activate([
@@ -167,6 +175,7 @@ class BabyNameController: UIViewController {
         NSLayoutConstraint.activate([
             babyName.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
         ])
+
     }
 
     private func setupGradient() {
@@ -175,57 +184,5 @@ class BabyNameController: UIViewController {
         gradient.colors = [UIColor.mediumBrown.cgColor, UIColor.pastelBrown.cgColor]
         gradient.locations = [0.0, 1.0]
         view.layer.insertSublayer(gradient, at: 0)
-    }
-
-    // MARK: - Keyboard
-    /// Check if the keyboard is displayed above textefield  and move the view if necessary
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let textFieldBottomY = babyName.convert(babyName.bounds, to: self.view.window).maxY
-                let screenHeight = UIScreen.main.bounds.height
-                let keyboardTopY = screenHeight - keyboardSize.height
-
-                if textFieldBottomY > keyboardTopY {
-                    self.view.frame.origin.y = -(textFieldBottomY - keyboardTopY) - 20
-                }
-        }
-    }
-
-    /// Return view in the origine place
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
-    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
-        babyName.resignFirstResponder()
-    }
-
-    private func setupTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
-        view.addGestureRecognizer(tapGesture)
-    }
-}
-
-extension BabyNameController: UITextFieldDelegate {
-    /// remove keyboard when tap to return button
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        if let text = textField.text, text.count >= 3 {
-            nextButton.isEnabled = true
-            nextButton.setTitleColor(.black, for: .normal)
-        } else {
-            nextButton.isEnabled = false
-            nextButton.setTitleColor(.gray, for: .normal)
-        }
     }
 }

@@ -22,6 +22,7 @@
 		475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */; };
 		475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */; };
 		4750720E2B09576900DAB527 /* TapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750720D2B09576900DAB527 /* TapBarController.swift */; };
+		47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A3A3532B0FE7FD00447362 /* WelcomeController.swift */; };
 		47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITests.swift; sourceTree = "<group>"; };
 		475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4750720D2B09576900DAB527 /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
+		47A3A3532B0FE7FD00447362 /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
 		47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +144,7 @@
 				475071D72B09462000DAB527 /* AppDelegate.swift */,
 				475071D92B09462000DAB527 /* SceneDelegate.swift */,
 				4719ABE42B0E96380088CBE2 /* babyNameController.swift */,
+				47A3A3532B0FE7FD00447362 /* WelcomeController.swift */,
 				4750720D2B09576900DAB527 /* TapBarController.swift */,
 				4712D4312B0A61040085035C /* Todday */,
 				4712D4362B0A991F0085035C /* insertBabyName */,
@@ -346,6 +349,7 @@
 				4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */,
 				4719ABE52B0E96380088CBE2 /* babyNameController.swift in Sources */,
 				4712D4332B0A62210085035C /* TodayViewController.swift in Sources */,
+				47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */,
 				475071D82B09462000DAB527 /* AppDelegate.swift in Sources */,
 				475071E22B09462000DAB527 /* MarmotMonitor.xcdatamodeld in Sources */,
 				4712D43D2B0A9BC50085035C /* UIView+.swift in Sources */,
