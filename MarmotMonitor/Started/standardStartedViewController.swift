@@ -1,34 +1,13 @@
 //
-//  babyNameController.swift
+//  standardStartedViewController.swift
 //  MarmotMonitor
 //
-//  Created by pierrick viret on 22/11/2023.
+//  Created by pierrick viret on 24/11/2023.
 //
-
 import UIKit
 
-class WelcomeController: UIViewController {
+class StandardStartedViewController: UIViewController {
         // MARK: - Properties
-        let welcomeTitle: UILabel = {
-            let label = UILabel()
-            label.text = "Bonjour"
-            label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
-            label.textColor = .black
-            label.textAlignment = .left
-            label.numberOfLines = 0
-            return label
-        }()
-
-    let subTitle: UILabel = {
-        let label = UILabel()
-        label.text = "Je vais t'aider à créer ton espace personnalisé"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
-        label.textColor = .black
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        return label
-    }()
-
         let nextButton: UIButton = {
             let button = UIButton()
             button.setTitle("Commencer", for: .normal)
@@ -39,7 +18,6 @@ class WelcomeController: UIViewController {
             button.titleLabel?.adjustsFontForContentSizeCategory = true
             button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
             button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            button.setAccessibility(with: .button, label: "commencer", hint: "Appuyer pour commencer")
             return button
         }()
 
@@ -78,7 +56,6 @@ class WelcomeController: UIViewController {
             setupViews()
             setupContraints()
             setupGradient()
-            nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         }
 
         override func viewDidLayoutSubviews() {
@@ -96,10 +73,6 @@ class WelcomeController: UIViewController {
                 view.addSubview($0)
             }
 
-            [welcomeTitle, subTitle].forEach {
-                stackView.addArrangedSubview($0)
-            }
-
             pastelArea.addSubview(stackView)
 
             schrollView.addSubview(pastelArea)
@@ -107,7 +80,7 @@ class WelcomeController: UIViewController {
         }
 
         private func setupContraints() {
-            [nextButton, roundedImage, welcomeTitle, subTitle, schrollView, stackView, pastelArea, nextButton].forEach {
+            [nextButton, roundedImage, schrollView, stackView, pastelArea, nextButton].forEach {
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
 
@@ -156,11 +129,4 @@ class WelcomeController: UIViewController {
             gradient.locations = [0.0, 1.0]
             view.layer.insertSublayer(gradient, at: 0)
         }
-
-    // MARK: - Action
-    @objc private func nextButtonTapped() {
-        navigationItem.backButtonDisplayMode = .minimal
-        navigationController?.navigationBar.tintColor = .black
-        navigationController?.pushViewController(BabyNameController(), animated: true)
-    }
 }

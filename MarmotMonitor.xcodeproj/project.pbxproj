@@ -12,6 +12,8 @@
 		4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D43A2B0A9B5C0085035C /* UILabel+.swift */; };
 		4712D43D2B0A9BC50085035C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D43C2B0A9BC50085035C /* UIView+.swift */; };
 		4719ABE52B0E96380088CBE2 /* babyNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719ABE42B0E96380088CBE2 /* babyNameController.swift */; };
+		4735B26B2B1140D8000F2B8C /* standardStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26A2B1140D8000F2B8C /* standardStartedViewController.swift */; };
+		4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26D2B1145B7000F2B8C /* GenderController.swift */; };
 		475071D82B09462000DAB527 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071D72B09462000DAB527 /* AppDelegate.swift */; };
 		475071DA2B09462000DAB527 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071D92B09462000DAB527 /* SceneDelegate.swift */; };
 		475071DC2B09462000DAB527 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071DB2B09462000DAB527 /* ViewController.swift */; };
@@ -49,6 +51,8 @@
 		4712D43A2B0A9B5C0085035C /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		4712D43C2B0A9BC50085035C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		4719ABE42B0E96380088CBE2 /* babyNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = babyNameController.swift; sourceTree = "<group>"; };
+		4735B26A2B1140D8000F2B8C /* standardStartedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = standardStartedViewController.swift; sourceTree = "<group>"; };
+		4735B26D2B1145B7000F2B8C /* GenderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderController.swift; sourceTree = "<group>"; };
 		475071D42B09462000DAB527 /* MarmotMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarmotMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		475071D72B09462000DAB527 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		475071D92B09462000DAB527 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +122,17 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		4735B26C2B11455C000F2B8C /* Started */ = {
+			isa = PBXGroup;
+			children = (
+				4735B26A2B1140D8000F2B8C /* standardStartedViewController.swift */,
+				47A3A3532B0FE7FD00447362 /* WelcomeController.swift */,
+				4719ABE42B0E96380088CBE2 /* babyNameController.swift */,
+				4735B26D2B1145B7000F2B8C /* GenderController.swift */,
+			);
+			path = Started;
+			sourceTree = "<group>";
+		};
 		475071CB2B09462000DAB527 = {
 			isa = PBXGroup;
 			children = (
@@ -141,10 +156,9 @@
 		475071D62B09462000DAB527 /* MarmotMonitor */ = {
 			isa = PBXGroup;
 			children = (
+				4735B26C2B11455C000F2B8C /* Started */,
 				475071D72B09462000DAB527 /* AppDelegate.swift */,
 				475071D92B09462000DAB527 /* SceneDelegate.swift */,
-				4719ABE42B0E96380088CBE2 /* babyNameController.swift */,
-				47A3A3532B0FE7FD00447362 /* WelcomeController.swift */,
 				4750720D2B09576900DAB527 /* TapBarController.swift */,
 				4712D4312B0A61040085035C /* Todday */,
 				4712D4362B0A991F0085035C /* insertBabyName */,
@@ -346,10 +360,12 @@
 				475071DC2B09462000DAB527 /* ViewController.swift in Sources */,
 				47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */,
 				4750720E2B09576900DAB527 /* TapBarController.swift in Sources */,
+				4735B26B2B1140D8000F2B8C /* standardStartedViewController.swift in Sources */,
 				4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */,
 				4719ABE52B0E96380088CBE2 /* babyNameController.swift in Sources */,
 				4712D4332B0A62210085035C /* TodayViewController.swift in Sources */,
 				47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */,
+				4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */,
 				475071D82B09462000DAB527 /* AppDelegate.swift in Sources */,
 				475071E22B09462000DAB527 /* MarmotMonitor.xcdatamodeld in Sources */,
 				4712D43D2B0A9BC50085035C /* UIView+.swift in Sources */,

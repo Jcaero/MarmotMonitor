@@ -16,4 +16,5 @@ extension UIColor {
     static let pastelBrown = UIColor(red: 0.75, green: 0.65, blue: 0.56, alpha: 1.00)
     static let darkBrown = UIColor(red: 0.65, green: 0.52, blue: 0.40, alpha: 1.00)
     static let mediumBrown = UIColor(red: 0.58, green: 0.42, blue: 0.27, alpha: 1.00)
+    static let heavyPink = UIColor(red: 0.91, green: 0.22, blue: 0.56, alpha: 1.00)
 }
