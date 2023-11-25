@@ -27,7 +27,7 @@ class GenderViewModelTest: XCTestCase {
 
         viewModel.saveGender()
 
-        let savedGender = defaults.string(forKey: "gender")
+        let savedGender = defaults.string(forKey: UserInfoKey.gender.rawValue)
         XCTAssertEqual(savedGender, nil)
     }
 
@@ -37,7 +37,7 @@ class GenderViewModelTest: XCTestCase {
 
         viewModel.saveGender()
 
-        let savedGender = defaults.string(forKey: "gender")
+        let savedGender = defaults.string(forKey: UserInfoKey.gender.rawValue)
         XCTAssertEqual(savedGender, testGender)
     }
 
@@ -47,7 +47,7 @@ class GenderViewModelTest: XCTestCase {
 
         viewModel.saveGender()
 
-        let savedGender = defaults.string(forKey: "gender")
+        let savedGender = defaults.string(forKey: UserInfoKey.gender.rawValue)
         XCTAssertEqual(savedGender, testGender)
     }
 
@@ -57,7 +57,7 @@ class GenderViewModelTest: XCTestCase {
 
         viewModel.saveGender()
 
-        let savedGender = defaults.string(forKey: "gender")
+        let savedGender = defaults.string(forKey: UserInfoKey.gender.rawValue)
         XCTAssertEqual(savedGender, nil)
     }
 }

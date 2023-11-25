@@ -27,7 +27,7 @@ class ParentNameViewModelTest: XCTestCase {
         let parentName = "Test Name"
         viewModel.saveParentName(name: parentName)
 
-        let savedGender = defaults.string(forKey: "parentName")
+        let savedGender = defaults.string(forKey: UserInfoKey.parentName.rawValue)
         XCTAssertEqual(savedGender, parentName)
     }
 
@@ -35,7 +35,7 @@ class ParentNameViewModelTest: XCTestCase {
         let parentName = ""
         viewModel.saveParentName(name: parentName)
 
-        let savedGender = defaults.string(forKey: "parentName")
+        let savedGender = defaults.string(forKey: UserInfoKey.parentName.rawValue)
         XCTAssertEqual(savedGender, nil)
     }
 }

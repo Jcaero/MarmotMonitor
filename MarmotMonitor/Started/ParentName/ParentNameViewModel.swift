@@ -16,7 +16,7 @@ final class ParentNameViewModel {
 
     func saveParentName(name: String) {
         if name != "" {
-            defaults.set(name, forKey: "parentName")
+            defaults.set(name, forKey: UserInfoKey.parentName.rawValue)
         }
     }
 }

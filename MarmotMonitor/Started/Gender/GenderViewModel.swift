@@ -30,7 +30,7 @@ final class GenderViewModel {
 
     func saveGender() {
         if gender != .none {
-            defaults.set(gender.description, forKey: "gender")
+            defaults.set(gender.description, forKey: UserInfoKey.gender.rawValue)
         }
     }
 }

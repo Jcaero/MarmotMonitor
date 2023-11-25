@@ -24,11 +24,13 @@
 		475071E22B09462000DAB527 /* MarmotMonitor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 475071E02B09462000DAB527 /* MarmotMonitor.xcdatamodeld */; };
 		475071E42B09462100DAB527 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 475071E32B09462100DAB527 /* Assets.xcassets */; };
 		475071E72B09462100DAB527 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 475071E52B09462100DAB527 /* LaunchScreen.storyboard */; };
-		475071F22B09462100DAB527 /* MarmotMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071F12B09462100DAB527 /* MarmotMonitorTests.swift */; };
 		475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */; };
 		475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */; };
 		4750720E2B09576900DAB527 /* TapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750720D2B09576900DAB527 /* TapBarController.swift */; };
 		47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A3A3532B0FE7FD00447362 /* WelcomeController.swift */; };
+		47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8C2B128A5A00C5919A /* UserDefault+.swift */; };
+		47CABD8F2B128D6A00C5919A /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8E2B128D6A00C5919A /* UIApplication.swift */; };
+		47CABD912B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */; };
 		47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,12 +72,14 @@
 		475071E62B09462100DAB527 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		475071E82B09462100DAB527 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		475071ED2B09462100DAB527 /* MarmotMonitorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarmotMonitorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		475071F12B09462100DAB527 /* MarmotMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorTests.swift; sourceTree = "<group>"; };
 		475071F72B09462100DAB527 /* MarmotMonitorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarmotMonitorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITests.swift; sourceTree = "<group>"; };
 		475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4750720D2B09576900DAB527 /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
 		47A3A3532B0FE7FD00447362 /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
+		47CABD8C2B128A5A00C5919A /* UserDefault+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+.swift"; sourceTree = "<group>"; };
+		47CABD8E2B128D6A00C5919A /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorAuditAccessibility.swift; sourceTree = "<group>"; };
 		47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +114,7 @@
 				4712D43A2B0A9B5C0085035C /* UILabel+.swift */,
 				4712D43C2B0A9BC50085035C /* UIView+.swift */,
 				47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */,
+				47CABD8C2B128A5A00C5919A /* UserDefault+.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -190,7 +195,6 @@
 		475071F02B09462100DAB527 /* MarmotMonitorTests */ = {
 			isa = PBXGroup;
 			children = (
-				475071F12B09462100DAB527 /* MarmotMonitorTests.swift */,
 				474732572B123F8D0064ABB4 /* BabyNameViewModelTest.swift */,
 				474732592B12432C0064ABB4 /* GenderViewModelTest.swift */,
 				4747325B2B12456A0064ABB4 /* ParentNameViewModelTest.swift */,
@@ -203,6 +207,8 @@
 			children = (
 				475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */,
 				475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */,
+				47CABD8E2B128D6A00C5919A /* UIApplication.swift */,
+				47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */,
 			);
 			path = MarmotMonitorUITests;
 			sourceTree = "<group>";
@@ -389,6 +395,7 @@
 				47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */,
 				4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */,
 				475071D82B09462000DAB527 /* AppDelegate.swift in Sources */,
+				47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */,
 				475071E22B09462000DAB527 /* MarmotMonitor.xcdatamodeld in Sources */,
 				4712D43D2B0A9BC50085035C /* UIView+.swift in Sources */,
 				475071DA2B09462000DAB527 /* SceneDelegate.swift in Sources */,
@@ -401,7 +408,6 @@
 			files = (
 				474732582B123F8D0064ABB4 /* BabyNameViewModelTest.swift in Sources */,
 				4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */,
-				475071F22B09462100DAB527 /* MarmotMonitorTests.swift in Sources */,
 				4747325C2B12456A0064ABB4 /* ParentNameViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,8 +416,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47CABD8F2B128D6A00C5919A /* UIApplication.swift in Sources */,
 				475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */,
 				475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */,
+				47CABD912B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

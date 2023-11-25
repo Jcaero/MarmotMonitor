@@ -15,6 +15,6 @@ final class BabyNameViewModel {
     }
 
     func saveBabyName(name: String) {
-        defaults.set(name, forKey: "babyName")
+        defaults.set(name, forKey: UserInfoKey.babyName.rawValue)
     }
 }

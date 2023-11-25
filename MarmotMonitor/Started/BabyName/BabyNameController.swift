@@ -49,6 +49,7 @@ final class BabyNameController: StandardStartedViewController {
         super.viewDidLoad()
         setupViews()
         setupContraints()
+
         setupNextButton()
 
         setupTapGesture()
@@ -83,6 +84,7 @@ final class BabyNameController: StandardStartedViewController {
         nextButton.setTitle("Suivant", for: .normal)
         nextButton.setAccessibility(with: .button, label: "Suivant", hint: "Appuyer pour passer à la suite")
         nextButton.isEnabled = false
+        nextButton.accessibilityTraits.insert(.notEnabled)
         nextButton.setTitleColor(.gray, for: .normal)
     }
 
@@ -131,9 +133,11 @@ extension BabyNameController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if let text = textField.text, text.count >= 3 {
             nextButton.isEnabled = true
+            nextButton.accessibilityTraits.remove(.notEnabled)
             nextButton.setTitleColor(.black, for: .normal)
         } else {
             nextButton.isEnabled = false
+            nextButton.accessibilityTraits.insert(.notEnabled)
             nextButton.setTitleColor(.gray, for: .normal)
         }
     }
@@ -146,5 +150,23 @@ extension BabyNameController {
         navigationItem.backButtonDisplayMode = .minimal
         navigationController?.navigationBar.tintColor = .black
         navigationController?.pushViewController(GenderController(), animated: true)
+    }
+}
+
+// MARK: - Accessibility
+extension BabyNameController {
+    /// Update the display when the user change the size of the text in the settings
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
+
+        guard currentCategory != previousCategory else { return }
+        let isAccessibilityCategory = currentCategory.isAccessibilityCategory
+        if isAccessibilityCategory {
+            babyName.placeholder = "Nom"
+        } else {
+            babyName.placeholder = "Nom du bébé"
+        }
+        
     }
 }
