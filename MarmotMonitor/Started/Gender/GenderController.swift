@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GenderController: StandardStartedViewController {
+final class GenderController: StandardStartedViewController {
     let genreTitre: UILabel = {
         let label = UILabel()
         label.text = "La petite marmotte est-elle un garçon ou une fille ?"
@@ -45,8 +45,12 @@ class GenderController: StandardStartedViewController {
     let blanck1 = UIView()
     let blanck2 = UIView()
 
+    // MARK: - Properties
+
     private var boyButtonHeightConstraint: NSLayoutConstraint?
     private var girlButtonHeightConstraint: NSLayoutConstraint?
+
+    private let viewModel = GenderViewModel()
 
     // MARK: - cicle life
     override func viewDidLoad() {
@@ -55,6 +59,7 @@ class GenderController: StandardStartedViewController {
         setupView()
         setupContraints()
         setupGenderButton()
+        setupNextButton()
     }
 
     override func viewDidLayoutSubviews() {
@@ -71,9 +76,6 @@ class GenderController: StandardStartedViewController {
         [genreTitre, genderStackView].forEach {
             stackView.addArrangedSubview($0)
         }
-
-        nextButton.setTitle("Suivant", for: .normal)
-        nextButton.setAccessibility(with: .button, label: "Suivant", hint: "Passer à l'étape suivante")
     }
 
     private func setupContraints() {
@@ -97,16 +99,24 @@ class GenderController: StandardStartedViewController {
         boyButton.addTarget(self, action: #selector(boyButtonTapped), for: .touchUpInside)
     }
 
+    private func setupNextButton() {
+        nextButton.setTitle("Suivant", for: .normal)
+        nextButton.setAccessibility(with: .button, label: "Suivant", hint: "Passer à l'étape suivante")
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+    }
+
     // MARK: - function
     @objc func boyButtonTapped() {
         if boyButton.layer.borderWidth == 2 {
             boyButton.layer.borderWidth = 0
             removeShadow(to: pastelArea)
+            viewModel.clearGender()
         } else {
             boyButton.layer.borderWidth = 2
             girlButton.layer.borderWidth = 0
             boyButton.layer.borderColor = UIColor.blue.cgColor
             addShadow(to: pastelArea, with: .blue)
+            viewModel.setBoyGender()
         }
     }
 
@@ -114,11 +124,13 @@ class GenderController: StandardStartedViewController {
         if girlButton.layer.borderWidth == 2 {
             girlButton.layer.borderWidth = 0
             removeShadow(to: pastelArea)
+            viewModel.clearGender()
         } else {
             girlButton.layer.borderWidth = 2
             boyButton.layer.borderWidth = 0
             girlButton.layer.borderColor = UIColor.heavyPink.cgColor
             addShadow(to: pastelArea, with: .heavyPink)
+            viewModel.setGirlGender()
         }
     }
 
@@ -159,5 +171,15 @@ extension GenderController {
         girlButtonHeightConstraint?.constant = CGFloat(constant)
 
          view.layoutIfNeeded()
+    }
+}
+
+extension GenderController {
+    // MARK: - Action
+    @objc private func nextButtonTapped() {
+        viewModel.saveGender()
+        navigationItem.backButtonDisplayMode = .minimal
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.pushViewController(ParentNameController(), animated: true)
     }
 }

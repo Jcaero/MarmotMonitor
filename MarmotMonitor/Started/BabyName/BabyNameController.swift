@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BabyNameController: StandardStartedViewController {
+final class BabyNameController: StandardStartedViewController {
     // MARK: - Properties
     let babyNameTitre: UILabel = {
         let label = UILabel()
@@ -40,6 +40,9 @@ class BabyNameController: StandardStartedViewController {
         textField.setAccessibility(with: .keyboardKey, label: "", hint: "inserer le nom de Bébé")
         return textField
     }()
+
+    // MARK: - Propriete
+    private let viewModel = BabyNameViewModel()
 
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -139,6 +142,7 @@ extension BabyNameController: UITextFieldDelegate {
 extension BabyNameController {
     // MARK: - Action
     @objc private func nextButtonTapped() {
+        viewModel.saveBabyName(name: babyName.text ?? "")
         navigationItem.backButtonDisplayMode = .minimal
         navigationController?.navigationBar.tintColor = .black
         navigationController?.pushViewController(GenderController(), animated: true)

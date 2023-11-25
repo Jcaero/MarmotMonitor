@@ -15,10 +15,10 @@ class TabBar: UITabBarController {
     }
 
     func setupVCs() {
-        let todayController = UINavigationController(rootViewController: TodayViewController())
-        let monitorController = UINavigationController(rootViewController: ViewController())
-        let doctorController = UINavigationController(rootViewController: ViewController())
-        let settingsController = UINavigationController(rootViewController: ViewController())
+        let todayController = UINavigationController(rootViewController: StandardStartedViewController())
+        let monitorController = UINavigationController(rootViewController: StandardStartedViewController())
+        let doctorController = UINavigationController(rootViewController: StandardStartedViewController())
+        let settingsController = UINavigationController(rootViewController: StandardStartedViewController())
 
         todayController.tabBarItem = UITabBarItem(title: "Auj.", image: UIImage(systemName: "calendar"), tag: 0)
         todayController.tabBarItem.accessibilityHint = "appuyer pour afficher la page du jour"
