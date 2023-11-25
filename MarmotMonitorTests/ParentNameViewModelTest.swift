@@ -24,11 +24,19 @@ class ParentNameViewModelTest: XCTestCase {
     }
 
     func testParentHaveName_WhenSaveParent_ParentNameIsSave() {
-        let parentName = "Test Name"
+        let parentName = "Test"
         viewModel.saveParentName(name: parentName)
 
         let savedGender = defaults.string(forKey: UserInfoKey.parentName.rawValue)
         XCTAssertEqual(savedGender, parentName)
+    }
+
+    func testParentHaveNameWithCapitalized_WhenSaveParent_ParentNameIsSave() {
+        let parentName = "TeSt"
+        viewModel.saveParentName(name: parentName)
+
+        let savedGender = defaults.string(forKey: UserInfoKey.parentName.rawValue)
+        XCTAssertEqual(savedGender, "Test")
     }
 
     func testParentHaveNoName_WhenSaveParent_ParentNameIsNil() {

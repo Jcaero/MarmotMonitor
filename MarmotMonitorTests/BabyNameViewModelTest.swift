@@ -24,7 +24,7 @@ class BabyNameViewModelTests: XCTestCase {
     }
 
     func testBabyHaveName_WhenSaveBabyName_NameHasBeenSave() {
-        let testBabyName = "Test Name"
+        let testBabyName = "Test"
 
         viewModel.saveBabyName(name: testBabyName)
 
@@ -39,5 +39,14 @@ class BabyNameViewModelTests: XCTestCase {
 
         let savedName = defaults.string(forKey: UserInfoKey.babyName.rawValue)
         XCTAssertEqual(savedName, testBabyName)
+    }
+
+    func testBabyHaveNameWithCapitalized_WhenSaveBabyName_NameHasBeenSave() {
+        let testBabyName = "TeSt"
+
+        viewModel.saveBabyName(name: testBabyName)
+
+        let savedName = defaults.string(forKey: UserInfoKey.babyName.rawValue)
+        XCTAssertEqual(savedName, "Test")
     }
 }

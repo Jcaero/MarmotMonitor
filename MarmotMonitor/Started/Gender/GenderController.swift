@@ -108,30 +108,41 @@ final class GenderController: StandardStartedViewController {
     // MARK: - function
     @objc func boyButtonTapped() {
         if boyButton.layer.borderWidth == 2 {
-            boyButton.layer.borderWidth = 0
-            removeShadow(to: pastelArea)
-            viewModel.clearGender()
+            clearGender()
         } else {
-            boyButton.layer.borderWidth = 2
-            girlButton.layer.borderWidth = 0
-            boyButton.layer.borderColor = UIColor.blue.cgColor
-            addShadow(to: pastelArea, with: .blue)
-            viewModel.setBoyGender()
+            setBoyGender()
         }
     }
 
     @objc func girlButtonTapped() {
         if girlButton.layer.borderWidth == 2 {
-            girlButton.layer.borderWidth = 0
-            removeShadow(to: pastelArea)
-            viewModel.clearGender()
+            clearGender()
         } else {
-            girlButton.layer.borderWidth = 2
-            boyButton.layer.borderWidth = 0
-            girlButton.layer.borderColor = UIColor.heavyPink.cgColor
-            addShadow(to: pastelArea, with: .heavyPink)
-            viewModel.setGirlGender()
+            setGirlGender()
         }
+    }
+
+    private func setGirlGender() {
+        girlButton.layer.borderWidth = 2
+        boyButton.layer.borderWidth = 0
+        girlButton.layer.borderColor = UIColor.heavyPink.cgColor
+        addShadow(to: pastelArea, with: .heavyPink)
+        viewModel.setGirlGender()
+    }
+
+    private func setBoyGender() {
+        boyButton.layer.borderWidth = 2
+        girlButton.layer.borderWidth = 0
+        boyButton.layer.borderColor = UIColor.blue.cgColor
+        addShadow(to: pastelArea, with: .blue)
+        viewModel.setBoyGender()
+    }
+
+    private func clearGender() {
+        boyButton.layer.borderWidth = 0
+        girlButton.layer.borderWidth = 0
+        removeShadow(to: pastelArea)
+        viewModel.clearGender()
     }
 
     private func addShadow(to view: UIView, with color: UIColor) {

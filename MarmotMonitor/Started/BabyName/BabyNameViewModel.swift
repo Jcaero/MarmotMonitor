@@ -15,6 +15,8 @@ final class BabyNameViewModel {
     }
 
     func saveBabyName(name: String) {
-        defaults.set(name, forKey: UserInfoKey.babyName.rawValue)
+        let lowercasedName = name.lowercased()
+        let babyName = lowercasedName.prefix(1).uppercased() + lowercasedName.dropFirst()
+        defaults.set(babyName, forKey: UserInfoKey.babyName.rawValue)
     }
 }
