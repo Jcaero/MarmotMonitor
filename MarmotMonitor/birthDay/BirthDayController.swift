@@ -1,28 +1,38 @@
 //
-//  parentNameController.swift
+//  BirthDayController.swift
 //  MarmotMonitor
 //
-//  Created by pierrick viret on 25/11/2023.
+//  Created by pierrick viret on 26/11/2023.
 //
 
 import UIKit
 
-class ParentNameController: StandardStartedViewController {
-    // MARK: - Properties
-    let parentNameTitre: UILabel = {
+class BirthDayController: StandardStartedViewController, BirthDayDelegate {
+    let dateTitre: UILabel = {
         let label = UILabel()
-        label.text = "Quel est le nom du parent ?"
+        label.text = "Quel est la date de naissance de la marmotte ?"
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         label.textColor = .black
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.setAccessibility(with: .header, label: "Quel est le nom du parent ?", hint: "")
+        label.setAccessibility(with: .header, label: "Quel est la date de naissance?", hint: "")
         return label
     }()
 
-    let parentName: UITextField = {
+    let birthDay: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.preferredDatePickerStyle = .inline
+        datePicker.datePickerMode = .date
+        datePicker.maximumDate = Date()
+        datePicker.tintColor = .black
+        datePicker.backgroundColor = .pastelBrown
+        datePicker.setAccessibility(with: .selected, label: "", hint: "choisir la date de naissance")
+        return datePicker
+    }()
+
+    let birthDayTF: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Nom du Parent"
+        textField.placeholder = "date"
         let font = UIFont(name: "Symbol", size: 20)
         let fontMetrics = UIFontMetrics(forTextStyle: .body)
         textField.font = fontMetrics.scaledFont(for: font!)
@@ -37,45 +47,57 @@ class ParentNameController: StandardStartedViewController {
         textField.adjustsFontSizeToFitWidth = true
         textField.textContentType = .name
         textField.backgroundColor = .pastelBrown
-        textField.setAccessibility(with: .keyboardKey, label: "", hint: "inserer le nom du parent")
+        textField.setAccessibility(with: .searchField, label: "", hint: "inserer la date de naissance")
         return textField
     }()
 
-    // MARK: - Properties
-    private let viewModel = ParentNameViewModel()
+    let dateTypeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "dd/mm/yyyy"
+        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.textColor = .black
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.setAccessibility(with: .header, label: "", hint: "date de naissance au format dd/mm/yyyy")
+        return label
+    }()
 
-    // MARK: - ViewDidLoad
+    // MARK: - Properties
+    private var viewModel: BirthDayViewModel!
+    private var isPickerHidden = false
+
+    // MARK: - Cycle of life
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        viewModel = BirthDayViewModel(delegate: self)
+
         setupViews()
         setupContraints()
         setupNextButton()
 
-        setupTapGesture()
-        parentName.delegate = self
+        updateDisplayAccessibility()
 
+        // MARK: - Keyboard
+        birthDayTF.delegate = self
+        setupTapGesture()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    // MARK: - function
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
+    // MARK: - Functions
     private func setupViews() {
-        view.backgroundColor = .white
-
-        [parentNameTitre, parentName].forEach {
-            stackView.addArrangedSubview($0)
-        }
+        stackView.addArrangedSubview(dateTitre)
+        stackView.addArrangedSubview(birthDay)
     }
 
     private func setupContraints() {
-        [parentName, parentNameTitre].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-
-        NSLayoutConstraint.activate([
-            parentName.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
-        ])
+        roundedImageTopConstraint?.constant = view.frame.height/6
+        view.layoutIfNeeded()
     }
 
     private func setupNextButton() {
@@ -83,12 +105,40 @@ class ParentNameController: StandardStartedViewController {
         nextButton.setTitle("Suivant", for: .normal)
         nextButton.setAccessibility(with: .button, label: "Suivant", hint: "Appuyer pour passer à la suite")
     }
+}
 
+extension BirthDayController {
+    // MARK: - Action
+    @objc private func nextButtonTapped() {
+        if isPickerHidden {
+            viewModel.saveBirthDate(stringDate: birthDayTF.text ?? "")
+        } else {
+            viewModel.saveBirthDate(date: birthDay.date)
+        }
+    }
+
+    // MARK: - Navigation
+    func pushToNextView() {
+        navigationItem.backButtonDisplayMode = .minimal
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.pushViewController(WelcomeController(), animated: true)
+    }
+
+    // MARK: - Alert
+    func showAlert(title: String, description: String) {
+        let alert = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+}
+
+extension BirthDayController {
     // MARK: - Keyboard
     /// Check if the keyboard is displayed above textefield  and move the view if necessary
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let textFieldBottomY = parentName.convert(parentName.bounds, to: self.view.window).maxY
+            let textFieldBottomY = birthDayTF.convert(birthDayTF.bounds, to: self.view.window).maxY
                 let screenHeight = UIScreen.main.bounds.height
                 let keyboardTopY = screenHeight - keyboardSize.height
 
@@ -105,12 +155,8 @@ class ParentNameController: StandardStartedViewController {
         }
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
-        parentName.resignFirstResponder()
+        birthDayTF.resignFirstResponder()
     }
 
     private func setupTapGesture() {
@@ -119,7 +165,7 @@ class ParentNameController: StandardStartedViewController {
     }
 }
 
-extension ParentNameController: UITextFieldDelegate {
+extension BirthDayController: UITextFieldDelegate {
     /// remove keyboard when tap to return button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -127,29 +173,32 @@ extension ParentNameController: UITextFieldDelegate {
     }
 }
 
-extension ParentNameController {
-    // MARK: - Action
-    @objc private func nextButtonTapped() {
-        viewModel.saveParentName(name: parentName.text ?? "")
-        navigationItem.backButtonDisplayMode = .minimal
-        navigationController?.navigationBar.tintColor = .black
-        navigationController?.pushViewController(BirthDayController(), animated: true)
-    }
-}
-
 // MARK: - Accessibility
-extension ParentNameController {
+extension BirthDayController {
     /// Update the display when the user change the size of the text in the settings
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         let currentCategory = traitCollection.preferredContentSizeCategory
         let previousCategory = previousTraitCollection?.preferredContentSizeCategory
 
         guard currentCategory != previousCategory else { return }
+        updateDisplayAccessibility()
+    }
+
+    /// Update the size of the girl and oy button when the user change the size of the text in the settings
+    private func updateDisplayAccessibility() {
+        let currentCategory = traitCollection.preferredContentSizeCategory
         let isAccessibilityCategory = currentCategory.isAccessibilityCategory
+
         if isAccessibilityCategory {
-            parentName.placeholder = "Nom"
+            birthDay.removeFromSuperview()
+            isPickerHidden = true
+            stackView.addArrangedSubview(dateTypeLabel)
+            stackView.addArrangedSubview(birthDayTF)
         } else {
-            parentName.placeholder = "Nom du Parent"
+            dateTypeLabel.removeFromSuperview()
+            birthDayTF.removeFromSuperview()
+            stackView.addArrangedSubview(birthDay)
+            isPickerHidden = false
         }
     }
 }

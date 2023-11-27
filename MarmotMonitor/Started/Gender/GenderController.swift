@@ -127,6 +127,7 @@ final class GenderController: StandardStartedViewController {
         boyButton.layer.borderWidth = 0
         girlButton.layer.borderColor = UIColor.heavyPink.cgColor
         addShadow(to: pastelArea, with: .heavyPink)
+
         viewModel.setGirlGender()
     }
 
@@ -135,6 +136,7 @@ final class GenderController: StandardStartedViewController {
         girlButton.layer.borderWidth = 0
         boyButton.layer.borderColor = UIColor.blue.cgColor
         addShadow(to: pastelArea, with: .blue)
+
         viewModel.setBoyGender()
     }
 
@@ -142,6 +144,7 @@ final class GenderController: StandardStartedViewController {
         boyButton.layer.borderWidth = 0
         girlButton.layer.borderWidth = 0
         removeShadow(to: pastelArea)
+
         viewModel.clearGender()
     }
 

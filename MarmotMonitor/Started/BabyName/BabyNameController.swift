@@ -167,6 +167,5 @@ extension BabyNameController {
         } else {
             babyName.placeholder = "Nom du bébé"
         }
-        
     }
 }

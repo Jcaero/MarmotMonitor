@@ -27,6 +27,11 @@
 		475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */; };
 		475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */; };
 		4750720E2B09576900DAB527 /* TapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750720D2B09576900DAB527 /* TapBarController.swift */; };
+		478E79072B1370DC004157AF /* BirthDayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478E79062B1370DC004157AF /* BirthDayController.swift */; };
+		478E79092B1375F3004157AF /* BirthDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478E79082B1375F3004157AF /* BirthDayViewModel.swift */; };
+		478E790B2B137CD1004157AF /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478E790A2B137CD1004157AF /* Date+.swift */; };
+		478E790D2B138099004157AF /* BirthDayViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478E790C2B138099004157AF /* BirthDayViewModelTest.swift */; };
+		478E79102B138200004157AF /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478E790F2B138200004157AF /* String+.swift */; };
 		47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A3A3532B0FE7FD00447362 /* WelcomeController.swift */; };
 		47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8C2B128A5A00C5919A /* UserDefault+.swift */; };
 		47CABD8F2B128D6A00C5919A /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8E2B128D6A00C5919A /* UIApplication.swift */; };
@@ -76,6 +81,11 @@
 		475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITests.swift; sourceTree = "<group>"; };
 		475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4750720D2B09576900DAB527 /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
+		478E79062B1370DC004157AF /* BirthDayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDayController.swift; sourceTree = "<group>"; };
+		478E79082B1375F3004157AF /* BirthDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDayViewModel.swift; sourceTree = "<group>"; };
+		478E790A2B137CD1004157AF /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		478E790C2B138099004157AF /* BirthDayViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDayViewModelTest.swift; sourceTree = "<group>"; };
+		478E790F2B138200004157AF /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		47A3A3532B0FE7FD00447362 /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
 		47CABD8C2B128A5A00C5919A /* UserDefault+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+.swift"; sourceTree = "<group>"; };
 		47CABD8E2B128D6A00C5919A /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -115,6 +125,8 @@
 				4712D43C2B0A9BC50085035C /* UIView+.swift */,
 				47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */,
 				47CABD8C2B128A5A00C5919A /* UserDefault+.swift */,
+				478E790A2B137CD1004157AF /* Date+.swift */,
+				478E790F2B138200004157AF /* String+.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -182,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				4735B26C2B11455C000F2B8C /* Started */,
+				478E79052B1370A2004157AF /* birthDay */,
 				475071D72B09462000DAB527 /* AppDelegate.swift */,
 				475071D92B09462000DAB527 /* SceneDelegate.swift */,
 				4750720D2B09576900DAB527 /* TapBarController.swift */,
@@ -198,6 +211,7 @@
 				474732572B123F8D0064ABB4 /* BabyNameViewModelTest.swift */,
 				474732592B12432C0064ABB4 /* GenderViewModelTest.swift */,
 				4747325B2B12456A0064ABB4 /* ParentNameViewModelTest.swift */,
+				478E790C2B138099004157AF /* BirthDayViewModelTest.swift */,
 			);
 			path = MarmotMonitorTests;
 			sourceTree = "<group>";
@@ -229,6 +243,15 @@
 				475071E02B09462000DAB527 /* MarmotMonitor.xcdatamodeld */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		478E79052B1370A2004157AF /* birthDay */ = {
+			isa = PBXGroup;
+			children = (
+				478E79062B1370DC004157AF /* BirthDayController.swift */,
+				478E79082B1375F3004157AF /* BirthDayViewModel.swift */,
+			);
+			path = birthDay;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,14 +408,18 @@
 			files = (
 				4747324D2B1234BB0064ABB4 /* ParentNameController.swift in Sources */,
 				47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */,
+				478E79102B138200004157AF /* String+.swift in Sources */,
 				474732562B123C900064ABB4 /* ParentNameViewModel.swift in Sources */,
 				4750720E2B09576900DAB527 /* TapBarController.swift in Sources */,
 				4735B26B2B1140D8000F2B8C /* StandardStartedViewController.swift in Sources */,
 				474732532B1239CF0064ABB4 /* GenderViewModel.swift in Sources */,
 				4747324F2B1238C20064ABB4 /* BabyNameViewModel.swift in Sources */,
 				4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */,
+				478E79072B1370DC004157AF /* BirthDayController.swift in Sources */,
+				478E79092B1375F3004157AF /* BirthDayViewModel.swift in Sources */,
 				4719ABE52B0E96380088CBE2 /* BabyNameController.swift in Sources */,
 				47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */,
+				478E790B2B137CD1004157AF /* Date+.swift in Sources */,
 				4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */,
 				475071D82B09462000DAB527 /* AppDelegate.swift in Sources */,
 				47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */,
@@ -407,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				474732582B123F8D0064ABB4 /* BabyNameViewModelTest.swift in Sources */,
+				478E790D2B138099004157AF /* BirthDayViewModelTest.swift in Sources */,
 				4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */,
 				4747325C2B12456A0064ABB4 /* ParentNameViewModelTest.swift in Sources */,
 			);

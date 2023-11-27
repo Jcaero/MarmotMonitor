@@ -52,4 +52,39 @@ final class AccessibilityTest: XCTestCase {
             // Fallback on earlier versions
         }
     }
+
+    func testAccessibilityParent() throws {
+
+        let app = UIApplication()
+        app.launch()
+        app.commencerButton.tap()
+        app.textFields["Nom du bébé"].tap()
+        app.textFields.element.typeText("test")
+        app.textFields.element.typeText("\n")
+        app.buttons["Suivant"].tap()
+        app.buttons["Suivant"].tap()
+        if #available(iOS 17.0, *) {
+            try app.performAccessibilityAudit()
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+
+    func testAccessibilityBirthDay() throws {
+
+        let app = UIApplication()
+        app.launch()
+        app.commencerButton.tap()
+        app.textFields["Nom du bébé"].tap()
+        app.textFields.element.typeText("test")
+        app.textFields.element.typeText("\n")
+        app.buttons["Suivant"].tap()
+        app.buttons["Suivant"].tap()
+        app.buttons["Suivant"].tap()
+        if #available(iOS 17.0, *) {
+            try app.performAccessibilityAudit()
+        } else {
+            // Fallback on earlier versions
+        }
+    }
 }

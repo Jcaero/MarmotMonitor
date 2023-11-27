@@ -50,6 +50,9 @@ class StandardStartedViewController: UIViewController {
             return view
         }()
 
+        // MARK: - Properties
+        var roundedImageTopConstraint: NSLayoutConstraint?
+
         // MARK: - ViewDidLoad
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -84,9 +87,11 @@ class StandardStartedViewController: UIViewController {
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
 
+            roundedImageTopConstraint = roundedImage.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height/4 )
+
             NSLayoutConstraint.activate([
                 roundedImage.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-                roundedImage.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height/4),
+                roundedImageTopConstraint!,
                 roundedImage.heightAnchor.constraint(equalToConstant: (view.frame.width / 3)),
                 roundedImage.widthAnchor.constraint(equalTo: roundedImage.heightAnchor)
             ])
