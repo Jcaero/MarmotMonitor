@@ -10,14 +10,12 @@ import XCTest
 
 class BirthDayViewModelTest: XCTestCase {
 
-    
     private var viewModel: BirthDayViewModel!
     private var defaults: UserDefaults!
-    
+
     private var alerteTitle: String?
     private var alerteDesciption: String?
     private var pushNavigation: Bool?
-    
 
     override func setUp() {
         super.setUp()

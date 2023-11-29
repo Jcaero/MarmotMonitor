@@ -7,67 +7,77 @@
 import UIKit
 
 class StandardStartedViewController: UIViewController {
-        // MARK: - Properties
-        let nextButton: UIButton = {
-            let button = UIButton()
-            button.setTitle("Commencer", for: .normal)
-            button.setTitleColor(.black, for: .normal)
-            button.layer.borderColor = UIColor.black.cgColor
-            button.layer.borderWidth = 1
-            button.layer.cornerRadius = 10
-            button.titleLabel?.adjustsFontForContentSizeCategory = true
-            button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
-            button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            return button
-        }()
+    // MARK: - Properties
 
-        let schrollView: UIScrollView = {
-            let scrollView = UIScrollView()
-            scrollView.backgroundColor = .clear
-            scrollView.layer.cornerRadius = 20
-            return scrollView
-        }()
-
-        let stackView: UIStackView = {
-            let view = UIStackView()
-            view.axis = .vertical
-            view.distribution = .fillProportionally
-            view.spacing = 20
-            return view
-        }()
-
-        let roundedImage: UIImageView = {
-            let imageView = UIImageView()
-            imageView.image = UIImage(named: "marmotWithPen")
-            imageView.contentMode = .scaleAspectFill
-            return imageView
-        }()
-
-        let pastelArea: UIView = {
-            let view = UIView()
-            view.backgroundColor = .pastelBrown
-            view.layer.cornerRadius = 20
-            return view
-        }()
-
-        // MARK: - Properties
-        var roundedImageTopConstraint: NSLayoutConstraint?
-
-        // MARK: - ViewDidLoad
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            setupViews()
-            setupContraints()
-            setupGradient()
+    let nextButton: UIButton = {
+        let button = UIButton()
+        var configuration = UIButton.Configuration.plain()
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        configuration.title = "Commencer"
+        configuration.baseForegroundColor = .black
+        configuration.baseBackgroundColor = .clear
+        configuration.background.strokeColor = .black
+        configuration.background.strokeWidth = 1
+        configuration.background.cornerRadius = 10
+        configuration.cornerStyle = .large
+        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
+            var titleAttributes = titleAttributes
+            titleAttributes.font = UIFont.preferredFont(forTextStyle: .title1)
+            return titleAttributes
         }
+        button.configuration = configuration
 
-        override func viewDidLayoutSubviews() {
-            super.viewDidLayoutSubviews()
-            roundedImage.layer.cornerRadius = roundedImage.bounds.height / 2
-            roundedImage.clipsToBounds = true
-        }
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        return button
+    }()
 
-        // MARK: - function
+    let schrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .clear
+        scrollView.layer.cornerRadius = 20
+        return scrollView
+    }()
+
+    let stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.distribution = .fillProportionally
+        view.spacing = 20
+        return view
+    }()
+
+    let roundedImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "marmotWithPen")
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+
+    let pastelArea: UIView = {
+        let view = UIView()
+        view.backgroundColor = .pastelBrown
+        view.layer.cornerRadius = 20
+        return view
+    }()
+
+    // MARK: - Properties
+    var roundedImageTopConstraint: NSLayoutConstraint?
+
+    // MARK: - ViewDidLoad
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+        setupContraints()
+        setupGradient()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        roundedImage.layer.cornerRadius = roundedImage.bounds.height / 2
+        roundedImage.clipsToBounds = true
+    }
+
+    // MARK: - function
 
         private func setupViews() {
             view.backgroundColor = .white
