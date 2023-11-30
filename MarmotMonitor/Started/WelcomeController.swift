@@ -13,7 +13,7 @@ final class WelcomeController: StandardStartedViewController {
             let label = UILabel()
             label.text = "Bonjour"
             label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
-            label.textColor = .black
+            label.textColor = .label
             label.textAlignment = .left
             label.numberOfLines = 0
             return label
@@ -23,7 +23,7 @@ final class WelcomeController: StandardStartedViewController {
         let label = UILabel()
         label.text = "Je vais t'aider à créer ton espace personnalisé"
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
-        label.textColor = .black
+        label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 0
         return label

@@ -14,9 +14,9 @@ class StandardStartedViewController: UIViewController {
         var configuration = UIButton.Configuration.plain()
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         configuration.title = "Commencer"
-        configuration.baseForegroundColor = .black
+        configuration.baseForegroundColor = UIColor.label
         configuration.baseBackgroundColor = .clear
-        configuration.background.strokeColor = .black
+        configuration.background.strokeColor = .dynamicColorForStokNextButton
         configuration.background.strokeWidth = 1
         configuration.background.cornerRadius = 10
         configuration.cornerStyle = .large
@@ -55,7 +55,7 @@ class StandardStartedViewController: UIViewController {
 
     let pastelArea: UIView = {
         let view = UIView()
-        view.backgroundColor = .pastelBrown
+        view.backgroundColor = .dynamicColorForPastelArea
         view.layer.cornerRadius = 20
         return view
     }()
@@ -136,12 +136,23 @@ class StandardStartedViewController: UIViewController {
                 nextButton.bottomAnchor.constraint(equalTo: schrollView.bottomAnchor, constant: -20)
             ])
         }
+}
 
-        private func setupGradient() {
-            let gradient = CAGradientLayer()
-            gradient.frame = view.bounds
-            gradient.colors = [UIColor.mediumBrown.cgColor, UIColor.pastelBrown.cgColor]
-            gradient.locations = [0.0, 1.0]
-            view.layer.insertSublayer(gradient, at: 0)
+extension StandardStartedViewController {
+    private func setupGradient() {
+        view.layer.sublayers?.first { $0 is CAGradientLayer }?.removeFromSuperlayer()
+
+        let gradient = CAGradientLayer()
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.dynamicColorForGradientStart.cgColor, UIColor.dynamicColorForGradientEnd.cgColor]
+        gradient.locations = [0.0, 1.0]
+        view.layer.insertSublayer(gradient, at: 0)
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            setupGradient()
         }
+    }
 }
