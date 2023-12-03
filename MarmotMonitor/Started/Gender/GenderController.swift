@@ -12,7 +12,7 @@ final class GenderController: StandardStartedViewController {
         let label = UILabel()
         label.text = "La petite marmotte est-elle un garçon ou une fille ?"
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
-        label.textColor = .black
+        label.textColor = .colorForLabelBlackToBrown
         label.textAlignment = .left
         label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "La petite marmotte est-elle un garçon ou une fille ?", hint: "")
@@ -58,8 +58,11 @@ final class GenderController: StandardStartedViewController {
 
         setupView()
         setupContraints()
+
         setupGenderButton()
         setupNextButton()
+
+        initNavigationBar()
     }
 
     override func viewDidLayoutSubviews() {
@@ -168,6 +171,8 @@ final class GenderController: StandardStartedViewController {
 extension GenderController {
     /// Update the display when the user change the size of the text in the settings
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
         let currentCategory = traitCollection.preferredContentSizeCategory
         let previousCategory = previousTraitCollection?.preferredContentSizeCategory
 
@@ -180,11 +185,11 @@ extension GenderController {
         let currentCategory = traitCollection.preferredContentSizeCategory
         let isAccessibilityCategory = currentCategory.isAccessibilityCategory
 
-        let constant = isAccessibilityCategory ? 100 : 50
-        boyButtonHeightConstraint?.constant = CGFloat(constant)
-        girlButtonHeightConstraint?.constant = CGFloat(constant)
+        let constante = isAccessibilityCategory ? 100 : 50
 
-         view.layoutIfNeeded()
+        boyButtonHeightConstraint?.constant = CGFloat(constante)
+        girlButtonHeightConstraint?.constant = CGFloat(constante)
+        view.layoutIfNeeded()
     }
 }
 
@@ -192,8 +197,6 @@ extension GenderController {
     // MARK: - Action
     @objc private func nextButtonTapped() {
         viewModel.saveGender()
-        navigationItem.backButtonDisplayMode = .minimal
-        navigationController?.navigationBar.tintColor = .black
         navigationController?.pushViewController(ParentNameController(), animated: true)
     }
 }

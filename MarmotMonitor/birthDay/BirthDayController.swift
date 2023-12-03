@@ -12,7 +12,7 @@ class BirthDayController: StandardStartedViewController, BirthDayDelegate {
         let label = UILabel()
         label.text = "Quel est la date de naissance de la marmotte ?"
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
-        label.textColor = .black
+        label.textColor = .colorForLabelBlackToBrown
         label.textAlignment = .left
         label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "Quel est la date de naissance?", hint: "")
@@ -24,8 +24,8 @@ class BirthDayController: StandardStartedViewController, BirthDayDelegate {
         datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .date
         datePicker.maximumDate = Date()
-        datePicker.tintColor = .black
-        datePicker.backgroundColor = .pastelBrown
+        datePicker.tintColor = .label
+        datePicker.backgroundColor = .clear
         datePicker.setAccessibility(with: .selected, label: "", hint: "choisir la date de naissance")
         return datePicker
     }()
@@ -37,16 +37,16 @@ class BirthDayController: StandardStartedViewController, BirthDayDelegate {
         let fontMetrics = UIFontMetrics(forTextStyle: .body)
         textField.font = fontMetrics.scaledFont(for: font!)
         textField.adjustsFontForContentSizeCategory = true
-        textField.textColor = .black
+        textField.textColor = .label
         textField.textAlignment = .left
         textField.borderStyle = .roundedRect
         textField.layer.borderColor = UIColor.black.cgColor
-        textField.tintColor = .black
+        textField.tintColor = .label
         textField.layer.borderWidth = 1.0
         textField.layer.cornerRadius = 15
         textField.adjustsFontSizeToFitWidth = true
         textField.textContentType = .name
-        textField.backgroundColor = .pastelBrown
+        textField.backgroundColor = .clear
         textField.setAccessibility(with: .searchField, label: "", hint: "inserer la date de naissance")
         return textField
     }()
@@ -55,7 +55,7 @@ class BirthDayController: StandardStartedViewController, BirthDayDelegate {
         let label = UILabel()
         label.text = "dd/mm/yyyy"
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
-        label.textColor = .black
+        label.textColor = .colorForLabelBlackToBrown
         label.textAlignment = .left
         label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "", hint: "date de naissance au format dd/mm/yyyy")
@@ -77,6 +77,8 @@ class BirthDayController: StandardStartedViewController, BirthDayDelegate {
         setupNextButton()
 
         updateDisplayAccessibility()
+
+        initNavigationBar()
 
         // MARK: - Keyboard
         birthDayTF.delegate = self
@@ -119,8 +121,6 @@ extension BirthDayController {
 
     // MARK: - Navigation
     func pushToNextView() {
-        navigationItem.backButtonDisplayMode = .minimal
-        navigationController?.navigationBar.tintColor = .black
         navigationController?.pushViewController(WelcomeController(), animated: true)
     }
 
@@ -177,6 +177,8 @@ extension BirthDayController: UITextFieldDelegate {
 extension BirthDayController {
     /// Update the display when the user change the size of the text in the settings
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
         let currentCategory = traitCollection.preferredContentSizeCategory
         let previousCategory = previousTraitCollection?.preferredContentSizeCategory
 

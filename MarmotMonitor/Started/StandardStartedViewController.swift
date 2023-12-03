@@ -11,12 +11,12 @@ class StandardStartedViewController: UIViewController {
 
     let nextButton: UIButton = {
         let button = UIButton()
-        var configuration = UIButton.Configuration.plain()
+        var configuration = UIButton.Configuration.filled()
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         configuration.title = "Commencer"
-        configuration.baseForegroundColor = UIColor.label
-        configuration.baseBackgroundColor = .clear
-        configuration.background.strokeColor = .dynamicColorForStokNextButton
+        configuration.baseForegroundColor = .colorForLabelNextButtonDefault
+        configuration.baseBackgroundColor = .colorForNextButton
+        configuration.background.strokeColor = .softBlack
         configuration.background.strokeWidth = 1
         configuration.background.cornerRadius = 10
         configuration.cornerStyle = .large
@@ -26,7 +26,6 @@ class StandardStartedViewController: UIViewController {
             return titleAttributes
         }
         button.configuration = configuration
-
         button.titleLabel?.adjustsFontForContentSizeCategory = true
         return button
     }()
@@ -55,7 +54,7 @@ class StandardStartedViewController: UIViewController {
 
     let pastelArea: UIView = {
         let view = UIView()
-        view.backgroundColor = .dynamicColorForPastelArea
+        view.backgroundColor = .colorForPastelArea
         view.layer.cornerRadius = 20
         return view
     }()
@@ -136,6 +135,21 @@ class StandardStartedViewController: UIViewController {
                 nextButton.bottomAnchor.constraint(equalTo: schrollView.bottomAnchor, constant: -20)
             ])
         }
+
+    // MARK: - Init navigationBar
+    func initNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = .clear
+
+        navigationItem.backButtonDisplayMode = .minimal
+        navigationController?.navigationBar.tintColor = .colorForLabelBlackToBrown
+
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.compactScrollEdgeAppearance = appearance
+    }
 }
 
 extension StandardStartedViewController {
@@ -144,7 +158,7 @@ extension StandardStartedViewController {
 
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
-        gradient.colors = [UIColor.dynamicColorForGradientStart.cgColor, UIColor.dynamicColorForGradientEnd.cgColor]
+        gradient.colors = [UIColor.colorForGradientStart.cgColor, UIColor.colorForGradientEnd.cgColor]
         gradient.locations = [0.0, 1.0]
         view.layer.insertSublayer(gradient, at: 0)
     }
@@ -154,5 +168,16 @@ extension StandardStartedViewController {
         if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             setupGradient()
         }
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
+
+        guard currentCategory != previousCategory else { return }
+        let isAccessibilityCategory = currentCategory.isAccessibilityCategory
+        setupTopContraintWith(height: isAccessibilityCategory ? view.frame.height / 6 : view.frame.height / 4)
+    }
+
+    func setupTopContraintWith (height: CGFloat) {
+        roundedImageTopConstraint?.constant = height
+        view.layoutIfNeeded()
     }
 }

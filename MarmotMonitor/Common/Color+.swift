@@ -18,23 +18,32 @@ extension UIColor {
     static let heavyPink = UIColor(red: 0.91, green: 0.22, blue: 0.56, alpha: 1.00)
 
     // MARK: - Brown
-    static let pastelBrown = UIColor(red: 0.75, green: 0.65, blue: 0.56, alpha: 1.00)
-    static let darkBrown = UIColor(red: 0.65, green: 0.52, blue: 0.40, alpha: 1.00)
-    static let mediumBrown = UIColor(red: 0.58, green: 0.42, blue: 0.27, alpha: 1.00)
+    static let pastelBrown = UIColor(red: 0.75, green: 0.65, blue: 0.56, alpha: 1.00) // #c0a68f
+    static let pastelHeavyBrown = UIColor(red: 0.39, green: 0.32, blue: 0.22, alpha: 1.00) // #645139
+    static let mediumBrown = UIColor(red: 0.58, green: 0.42, blue: 0.27, alpha: 1.00) // #946b45
+    static let darkBrown = UIColor(red: 0.64, green: 0.52, blue: 0.37, alpha: 1.00) // #a3855e
 
-    static let heavyBrown = UIColor(red: 0.34, green: 0.14, blue: 0.10, alpha: 1.00)
-    static let heavySoftBrown = UIColor(red: 0.55, green: 0.35, blue: 0.31, alpha: 1.00)
+    // MARK: - Dark
+    static let softBlack = UIColor(red: 0.07, green: 0.07, blue: 0.07, alpha: 1.00) // #121212
+    static let softWhite = UIColor(red: 0.92, green: 0.92, blue: 0.92, alpha: 1.00) // #ebebeb
 
-    static let dynamicColorForGradientStart = UIColor { traitCollection in
-            return traitCollection.userInterfaceStyle == .dark ? UIColor.heavyBrown : UIColor.mediumBrown
-        }
-    static let dynamicColorForGradientEnd = UIColor { traitCollection in
-            return traitCollection.userInterfaceStyle == .dark ? UIColor.heavySoftBrown : UIColor.pastelBrown
-        }
-    static let dynamicColorForStokNextButton = UIColor { traitCollection in
-            return traitCollection.userInterfaceStyle == .dark ? UIColor.black : UIColor.white
-        }
-    static let dynamicColorForPastelArea = UIColor { traitCollection in
-            return traitCollection.userInterfaceStyle == .dark ? UIColor.mediumBrown : UIColor.pastelBrown
-        }
+    // MARK: - Gradient
+    static let colorForGradientStart = themed(light: .mediumBrown, dark: .softBlack)
+    static let colorForGradientEnd = themed(light: .pastelBrown, dark: .darkGray)
+
+    static let colorForPastelArea = themed(light: .pastelBrown, dark: .systemGray4)
+
+    static let colorForLabelBlackToBrown = themed(light: .black, dark: .darkBrown)
+
+    // MARK: - NextButton
+    static let colorForNextButton = themed(light: .clear, dark: .pastelHeavyBrown)
+    static let colorForLabelNextButtonDefault = themed(light: .softBlack, dark: .softWhite)
+    static let colorForStokNextButton = themed(light: .white, dark: .black)
+    
+}
+
+private func themed(light: UIColor, dark: UIColor) -> UIColor {
+    return UIColor(dynamicProvider: { trait -> UIColor in
+        (trait.userInterfaceStyle == .dark) ? dark : light
+    })
 }

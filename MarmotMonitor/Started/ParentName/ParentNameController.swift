@@ -13,7 +13,7 @@ class ParentNameController: StandardStartedViewController {
         let label = UILabel()
         label.text = "Quel est le nom du parent ?"
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
-        label.textColor = .black
+        label.textColor = .colorForLabelBlackToBrown
         label.textAlignment = .left
         label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "Quel est le nom du parent ?", hint: "")
@@ -27,16 +27,16 @@ class ParentNameController: StandardStartedViewController {
         let fontMetrics = UIFontMetrics(forTextStyle: .body)
         textField.font = fontMetrics.scaledFont(for: font!)
         textField.adjustsFontForContentSizeCategory = true
-        textField.textColor = .black
+        textField.textColor = .label
         textField.textAlignment = .left
         textField.borderStyle = .roundedRect
         textField.layer.borderColor = UIColor.black.cgColor
-        textField.tintColor = .black
+        textField.tintColor = .label
         textField.layer.borderWidth = 1.0
         textField.layer.cornerRadius = 15
         textField.adjustsFontSizeToFitWidth = true
         textField.textContentType = .name
-        textField.backgroundColor = .pastelBrown
+        textField.backgroundColor = .clear
         textField.setAccessibility(with: .keyboardKey, label: "", hint: "inserer le nom du parent")
         return textField
     }()
@@ -56,6 +56,8 @@ class ParentNameController: StandardStartedViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        initNavigationBar()
     }
 
     // MARK: - function
@@ -131,8 +133,6 @@ extension ParentNameController {
     // MARK: - Action
     @objc private func nextButtonTapped() {
         viewModel.saveParentName(name: parentName.text ?? "")
-        navigationItem.backButtonDisplayMode = .minimal
-        navigationController?.navigationBar.tintColor = .black
         navigationController?.pushViewController(BirthDayController(), animated: true)
     }
 }
@@ -141,15 +141,14 @@ extension ParentNameController {
 extension ParentNameController {
     /// Update the display when the user change the size of the text in the settings
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
         let currentCategory = traitCollection.preferredContentSizeCategory
         let previousCategory = previousTraitCollection?.preferredContentSizeCategory
 
         guard currentCategory != previousCategory else { return }
         let isAccessibilityCategory = currentCategory.isAccessibilityCategory
-        if isAccessibilityCategory {
-            parentName.placeholder = "Nom"
-        } else {
-            parentName.placeholder = "Nom du Parent"
-        }
+
+        parentName.placeholder = isAccessibilityCategory ? "Nom" : "Nom du Parent"
     }
 }

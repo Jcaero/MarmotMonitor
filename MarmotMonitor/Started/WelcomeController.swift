@@ -13,7 +13,7 @@ final class WelcomeController: StandardStartedViewController {
             let label = UILabel()
             label.text = "Bonjour"
             label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
-            label.textColor = .label
+            label.textColor = .colorForLabelBlackToBrown
             label.textAlignment = .left
             label.numberOfLines = 0
             return label
@@ -56,7 +56,15 @@ final class WelcomeController: StandardStartedViewController {
     // MARK: - Action
     @objc private func nextButtonTapped() {
         navigationItem.backButtonDisplayMode = .minimal
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = .colorForLabelBlackToBrown
         navigationController?.pushViewController(BabyNameController(), animated: true)
+    }
+}
+
+// MARK: - Accessibility
+extension WelcomeController {
+    /// Update the display when the user change the size of the text in the settings
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
     }
 }

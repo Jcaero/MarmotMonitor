@@ -13,7 +13,7 @@ final class BabyNameController: StandardStartedViewController {
         let label = UILabel()
         label.text = "Quel est le nom de la petite marmotte ?"
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
-        label.textColor = .black
+        label.textColor = .colorForLabelBlackToBrown
         label.textAlignment = .left
         label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "Quel est le nom de la petite marmotte ?", hint: "")
@@ -27,16 +27,16 @@ final class BabyNameController: StandardStartedViewController {
         let fontMetrics = UIFontMetrics(forTextStyle: .body)
         textField.font = fontMetrics.scaledFont(for: font!)
         textField.adjustsFontForContentSizeCategory = true
-        textField.textColor = .black
+        textField.textColor = .label
         textField.textAlignment = .left
         textField.borderStyle = .roundedRect
-        textField.layer.borderColor = UIColor.black.cgColor
-        textField.tintColor = .black
+        textField.layer.borderColor = UIColor.label.cgColor
+        textField.tintColor = .label
         textField.layer.borderWidth = 1.0
         textField.layer.cornerRadius = 15
         textField.adjustsFontSizeToFitWidth = true
         textField.textContentType = .name
-        textField.backgroundColor = .pastelBrown
+        textField.backgroundColor = .colorForPastelArea
         textField.setAccessibility(with: .keyboardKey, label: "", hint: "inserer le nom de Bébé")
         return textField
     }()
@@ -51,6 +51,7 @@ final class BabyNameController: StandardStartedViewController {
         setupContraints()
 
         setupNextButton()
+        initNavigationBar()
 
         setupTapGesture()
         babyName.delegate = self
@@ -62,7 +63,6 @@ final class BabyNameController: StandardStartedViewController {
     // MARK: - function
 
     private func setupViews() {
-        view.backgroundColor = .white
 
         [babyNameTitre, babyName].forEach {
             stackView.addArrangedSubview($0)
@@ -131,10 +131,10 @@ extension BabyNameController: UITextFieldDelegate {
     }
 
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if let text = textField.text, text.count >= 3 {
+        if let text = textField.text, text.count >= 2 {
             nextButton.isEnabled = true
             nextButton.accessibilityTraits.remove(.notEnabled)
-            nextButton.setTitleColor(.black, for: .normal)
+            nextButton.setTitleColor(.colorForLabelNextButtonDefault, for: .normal)
         } else {
             nextButton.isEnabled = false
             nextButton.accessibilityTraits.insert(.notEnabled)
@@ -147,8 +147,8 @@ extension BabyNameController {
     // MARK: - Action
     @objc private func nextButtonTapped() {
         viewModel.saveBabyName(name: babyName.text ?? "")
-        navigationItem.backButtonDisplayMode = .minimal
-        navigationController?.navigationBar.tintColor = .black
+//        navigationItem.backButtonDisplayMode = .minimal
+//        navigationController?.navigationBar.tintColor = .colorForLabelBlackToBrown
         navigationController?.pushViewController(GenderController(), animated: true)
     }
 }
@@ -157,15 +157,14 @@ extension BabyNameController {
 extension BabyNameController {
     /// Update the display when the user change the size of the text in the settings
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
         let currentCategory = traitCollection.preferredContentSizeCategory
         let previousCategory = previousTraitCollection?.preferredContentSizeCategory
 
         guard currentCategory != previousCategory else { return }
         let isAccessibilityCategory = currentCategory.isAccessibilityCategory
-        if isAccessibilityCategory {
-            babyName.placeholder = "Nom"
-        } else {
-            babyName.placeholder = "Nom du bébé"
-        }
+        
+        babyName.placeholder = isAccessibilityCategory ? "Nom" : "Nom du bébé"
     }
 }
