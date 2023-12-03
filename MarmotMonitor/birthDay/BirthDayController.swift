@@ -53,8 +53,8 @@ class BirthDayController: StandardStartedViewController, BirthDayDelegate {
 
     let dateTypeLabel: UILabel = {
         let label = UILabel()
-        label.text = "dd/mm/yyyy"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.text = "ex: 01/01/2021"
+        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
         label.textColor = .colorForLabelBlackToBrown
         label.textAlignment = .left
         label.numberOfLines = 0
