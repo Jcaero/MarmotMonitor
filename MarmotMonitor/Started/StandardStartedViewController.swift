@@ -68,6 +68,9 @@ class StandardStartedViewController: UIViewController {
         setupViews()
         setupContraints()
         setupGradient()
+
+        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+        setupTopContraintWith(height: isAccessibilityCategory ? view.frame.height / 6 : view.frame.height / 4)
     }
 
     override func viewDidLayoutSubviews() {
