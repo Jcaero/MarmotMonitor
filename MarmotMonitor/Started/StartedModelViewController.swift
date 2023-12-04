@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class StartedModelViewController: UIViewController {
+class StartedModelViewController: BackgroundViewController {
     // MARK: - Properties
 
     let nextButton: UIButton = {
@@ -30,7 +30,7 @@ class StartedModelViewController: UIViewController {
         return button
     }()
 
-    let schrollView: UIScrollView = {
+    let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .clear
         scrollView.layer.cornerRadius = 20
@@ -67,7 +67,6 @@ class StartedModelViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupContraints()
-        setupGradient()
 
         let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
         setupTopContraintWith(height: isAccessibilityCategory ? view.frame.height / 6 : view.frame.height / 4)
@@ -84,18 +83,18 @@ class StartedModelViewController: UIViewController {
         private func setupViews() {
             view.backgroundColor = .white
 
-            [schrollView, roundedImage].forEach {
+            [scrollView, roundedImage].forEach {
                 view.addSubview($0)
             }
 
             pastelArea.addSubview(stackView)
 
-            schrollView.addSubview(pastelArea)
-            schrollView.addSubview(nextButton)
+            scrollView.addSubview(pastelArea)
+            scrollView.addSubview(nextButton)
         }
 
         private func setupContraints() {
-            [nextButton, roundedImage, schrollView, stackView, pastelArea, nextButton].forEach {
+            [nextButton, roundedImage, scrollView, stackView, pastelArea, nextButton].forEach {
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
 
@@ -109,16 +108,16 @@ class StartedModelViewController: UIViewController {
             ])
 
             NSLayoutConstraint.activate([
-                schrollView.topAnchor.constraint(equalTo: roundedImage.bottomAnchor, constant: -20),
-                schrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-                schrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-                schrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10)
+                scrollView.topAnchor.constraint(equalTo: roundedImage.bottomAnchor, constant: -20),
+                scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+                scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
+                scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10)
             ])
 
             NSLayoutConstraint.activate([
-                pastelArea.topAnchor.constraint(equalTo: schrollView.topAnchor, constant: 10),
-                pastelArea.rightAnchor.constraint(equalTo: schrollView.rightAnchor, constant: -10),
-                pastelArea.leftAnchor.constraint(equalTo: schrollView.leftAnchor, constant: 10),
+                pastelArea.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
+                pastelArea.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10),
+                pastelArea.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10),
                 pastelArea.widthAnchor.constraint(equalToConstant: (view.frame.width - 40))
             ])
 
@@ -132,10 +131,10 @@ class StartedModelViewController: UIViewController {
 
             NSLayoutConstraint.activate([
                 nextButton.topAnchor.constraint(equalTo: pastelArea.bottomAnchor, constant: 20),
-                nextButton.rightAnchor.constraint(equalTo: schrollView.rightAnchor, constant: -10),
+                nextButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10),
                 nextButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
                 nextButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 100),
-                nextButton.bottomAnchor.constraint(equalTo: schrollView.bottomAnchor, constant: -20)
+                nextButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20)
             ])
         }
 
@@ -156,21 +155,9 @@ class StartedModelViewController: UIViewController {
 }
 
 extension StartedModelViewController {
-    private func setupGradient() {
-        view.layer.sublayers?.first { $0 is CAGradientLayer }?.removeFromSuperlayer()
-
-        let gradient = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor.colorForGradientStart.cgColor, UIColor.colorForGradientEnd.cgColor]
-        gradient.locations = [0.0, 1.0]
-        view.layer.insertSublayer(gradient, at: 0)
-    }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-            setupGradient()
-        }
         let currentCategory = traitCollection.preferredContentSizeCategory
         let previousCategory = previousTraitCollection?.preferredContentSizeCategory
 

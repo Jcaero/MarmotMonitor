@@ -121,7 +121,8 @@ extension BirthDayController {
 
     // MARK: - Navigation
     func pushToNextView() {
-        navigationController?.pushViewController(WelcomeController(), animated: true)
+        let next = TabBarController() // Assurez-vous que TabBarController est correctement initialisé
+        self.navigationController?.setViewControllers([next], animated: true)
     }
 
     // MARK: - Alert

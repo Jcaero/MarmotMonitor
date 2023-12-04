@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBar: UITabBarController {
+class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVCs()
@@ -15,7 +15,7 @@ class TabBar: UITabBarController {
     }
 
     func setupVCs() {
-        let todayController = UINavigationController(rootViewController: StartedModelViewController())
+        let todayController = UINavigationController(rootViewController: TodayViewController())
         let monitorController = UINavigationController(rootViewController: StartedModelViewController())
         let doctorController = UINavigationController(rootViewController: StartedModelViewController())
         let settingsController = UINavigationController(rootViewController: StartedModelViewController())
@@ -38,6 +38,7 @@ class TabBar: UITabBarController {
     func setupTabBar() {
 
         let appearance = UITabBarAppearance()
+        appearance.configureWithTransparentBackground()
         appearance.backgroundColor = .none
 
         // setup normal Attributes
