@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BabyNameController: StandardStartedViewController {
+final class BabyNameController: StartedModelViewController {
     // MARK: - Properties
     let babyNameTitre: UILabel = {
         let label = UILabel()
@@ -164,7 +164,7 @@ extension BabyNameController {
 
         guard currentCategory != previousCategory else { return }
         let isAccessibilityCategory = currentCategory.isAccessibilityCategory
-        
+
         babyName.placeholder = isAccessibilityCategory ? "Nom" : "Nom du bébé"
     }
 }

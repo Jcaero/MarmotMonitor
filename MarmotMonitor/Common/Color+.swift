@@ -39,7 +39,7 @@ extension UIColor {
     static let colorForNextButton = themed(light: .clear, dark: .pastelHeavyBrown)
     static let colorForLabelNextButtonDefault = themed(light: .softBlack, dark: .softWhite)
     static let colorForStokNextButton = themed(light: .white, dark: .black)
-    
+
 }
 
 private func themed(light: UIColor, dark: UIColor) -> UIColor {

@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class StandardStartedViewController: UIViewController {
+class StartedModelViewController: UIViewController {
     // MARK: - Properties
 
     let nextButton: UIButton = {
@@ -155,7 +155,7 @@ class StandardStartedViewController: UIViewController {
     }
 }
 
-extension StandardStartedViewController {
+extension StartedModelViewController {
     private func setupGradient() {
         view.layer.sublayers?.first { $0 is CAGradientLayer }?.removeFromSuperlayer()
 
