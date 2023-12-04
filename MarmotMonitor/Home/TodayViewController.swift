@@ -11,8 +11,8 @@ class TodayViewController: BackgroundViewController {
 
     let currentDate: UILabel = {
         let label = UILabel()
-        label.text = "dd - MM - YYYY"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 17, style: .body)
+        label.text = Date().toDateFormat("EEEE dd MMMM")
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -40,7 +40,6 @@ class TodayViewController: BackgroundViewController {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
-
 
     // MARK: - Properties
     let viewModel = TodayViewModel()
@@ -71,7 +70,7 @@ class TodayViewController: BackgroundViewController {
         }
 
         NSLayoutConstraint.activate([
-            currentDate.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
+            currentDate.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             currentDate.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5)
         ])
 

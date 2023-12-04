@@ -97,7 +97,7 @@ final class BabyNameController: StartedModelViewController {
                 let keyboardTopY = screenHeight - keyboardSize.height
 
                 if textFieldBottomY > keyboardTopY {
-                    self.view.frame.origin.y = -(textFieldBottomY - keyboardTopY) - 20
+                    self.view.frame.origin.y = -(textFieldBottomY - keyboardTopY) - 40
                 }
         }
     }
