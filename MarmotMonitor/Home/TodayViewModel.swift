@@ -25,4 +25,15 @@ class TodayViewModel {
 
         return Person(name: babyName, gender: gender, parentName: parentName, birthDay: birthDayString)
     }
+
+    func welcomeTexte() -> String {
+
+        guard let person = requestPersonData() else {return ""}
+
+        if let parentName = person.parentName {
+            return "Bonjour \(parentName) et \(person.name)"
+        } else {
+            return "Bonjour \(person.name)"
+        }
+    }
 }

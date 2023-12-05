@@ -230,10 +230,7 @@
 		475071F02B09462100DAB527 /* MarmotMonitorTests */ = {
 			isa = PBXGroup;
 			children = (
-				474732572B123F8D0064ABB4 /* BabyNameViewModelTest.swift */,
-				474732592B12432C0064ABB4 /* GenderViewModelTest.swift */,
-				4747325B2B12456A0064ABB4 /* ParentNameViewModelTest.swift */,
-				478E790C2B138099004157AF /* BirthDayViewModelTest.swift */,
+				47CB30012B1F400F0054EAC7 /* started */,
 				4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */,
 			);
 			path = MarmotMonitorTests;
@@ -275,6 +272,17 @@
 				478E79082B1375F3004157AF /* BirthDayViewModel.swift */,
 			);
 			path = birthDay;
+			sourceTree = "<group>";
+		};
+		47CB30012B1F400F0054EAC7 /* started */ = {
+			isa = PBXGroup;
+			children = (
+				474732572B123F8D0064ABB4 /* BabyNameViewModelTest.swift */,
+				474732592B12432C0064ABB4 /* GenderViewModelTest.swift */,
+				4747325B2B12456A0064ABB4 /* ParentNameViewModelTest.swift */,
+				478E790C2B138099004157AF /* BirthDayViewModelTest.swift */,
+			);
+			path = started;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

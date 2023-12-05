@@ -96,6 +96,25 @@ class TodayViewModelTest: XCTestCase, BirthDayDelegate {
         XCTAssertNil(person?.parentName)
         XCTAssertNil(person?.birthDay)
     }
+
+    func testUserDefaultHaveData_WhenRequestLabelText_receiveLabeltexte() {
+        let date = Date().toStringWithDayMonthYear()
+        let baby = Person(name: "Bébé", gender: "Fille", parentName: "Pierrick", birthDay: date )
+        saveData(person: baby)
+
+        let texte = viewModel.welcomeTexte()
+
+        XCTAssertEqual(texte, "Bonjour Pierrick et Bébé")
+    }
+
+    func testUserDefaultHaveJusteBabyData_WhenRequestLabelText_receiveLabeltexte() {
+        let baby = Person(name: "Bébé")
+        saveData(person: baby)
+
+        let texte = viewModel.welcomeTexte()
+
+        XCTAssertEqual(texte, "Bonjour Bébé")
+    }
 }
 
 extension TodayViewModelTest {

@@ -13,17 +13,17 @@ class TodayViewController: BackgroundViewController {
         let label = UILabel()
         label.text = Date().toDateFormat("EEEE dd MMMM")
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
-        label.textColor = .label
+        label.textColor = .systemGray5
         label.textAlignment = .left
         label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "date du jour", hint: "")
         return label
     }()
 
-    let bonjourLabel: UILabel = {
+    let welcomeLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
         label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -65,15 +65,14 @@ class TodayViewController: BackgroundViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        baby = viewModel.requestPersonData()
-        
+        welcomeLabel.text = viewModel.welcomeTexte()
     }
 
     // MARK: - Setup function
 
         private func setupViews() {
 
-            [scrollView, currentDate].forEach {
+            [scrollView, currentDate, welcomeLabel].forEach {
                 view.addSubview($0)
             }
 
@@ -82,17 +81,22 @@ class TodayViewController: BackgroundViewController {
         }
 
     private func setupContraints() {
-        [scrollView, pastelArea, currentDate, babyImage].forEach {
+        [scrollView, pastelArea, currentDate, babyImage, welcomeLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
         NSLayoutConstraint.activate([
             currentDate.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            currentDate.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5)
+            currentDate.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
 
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: currentDate.bottomAnchor, constant: 30),
+            welcomeLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            welcomeLabel.topAnchor.constraint(equalTo: currentDate.bottomAnchor, constant: 10)
+        ])
+
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 5),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10)
