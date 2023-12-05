@@ -16,7 +16,7 @@ class StartedModelViewController: BackgroundViewController {
         configuration.title = "Commencer"
         configuration.baseForegroundColor = .colorForLabelNextButtonDefault
         configuration.baseBackgroundColor = .colorForNextButton
-        configuration.background.strokeColor = .softBlack
+        configuration.background.strokeColor = .label
         configuration.background.strokeWidth = 1
         configuration.background.cornerRadius = 10
         configuration.cornerStyle = .large

@@ -21,7 +21,7 @@ class BirthDayController: StartedModelViewController, BirthDayDelegate {
 
     let birthDay: UIDatePicker = {
         let datePicker = UIDatePicker()
-        datePicker.preferredDatePickerStyle = .compact
+        datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .date
         datePicker.maximumDate = Date()
         datePicker.tintColor = .label
@@ -163,6 +163,7 @@ extension BirthDayController {
     private func setupTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
         view.addGestureRecognizer(tapGesture)
+        tapGesture.isEnabled = false
     }
 }
 
@@ -203,5 +204,9 @@ extension BirthDayController {
             stackView.addArrangedSubview(birthDay)
             isPickerHidden = false
         }
+
+        if let tapGesture = view.gestureRecognizers?.first(where: { $0 is UITapGestureRecognizer }) {
+                tapGesture.isEnabled = !isPickerHidden
+            }
     }
 }

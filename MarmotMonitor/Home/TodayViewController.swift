@@ -13,7 +13,7 @@ class TodayViewController: BackgroundViewController {
         let label = UILabel()
         label.text = Date().toDateFormat("EEEE dd MMMM")
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
-        label.textColor = .systemGray5
+        label.textColor = .colorForDate
         label.textAlignment = .left
         label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "date du jour", hint: "")
@@ -48,6 +48,8 @@ class TodayViewController: BackgroundViewController {
     let babyImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "todayDefault")
+        imageView.layer.cornerRadius = 40
+        imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()

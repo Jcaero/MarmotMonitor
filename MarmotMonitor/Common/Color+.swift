@@ -36,9 +36,12 @@ extension UIColor {
     static let colorForLabelBlackToBrown = themed(light: .black, dark: .darkBrown)
 
     // MARK: - NextButton
-    static let colorForNextButton = themed(light: .clear, dark: .pastelHeavyBrown)
-    static let colorForLabelNextButtonDefault = themed(light: .softBlack, dark: .softWhite)
-    static let colorForStokNextButton = themed(light: .white, dark: .black)
+    static let colorForNextButton = themed(light: .clear, dark: .clear)
+    static let colorForLabelNextButtonDefault = themed(light: .softBlack, dark: .pastelBrown)
+    static let colorForStokNextButton = themed(light: .white, dark: .darkGray)
+
+    // MARK: - Today
+    static let colorForDate = themed(light: .softWhite, dark: .lightGray)
 
 }
 

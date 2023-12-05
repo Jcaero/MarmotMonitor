@@ -16,12 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-//        let home = TabBar()
-//        let home = NameController()
-        let home = WelcomeController()
-       let navController = UINavigationController(rootViewController: home)
+
+        let savedName = UserDefaults.standard.string(forKey: UserInfoKey.babyName.rawValue)
+        print("savedName: \(savedName)")
+        let home = savedName != nil ? TodayViewController() : WelcomeController()
+
+        let navController = UINavigationController(rootViewController: home)
         window?.rootViewController = navController
-//        window?.rootViewController?.view.backgroundColor = .white
         window?.makeKeyAndVisible()
 
     }
