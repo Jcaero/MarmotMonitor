@@ -21,7 +21,7 @@ class BirthDayController: StartedModelViewController, BirthDayDelegate {
 
     let birthDay: UIDatePicker = {
         let datePicker = UIDatePicker()
-        datePicker.preferredDatePickerStyle = .inline
+        datePicker.preferredDatePickerStyle = .compact
         datePicker.datePickerMode = .date
         datePicker.maximumDate = Date()
         datePicker.tintColor = .label

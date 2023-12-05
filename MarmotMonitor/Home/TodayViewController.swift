@@ -20,6 +20,17 @@ class TodayViewController: BackgroundViewController {
         return label
     }()
 
+    let bonjourLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.textColor = .label
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.setAccessibility(with: .staticText, label: "", hint: "")
+        return label
+    }()
+
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .clear
@@ -43,6 +54,7 @@ class TodayViewController: BackgroundViewController {
 
     // MARK: - Properties
     let viewModel = TodayViewModel()
+    var baby: Person!
 
     // MARK: - Cycle Life
 
@@ -50,6 +62,11 @@ class TodayViewController: BackgroundViewController {
         super.viewDidLoad()
         setupViews()
         setupContraints()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        baby = viewModel.requestPersonData()
+        
     }
 
     // MARK: - Setup function
