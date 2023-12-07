@@ -142,13 +142,13 @@ class TodayViewController: BackgroundViewController {
             view.addSubview($0)
         }
 
-        pastelArea.addSubview(babyImage)
+        // MARK: - Baby Image
         babyImage.layer.addSublayer(imageGradient)
         babyImage.addSubview(babyYear)
         babyImage.addSubview(babyMonth)
         babyImage.addSubview(yearLabel)
         babyImage.addSubview(monthLabel)
-        scrollView.addSubview(pastelArea)
+        scrollView.addSubview(babyImage)
     }
 
     private func setupContraints() {
@@ -172,23 +172,17 @@ class TodayViewController: BackgroundViewController {
         NSLayoutConstraint.activate([
             welcomeLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10),
             welcomeLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10),
-            welcomeLabel.topAnchor.constraint(equalTo: currentDate.bottomAnchor, constant: 10)
+            welcomeLabel.topAnchor.constraint(equalTo: currentDate.bottomAnchor, constant: 10),
+            welcomeLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
         ])
 
         NSLayoutConstraint.activate([
-            pastelArea.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 15),
-            pastelArea.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10),
-            pastelArea.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10),
-            pastelArea.widthAnchor.constraint(equalToConstant: (view.frame.width - 40)),
-            pastelArea.heightAnchor.constraint(equalToConstant: ((view.frame.width - 40)/3)*2),
-            pastelArea.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20)
-        ])
-
-        NSLayoutConstraint.activate([
-            babyImage.topAnchor.constraint(equalTo: pastelArea.topAnchor),
-            babyImage.bottomAnchor.constraint(equalTo: pastelArea.bottomAnchor),
-            babyImage.leftAnchor.constraint(equalTo: pastelArea.leftAnchor),
-            babyImage.rightAnchor.constraint(equalTo: pastelArea.rightAnchor)
+            babyImage.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor),
+            babyImage.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10),
+            babyImage.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10),
+            babyImage.widthAnchor.constraint(equalToConstant: (view.frame.width - 40)),
+            babyImage.heightAnchor.constraint(equalToConstant: ((view.frame.width - 40)/3)*2),
+            babyImage.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20)
         ])
 
         NSLayoutConstraint.activate([
