@@ -14,6 +14,7 @@ class TodayViewModel {
         self.defaults = defaults
     }
 
+    // MARK: - Person Data
     func requestPersonData() -> Person? {
         guard let babyName = defaults.string(forKey: UserInfoKey.babyName.rawValue) else { return nil }
 
@@ -26,6 +27,7 @@ class TodayViewModel {
         return Person(name: babyName, gender: gender, parentName: parentName, birthDay: birthDayString)
     }
 
+    // MARK: - Welcome Texte
     func welcomeTexte() -> String {
 
         guard let person = requestPersonData() else {return ""}
@@ -35,5 +37,23 @@ class TodayViewModel {
         } else {
             return "Bonjour \(person.name)"
         }
+    }
+
+    // MARK: - Age
+    private func babyAge() -> DateComponents? {
+        guard let birthDayDate = requestPersonData()?.birthDay?.toDate() else {
+            return nil
+        }
+        return Calendar.current.dateComponents([.year, .month], from: birthDayDate, to: Date())
+    }
+
+    func babyYear() -> String {
+        guard let age = babyAge() else { return "" }
+        return "\(age.year ?? 0)\nAns"
+    }
+
+    func babyMonth() -> String {
+        guard let age = babyAge() else { return "" }
+        return "\(age.month ?? 0)\nMois"
     }
 }

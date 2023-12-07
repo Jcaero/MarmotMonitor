@@ -36,7 +36,7 @@ class TodayViewModelTest: XCTestCase, BirthDayDelegate {
         babyNameViewModel.saveBabyName(name: person.name)
 
         switch person.gender {
-        case "Garçon" :
+        case "Garçon":
             genderViewModel.setBoyGender()
         case "Fille":
             genderViewModel.setGirlGender()
@@ -114,6 +114,60 @@ class TodayViewModelTest: XCTestCase, BirthDayDelegate {
         let texte = viewModel.welcomeTexte()
 
         XCTAssertEqual(texte, "Bonjour Bébé")
+    }
+
+    func testBabyBornToday_WhenRequestAge_receiveAgeForText() {
+        let date = Date().toStringWithDayMonthYear()
+        let baby = Person(name: "Bébé", gender: "Fille", parentName: "Pierrick", birthDay: date )
+        saveData(person: baby)
+
+        let year = viewModel.babyYear()
+        let month = viewModel.babyMonth()
+        
+        XCTAssertEqual(year, "0\nAns")
+        XCTAssertEqual(month, "0\nMois")
+    }
+
+    func testBabyBorn2MonthAgo_WhenRequestAge_receiveAgeForText() {
+        let date = Date()
+        let calendar = Calendar.current
+        let newDate = calendar.date(byAdding: .month, value: -2, to: date)
+        let babyDate = newDate!.toStringWithDayMonthYear()
+        let baby = Person(name: "Bébé", gender: "Fille", parentName: "Pierrick", birthDay: babyDate )
+        saveData(person: baby)
+
+        let year = viewModel.babyYear()
+        let month = viewModel.babyMonth()
+        
+        XCTAssertEqual(year, "0\nAns")
+        XCTAssertEqual(month, "2\nMois")
+    }
+
+    func testBabyBorn3YearAnd2MonthAgo_WhenRequestAge_receiveAgeForText() {
+        let date = Date()
+        let calendar = Calendar.current
+        let newDate = calendar.date(byAdding: .year, value: -3, to: date)
+        let newDate2 = calendar.date(byAdding: .month, value: -2, to: newDate!)
+        let babyDate = newDate2!.toStringWithDayMonthYear()
+        let baby = Person(name: "Bébé", gender: "Fille", parentName: "Pierrick", birthDay: babyDate )
+        saveData(person: baby)
+
+        let year = viewModel.babyYear()
+        let month = viewModel.babyMonth()
+
+        XCTAssertEqual(year, "3\nAns")
+        XCTAssertEqual(month, "2\nMois")
+    }
+
+    func testBabyHaveNoBirthDay_WhenRequestAge_receiveNil() {
+        let baby = Person(name: "Bébé")
+        saveData(person: baby)
+
+        let year = viewModel.babyYear()
+        let month = viewModel.babyMonth()
+
+        XCTAssertEqual(year, "")
+        XCTAssertEqual(month, "")
     }
 }
 

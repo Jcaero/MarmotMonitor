@@ -48,10 +48,35 @@ class TodayViewController: BackgroundViewController {
     let babyImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "todayDefault")
-        imageView.layer.cornerRadius = 40
+        imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
         return imageView
+    }()
+
+    let imageGradient: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.clear.cgColor, UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradient.locations = [0.0, 0.4, 1.0]
+        return gradient
+    }()
+
+    let babyYear: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.setAccessibility(with: .staticText, label: "", hint: "age du bébé")
+        return label
+    }()
+
+    let babyMonth: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .right
+        label.numberOfLines = 0
+        label.setAccessibility(with: .staticText, label: "", hint: "age du bébé")
+        return label
     }()
 
     // MARK: - Properties
@@ -67,23 +92,36 @@ class TodayViewController: BackgroundViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         welcomeLabel.text = viewModel.welcomeTexte()
+
+        babyYear.attributedText = transformInAttributedString(viewModel.babyYear())
+        babyMonth.attributedText = transformInAttributedString(viewModel.babyMonth())
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        imageGradient.frame = babyImage.bounds
     }
 
     // MARK: - Setup function
 
-        private func setupViews() {
+    private func setupViews() {
 
-            [scrollView, currentDate, welcomeLabel].forEach {
-                view.addSubview($0)
-            }
-
-            pastelArea.addSubview(babyImage)
-            scrollView.addSubview(pastelArea)
+        [scrollView, currentDate, welcomeLabel].forEach {
+            view.addSubview($0)
         }
 
+        pastelArea.addSubview(babyImage)
+        babyImage.layer.addSublayer(imageGradient)
+        babyImage.addSubview(babyYear)
+        babyImage.addSubview(babyMonth)
+        scrollView.addSubview(pastelArea)
+    }
+
     private func setupContraints() {
-        [scrollView, pastelArea, currentDate, babyImage, welcomeLabel].forEach {
+        [scrollView, pastelArea, currentDate, babyImage, welcomeLabel, babyYear, babyMonth].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -119,5 +157,46 @@ class TodayViewController: BackgroundViewController {
             babyImage.leftAnchor.constraint(equalTo: pastelArea.leftAnchor),
             babyImage.rightAnchor.constraint(equalTo: pastelArea.rightAnchor)
         ])
+
+        NSLayoutConstraint.activate([
+            babyYear.bottomAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: -2),
+            babyYear.leftAnchor.constraint(equalTo: babyImage.leftAnchor, constant: 10),
+            babyMonth.bottomAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: -2),
+            babyMonth.rightAnchor.constraint(equalTo: babyImage.rightAnchor, constant: -10)
+        ])
+    }
+
+    // MARK: - SetupTexte
+
+    private func transformInAttributedString(_ text: String) -> NSMutableAttributedString {
+        guard !text.isEmpty else { return NSMutableAttributedString(string: "") }
+
+        let parts = text.split(separator: "\n", maxSplits: 1, omittingEmptySubsequences: false)
+        let attributedString = NSMutableAttributedString()
+
+        if let firstPart = parts.first {
+            let attributedFirstString = NSMutableAttributedString(string: String(firstPart))
+            if let largeBoldFont = getFont(style: .largeTitle, traits: .traitBold, scale: 1.5) {
+                attributedFirstString.addAttribute(.font, value: largeBoldFont, range: NSRange(location: 0, length: firstPart.count))
+            }
+            attributedString.append(attributedFirstString)
+        }
+
+        if parts.count > 1 {
+            let attributedSecondString = NSMutableAttributedString(string: "\n" + String(parts[1]))
+            if let smallFont = getFont(style: .body, scale: 1.5) {
+                attributedSecondString.addAttribute(.font, value: smallFont, range: NSRange(location: 0, length: parts[1].count + 1))
+            }
+            attributedString.append(attributedSecondString)
+        }
+
+        return attributedString
+    }
+
+    private func getFont(style: UIFont.TextStyle, traits: UIFontDescriptor.SymbolicTraits? = nil, scale: CGFloat) -> UIFont? {
+        let fontDescriptor = UIFont.preferredFont(forTextStyle: style).fontDescriptor
+        let descriptor = traits != nil ? fontDescriptor.withSymbolicTraits(traits!) : fontDescriptor
+        let pointSize = UIFont.preferredFont(forTextStyle: style).pointSize * scale
+        return descriptor != nil ? UIFont(descriptor: descriptor!, size: pointSize) : nil
     }
 }
