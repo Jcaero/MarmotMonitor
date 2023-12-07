@@ -49,11 +49,11 @@ class TodayViewModel {
 
     func babyYear() -> String {
         guard let age = babyAge() else { return "" }
-        return "\(age.year ?? 0)\nAns"
+        return "\(age.year ?? 0)"
     }
 
     func babyMonth() -> String {
         guard let age = babyAge() else { return "" }
-        return "\(age.month ?? 0)\nMois"
+        return "\(age.month ?? 0)"
     }
 }
