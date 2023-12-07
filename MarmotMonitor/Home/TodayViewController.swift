@@ -100,6 +100,11 @@ class TodayViewController: BackgroundViewController {
         babyMonth.attributedText = transformInAttributedString(viewModel.babyMonth())
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        imageGradient.frame = babyImage.bounds
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         imageGradient.frame = babyImage.bounds
