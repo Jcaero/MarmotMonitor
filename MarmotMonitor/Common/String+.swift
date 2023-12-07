@@ -14,4 +14,8 @@ extension String {
         dateFormatter.dateFormat = "dd/MM/yyyy"
         return dateFormatter.date(from: self)
     }
+
+    func capitalizeFirstLetter() -> String {
+        return self.prefix(1).uppercased() + self.dropFirst()
+    }
 }
