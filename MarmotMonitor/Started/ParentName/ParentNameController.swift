@@ -125,6 +125,7 @@ extension ParentNameController: UITextFieldDelegate {
     /// remove keyboard when tap to return button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        nextButtonTapped()
         return true
     }
 }

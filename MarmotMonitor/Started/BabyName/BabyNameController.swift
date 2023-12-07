@@ -127,6 +127,7 @@ extension BabyNameController: UITextFieldDelegate {
     /// remove keyboard when tap to return button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        nextButtonTapped()
         return true
     }
 
@@ -147,8 +148,6 @@ extension BabyNameController {
     // MARK: - Action
     @objc private func nextButtonTapped() {
         viewModel.saveBabyName(name: babyName.text ?? "")
-//        navigationItem.backButtonDisplayMode = .minimal
-//        navigationController?.navigationBar.tintColor = .colorForLabelBlackToBrown
         navigationController?.pushViewController(GenderController(), animated: true)
     }
 }
