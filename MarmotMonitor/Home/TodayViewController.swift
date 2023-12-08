@@ -32,19 +32,13 @@ class TodayViewController: BackgroundViewController {
 
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.isScrollEnabled = true
         scrollView.backgroundColor = .clear
         scrollView.layer.cornerRadius = 20
         return scrollView
     }()
 
-    let pastelArea: UIView = {
-        let view = UIView()
-        view.backgroundColor = .colorForPastelArea
-        view.layer.cornerRadius = 20
-        return view
-    }()
-
-    let babyImage: UIImageView = {
+     let babyImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "todayDefault")
         imageView.layer.cornerRadius = 20
@@ -100,9 +94,27 @@ class TodayViewController: BackgroundViewController {
         return label
     }()
 
+    let clearArea: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.backgroundColor = .colorForPastelArea
+        tableView.isScrollEnabled = false
+        tableView.separatorStyle = .none
+        tableView.layer.cornerRadius = 20
+        return tableView
+    }()
+
     // MARK: - Properties
     let viewModel = TodayViewModel()
     var baby: Person!
+
+    var tableViewHeightConstraint: NSLayoutConstraint?
 
     // MARK: - Cycle Life
 
@@ -110,6 +122,11 @@ class TodayViewController: BackgroundViewController {
         super.viewDidLoad()
         setupViews()
         setupContraints()
+
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -132,6 +149,9 @@ class TodayViewController: BackgroundViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         imageGradient.frame = babyImage.bounds
+
+        // MARK: - Setup TableView Height
+        setupTableViewHeight()
     }
 
     // MARK: - Setup function
@@ -148,11 +168,15 @@ class TodayViewController: BackgroundViewController {
         babyImage.addSubview(babyMonth)
         babyImage.addSubview(yearLabel)
         babyImage.addSubview(monthLabel)
-        scrollView.addSubview(babyImage)
+        scrollView.addSubview(clearArea)
+        clearArea.addSubview(babyImage)
+        clearArea.addSubview(tableView)
     }
 
     private func setupContraints() {
-        [scrollView, pastelArea, currentDate, babyImage, welcomeLabel, babyYear, babyMonth, yearLabel, monthLabel].forEach {
+        [scrollView, currentDate, welcomeLabel,
+         babyImage, babyYear, babyMonth, yearLabel, monthLabel,
+         clearArea, tableView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -164,25 +188,31 @@ class TodayViewController: BackgroundViewController {
         ])
 
         NSLayoutConstraint.activate([
-            currentDate.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10),
-            currentDate.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10),
-            currentDate.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+            clearArea.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
+            clearArea.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
+            clearArea.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0),
+            clearArea.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0)
         ])
 
         NSLayoutConstraint.activate([
-            welcomeLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10),
-            welcomeLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10),
+            currentDate.leftAnchor.constraint(equalTo: clearArea.leftAnchor, constant: 10),
+            currentDate.rightAnchor.constraint(equalTo: clearArea.rightAnchor, constant: -10),
+            currentDate.topAnchor.constraint(equalTo: clearArea.topAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            welcomeLabel.leftAnchor.constraint(equalTo: clearArea.leftAnchor, constant: 10),
+            welcomeLabel.rightAnchor.constraint(equalTo: clearArea.rightAnchor, constant: -10),
             welcomeLabel.topAnchor.constraint(equalTo: currentDate.bottomAnchor, constant: 10),
             welcomeLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
         ])
 
         NSLayoutConstraint.activate([
             babyImage.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor),
-            babyImage.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10),
-            babyImage.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10),
+            babyImage.rightAnchor.constraint(equalTo: clearArea.rightAnchor, constant: -10),
+            babyImage.leftAnchor.constraint(equalTo: clearArea.leftAnchor, constant: 10),
             babyImage.widthAnchor.constraint(equalToConstant: (view.frame.width - 40)),
-            babyImage.heightAnchor.constraint(equalToConstant: ((view.frame.width - 40)/3)*2),
-            babyImage.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20)
+            babyImage.heightAnchor.constraint(equalToConstant: ((view.frame.width - 40)/3)*2)
         ])
 
         NSLayoutConstraint.activate([
@@ -198,5 +228,77 @@ class TodayViewController: BackgroundViewController {
             babyMonth.bottomAnchor.constraint(equalTo: monthLabel.topAnchor, constant: -2),
             babyMonth.rightAnchor.constraint(equalTo: babyImage.rightAnchor, constant: -10)
         ])
+
+        tableViewHeightConstraint = tableView.heightAnchor.constraint(greaterThanOrEqualToConstant: 300)
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: 30),
+            tableView.rightAnchor.constraint(equalTo: clearArea.rightAnchor, constant: -10),
+            tableView.leftAnchor.constraint(equalTo: clearArea.leftAnchor, constant: 10),
+            tableView.widthAnchor.constraint(equalToConstant: (view.frame.width - 40)),
+            tableViewHeightConstraint!,
+            tableView.bottomAnchor.constraint(equalTo: clearArea.bottomAnchor, constant: -20)
+        ])
+    }
+
+    private func setupTableViewHeight() {
+        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+        else { return }
+
+        let cellHeight = cell.frame.size.height
+        let header = CGFloat(100)
+       tableViewHeightConstraint?.constant = header + cellHeight * 4
+        tableView.layoutIfNeeded()
     }
 }
+
+extension TodayViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.setAccessibility(with: .header, label: "Activités", hint: "Liste des activités")
+        headerView.backgroundColor = .colorForPastelArea
+        let label = UILabel()
+        label.text = "Activités"
+        label.textColor = .label
+        label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        headerView.addSubview(label)
+        NSLayoutConstraint.activate([
+            label.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 10),
+            label.rightAnchor.constraint(equalTo: headerView.rightAnchor, constant: -10),
+            label.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 10),
+            label.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -10)
+        ])
+        return headerView
+    }
+}
+
+extension TodayViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+
+        cell.textLabel?.text = "Ligne numéro \(indexPath.row)"
+        cell.detailTextLabel?.text = "Sub Ligne numéro \(indexPath.row)"
+        cell.imageView?.image = UIImage(systemName: "photo")
+        cell.backgroundColor = .clear
+        cell.accessoryType = .disclosureIndicator
+        return cell
+    }
+}
+
+// MARK: - Accessibility
+
