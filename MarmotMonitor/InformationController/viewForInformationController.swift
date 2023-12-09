@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class StartedModelViewController: BackgroundViewController {
+class viewForInformationController: BackgroundViewController {
     // MARK: - Properties
 
     let nextButton: UIButton = {
@@ -139,7 +139,7 @@ class StartedModelViewController: BackgroundViewController {
         }
 }
 
-extension StartedModelViewController {
+extension viewForInformationController {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

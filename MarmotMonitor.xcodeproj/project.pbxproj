@@ -15,7 +15,7 @@
 		47155BCA2B1DE97000775B27 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BC92B1DE97000775B27 /* TodayViewController.swift */; };
 		47155BCD2B1DEBDB00775B27 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */; };
 		4719ABE52B0E96380088CBE2 /* BabyNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719ABE42B0E96380088CBE2 /* BabyNameController.swift */; };
-		4735B26B2B1140D8000F2B8C /* StartedModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26A2B1140D8000F2B8C /* StartedModelViewController.swift */; };
+		4735B26B2B1140D8000F2B8C /* viewForInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26A2B1140D8000F2B8C /* viewForInformationController.swift */; };
 		4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26D2B1145B7000F2B8C /* GenderController.swift */; };
 		4747324D2B1234BB0064ABB4 /* ParentNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4747324C2B1234BB0064ABB4 /* ParentNameController.swift */; };
 		4747324F2B1238C20064ABB4 /* BabyNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4747324E2B1238C20064ABB4 /* BabyNameViewModel.swift */; };
@@ -70,7 +70,7 @@
 		47155BC92B1DE97000775B27 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 		4719ABE42B0E96380088CBE2 /* BabyNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyNameController.swift; sourceTree = "<group>"; };
-		4735B26A2B1140D8000F2B8C /* StartedModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartedModelViewController.swift; sourceTree = "<group>"; };
+		4735B26A2B1140D8000F2B8C /* viewForInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewForInformationController.swift; sourceTree = "<group>"; };
 		4735B26D2B1145B7000F2B8C /* GenderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderController.swift; sourceTree = "<group>"; };
 		4747324C2B1234BB0064ABB4 /* ParentNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentNameController.swift; sourceTree = "<group>"; };
 		4747324E2B1238C20064ABB4 /* BabyNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyNameViewModel.swift; sourceTree = "<group>"; };
@@ -151,17 +151,17 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		4735B26C2B11455C000F2B8C /* Started */ = {
+		4735B26C2B11455C000F2B8C /* InformationController */ = {
 			isa = PBXGroup;
 			children = (
-				4735B26A2B1140D8000F2B8C /* StartedModelViewController.swift */,
+				4735B26A2B1140D8000F2B8C /* viewForInformationController.swift */,
 				47A3A3532B0FE7FD00447362 /* WelcomeController.swift */,
 				474732502B1239300064ABB4 /* BabyName */,
 				474732512B1239AF0064ABB4 /* Gender */,
 				474732542B123C680064ABB4 /* ParentName */,
 				478E79052B1370A2004157AF /* birthDay */,
 			);
-			path = Started;
+			path = InformationController;
 			sourceTree = "<group>";
 		};
 		474732502B1239300064ABB4 /* BabyName */ = {
@@ -218,7 +218,7 @@
 				4750720D2B09576900DAB527 /* TapBarController.swift */,
 				475071D72B09462000DAB527 /* AppDelegate.swift */,
 				47155BC72B1DE6E000775B27 /* BackgroundViewController.swift */,
-				4735B26C2B11455C000F2B8C /* Started */,
+				4735B26C2B11455C000F2B8C /* InformationController */,
 				47155BCB2B1DE9D400775B27 /* Home */,
 				4712D4392B0A9B2F0085035C /* Common */,
 				4750720B2B09471000DAB527 /* Ressources */,
@@ -239,10 +239,10 @@
 		475071FA2B09462100DAB527 /* MarmotMonitorUITests */ = {
 			isa = PBXGroup;
 			children = (
+				47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */,
 				475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */,
 				475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */,
 				47CABD8E2B128D6A00C5919A /* UIApplication.swift */,
-				47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */,
 			);
 			path = MarmotMonitorUITests;
 			sourceTree = "<group>";
@@ -443,7 +443,7 @@
 				474732562B123C900064ABB4 /* ParentNameViewModel.swift in Sources */,
 				4750720E2B09576900DAB527 /* TapBarController.swift in Sources */,
 				47155BCD2B1DEBDB00775B27 /* TodayViewModel.swift in Sources */,
-				4735B26B2B1140D8000F2B8C /* StartedModelViewController.swift in Sources */,
+				4735B26B2B1140D8000F2B8C /* viewForInformationController.swift in Sources */,
 				474732532B1239CF0064ABB4 /* GenderViewModel.swift in Sources */,
 				47155BCA2B1DE97000775B27 /* TodayViewController.swift in Sources */,
 				4747324F2B1238C20064ABB4 /* BabyNameViewModel.swift in Sources */,

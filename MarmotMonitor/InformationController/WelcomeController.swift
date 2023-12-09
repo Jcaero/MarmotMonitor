@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WelcomeController: StartedModelViewController {
+final class WelcomeController: viewForInformationController {
         // MARK: - Properties
         let welcomeTitle: UILabel = {
             let label = UILabel()
