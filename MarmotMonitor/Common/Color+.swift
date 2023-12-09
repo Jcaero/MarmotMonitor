@@ -43,6 +43,9 @@ extension UIColor {
     // MARK: - Today
     static let colorForDate = themed(light: .softWhite, dark: .lightGray)
 
+    // MARK: - BreastFeeding
+    static let colorForBreastButton = themed(light: .mediumBrown, dark: .softBlack)
+
 }
 
 private func themed(light: UIColor, dark: UIColor) -> UIColor {

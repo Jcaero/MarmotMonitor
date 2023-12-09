@@ -123,6 +123,8 @@ class TodayViewController: BackgroundViewController {
         setupViews()
         setupContraints()
 
+        navigationController?.navigationBar.isHidden = true
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
@@ -202,7 +204,7 @@ class TodayViewController: BackgroundViewController {
         NSLayoutConstraint.activate([
             welcomeLabel.leftAnchor.constraint(equalTo: clearArea.leftAnchor, constant: 10),
             welcomeLabel.rightAnchor.constraint(equalTo: clearArea.rightAnchor, constant: -10),
-            welcomeLabel.topAnchor.constraint(equalTo: currentDate.bottomAnchor, constant: 10),
+            welcomeLabel.topAnchor.constraint(equalTo: currentDate.bottomAnchor, constant: 5),
             welcomeLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
         ])
 
@@ -252,6 +254,20 @@ class TodayViewController: BackgroundViewController {
 
 extension TodayViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            let vc = BreastFeedingViewController()
+            present(vc, animated: true, completion: nil)
+        case 1:
+            print("sommeil")
+            
+        case 2:
+            print("couche")
+        case 3:
+            print("Croissance")
+        default:
+            break
+        }
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {

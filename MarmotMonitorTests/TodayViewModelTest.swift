@@ -123,7 +123,7 @@ class TodayViewModelTest: XCTestCase, BirthDayDelegate {
 
         let year = viewModel.babyYear()
         let month = viewModel.babyMonth()
-        
+
         XCTAssertEqual(year, "0\nAns")
         XCTAssertEqual(month, "0\nMois")
     }
@@ -138,7 +138,7 @@ class TodayViewModelTest: XCTestCase, BirthDayDelegate {
 
         let year = viewModel.babyYear()
         let month = viewModel.babyMonth()
-        
+
         XCTAssertEqual(year, "0\nAns")
         XCTAssertEqual(month, "2\nMois")
     }
