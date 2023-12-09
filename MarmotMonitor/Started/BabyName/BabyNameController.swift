@@ -51,7 +51,6 @@ final class BabyNameController: StartedModelViewController {
         setupContraints()
 
         setupNextButton()
-        initNavigationBar()
 
         setupTapGesture()
         babyName.delegate = self

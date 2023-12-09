@@ -12,6 +12,8 @@ class BackgroundViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGradient()
+
+        initNavigationBar()
     }
 
     private func setupGradient() {
@@ -29,5 +31,19 @@ class BackgroundViewController: UIViewController {
         if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             setupGradient()
         }
+    }
+
+    private func initNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = .clear
+
+        navigationItem.backButtonDisplayMode = .minimal
+        navigationController?.navigationBar.tintColor = .colorForLabelBlackToBrown
+
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.compactScrollEdgeAppearance = appearance
     }
 }

@@ -137,21 +137,6 @@ class StartedModelViewController: BackgroundViewController {
                 nextButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20)
             ])
         }
-
-    // MARK: - Init navigationBar
-    func initNavigationBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = .clear
-
-        navigationItem.backButtonDisplayMode = .minimal
-        navigationController?.navigationBar.tintColor = .colorForLabelBlackToBrown
-
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.compactScrollEdgeAppearance = appearance
-    }
 }
 
 extension StartedModelViewController {

@@ -78,8 +78,6 @@ class BirthDayController: StartedModelViewController, BirthDayDelegate {
 
         updateDisplayAccessibility()
 
-        initNavigationBar()
-
         // MARK: - Keyboard
         birthDayTF.delegate = self
         setupTapGesture()
@@ -207,7 +205,7 @@ extension BirthDayController {
         }
 
         if let tapGesture = view.gestureRecognizers?.first(where: { $0 is UITapGestureRecognizer }) {
-                tapGesture.isEnabled = !isPickerHidden
+                tapGesture.isEnabled = isPickerHidden
             }
     }
 }

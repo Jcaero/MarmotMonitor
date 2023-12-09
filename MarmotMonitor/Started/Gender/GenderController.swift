@@ -61,8 +61,6 @@ final class GenderController: StartedModelViewController {
 
         setupGenderButton()
         setupNextButton()
-
-        initNavigationBar()
     }
 
     override func viewDidLayoutSubviews() {

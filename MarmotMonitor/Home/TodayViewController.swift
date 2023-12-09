@@ -150,7 +150,6 @@ class TodayViewController: BackgroundViewController {
         super.viewDidLayoutSubviews()
         imageGradient.frame = babyImage.bounds
 
-        // MARK: - Setup TableView Height
         setupTableViewHeight()
     }
 
@@ -181,7 +180,7 @@ class TodayViewController: BackgroundViewController {
         }
 
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10)
@@ -245,7 +244,7 @@ class TodayViewController: BackgroundViewController {
         else { return }
 
         let cellHeight = cell.frame.size.height
-        let header = CGFloat(100)
+        let header = CGFloat(80)
        tableViewHeightConstraint?.constant = header + cellHeight * 4
         tableView.layoutIfNeeded()
     }
@@ -293,19 +292,10 @@ extension TodayViewController: UITableViewDataSource {
         cell.textLabel?.text = viewModel.acitivityCellTitle[indexPath.row]
         cell.detailTextLabel?.text = viewModel.acitivityCellSubTitle[indexPath.row]
         cell.imageView?.image = UIImage(named: viewModel.imageName[indexPath.row])
-//        cell.imageView?.image = imageWithImage(image: UIImage(named: viewModel.imageName[indexPath.row])!, scaledToSize: CGSize(width: 40, height: 40))
         cell.backgroundColor = .clear
         cell.accessoryType = .disclosureIndicator
         return cell
     }
-
-//    private func imageWithImage(image: UIImage, scaledToSize newSize: CGSize) -> UIImage {
-//        UIGraphicsBeginImageContext(newSize)
-//        image.draw(in: CGRect(x: 0,y: 0,width: newSize.width ,height: newSize.height))
-//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        return newImage!.withRenderingMode(.alwaysOriginal)
-//    }
 }
 
 // MARK: - Accessibility
