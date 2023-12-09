@@ -105,7 +105,7 @@ class TodayViewController: BackgroundViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.backgroundColor = .colorForPastelArea
         tableView.isScrollEnabled = false
-        tableView.separatorStyle = .none
+        tableView.separatorStyle = .singleLine
         tableView.layer.cornerRadius = 20
         return tableView
     }()
@@ -289,16 +289,23 @@ extension TodayViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
-        cell.textLabel?.text = "Ligne numéro \(indexPath.row)"
-        cell.detailTextLabel?.text = "Sub Ligne numéro \(indexPath.row)"
-        cell.imageView?.image = UIImage(systemName: "photo")
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        cell.textLabel?.text = viewModel.acitivityCellTitle[indexPath.row]
+        cell.detailTextLabel?.text = viewModel.acitivityCellSubTitle[indexPath.row]
+        cell.imageView?.image = UIImage(named: viewModel.imageName[indexPath.row])
+//        cell.imageView?.image = imageWithImage(image: UIImage(named: viewModel.imageName[indexPath.row])!, scaledToSize: CGSize(width: 40, height: 40))
         cell.backgroundColor = .clear
         cell.accessoryType = .disclosureIndicator
         return cell
     }
+
+//    private func imageWithImage(image: UIImage, scaledToSize newSize: CGSize) -> UIImage {
+//        UIGraphicsBeginImageContext(newSize)
+//        image.draw(in: CGRect(x: 0,y: 0,width: newSize.width ,height: newSize.height))
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        return newImage!.withRenderingMode(.alwaysOriginal)
+//    }
 }
 
 // MARK: - Accessibility
-

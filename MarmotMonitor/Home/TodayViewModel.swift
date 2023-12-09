@@ -9,6 +9,9 @@ import Foundation
 
 class TodayViewModel {
     private let defaults: UserDefaults
+    let imageName = ["biberon", "couche", "sommeil", "croissance"]
+    let acitivityCellTitle = ["Dernière tétéé/biberon", "Dernier sommeil", "Dernière couche", "Croissance"]
+    let acitivityCellSubTitle = ["Saisir la tétéé/le biberon", "Saisir le sommeil", "Saisir la couche", "Ajouter une mesure"]
 
     init(defaults: UserDefaults = UserDefaults.standard) {
         self.defaults = defaults
