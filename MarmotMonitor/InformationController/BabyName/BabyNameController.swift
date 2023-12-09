@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BabyNameController: viewForInformationController {
+final class BabyNameController: ViewForInformationController {
     // MARK: - Properties
     let babyNameTitre: UILabel = {
         let label = UILabel()

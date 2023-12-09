@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GenderController: viewForInformationController {
+final class GenderController: ViewForInformationController {
     let genreTitre: UILabel = {
         let label = UILabel()
         label.text = "La petite marmotte est-elle un garçon ou une fille ?"

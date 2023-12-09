@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BirthDayController: viewForInformationController, BirthDayDelegate {
+class BirthDayController: ViewForInformationController, BirthDayDelegate {
     let dateTitre: UILabel = {
         let label = UILabel()
         label.text = "Quel est la date de naissance de la marmotte ?"
