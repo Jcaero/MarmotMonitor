@@ -12,7 +12,7 @@ final class GenderController: ViewForInformationController {
         let label = UILabel()
         label.text = "La petite marmotte est-elle un garçon ou une fille ?"
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
-        label.textColor = .colorForLabelBlackToBrown
+        label.textColor = .colorForLabelBlackToBlue
         label.textAlignment = .left
         label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "La petite marmotte est-elle un garçon ou une fille ?", hint: "")

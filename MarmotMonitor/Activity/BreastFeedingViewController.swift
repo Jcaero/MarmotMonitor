@@ -61,14 +61,14 @@ class BreastFeedingViewController: UIViewController {
         button.setTitle("G", for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.backgroundColor = .clear
-        button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.label.cgColor
+        button.layer.borderWidth = 10
+        button.layer.borderColor = UIColor.duckBlue.cgColor
         return button
     }()
 
     let timeLeftBreastLabel: UILabel = {
         let label = UILabel()
-        label.text = "0"
+        label.text = "0 min"
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         label.textColor = .label
         label.textAlignment = .center
@@ -79,7 +79,7 @@ class BreastFeedingViewController: UIViewController {
 
     let timeRightBreastLabel: UILabel = {
         let label = UILabel()
-        label.text = "0"
+        label.text = "0 min"
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         label.textColor = .label
         label.textAlignment = .center
@@ -126,7 +126,7 @@ class BreastFeedingViewController: UIViewController {
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .pastelBrown
+        view.backgroundColor = .pastelBlueNew
 
         setupViews()
         setupContraints()
@@ -151,9 +151,9 @@ class BreastFeedingViewController: UIViewController {
     }
 
     private func setupContraints() {
-        [timeStackView,timeLabel, timePicker,
+        [timeStackView, timeLabel, timePicker,
          leftBreastButton, timeLeftBreastLabel,
-         rightBreastButton,timeRightBreastLabel,
+         rightBreastButton, timeRightBreastLabel,
          totalTimeBreastLabel,
          firstBreastLabel, firstBreastButton,
          separator].forEach {

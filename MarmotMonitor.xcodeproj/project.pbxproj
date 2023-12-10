@@ -43,6 +43,8 @@
 		47CABD8F2B128D6A00C5919A /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8E2B128D6A00C5919A /* UIApplication.swift */; };
 		47CABD912B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */; };
 		47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */; };
+		47FB1DAB2B2653580029EB2E /* BackgroundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FB1DAA2B2653580029EB2E /* BackgroundViewModel.swift */; };
+		47FB1DAD2B2655FD0029EB2E /* BackgroundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FB1DAC2B2655FD0029EB2E /* BackgroundViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,8 @@
 		47CABD8E2B128D6A00C5919A /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorAuditAccessibility.swift; sourceTree = "<group>"; };
 		47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		47FB1DAA2B2653580029EB2E /* BackgroundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewModel.swift; sourceTree = "<group>"; };
+		47FB1DAC2B2655FD0029EB2E /* BackgroundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,7 +223,7 @@
 				475071D92B09462000DAB527 /* SceneDelegate.swift */,
 				4750720D2B09576900DAB527 /* TapBarController.swift */,
 				475071D72B09462000DAB527 /* AppDelegate.swift */,
-				47155BC72B1DE6E000775B27 /* BackgroundViewController.swift */,
+				47FB1DAE2B265BD90029EB2E /* BackgroundView */,
 				4735B26C2B11455C000F2B8C /* InformationController */,
 				47155BCB2B1DE9D400775B27 /* Home */,
 				4777ABED2B2500D40055DF4A /* Activity */,
@@ -235,6 +239,7 @@
 			children = (
 				47CB30012B1F400F0054EAC7 /* started */,
 				4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */,
+				47FB1DAC2B2655FD0029EB2E /* BackgroundViewModel.swift */,
 			);
 			path = MarmotMonitorTests;
 			sourceTree = "<group>";
@@ -294,6 +299,15 @@
 				478E790C2B138099004157AF /* BirthDayViewModelTest.swift */,
 			);
 			path = started;
+			sourceTree = "<group>";
+		};
+		47FB1DAE2B265BD90029EB2E /* BackgroundView */ = {
+			isa = PBXGroup;
+			children = (
+				47155BC72B1DE6E000775B27 /* BackgroundViewController.swift */,
+				47FB1DAA2B2653580029EB2E /* BackgroundViewModel.swift */,
+			);
+			path = BackgroundView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -472,6 +486,7 @@
 				475071E22B09462000DAB527 /* MarmotMonitor.xcdatamodeld in Sources */,
 				4711F7742B1E70AB00869A27 /* Person.swift in Sources */,
 				4712D43D2B0A9BC50085035C /* UIView+.swift in Sources */,
+				47FB1DAB2B2653580029EB2E /* BackgroundViewModel.swift in Sources */,
 				475071DA2B09462000DAB527 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +499,7 @@
 				478E790D2B138099004157AF /* BirthDayViewModelTest.swift in Sources */,
 				4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */,
 				4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */,
+				47FB1DAD2B2655FD0029EB2E /* BackgroundViewModel.swift in Sources */,
 				4747325C2B12456A0064ABB4 /* ParentNameViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

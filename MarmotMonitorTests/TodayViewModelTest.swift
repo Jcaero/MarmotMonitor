@@ -124,8 +124,8 @@ class TodayViewModelTest: XCTestCase, BirthDayDelegate {
         let year = viewModel.babyYear()
         let month = viewModel.babyMonth()
 
-        XCTAssertEqual(year, "0\nAns")
-        XCTAssertEqual(month, "0\nMois")
+        XCTAssertEqual(year, "0")
+        XCTAssertEqual(month, "0")
     }
 
     func testBabyBorn2MonthAgo_WhenRequestAge_receiveAgeForText() {
@@ -139,8 +139,8 @@ class TodayViewModelTest: XCTestCase, BirthDayDelegate {
         let year = viewModel.babyYear()
         let month = viewModel.babyMonth()
 
-        XCTAssertEqual(year, "0\nAns")
-        XCTAssertEqual(month, "2\nMois")
+        XCTAssertEqual(year, "0")
+        XCTAssertEqual(month, "2")
     }
 
     func testBabyBorn3YearAnd2MonthAgo_WhenRequestAge_receiveAgeForText() {
@@ -155,8 +155,8 @@ class TodayViewModelTest: XCTestCase, BirthDayDelegate {
         let year = viewModel.babyYear()
         let month = viewModel.babyMonth()
 
-        XCTAssertEqual(year, "3\nAns")
-        XCTAssertEqual(month, "2\nMois")
+        XCTAssertEqual(year, "3")
+        XCTAssertEqual(month, "2")
     }
 
     func testBabyHaveNoBirthDay_WhenRequestAge_receiveNil() {

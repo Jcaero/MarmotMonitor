@@ -9,6 +9,14 @@ import Foundation
 import UIKit
 
 extension UIColor {
+    // MARK: - New Colors
+    static let pastelBlueNew = UIColor(red: 0.64, green: 0.82, blue: 1.00, alpha: 1.00) // #A2D2FF
+    static let softGray = UIColor(red: 0.94, green: 0.97, blue: 1.00, alpha: 1.00) // #fafafa
+    static let egyptienBlue = UIColor(red: 0.00, green: 0.20, blue: 0.40, alpha: 1.00) // #003366
+    static let egyptienBlueSoft = UIColor(red: 0.20, green: 0.36, blue: 0.52, alpha: 1.00) // #335B84
+    static let graySoft = UIColor(red: 0.91, green: 0.91, blue: 0.91, alpha: 1.00) // #E8E8E8
+    static let pastelPinkNew = UIColor(red: 1.00, green: 0.78, blue: 0.87, alpha: 1.00) // #FFC8DD
+
     // MARK: - Pink
     static let pastelPink = UIColor(red: 1.00, green: 0.66, blue: 0.78, alpha: 1.00)
     static let darkPink = UIColor(red: 0.93, green: 0.40, blue: 0.58, alpha: 1.00)
@@ -32,20 +40,21 @@ extension UIColor {
     static let darkBlue = UIColor(red: 0.16, green: 0.62, blue: 0.91, alpha: 1.00)
 
     // MARK: - Gradient
-    static let colorForGradientStart = themed(light: .mediumBrown, dark: .softBlack)
-    static let colorForGradientEnd = themed(light: .pastelBrown, dark: .darkGray)
+    static let colorForGradientStart = themed(light: .pastelBlueNew, dark: .egyptienBlue)
+    static let colorForGradientStartPink = themed(light: .pastelPinkNew, dark: .egyptienBlue)
+    static let colorForGradientEnd = themed(light: .white, dark: .egyptienBlueSoft)
 
-    static let colorForPastelArea = themed(light: .pastelBrown, dark: .systemGray4)
+    static let colorForPastelArea = themed(light: .softGray, dark: .egyptienBlueSoft)
 
-    static let colorForLabelBlackToBrown = themed(light: .black, dark: .darkBrown)
+    static let colorForLabelBlackToBlue = themed(light: .black, dark: .graySoft)
 
     // MARK: - NextButton
     static let colorForNextButton = themed(light: .clear, dark: .clear)
-    static let colorForLabelNextButtonDefault = themed(light: .softBlack, dark: .pastelBrown)
+    static let colorForLabelNextButtonDefault = themed(light: .softBlack, dark: .white)
     static let colorForStokNextButton = themed(light: .white, dark: .darkGray)
 
     // MARK: - Today
-    static let colorForDate = themed(light: .softWhite, dark: .lightGray)
+    static let colorForDate = themed(light: .softBlack, dark: .lightGray)
 
     // MARK: - BreastFeeding
     static let colorForBreastButton = themed(light: .duckBlueAlpha, dark: .softBlack)

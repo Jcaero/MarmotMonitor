@@ -155,8 +155,6 @@ class TodayViewController: BackgroundViewController {
         setupTableViewHeight()
     }
 
-    // MARK: - Setup function
-
     private func setupViews() {
 
         [scrollView, currentDate, welcomeLabel].forEach {
@@ -256,11 +254,10 @@ extension TodayViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let vc = BreastFeedingViewController()
-            present(vc, animated: true, completion: nil)
+            let next = BreastFeedingViewController()
+            present(next, animated: true, completion: nil)
         case 1:
             print("sommeil")
-            
         case 2:
             print("couche")
         case 3:

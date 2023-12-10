@@ -13,7 +13,7 @@ final class BabyNameController: ViewForInformationController {
         let label = UILabel()
         label.text = "Quel est le nom de la petite marmotte ?"
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
-        label.textColor = .colorForLabelBlackToBrown
+        label.textColor = .colorForLabelBlackToBlue
         label.textAlignment = .left
         label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "Quel est le nom de la petite marmotte ?", hint: "")

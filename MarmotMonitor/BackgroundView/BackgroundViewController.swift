@@ -8,7 +8,10 @@
 import UIKit
 
 class BackgroundViewController: UIViewController {
+    // MARK: - Propriete
+    private let viewModel = BackgroundViewModel()
 
+    // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGradient()
@@ -16,12 +19,18 @@ class BackgroundViewController: UIViewController {
         initNavigationBar()
     }
 
+    // MARK: - function
     private func setupGradient() {
         view.layer.sublayers?.first { $0 is CAGradientLayer }?.removeFromSuperlayer()
 
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
-        gradient.colors = [UIColor.colorForGradientStart.cgColor, UIColor.colorForGradientEnd.cgColor]
+        let gender = viewModel.getGender()
+        if gender == "Fille" {
+            gradient.colors = [UIColor.colorForGradientStartPink.cgColor, UIColor.colorForGradientEnd.cgColor]
+        } else {
+            gradient.colors = [UIColor.colorForGradientStart.cgColor, UIColor.colorForGradientEnd.cgColor]
+        }
         gradient.locations = [0.0, 1.0]
         view.layer.insertSublayer(gradient, at: 0)
     }
@@ -39,7 +48,7 @@ class BackgroundViewController: UIViewController {
         appearance.backgroundColor = .clear
 
         navigationItem.backButtonDisplayMode = .minimal
-        navigationController?.navigationBar.tintColor = .colorForLabelBlackToBrown
+        navigationController?.navigationBar.tintColor = .colorForLabelBlackToBlue
 
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance

@@ -19,6 +19,8 @@ final class ParentNameViewModel {
             let lowercasedName = name.lowercased()
             let parentName = lowercasedName.prefix(1).uppercased() + lowercasedName.dropFirst()
             defaults.set(parentName, forKey: UserInfoKey.parentName.rawValue)
+        } else {
+            defaults.removeObject(forKey: UserInfoKey.parentName.rawValue)
         }
     }
 }

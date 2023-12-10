@@ -13,7 +13,7 @@ final class WelcomeController: ViewForInformationController {
             let label = UILabel()
             label.text = "Bonjour"
             label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
-            label.textColor = .colorForLabelBlackToBrown
+            label.textColor = .colorForLabelBlackToBlue
             label.textAlignment = .left
             label.numberOfLines = 0
             return label
@@ -56,7 +56,7 @@ final class WelcomeController: ViewForInformationController {
     // MARK: - Action
     @objc private func nextButtonTapped() {
         navigationItem.backButtonDisplayMode = .minimal
-        navigationController?.navigationBar.tintColor = .colorForLabelBlackToBrown
+        navigationController?.navigationBar.tintColor = .colorForLabelBlackToBlue
         navigationController?.pushViewController(BabyNameController(), animated: true)
     }
 }

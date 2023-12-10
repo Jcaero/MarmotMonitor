@@ -12,7 +12,7 @@ class BirthDayController: ViewForInformationController, BirthDayDelegate {
         let label = UILabel()
         label.text = "Quel est la date de naissance de la marmotte ?"
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
-        label.textColor = .colorForLabelBlackToBrown
+        label.textColor = .colorForLabelBlackToBlue
         label.textAlignment = .left
         label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "Quel est la date de naissance?", hint: "")
@@ -55,7 +55,7 @@ class BirthDayController: ViewForInformationController, BirthDayDelegate {
         let label = UILabel()
         label.text = "ex: 01/01/2021"
         label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
-        label.textColor = .colorForLabelBlackToBrown
+        label.textColor = .colorForLabelBlackToBlue
         label.textAlignment = .left
         label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "", hint: "date de naissance au format dd/mm/yyyy")

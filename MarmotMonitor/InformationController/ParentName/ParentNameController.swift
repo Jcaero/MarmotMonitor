@@ -13,7 +13,7 @@ class ParentNameController: ViewForInformationController {
         let label = UILabel()
         label.text = "Quel est le nom du parent ?"
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
-        label.textColor = .colorForLabelBlackToBrown
+        label.textColor = .colorForLabelBlackToBlue
         label.textAlignment = .left
         label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "Quel est le nom du parent ?", hint: "")
