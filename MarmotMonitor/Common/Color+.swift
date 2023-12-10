@@ -9,9 +9,6 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    static let pastelBlue = UIColor(red: 0.52, green: 0.80, blue: 0.86, alpha: 1.00)
-    static let darkBlue = UIColor(red: 0.16, green: 0.62, blue: 0.91, alpha: 1.00)
-
     // MARK: - Pink
     static let pastelPink = UIColor(red: 1.00, green: 0.66, blue: 0.78, alpha: 1.00)
     static let darkPink = UIColor(red: 0.93, green: 0.40, blue: 0.58, alpha: 1.00)
@@ -22,10 +19,17 @@ extension UIColor {
     static let pastelHeavyBrown = UIColor(red: 0.39, green: 0.32, blue: 0.22, alpha: 1.00) // #645139
     static let mediumBrown = UIColor(red: 0.58, green: 0.42, blue: 0.27, alpha: 1.00) // #946b45
     static let darkBrown = UIColor(red: 0.64, green: 0.52, blue: 0.37, alpha: 1.00) // #a3855e
+    static let beige = UIColor(red: 0.73, green: 0.57, blue: 0.37, alpha: 1.00) // #b9925e
 
     // MARK: - Dark
     static let softBlack = UIColor(red: 0.07, green: 0.07, blue: 0.07, alpha: 1.00) // #121212
     static let softWhite = UIColor(red: 0.92, green: 0.92, blue: 0.92, alpha: 1.00) // #ebebeb
+
+    // MARK: - Blue
+    static let duckBlue = UIColor(red: 0.02, green: 0.55, blue: 0.60, alpha: 1.00) // #048B9A
+    static let duckBlueAlpha = UIColor(red: 0.02, green: 0.55, blue: 0.60, alpha: 0.40) // #048B9A
+    static let pastelBlue = UIColor(red: 0.52, green: 0.80, blue: 0.86, alpha: 1.00)
+    static let darkBlue = UIColor(red: 0.16, green: 0.62, blue: 0.91, alpha: 1.00)
 
     // MARK: - Gradient
     static let colorForGradientStart = themed(light: .mediumBrown, dark: .softBlack)
@@ -44,7 +48,7 @@ extension UIColor {
     static let colorForDate = themed(light: .softWhite, dark: .lightGray)
 
     // MARK: - BreastFeeding
-    static let colorForBreastButton = themed(light: .mediumBrown, dark: .softBlack)
+    static let colorForBreastButton = themed(light: .duckBlueAlpha, dark: .softBlack)
 
 }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BreastFeedingViewController: BackgroundViewController {
+class BreastFeedingViewController: UIViewController {
     let timeLabel: UILabel = {
         let label = UILabel()
         label.text = "Heure"
@@ -17,6 +17,12 @@ class BreastFeedingViewController: BackgroundViewController {
         label.numberOfLines = 0
         label.setAccessibility(with: .staticText, label: "heure de la tétée", hint: "")
         return label
+    }()
+
+    let separator: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        return view
     }()
 
     let timePicker: UIDatePicker = {
@@ -45,8 +51,8 @@ class BreastFeedingViewController: BackgroundViewController {
         button.setTitle("D", for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.backgroundColor = .clear
-        button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.label.cgColor
+        button.layer.borderWidth = 10
+        button.layer.borderColor = UIColor.duckBlue.cgColor
         return button
     }()
 
@@ -120,6 +126,8 @@ class BreastFeedingViewController: BackgroundViewController {
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .pastelBrown
+
         setupViews()
         setupContraints()
     }
@@ -128,13 +136,14 @@ class BreastFeedingViewController: BackgroundViewController {
         super.viewDidLayoutSubviews()
         leftBreastButton.layer.cornerRadius = leftBreastButton.frame.width/2
         rightBreastButton.layer.cornerRadius = rightBreastButton.frame.width/2
+        firstBreastButton.layer.cornerRadius = firstBreastButton.frame.width/2
     }
 
     // MARK: - Setup function
 
     private func setupViews() {
-        
-        [timeStackView, leftBreastButton, timeLeftBreastLabel, rightBreastButton, timeRightBreastLabel, totalTimeBreastLabel, firstBreastLabel, firstBreastButton].forEach {
+
+        [timeStackView, leftBreastButton, timeLeftBreastLabel, rightBreastButton, timeRightBreastLabel, totalTimeBreastLabel, firstBreastLabel, firstBreastButton, separator].forEach {
             view.addSubview($0)
         }
         timeStackView.addArrangedSubview(timeLabel)
@@ -142,28 +151,27 @@ class BreastFeedingViewController: BackgroundViewController {
     }
 
     private func setupContraints() {
-        [timeStackView,timeLabel, timePicker, leftBreastButton, timeLeftBreastLabel, rightBreastButton, timeRightBreastLabel, totalTimeBreastLabel, firstBreastLabel, firstBreastButton].forEach {
+        [timeStackView,timeLabel, timePicker,
+         leftBreastButton, timeLeftBreastLabel,
+         rightBreastButton,timeRightBreastLabel,
+         totalTimeBreastLabel,
+         firstBreastLabel, firstBreastButton,
+         separator].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
         NSLayoutConstraint.activate([
-            timeStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            timeStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            timeStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20)
-        ])
-
-        NSLayoutConstraint.activate([
-            rightBreastButton.topAnchor.constraint(equalTo: timeStackView.bottomAnchor, constant: 30),
+            rightBreastButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height/10),
             rightBreastButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: view.frame.width/4),
             rightBreastButton.widthAnchor.constraint(equalToConstant: view.frame.width/4),
             rightBreastButton.heightAnchor.constraint(equalTo: rightBreastButton.widthAnchor)
         ])
 
         NSLayoutConstraint.activate([
-            leftBreastButton.topAnchor.constraint(equalTo: timeStackView.bottomAnchor, constant: 30),
+            leftBreastButton.topAnchor.constraint(equalTo: rightBreastButton.topAnchor),
             leftBreastButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -view.frame.width/4),
             leftBreastButton.widthAnchor.constraint(equalToConstant: view.frame.width/4),
-            leftBreastButton.heightAnchor.constraint(equalTo: rightBreastButton.widthAnchor)
+            leftBreastButton.heightAnchor.constraint(equalTo: leftBreastButton.widthAnchor)
         ])
 
         NSLayoutConstraint.activate([
@@ -180,13 +188,26 @@ class BreastFeedingViewController: BackgroundViewController {
 
         NSLayoutConstraint.activate([
             totalTimeBreastLabel.topAnchor.constraint(equalTo: timeRightBreastLabel.bottomAnchor, constant: 30),
-            totalTimeBreastLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            totalTimeBreastLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            totalTimeBreastLabel.leftAnchor.constraint(equalTo: leftBreastButton.leftAnchor),
+            totalTimeBreastLabel.rightAnchor.constraint(equalTo: rightBreastButton.rightAnchor),
             totalTimeBreastLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 100)
         ])
 
         NSLayoutConstraint.activate([
-            firstBreastLabel.topAnchor.constraint(equalTo: totalTimeBreastLabel.bottomAnchor, constant: 30),
+            separator.topAnchor.constraint(equalTo: totalTimeBreastLabel.bottomAnchor, constant: 30),
+            separator.leftAnchor.constraint(equalTo: totalTimeBreastLabel.leftAnchor),
+            separator.rightAnchor.constraint(equalTo: totalTimeBreastLabel.rightAnchor),
+            separator.heightAnchor.constraint(equalToConstant: 1)
+        ])
+
+        NSLayoutConstraint.activate([
+            timeStackView.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 30),
+            timeStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
+            timeStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20)
+        ])
+
+        NSLayoutConstraint.activate([
+            firstBreastLabel.topAnchor.constraint(equalTo: timeStackView.bottomAnchor, constant: 30),
             firstBreastLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             firstBreastLabel.rightAnchor.constraint(equalTo: view.centerXAnchor)
         ])
@@ -194,7 +215,8 @@ class BreastFeedingViewController: BackgroundViewController {
         NSLayoutConstraint.activate([
             firstBreastButton.centerYAnchor.constraint(equalTo: firstBreastLabel.centerYAnchor),
             firstBreastButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: view.frame.width/4),
-            firstBreastButton.widthAnchor.constraint(equalToConstant: view.frame.width/6)
+            firstBreastButton.widthAnchor.constraint(equalToConstant: view.frame.width/6),
+            firstBreastButton.heightAnchor.constraint(equalTo: firstBreastButton.widthAnchor)
         ])
     }
 }
