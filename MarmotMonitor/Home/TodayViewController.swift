@@ -94,10 +94,28 @@ class TodayViewController: BackgroundViewController {
         return label
     }()
 
-    let clearArea: UIView = {
+    let scrollArea: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
+    }()
+
+    let tableViewArea: UIView = {
+        let view = UIView()
+        view.backgroundColor = .colorForPastelArea
+        view.layer.cornerRadius = 20
+        return view
+    }()
+
+    let tableViewName: UILabel = {
+        let label = UILabel()
+        label.textColor = .label
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.text = "Activités"
+        label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
+        label.setAccessibility(with: .staticText, label: "Activités de bébé", hint: "")
+        return label
     }()
 
     let tableView: UITableView = {
@@ -167,15 +185,18 @@ class TodayViewController: BackgroundViewController {
         babyImage.addSubview(babyMonth)
         babyImage.addSubview(yearLabel)
         babyImage.addSubview(monthLabel)
-        scrollView.addSubview(clearArea)
-        clearArea.addSubview(babyImage)
-        clearArea.addSubview(tableView)
+        scrollView.addSubview(scrollArea)
+        scrollArea.addSubview(babyImage)
+        tableViewArea.addSubview(tableViewName)
+        tableViewArea.addSubview(tableView)
+        scrollArea.addSubview(tableViewArea)
     }
 
     private func setupContraints() {
         [scrollView, currentDate, welcomeLabel,
          babyImage, babyYear, babyMonth, yearLabel, monthLabel,
-         clearArea, tableView].forEach {
+         scrollArea, 
+         tableView, tableViewArea, tableViewName].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -187,29 +208,29 @@ class TodayViewController: BackgroundViewController {
         ])
 
         NSLayoutConstraint.activate([
-            clearArea.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
-            clearArea.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
-            clearArea.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0),
-            clearArea.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0)
+            scrollArea.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
+            scrollArea.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
+            scrollArea.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0),
+            scrollArea.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0)
         ])
 
         NSLayoutConstraint.activate([
-            currentDate.leftAnchor.constraint(equalTo: clearArea.leftAnchor, constant: 10),
-            currentDate.rightAnchor.constraint(equalTo: clearArea.rightAnchor, constant: -10),
-            currentDate.topAnchor.constraint(equalTo: clearArea.topAnchor)
+            currentDate.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
+            currentDate.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
+            currentDate.topAnchor.constraint(equalTo: scrollArea.topAnchor)
         ])
 
         NSLayoutConstraint.activate([
-            welcomeLabel.leftAnchor.constraint(equalTo: clearArea.leftAnchor, constant: 10),
-            welcomeLabel.rightAnchor.constraint(equalTo: clearArea.rightAnchor, constant: -10),
-            welcomeLabel.topAnchor.constraint(equalTo: currentDate.bottomAnchor, constant: 5),
+            welcomeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
+            welcomeLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
+            welcomeLabel.topAnchor.constraint(equalTo: currentDate.bottomAnchor, constant: 10),
             welcomeLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
         ])
 
         NSLayoutConstraint.activate([
             babyImage.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor),
-            babyImage.rightAnchor.constraint(equalTo: clearArea.rightAnchor, constant: -10),
-            babyImage.leftAnchor.constraint(equalTo: clearArea.leftAnchor, constant: 10),
+            babyImage.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
+            babyImage.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
             babyImage.widthAnchor.constraint(equalToConstant: (view.frame.width - 40)),
             babyImage.heightAnchor.constraint(equalToConstant: ((view.frame.width - 40)/3)*2)
         ])
@@ -228,24 +249,34 @@ class TodayViewController: BackgroundViewController {
             babyMonth.rightAnchor.constraint(equalTo: babyImage.rightAnchor, constant: -10)
         ])
 
+        NSLayoutConstraint.activate([
+            tableViewArea.topAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: 30),
+            tableViewArea.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
+            tableViewArea.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
+            tableViewArea.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -20),
+            tableViewArea.widthAnchor.constraint(equalToConstant: (view.frame.width - 40))
+        ])
+
+        NSLayoutConstraint.activate([
+            tableViewName.topAnchor.constraint(equalTo: tableViewArea.topAnchor, constant: 10),
+            tableViewName.rightAnchor.constraint(equalTo: tableViewArea.rightAnchor),
+            tableViewName.leftAnchor.constraint(equalTo: tableViewArea.leftAnchor)
+        ])
+
         tableViewHeightConstraint = tableView.heightAnchor.constraint(greaterThanOrEqualToConstant: 300)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: 30),
-            tableView.rightAnchor.constraint(equalTo: clearArea.rightAnchor, constant: -10),
-            tableView.leftAnchor.constraint(equalTo: clearArea.leftAnchor, constant: 10),
-            tableView.widthAnchor.constraint(equalToConstant: (view.frame.width - 40)),
+            tableView.topAnchor.constraint(equalTo: tableViewName.bottomAnchor, constant: 5),
+            tableView.rightAnchor.constraint(equalTo: tableViewArea.rightAnchor),
+            tableView.leftAnchor.constraint(equalTo: tableViewArea.leftAnchor),
             tableViewHeightConstraint!,
-            tableView.bottomAnchor.constraint(equalTo: clearArea.bottomAnchor, constant: -20)
+            tableView.bottomAnchor.constraint(equalTo: tableViewArea.bottomAnchor)
         ])
     }
 
     private func setupTableViewHeight() {
         guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
         else { return }
-
-        let cellHeight = cell.frame.size.height
-        let header = CGFloat(80)
-       tableViewHeightConstraint?.constant = header + cellHeight * 4
+        tableViewHeightConstraint?.constant = cell.frame.size.height * 4
         tableView.layoutIfNeeded()
     }
 }
@@ -269,25 +300,6 @@ extension TodayViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return 60
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.setAccessibility(with: .header, label: "Activités", hint: "Liste des activités")
-        headerView.backgroundColor = .colorForPastelArea
-        let label = UILabel()
-        label.text = "Activités"
-        label.textColor = .label
-        label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        headerView.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 10),
-            label.rightAnchor.constraint(equalTo: headerView.rightAnchor, constant: -10),
-            label.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 10),
-            label.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -10)
-        ])
-        return headerView
     }
 }
 
