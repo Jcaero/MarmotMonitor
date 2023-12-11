@@ -38,6 +38,12 @@ class TodayViewController: BackgroundViewController {
         return scrollView
     }()
 
+    let scrollArea: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+
      let babyImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "todayDefault")
@@ -92,12 +98,6 @@ class TodayViewController: BackgroundViewController {
         label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
         label.setAccessibility(with: .staticText, label: "mois", hint: "")
         return label
-    }()
-
-    let scrollArea: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
     }()
 
     let tableViewArea: UIView = {
