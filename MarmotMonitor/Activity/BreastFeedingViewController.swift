@@ -23,7 +23,7 @@ class BreastFeedingViewController: UIViewController {
 
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Heure"
+        label.text = "Heure du debut"
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         label.textColor = .label
         label.textAlignment = .center
@@ -52,9 +52,11 @@ class BreastFeedingViewController: UIViewController {
     let rightBreastButton: UIButton = {
         let button = UIButton()
         button.setTitle("D", for: .normal)
+        button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         button.setTitleColor(.label, for: .normal)
+        button.contentVerticalAlignment = .fill
         button.backgroundColor = .clear
-        button.layer.borderWidth = 10
+        button.layer.borderWidth = 8
         button.layer.borderColor = UIColor.duckBlue.cgColor
         return button
     }()
@@ -62,9 +64,11 @@ class BreastFeedingViewController: UIViewController {
     let leftBreastButton: UIButton = {
         let button = UIButton()
         button.setTitle("G", for: .normal)
+        button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         button.setTitleColor(.label, for: .normal)
+        button.contentVerticalAlignment = .fill
         button.backgroundColor = .clear
-        button.layer.borderWidth = 10
+        button.layer.borderWidth = 8
         button.layer.borderColor = UIColor.duckBlue.cgColor
         return button
     }()
@@ -119,12 +123,44 @@ class BreastFeedingViewController: UIViewController {
     let firstBreastButton: UIButton = {
         let button = UIButton()
         button.setTitle("D", for: .normal)
+        button.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         button.setTitleColor(.label, for: .normal)
         button.backgroundColor = .colorForBreastButton
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         return button
     }()
+
+    let picker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.backgroundColor = .white
+        picker.datePickerMode = .countDownTimer
+        picker.preferredDatePickerStyle = .wheels
+        return picker
+    }()
+
+    let validePickerButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Valider", for: .normal)
+        button.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
+        button.setTitleColor(.label, for: .normal)
+        button.backgroundColor = .colorForBreastButton
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        return button
+    }()
+
+    let stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.distribution = .fillProportionally
+        view.spacing = 20
+        return view
+    }()
+
+    // MARK: - PROPERTIES
+    var buttonWidthConstraint: NSLayoutConstraint?
+    var firstBreastButtonCenterXContraint: NSLayoutConstraint?
 
     // MARK: - Cycle life
     override func viewDidLoad() {
@@ -133,6 +169,9 @@ class BreastFeedingViewController: UIViewController {
 
         setupViews()
         setupContraints()
+        traitCollectionDidChange(nil)
+        hiddenPicker()
+        setupActionButton()
     }
 
     override func viewDidLayoutSubviews() {
@@ -148,9 +187,13 @@ class BreastFeedingViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(scrollArea)
 
-        [leftBreastButton, timeLeftBreastLabel, rightBreastButton, timeRightBreastLabel, totalTimeBreastLabel, firstBreastLabel, firstBreastButton, separator, timeLabel, timePicker].forEach {
+        [leftBreastButton, timeLeftBreastLabel, rightBreastButton, timeRightBreastLabel, stackView, firstBreastLabel, firstBreastButton, separator, timeLabel, timePicker].forEach {
             scrollArea.addSubview($0)
         }
+
+        stackView.addArrangedSubview(picker)
+        stackView.addArrangedSubview(validePickerButton)
+        stackView.addArrangedSubview(totalTimeBreastLabel)
     }
 
     private func setupContraints() {
@@ -159,7 +202,7 @@ class BreastFeedingViewController: UIViewController {
          rightBreastButton, timeRightBreastLabel,
          totalTimeBreastLabel,
          firstBreastLabel, firstBreastButton,
-         separator, 
+         separator, stackView, validePickerButton,
          scrollView, scrollArea].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -179,16 +222,36 @@ class BreastFeedingViewController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            rightBreastButton.topAnchor.constraint(equalTo: scrollArea.topAnchor, constant: view.frame.height/10),
+            timeLabel.topAnchor.constraint(equalTo: scrollArea.topAnchor, constant: view.frame.height/10),
+            timeLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20),
+            timeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 20)
+        ])
+
+        NSLayoutConstraint.activate([
+            timePicker.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 30),
+            timePicker.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
+            timePicker.leftAnchor.constraint(greaterThanOrEqualTo: scrollArea.leftAnchor, constant: 20)
+        ])
+
+        NSLayoutConstraint.activate([
+            separator.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 30),
+            separator.leftAnchor.constraint(equalTo: totalTimeBreastLabel.leftAnchor),
+            separator.rightAnchor.constraint(equalTo: totalTimeBreastLabel.rightAnchor),
+            separator.heightAnchor.constraint(equalToConstant: 1)
+        ])
+
+        buttonWidthConstraint = rightBreastButton.widthAnchor.constraint(equalToConstant: view.frame.width/4)
+        NSLayoutConstraint.activate([
+            rightBreastButton.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 30),
             rightBreastButton.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor, constant: view.frame.width/4),
-            rightBreastButton.widthAnchor.constraint(equalToConstant: view.frame.width/4),
+            buttonWidthConstraint!,
             rightBreastButton.heightAnchor.constraint(equalTo: rightBreastButton.widthAnchor)
         ])
 
         NSLayoutConstraint.activate([
             leftBreastButton.topAnchor.constraint(equalTo: rightBreastButton.topAnchor),
             leftBreastButton.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor, constant: -view.frame.width/4),
-            leftBreastButton.widthAnchor.constraint(equalToConstant: view.frame.width/4),
+            leftBreastButton.widthAnchor.constraint(equalTo: rightBreastButton.widthAnchor),
             leftBreastButton.heightAnchor.constraint(equalTo: leftBreastButton.widthAnchor)
         ])
 
@@ -205,43 +268,80 @@ class BreastFeedingViewController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            totalTimeBreastLabel.topAnchor.constraint(equalTo: timeRightBreastLabel.bottomAnchor, constant: 30),
-            totalTimeBreastLabel.leftAnchor.constraint(equalTo: leftBreastButton.leftAnchor),
-            totalTimeBreastLabel.rightAnchor.constraint(equalTo: rightBreastButton.rightAnchor),
-            totalTimeBreastLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 100)
+            stackView.topAnchor.constraint(equalTo: timeRightBreastLabel.bottomAnchor, constant: 30),
+            stackView.leftAnchor.constraint(equalTo: leftBreastButton.leftAnchor),
+            stackView.rightAnchor.constraint(equalTo: rightBreastButton.rightAnchor),
+            totalTimeBreastLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
+            picker.heightAnchor.constraint(equalToConstant: 150),
+            validePickerButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
         ])
 
         NSLayoutConstraint.activate([
-            separator.topAnchor.constraint(equalTo: totalTimeBreastLabel.bottomAnchor, constant: 30),
-            separator.leftAnchor.constraint(equalTo: totalTimeBreastLabel.leftAnchor),
-            separator.rightAnchor.constraint(equalTo: totalTimeBreastLabel.rightAnchor),
-            separator.heightAnchor.constraint(equalToConstant: 1)
-        ])
-
-        NSLayoutConstraint.activate([
-            timeLabel.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 30),
-            timeLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20),
-            timeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 20)
-        ])
-
-        NSLayoutConstraint.activate([
-            timePicker.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 30),
-            timePicker.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20),
-            timePicker.leftAnchor.constraint(greaterThanOrEqualTo: scrollArea.leftAnchor, constant: 20)
-        ])
-
-        NSLayoutConstraint.activate([
-            firstBreastLabel.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 30),
+            firstBreastLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
             firstBreastLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 20),
             firstBreastLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20)
         ])
 
         NSLayoutConstraint.activate([
             firstBreastButton.topAnchor.constraint(equalTo: firstBreastLabel.bottomAnchor, constant: 10),
-            firstBreastButton.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20),
-            firstBreastButton.widthAnchor.constraint(equalToConstant: view.frame.width/6),
+            firstBreastButton.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
+            firstBreastButton.widthAnchor.constraint(equalTo: (rightBreastButton.widthAnchor), multiplier: 0.8),
             firstBreastButton.heightAnchor.constraint(equalTo: firstBreastButton.widthAnchor),
-            firstBreastLabel.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: 10)
+            firstBreastLabel.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -100)
         ])
+    }
+
+    private func setupActionButton() {
+        let action = UIAction { _ in
+            self.hiddenPicker()
+        }
+        validePickerButton.addAction(action, for: .touchUpInside)
+
+        let actionLeft = UIAction { _ in
+            if self.leftBreastButton.backgroundColor == .duckBlue {
+                self.leftBreastButton.backgroundColor = .clear
+                self.hiddenPicker()
+            } else {
+                self.leftBreastButton.backgroundColor = .duckBlue
+                self.showPicker()
+            }
+        }
+        leftBreastButton.addAction(actionLeft, for: .touchUpInside)
+    }
+
+    // MARK: - Actions Picker
+    private func hiddenPicker() {
+        UIView.animate(withDuration: 0.5) {
+            self.picker.isHidden = true
+            self.validePickerButton.isHidden = true
+        }
+    }
+
+    private func showPicker() {
+        UIView.animate(withDuration: 0.4) {
+            self.picker.isHidden = false
+            self.validePickerButton.isHidden = false
+        }
+    }
+
+
+}
+
+// MARK: - Accesibility
+extension BreastFeedingViewController {
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
+
+        guard currentCategory != previousCategory else { return }
+        let isAccessibilityCategory = currentCategory.isAccessibilityCategory
+        setupWidthContraintWith(height: isAccessibilityCategory ? view.frame.width/3 : view.frame.width/4)
+    }
+
+    func setupWidthContraintWith (height: CGFloat) {
+        buttonWidthConstraint?.constant = height
+        view.layoutIfNeeded()
     }
 }

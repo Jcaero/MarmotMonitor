@@ -32,6 +32,7 @@
 		475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */; };
 		475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */; };
 		4750720E2B09576900DAB527 /* TapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750720D2B09576900DAB527 /* TapBarController.swift */; };
+		476AF6302B27A10100F4935F /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF62F2B27A10100F4935F /* UIButton+.swift */; };
 		4777ABEF2B2501710055DF4A /* BreastFeedingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4777ABEE2B2501710055DF4A /* BreastFeedingViewController.swift */; };
 		478E79072B1370DC004157AF /* BirthDayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478E79062B1370DC004157AF /* BirthDayController.swift */; };
 		478E79092B1375F3004157AF /* BirthDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478E79082B1375F3004157AF /* BirthDayViewModel.swift */; };
@@ -94,6 +95,7 @@
 		475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITests.swift; sourceTree = "<group>"; };
 		475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4750720D2B09576900DAB527 /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
+		476AF62F2B27A10100F4935F /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		4777ABEE2B2501710055DF4A /* BreastFeedingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingViewController.swift; sourceTree = "<group>"; };
 		478E79062B1370DC004157AF /* BirthDayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDayController.swift; sourceTree = "<group>"; };
 		478E79082B1375F3004157AF /* BirthDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDayViewModel.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				4777ABEE2B2501710055DF4A /* BreastFeedingViewController.swift */,
+				476AF62F2B27A10100F4935F /* UIButton+.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */,
 				478E79102B138200004157AF /* String+.swift in Sources */,
 				474732562B123C900064ABB4 /* ParentNameViewModel.swift in Sources */,
+				476AF6302B27A10100F4935F /* UIButton+.swift in Sources */,
 				4750720E2B09576900DAB527 /* TapBarController.swift in Sources */,
 				47155BCD2B1DEBDB00775B27 /* TodayViewModel.swift in Sources */,
 				4735B26B2B1140D8000F2B8C /* ViewForInformationController.swift in Sources */,
