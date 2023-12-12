@@ -162,6 +162,8 @@ class BreastFeedingViewController: UIViewController {
     var buttonWidthConstraint: NSLayoutConstraint?
     var firstBreastButtonCenterXContraint: NSLayoutConstraint?
 
+    var isSelectedBreastButton = ""
+
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -171,7 +173,8 @@ class BreastFeedingViewController: UIViewController {
         setupContraints()
         traitCollectionDidChange(nil)
         hiddenPicker()
-        setupActionButton()
+        setupActionButton(button: leftBreastButton)
+        setupActionButton(button: rightBreastButton)
     }
 
     override func viewDidLayoutSubviews() {
@@ -291,40 +294,52 @@ class BreastFeedingViewController: UIViewController {
         ])
     }
 
-    private func setupActionButton() {
-        let action = UIAction { _ in
+    private func setupActionButton(button: UIButton) {
+        let actionForValide = UIAction { _ in
             self.hiddenPicker()
+            self.storeSelectedRow()
         }
-        validePickerButton.addAction(action, for: .touchUpInside)
+        validePickerButton.addAction(actionForValide, for: .touchUpInside)
 
-        let actionLeft = UIAction { _ in
-            if self.leftBreastButton.backgroundColor == .duckBlue {
-                self.leftBreastButton.backgroundColor = .clear
+        let actionForBreast = UIAction { _ in
+            if button.backgroundColor == .duckBlue {
+                button.backgroundColor = .clear
                 self.hiddenPicker()
+                self.isSelectedBreastButton = ""
             } else {
-                self.leftBreastButton.backgroundColor = .duckBlue
+                button.backgroundColor = .duckBlue
                 self.showPicker()
+                self.isSelectedBreastButton = button.titleLabel?.text ?? ""
             }
         }
-        leftBreastButton.addAction(actionLeft, for: .touchUpInside)
+        button.addAction(actionForBreast, for: .touchUpInside)
     }
 
     // MARK: - Actions Picker
     private func hiddenPicker() {
-        UIView.animate(withDuration: 0.5) {
-            self.picker.isHidden = true
+        self.picker.isHidden = true
+        UIView.animate(withDuration: 0.2) {
             self.validePickerButton.isHidden = true
         }
     }
 
     private func showPicker() {
+        self.picker.isHidden = false
         UIView.animate(withDuration: 0.4) {
-            self.picker.isHidden = false
             self.validePickerButton.isHidden = false
         }
     }
 
-
+    private func storeSelectedRow(){
+        let time = Int(self.picker.countDownDuration).toTimeString()
+        switch isSelectedBreastButton {
+        case "D":
+            self.timeRightBreastLabel.text = time
+        case "G":
+            self.timeLeftBreastLabel.text = time
+        default: break
+        }
+    }
 }
 
 // MARK: - Accesibility
