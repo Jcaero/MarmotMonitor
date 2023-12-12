@@ -17,6 +17,8 @@
 		4719ABE52B0E96380088CBE2 /* BabyNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719ABE42B0E96380088CBE2 /* BabyNameController.swift */; };
 		4735B26B2B1140D8000F2B8C /* ViewForInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */; };
 		4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26D2B1145B7000F2B8C /* GenderController.swift */; };
+		4738B4D22B287D830041ECF0 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B4D12B287D830041ECF0 /* Int+.swift */; };
+		4738B4D42B287EC70041ECF0 /* BreastFeedingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B4D32B287EC70041ECF0 /* BreastFeedingViewModel.swift */; };
 		4747324D2B1234BB0064ABB4 /* ParentNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4747324C2B1234BB0064ABB4 /* ParentNameController.swift */; };
 		4747324F2B1238C20064ABB4 /* BabyNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4747324E2B1238C20064ABB4 /* BabyNameViewModel.swift */; };
 		474732532B1239CF0064ABB4 /* GenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474732522B1239CF0064ABB4 /* GenderViewModel.swift */; };
@@ -33,7 +35,7 @@
 		475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */; };
 		4750720E2B09576900DAB527 /* TapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750720D2B09576900DAB527 /* TapBarController.swift */; };
 		476AF6302B27A10100F4935F /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF62F2B27A10100F4935F /* UIButton+.swift */; };
-		4777ABEF2B2501710055DF4A /* BreastFeedingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4777ABEE2B2501710055DF4A /* BreastFeedingViewController.swift */; };
+		4777ABEF2B2501710055DF4A /* BreastFeedingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4777ABEE2B2501710055DF4A /* BreastFeedingController.swift */; };
 		478E79072B1370DC004157AF /* BirthDayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478E79062B1370DC004157AF /* BirthDayController.swift */; };
 		478E79092B1375F3004157AF /* BirthDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478E79082B1375F3004157AF /* BirthDayViewModel.swift */; };
 		478E790B2B137CD1004157AF /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478E790A2B137CD1004157AF /* Date+.swift */; };
@@ -76,6 +78,8 @@
 		4719ABE42B0E96380088CBE2 /* BabyNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyNameController.swift; sourceTree = "<group>"; };
 		4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForInformationController.swift; sourceTree = "<group>"; };
 		4735B26D2B1145B7000F2B8C /* GenderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderController.swift; sourceTree = "<group>"; };
+		4738B4D12B287D830041ECF0 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
+		4738B4D32B287EC70041ECF0 /* BreastFeedingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingViewModel.swift; sourceTree = "<group>"; };
 		4747324C2B1234BB0064ABB4 /* ParentNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentNameController.swift; sourceTree = "<group>"; };
 		4747324E2B1238C20064ABB4 /* BabyNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyNameViewModel.swift; sourceTree = "<group>"; };
 		474732522B1239CF0064ABB4 /* GenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewModel.swift; sourceTree = "<group>"; };
@@ -96,7 +100,7 @@
 		475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4750720D2B09576900DAB527 /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
 		476AF62F2B27A10100F4935F /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
-		4777ABEE2B2501710055DF4A /* BreastFeedingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingViewController.swift; sourceTree = "<group>"; };
+		4777ABEE2B2501710055DF4A /* BreastFeedingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingController.swift; sourceTree = "<group>"; };
 		478E79062B1370DC004157AF /* BirthDayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDayController.swift; sourceTree = "<group>"; };
 		478E79082B1375F3004157AF /* BirthDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDayViewModel.swift; sourceTree = "<group>"; };
 		478E790A2B137CD1004157AF /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 		4712D4392B0A9B2F0085035C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4738B4D12B287D830041ECF0 /* Int+.swift */,
+				476AF62F2B27A10100F4935F /* UIButton+.swift */,
 				4712D43A2B0A9B5C0085035C /* UILabel+.swift */,
 				4712D43C2B0A9BC50085035C /* UIView+.swift */,
 				47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */,
@@ -278,8 +284,8 @@
 		4777ABED2B2500D40055DF4A /* Activity */ = {
 			isa = PBXGroup;
 			children = (
-				4777ABEE2B2501710055DF4A /* BreastFeedingViewController.swift */,
-				476AF62F2B27A10100F4935F /* UIButton+.swift */,
+				4777ABEE2B2501710055DF4A /* BreastFeedingController.swift */,
+				4738B4D32B287EC70041ECF0 /* BreastFeedingViewModel.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -484,8 +490,10 @@
 				47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */,
 				478E790B2B137CD1004157AF /* Date+.swift in Sources */,
 				4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */,
+				4738B4D22B287D830041ECF0 /* Int+.swift in Sources */,
 				475071D82B09462000DAB527 /* AppDelegate.swift in Sources */,
-				4777ABEF2B2501710055DF4A /* BreastFeedingViewController.swift in Sources */,
+				4777ABEF2B2501710055DF4A /* BreastFeedingController.swift in Sources */,
+				4738B4D42B287EC70041ECF0 /* BreastFeedingViewModel.swift in Sources */,
 				47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */,
 				475071E22B09462000DAB527 /* MarmotMonitor.xcdatamodeld in Sources */,
 				4711F7742B1E70AB00869A27 /* Person.swift in Sources */,

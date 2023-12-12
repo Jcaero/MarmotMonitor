@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BreastFeedingViewController: UIViewController {
+class BreastFeedingController: UIViewController {
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = true
@@ -163,6 +163,7 @@ class BreastFeedingViewController: UIViewController {
     var firstBreastButtonCenterXContraint: NSLayoutConstraint?
 
     var isSelectedBreastButton = ""
+    var viewModel: BreastFeedingViewModel!
 
     // MARK: - Cycle life
     override func viewDidLoad() {
@@ -172,9 +173,13 @@ class BreastFeedingViewController: UIViewController {
         setupViews()
         setupContraints()
         traitCollectionDidChange(nil)
+        
         hiddenPicker()
+        
         setupActionButton(button: leftBreastButton)
         setupActionButton(button: rightBreastButton)
+
+        viewModel = BreastFeedingViewModel(delegate: self)
     }
 
     override func viewDidLayoutSubviews() {
@@ -297,7 +302,7 @@ class BreastFeedingViewController: UIViewController {
     private func setupActionButton(button: UIButton) {
         let actionForValide = UIAction { _ in
             self.hiddenPicker()
-            self.storeSelectedRow()
+            self.viewModel.storeSelectedRow(picker: self.picker.countDownDuration, for: self.isSelectedBreastButton)
         }
         validePickerButton.addAction(actionForValide, for: .touchUpInside)
 
@@ -329,21 +334,10 @@ class BreastFeedingViewController: UIViewController {
             self.validePickerButton.isHidden = false
         }
     }
-
-    private func storeSelectedRow(){
-        let time = Int(self.picker.countDownDuration).toTimeString()
-        switch isSelectedBreastButton {
-        case "D":
-            self.timeRightBreastLabel.text = time
-        case "G":
-            self.timeLeftBreastLabel.text = time
-        default: break
-        }
-    }
 }
 
 // MARK: - Accesibility
-extension BreastFeedingViewController {
+extension BreastFeedingController {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -358,5 +352,20 @@ extension BreastFeedingViewController {
     func setupWidthContraintWith (height: CGFloat) {
         buttonWidthConstraint?.constant = height
         view.layoutIfNeeded()
+    }
+}
+
+// MARK: - Delegate
+extension BreastFeedingController: BreastFeedingDelegate {
+    func updateRightLabel(with texte: String) {
+        timeRightBreastLabel.text = texte
+    }
+
+    func updateLeftLabel(with texte: String) {
+        timeLeftBreastLabel.text = texte
+    }
+
+    func updateTotalLabel(with texte: String) {
+        totalTimeBreastLabel.text = "Temps Total : " + texte
     }
 }
