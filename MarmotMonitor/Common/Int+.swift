@@ -9,8 +9,9 @@ import Foundation
 
 extension Int {
     func toTimeString() -> String {
-        let minutes = (self / 60) % 60
-        let hours = (self / 3600)
+        let minutes = self % 60
+        let hours = (self / 60) % 60
+
         if hours == 0 {
             return String(format: "%02d min", minutes)
         } else {

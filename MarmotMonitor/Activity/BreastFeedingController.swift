@@ -102,7 +102,6 @@ class BreastFeedingController: UIViewController {
         label.textColor = .label
         label.textAlignment = .center
         label.backgroundColor = .colorForBreastButton
-        label.numberOfLines = 0
         label.layer.cornerRadius = 30
         label.clipsToBounds = true
         label.setAccessibility(with: .staticText, label: "", hint: "")
@@ -128,14 +127,21 @@ class BreastFeedingController: UIViewController {
         button.backgroundColor = .colorForBreastButton
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
+        let action = UIAction { _ in
+            if button.titleLabel?.text == "D" {
+                button.setTitle("G", for: .normal)
+            } else {
+                button.setTitle("D", for: .normal)
+            }
+        }
+        button.addAction(action, for: .touchUpInside)
         return button
     }()
 
-    let picker: UIDatePicker = {
-        let picker = UIDatePicker()
-        picker.backgroundColor = .white
-        picker.datePickerMode = .countDownTimer
-        picker.preferredDatePickerStyle = .wheels
+    let picker: UIPickerView = {
+        let picker = UIPickerView()
+        picker.backgroundColor = .clear
+        picker.layer.cornerRadius = 20
         return picker
     }()
 
@@ -163,6 +169,8 @@ class BreastFeedingController: UIViewController {
     var firstBreastButtonCenterXContraint: NSLayoutConstraint?
 
     var isSelectedBreastButton = ""
+    var selectedTime = 0
+
     var viewModel: BreastFeedingViewModel!
 
     // MARK: - Cycle life
@@ -173,9 +181,11 @@ class BreastFeedingController: UIViewController {
         setupViews()
         setupContraints()
         traitCollectionDidChange(nil)
-        
+
+        picker.delegate = self
+        picker.dataSource = self
         hiddenPicker()
-        
+
         setupActionButton(button: leftBreastButton)
         setupActionButton(button: rightBreastButton)
 
@@ -276,7 +286,8 @@ class BreastFeedingController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: timeRightBreastLabel.bottomAnchor, constant: 30),
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: timeRightBreastLabel.bottomAnchor, constant: 30),
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: timeLeftBreastLabel.bottomAnchor, constant: 30),
             stackView.leftAnchor.constraint(equalTo: leftBreastButton.leftAnchor),
             stackView.rightAnchor.constraint(equalTo: rightBreastButton.rightAnchor),
             totalTimeBreastLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
@@ -302,7 +313,7 @@ class BreastFeedingController: UIViewController {
     private func setupActionButton(button: UIButton) {
         let actionForValide = UIAction { _ in
             self.hiddenPicker()
-            self.viewModel.storeSelectedRow(picker: self.picker.countDownDuration, for: self.isSelectedBreastButton)
+            self.viewModel.storeSelected(time: self.selectedTime, for: self.isSelectedBreastButton)
         }
         validePickerButton.addAction(actionForValide, for: .touchUpInside)
 
@@ -367,5 +378,55 @@ extension BreastFeedingController: BreastFeedingDelegate {
 
     func updateTotalLabel(with texte: String) {
         totalTimeBreastLabel.text = "Temps Total : " + texte
+    }
+}
+
+// MARK: - Picker Delegate
+extension BreastFeedingController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        2
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return 61
+        } else {
+            return 1
+        }
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedTime = row
+    }
+
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        return currentCategory.isAccessibilityCategory ? 80 : 40
+    }
+
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var label = UILabel()
+        if let newView = view as? UILabel { label = newView }
+        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.textAlignment = .center
+        if component == 0 {
+            label.text = "\(row)"
+            label.textAlignment = .right
+        } else {
+            label.text = " min"
+            label.textAlignment = .left
+        }
+        return label
+    }
+}
+
+// MARK: - Picker Acessibility
+extension BreastFeedingController: UIPickerViewAccessibilityDelegate {
+    func pickerView(_ pickerView: UIPickerView, accessibilityLabelForComponent component: Int) -> String? {
+        if component == 0 {
+            return "temps"
+        } else {
+            return "minutes"
+        }
     }
 }

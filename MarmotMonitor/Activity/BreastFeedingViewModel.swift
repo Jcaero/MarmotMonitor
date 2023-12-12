@@ -25,10 +25,9 @@ final class BreastFeedingViewModel {
     init(delegate: BreastFeedingDelegate?) {
         self.delegate = delegate
     }
-    
+
     // MARK: - function
-    func storeSelectedRow(picker: Double, for breast: String) {
-        let time = Int(picker)
+    func storeSelected(time: Int, for breast: String) {
         switch breast {
         case "D":
             rightTime = time
@@ -38,6 +37,6 @@ final class BreastFeedingViewModel {
             delegate?.updateLeftLabel(with: time.toTimeString())
         default: break
         }
-        delegate?.updateTotalLabel(with: totalTime.toTimeString())
+        delegate?.updateTotalLabel(with: time.toTimeString())
     }
 }
