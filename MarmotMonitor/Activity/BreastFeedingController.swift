@@ -277,7 +277,7 @@ extension BreastFeedingController: UIPickerViewDelegate, UIPickerViewDataSource 
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedTime = row
+        viewModel.storeSelected(time: row, for: pickerView == rightPicker ? "D" : "G")
     }
 
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {

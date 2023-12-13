@@ -33,6 +33,6 @@ final class BreastFeedingViewModel {
             leftTime = time
         default: break
         }
-        delegate?.updateTotalLabel(with: time.toTimeString())
+        delegate?.updateTotalLabel(with: totalTime.toTimeString())
     }
 }
