@@ -49,28 +49,6 @@ class BreastFeedingController: UIViewController {
         return datePicker
     }()
 
-    let leftBreastLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Sein Gauche"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
-        label.textColor = .label
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.setAccessibility(with: .staticText, label: "", hint: "")
-        return label
-    }()
-
-    let rightBreastLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Sein Droit"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
-        label.textColor = .label
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.setAccessibility(with: .staticText, label: "", hint: "")
-        return label
-    }()
-
     let totalTimeBreastLabel: UILabel = {
         let label = UILabel()
         label.text = "Temps total: 0"
@@ -83,7 +61,7 @@ class BreastFeedingController: UIViewController {
         label.setAccessibility(with: .staticText, label: "", hint: "")
         return label
     }()
- 
+
     let firstBreastLabel: UILabel = {
         let label = UILabel()
         label.text = "Premier sein ?"
@@ -96,8 +74,9 @@ class BreastFeedingController: UIViewController {
     }()
 
     let firstBreastSegmented: UISegmentedControl = {
-        let segmented = UISegmentedControl(items: ["Gauche", "Droite"])
+        let segmented = UISegmentedControl(items: ["Gauche", "Droit"])
         segmented.backgroundColor = .clear
+        segmented.selectedSegmentTintColor = .duckBlueAlpha
         segmented.tintColor = .colorForBreastButton
         segmented.selectedSegmentIndex = 0 // Gauche
         return segmented
@@ -120,13 +99,14 @@ class BreastFeedingController: UIViewController {
     let cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("Annuler", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
+        button.setTitleColor(.duckBlue, for: .normal)
         button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         return button
     }()
 
     let valideButton: UIButton = {
         let button = UIButton()
+        button.tintColor = .duckBlue
         button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
         return button
     }()
@@ -140,10 +120,9 @@ class BreastFeedingController: UIViewController {
     }()
 
     // MARK: - PROPERTIES
-    var isSelectedBreastButton = ""
-    var selectedTime = 0
-
     var viewModel: BreastFeedingViewModel!
+
+    var segmentedHeightConstraint: NSLayoutConstraint?
 
     // MARK: - Cycle life
     override func viewDidLoad() {
@@ -155,16 +134,12 @@ class BreastFeedingController: UIViewController {
         traitCollectionDidChange(nil)
 
         // MARK: - Delegate
-        [rightPicker, leftPicker].forEach {
-            $0.delegate = self
-            $0.dataSource = self
-        }
+        traitCollectionDidChange(nil)
 
         viewModel = BreastFeedingViewModel(delegate: self)
     }
 
     // MARK: - Setup function
-
     private func setupViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(scrollArea)
@@ -180,10 +155,10 @@ class BreastFeedingController: UIViewController {
 
     private func setupContraints() {
         [timeLabel, timePicker, separator, stackView,
-        rightPicker, leftPicker,
+         rightPicker, leftPicker,
          valideButton, cancelButton, totalTimeBreastLabel,
          firstBreastLabel, firstBreastSegmented,
-        scrollArea, scrollView].forEach {
+         scrollArea, scrollView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -214,17 +189,20 @@ class BreastFeedingController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            separator.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 30),
+            separator.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 15),
             separator.leftAnchor.constraint(equalTo: totalTimeBreastLabel.leftAnchor, constant: 40),
             separator.rightAnchor.constraint(equalTo: totalTimeBreastLabel.rightAnchor, constant: -40),
             separator.heightAnchor.constraint(equalToConstant: 2)
         ])
 
+        segmentedHeightConstraint = firstBreastSegmented.heightAnchor.constraint(equalToConstant: 40)
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 30),
+            stackView.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 15),
             stackView.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
-            stackView.widthAnchor.constraint(equalTo: scrollArea.widthAnchor),
-            totalTimeBreastLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
+            stackView.widthAnchor.constraint(lessThanOrEqualTo: scrollArea.widthAnchor),
+            stackView.widthAnchor.constraint(greaterThanOrEqualTo: scrollArea.widthAnchor, multiplier: 0.75),
+            totalTimeBreastLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
+            segmentedHeightConstraint!
         ])
 
         NSLayoutConstraint.activate([
@@ -282,11 +260,7 @@ extension BreastFeedingController: UIPickerViewDelegate, UIPickerViewDataSource 
 
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         let currentCategory = traitCollection.preferredContentSizeCategory
-            if currentCategory.isAccessibilityCategory {
-                return 80
-            } else {
-                return 40
-            }
+        return currentCategory.isAccessibilityCategory ? 80 : 40
     }
 
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -321,6 +295,7 @@ extension BreastFeedingController: UIPickerViewAccessibilityDelegate {
     /// Update the display when the user change the size of the text in the settings
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+
         reloadpickerForRowHeigt()
 
         let currentCategory = traitCollection.preferredContentSizeCategory
@@ -329,6 +304,13 @@ extension BreastFeedingController: UIPickerViewAccessibilityDelegate {
         guard currentCategory != previousCategory else { return }
         let isAccessibilityCategory = currentCategory.isAccessibilityCategory
         cancelButton.setupDynamicTextWith(policeName: "Symbol", size: isAccessibilityCategory ? 15 : 25, style: .body)
+        segmentedHeightConstraint?.constant = isAccessibilityCategory ? 80 : 40
+
+        // dynamic text for segmented
+        if let font = UIFont(name: "Symbol", size: 15) {
+            let fontMetrics = UIFontMetrics(forTextStyle: .body)
+            firstBreastSegmented.setTitleTextAttributes([.font: fontMetrics.scaledFont(for: font)], for: .normal)
+        }
     }
 
     private func reloadpickerForRowHeigt() {
