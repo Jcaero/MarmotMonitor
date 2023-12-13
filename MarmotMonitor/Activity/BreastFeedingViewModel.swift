@@ -8,8 +8,6 @@
 import Foundation
 
 protocol BreastFeedingDelegate: AnyObject {
-    func updateRightLabel(with texte: String)
-    func updateLeftLabel(with texte: String)
     func updateTotalLabel(with texte: String)
 }
 
@@ -31,10 +29,8 @@ final class BreastFeedingViewModel {
         switch breast {
         case "D":
             rightTime = time
-            delegate?.updateRightLabel(with: time.toTimeString())
         case "G":
             leftTime = time
-            delegate?.updateLeftLabel(with: time.toTimeString())
         default: break
         }
         delegate?.updateTotalLabel(with: time.toTimeString())
