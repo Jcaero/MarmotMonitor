@@ -120,6 +120,8 @@ class BreastFeedingController: UIViewController {
     let cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("Annuler", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         return button
     }()
 
@@ -171,9 +173,9 @@ class BreastFeedingController: UIViewController {
             scrollArea.addSubview($0)
         }
 
-        stackView.addArrangedSubview(totalTimeBreastLabel)
-        stackView.addArrangedSubview(firstBreastLabel)
-        stackView.addArrangedSubview(firstBreastSegmented)
+        [totalTimeBreastLabel, firstBreastLabel, firstBreastSegmented].forEach {
+            stackView.addArrangedSubview($0)
+        }
     }
 
     private func setupContraints() {
@@ -213,9 +215,9 @@ class BreastFeedingController: UIViewController {
 
         NSLayoutConstraint.activate([
             separator.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 30),
-            separator.leftAnchor.constraint(equalTo: totalTimeBreastLabel.leftAnchor),
-            separator.rightAnchor.constraint(equalTo: totalTimeBreastLabel.rightAnchor),
-            separator.heightAnchor.constraint(equalToConstant: 1)
+            separator.leftAnchor.constraint(equalTo: totalTimeBreastLabel.leftAnchor, constant: 40),
+            separator.rightAnchor.constraint(equalTo: totalTimeBreastLabel.rightAnchor, constant: -40),
+            separator.heightAnchor.constraint(equalToConstant: 2)
         ])
 
         NSLayoutConstraint.activate([
@@ -239,16 +241,15 @@ class BreastFeedingController: UIViewController {
 
         NSLayoutConstraint.activate([
             cancelButton.topAnchor.constraint(equalTo: leftPicker.bottomAnchor, constant: 30),
-            cancelButton.centerXAnchor.constraint(equalTo: leftPicker.centerXAnchor),
-            cancelButton.widthAnchor.constraint(equalTo: cancelButton.heightAnchor),
-            cancelButton.heightAnchor.constraint(equalToConstant: 15)
+            cancelButton.leftAnchor.constraint(equalTo: scrollArea.leftAnchor),
+            cancelButton.rightAnchor.constraint(equalTo: scrollArea.centerXAnchor)
         ])
 
         NSLayoutConstraint.activate([
             valideButton.topAnchor.constraint(equalTo: rightPicker.bottomAnchor, constant: 30),
             valideButton.centerXAnchor.constraint(equalTo: rightPicker.centerXAnchor),
             valideButton.widthAnchor.constraint(equalTo: valideButton.heightAnchor),
-            valideButton.heightAnchor.constraint(equalToConstant: 15),
+            valideButton.heightAnchor.constraint(equalTo: cancelButton.heightAnchor),
             valideButton.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -30)
         ])
     }
@@ -320,6 +321,17 @@ extension BreastFeedingController: UIPickerViewAccessibilityDelegate {
     /// Update the display when the user change the size of the text in the settings
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+        reloadpickerForRowHeigt()
+
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
+
+        guard currentCategory != previousCategory else { return }
+        let isAccessibilityCategory = currentCategory.isAccessibilityCategory
+        cancelButton.setupDynamicTextWith(policeName: "Symbol", size: isAccessibilityCategory ? 15 : 25, style: .body)
+    }
+
+    private func reloadpickerForRowHeigt() {
         rightPicker.delegate = self
         leftPicker.delegate = self
         rightPicker.reloadAllComponents()
