@@ -131,14 +131,13 @@ class BreastFeedingController: UIViewController {
 
         setupViews()
         setupContraints()
-        traitCollectionDidChange(nil)
-
-        // MARK: - Delegate
-        traitCollectionDidChange(nil)
-
-        viewModel = BreastFeedingViewModel(delegate: self)
-
         setupButton()
+        setupNavigationBar()
+
+        traitCollectionDidChange(nil)
+
+        // Delegate
+        viewModel = BreastFeedingViewModel(delegate: self)
     }
 
     // MARK: - Setup function
@@ -239,6 +238,14 @@ class BreastFeedingController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
         cancelButton.addAction(action, for: .touchUpInside)
+    }
+
+    private func setupNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = .none
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
 }
 

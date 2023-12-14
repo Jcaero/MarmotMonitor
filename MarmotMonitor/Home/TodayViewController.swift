@@ -285,7 +285,7 @@ extension TodayViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let next = BreastFeedingController()
+            let next = FoodTapBar()
             present(next, animated: true, completion: nil)
         case 1:
             print("sommeil")
