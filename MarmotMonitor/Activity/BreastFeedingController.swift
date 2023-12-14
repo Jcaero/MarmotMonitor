@@ -55,7 +55,7 @@ class BreastFeedingController: UIViewController {
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         label.textColor = .label
         label.textAlignment = .center
-        label.backgroundColor = .colorForBreastButton
+        label.backgroundColor = .duckBlue
         label.layer.cornerRadius = 15
         label.clipsToBounds = true
         label.setAccessibility(with: .staticText, label: "", hint: "")
@@ -127,7 +127,7 @@ class BreastFeedingController: UIViewController {
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .pastelBlueNew
+        view.backgroundColor = .colorForGradientStart
 
         setupViews()
         setupContraints()
