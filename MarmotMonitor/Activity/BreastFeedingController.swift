@@ -137,6 +137,8 @@ class BreastFeedingController: UIViewController {
         traitCollectionDidChange(nil)
 
         viewModel = BreastFeedingViewModel(delegate: self)
+
+        setupButton()
     }
 
     // MARK: - Setup function
@@ -230,6 +232,13 @@ class BreastFeedingController: UIViewController {
             valideButton.heightAnchor.constraint(equalTo: cancelButton.heightAnchor),
             valideButton.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -30)
         ])
+    }
+
+    private func setupButton() {
+        let action = UIAction { _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        cancelButton.addAction(action, for: .touchUpInside)
     }
 }
 

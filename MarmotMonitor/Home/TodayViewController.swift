@@ -195,7 +195,7 @@ class TodayViewController: BackgroundViewController {
     private func setupContraints() {
         [scrollView, currentDate, welcomeLabel,
          babyImage, babyYear, babyMonth, yearLabel, monthLabel,
-         scrollArea, 
+         scrollArea,
          tableView, tableViewArea, tableViewName].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
