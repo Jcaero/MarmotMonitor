@@ -124,6 +124,13 @@ class BreastChronoFeedingController: UIViewController {
         return view
     }()
 
+    let labelStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .fillProportionally
+        return view
+    }()
+
     // MARK: - PROPERTIES
 
     // MARK: - Cycle life
@@ -152,8 +159,16 @@ class BreastChronoFeedingController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(scrollArea)
 
-        [timeLabel, timePicker, separator, totalTimeBreastLabel, rightButton, rightTimeLabel, leftButton, leftTimeLabel, valideButton, cancelButton].forEach {
+        [timeLabel, timePicker, separator, stackView, labelStackView, cancelButton, valideButton,leftButton, rightButton].forEach {
             scrollArea.addSubview($0)
+        }
+
+        [totalTimeBreastLabel, labelStackView].forEach {
+            stackView.addArrangedSubview($0)
+        }
+
+        [leftTimeLabel, rightTimeLabel].forEach {
+            labelStackView.addArrangedSubview($0)
         }
     }
 
@@ -161,7 +176,7 @@ class BreastChronoFeedingController: UIViewController {
         [timeLabel, timePicker, separator,
          rightButton, rightTimeLabel, leftButton, leftTimeLabel,
          valideButton, cancelButton, totalTimeBreastLabel,
-         scrollArea, scrollView].forEach {
+         scrollArea, scrollView, labelStackView, stackView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -199,51 +214,33 @@ class BreastChronoFeedingController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            totalTimeBreastLabel.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 15),
-            totalTimeBreastLabel.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
-            totalTimeBreastLabel.widthAnchor.constraint(lessThanOrEqualTo: scrollArea.widthAnchor),
-            totalTimeBreastLabel.widthAnchor.constraint(greaterThanOrEqualTo: scrollArea.widthAnchor, multiplier: 0.75),
+            stackView.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 15),
+            stackView.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
+            stackView.widthAnchor.constraint(lessThanOrEqualTo: scrollArea.widthAnchor),
+            stackView.widthAnchor.constraint(greaterThanOrEqualTo: scrollArea.widthAnchor, multiplier: 0.75),
             totalTimeBreastLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
         ])
 
         NSLayoutConstraint.activate([
-            rightTimeLabel.topAnchor.constraint(equalTo: totalTimeBreastLabel.bottomAnchor, constant: 30),
-            rightTimeLabel.leftAnchor.constraint(equalTo: scrollArea.centerXAnchor),
-            rightTimeLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20)
-        ])
-
-        NSLayoutConstraint.activate([
-            leftTimeLabel.topAnchor.constraint(equalTo: rightTimeLabel.topAnchor),
-            leftTimeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 20),
-            leftTimeLabel.rightAnchor.constraint(equalTo: scrollArea.centerXAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
-            rightButton.topAnchor.constraint(greaterThanOrEqualTo: rightTimeLabel.bottomAnchor, constant: 20),
-            rightButton.topAnchor.constraint(greaterThanOrEqualTo: leftTimeLabel.bottomAnchor, constant: 20),
-            rightButton.centerXAnchor.constraint(equalTo: rightTimeLabel.centerXAnchor),
+            leftButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
+            rightButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
+            leftButton.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.25),
+            rightButton.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.25),
             rightButton.heightAnchor.constraint(equalTo: rightButton.widthAnchor),
-            rightButton.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.25)
-        ])
-
-        NSLayoutConstraint.activate([
-            leftButton.topAnchor.constraint(equalTo: rightButton.topAnchor),
-            leftButton.centerXAnchor.constraint(equalTo: leftTimeLabel.centerXAnchor),
-            leftButton.heightAnchor.constraint(equalTo: leftButton.widthAnchor),
-            leftButton.widthAnchor.constraint(equalTo: rightButton.widthAnchor)
+            leftButton.widthAnchor.constraint(equalTo: leftButton.heightAnchor),
+            leftTimeLabel.centerXAnchor.constraint(equalTo: leftButton.centerXAnchor),
+            rightTimeLabel.centerXAnchor.constraint(equalTo: rightButton.centerXAnchor)
         ])
 
         NSLayoutConstraint.activate([
             cancelButton.topAnchor.constraint(equalTo: valideButton.topAnchor),
-            cancelButton.leftAnchor.constraint(equalTo: scrollArea.leftAnchor),
-            cancelButton.rightAnchor.constraint(equalTo: scrollArea.centerXAnchor)
+            cancelButton.centerXAnchor.constraint(equalTo: leftButton.centerXAnchor)
         ])
 
         NSLayoutConstraint.activate([
-            valideButton.topAnchor.constraint(greaterThanOrEqualTo: leftButton.bottomAnchor, constant: 30),
+            valideButton.topAnchor.constraint(greaterThanOrEqualTo: rightButton.bottomAnchor, constant: 30),
             valideButton.topAnchor.constraint(greaterThanOrEqualTo: scrollArea.topAnchor, constant: view.frame.height*0.65),
             valideButton.centerXAnchor.constraint(equalTo: rightButton.centerXAnchor),
-            valideButton.widthAnchor.constraint(equalTo: valideButton.heightAnchor),
             valideButton.heightAnchor.constraint(equalTo: cancelButton.heightAnchor),
             valideButton.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -30)
         ])
