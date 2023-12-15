@@ -101,21 +101,6 @@ class BreastChronoFeedingController: UIViewController {
         return label
     }()
 
-    let cancelButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Annuler", for: .normal)
-        button.setTitleColor(.duckBlue, for: .normal)
-        button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
-        return button
-    }()
-
-    let valideButton: UIButton = {
-        let button = UIButton()
-        button.tintColor = .duckBlue
-        button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
-        return button
-    }()
-
     let stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -140,7 +125,6 @@ class BreastChronoFeedingController: UIViewController {
 
         setupViews()
         setupContraints()
-        setupButton()
         setupNavigationBar()
 
         traitCollectionDidChange(nil)
@@ -159,7 +143,7 @@ class BreastChronoFeedingController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(scrollArea)
 
-        [timeLabel, timePicker, separator, stackView, labelStackView, cancelButton, valideButton,leftButton, rightButton].forEach {
+        [timeLabel, timePicker, separator, stackView, labelStackView,leftButton, rightButton].forEach {
             scrollArea.addSubview($0)
         }
 
@@ -175,7 +159,7 @@ class BreastChronoFeedingController: UIViewController {
     private func setupContraints() {
         [timeLabel, timePicker, separator,
          rightButton, rightTimeLabel, leftButton, leftTimeLabel,
-         valideButton, cancelButton, totalTimeBreastLabel,
+         totalTimeBreastLabel,
          scrollArea, scrollView, labelStackView, stackView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -195,7 +179,7 @@ class BreastChronoFeedingController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            timeLabel.topAnchor.constraint(equalTo: scrollArea.topAnchor, constant: view.frame.height/20),
+            timeLabel.topAnchor.constraint(equalTo: scrollArea.topAnchor),
             timeLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20),
             timeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 20)
         ])
@@ -229,28 +213,9 @@ class BreastChronoFeedingController: UIViewController {
             rightButton.heightAnchor.constraint(equalTo: rightButton.widthAnchor),
             leftButton.widthAnchor.constraint(equalTo: leftButton.heightAnchor),
             leftTimeLabel.centerXAnchor.constraint(equalTo: leftButton.centerXAnchor),
-            rightTimeLabel.centerXAnchor.constraint(equalTo: rightButton.centerXAnchor)
+            rightTimeLabel.centerXAnchor.constraint(equalTo: rightButton.centerXAnchor),
+            leftButton.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -30)
         ])
-
-        NSLayoutConstraint.activate([
-            cancelButton.topAnchor.constraint(equalTo: valideButton.topAnchor),
-            cancelButton.centerXAnchor.constraint(equalTo: leftButton.centerXAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
-            valideButton.topAnchor.constraint(greaterThanOrEqualTo: rightButton.bottomAnchor, constant: 30),
-            valideButton.topAnchor.constraint(greaterThanOrEqualTo: scrollArea.topAnchor, constant: view.frame.height*0.65),
-            valideButton.centerXAnchor.constraint(equalTo: rightButton.centerXAnchor),
-            valideButton.heightAnchor.constraint(equalTo: cancelButton.heightAnchor),
-            valideButton.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -30)
-        ])
-    }
-
-    private func setupButton() {
-        let action = UIAction { _ in
-            self.dismiss(animated: true, completion: nil)
-        }
-        cancelButton.addAction(action, for: .touchUpInside)
     }
 
     private func setupNavigationBar() {
@@ -259,21 +224,5 @@ class BreastChronoFeedingController: UIViewController {
         appearance.backgroundColor = .none
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-    }
-}
-
-// MARK: - Picker Acessibility
-extension BreastChronoFeedingController: UIPickerViewAccessibilityDelegate {
-
-    /// Update the display when the user change the size of the text in the settings
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        let currentCategory = traitCollection.preferredContentSizeCategory
-        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
-
-        guard currentCategory != previousCategory else { return }
-        let isAccessibilityCategory = currentCategory.isAccessibilityCategory
-        cancelButton.setupDynamicTextWith(policeName: "Symbol", size: isAccessibilityCategory ? 15 : 25, style: .body)
     }
 }

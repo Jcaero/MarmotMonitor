@@ -10,19 +10,15 @@ import UIKit
 
 class BreastPageViewController: UIPageViewController {
 
-    var pages: [UIViewController]!
+    var pages: [UIViewController] = [UIViewController]()
 
-    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
+    init(pages: [UIViewController]) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        self.pages = pages
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-    }
-
-    convenience init(pages: [UIViewController]) {
-        self.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        self.pages = pages
     }
 
     override func viewDidLoad() {
