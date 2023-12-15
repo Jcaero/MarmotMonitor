@@ -27,6 +27,7 @@
 		4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474732592B12432C0064ABB4 /* GenderViewModelTest.swift */; };
 		4747325C2B12456A0064ABB4 /* ParentNameViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4747325B2B12456A0064ABB4 /* ParentNameViewModelTest.swift */; };
 		474C945B2B2B9FFE009A7D74 /* FoodTapBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C945A2B2B9FFE009A7D74 /* FoodTapBar.swift */; };
+		474C945D2B2BA95B009A7D74 /* BreastChronoFeedingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C945C2B2BA95B009A7D74 /* BreastChronoFeedingController.swift */; };
 		475071D82B09462000DAB527 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071D72B09462000DAB527 /* AppDelegate.swift */; };
 		475071DA2B09462000DAB527 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071D92B09462000DAB527 /* SceneDelegate.swift */; };
 		475071E22B09462000DAB527 /* MarmotMonitor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 475071E02B09462000DAB527 /* MarmotMonitor.xcdatamodeld */; };
@@ -89,6 +90,7 @@
 		474732592B12432C0064ABB4 /* GenderViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewModelTest.swift; sourceTree = "<group>"; };
 		4747325B2B12456A0064ABB4 /* ParentNameViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentNameViewModelTest.swift; sourceTree = "<group>"; };
 		474C945A2B2B9FFE009A7D74 /* FoodTapBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTapBar.swift; sourceTree = "<group>"; };
+		474C945C2B2BA95B009A7D74 /* BreastChronoFeedingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastChronoFeedingController.swift; sourceTree = "<group>"; };
 		475071D42B09462000DAB527 /* MarmotMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarmotMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		475071D72B09462000DAB527 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		475071D92B09462000DAB527 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				474C94592B2B9FE6009A7D74 /* food */,
+				474C945C2B2BA95B009A7D74 /* BreastChronoFeedingController.swift */,
 				4777ABEE2B2501710055DF4A /* BreastFeedingController.swift */,
 				4738B4D32B287EC70041ECF0 /* BreastFeedingViewModel.swift */,
 			);
@@ -504,6 +507,7 @@
 				4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */,
 				4738B4D22B287D830041ECF0 /* Int+.swift in Sources */,
 				475071D82B09462000DAB527 /* AppDelegate.swift in Sources */,
+				474C945D2B2BA95B009A7D74 /* BreastChronoFeedingController.swift in Sources */,
 				4777ABEF2B2501710055DF4A /* BreastFeedingController.swift in Sources */,
 				4738B4D42B287EC70041ECF0 /* BreastFeedingViewModel.swift in Sources */,
 				47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */,
