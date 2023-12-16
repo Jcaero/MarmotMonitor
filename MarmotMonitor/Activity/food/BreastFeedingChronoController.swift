@@ -63,19 +63,25 @@ class BreastFeedingChronoController: UIViewController {
         return label
     }()
 
-    let leftButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        button.backgroundColor = .duckBlue
-        button.tintColor = .black
+    let leftButton: UIButton =  {
+        var configuration = UIButton.Configuration.filled()
+        configuration.image = UIImage(systemName: "play.fill")!
+            .applyingSymbolConfiguration(.init(pointSize: 40))
+        configuration.cornerStyle = .capsule
+        configuration.baseBackgroundColor = .duckBlue
+        configuration.contentInsets = .zero
+        let button = UIButton(configuration: configuration)
         return button
     }()
 
-    let rightButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
-        button.backgroundColor = .duckBlue
-        button.tintColor = .black
+    let rightButton: UIButton =  {
+        var configuration = UIButton.Configuration.filled()
+        configuration.image = UIImage(systemName: "play.fill")!
+            .applyingSymbolConfiguration(.init(pointSize: 40))
+        configuration.cornerStyle = .capsule
+        configuration.baseBackgroundColor = .duckBlue
+        configuration.contentInsets = .zero
+        let button = UIButton(configuration: configuration)
         return button
     }()
 
@@ -135,8 +141,6 @@ class BreastFeedingChronoController: UIViewController {
 
         setupCornerRadiusOf(rightButton)
         setupCornerRadiusOf(leftButton)
-
-        leftButton.imageView?.contentMode = .scaleAspectFit
     }
 
     private func setupCornerRadiusOf(_ button: UIButton) {
@@ -150,7 +154,7 @@ class BreastFeedingChronoController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(scrollArea)
 
-        [timeLabel, timePicker, separator, stackView, labelStackView,leftButton, rightButton].forEach {
+        [timeLabel, timePicker, separator, stackView, labelStackView, leftButton, rightButton].forEach {
             scrollArea.addSubview($0)
         }
 
