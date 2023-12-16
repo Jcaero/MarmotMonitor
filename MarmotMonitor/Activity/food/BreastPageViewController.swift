@@ -32,6 +32,12 @@ class BreastPageViewController: UIPageViewController {
 
 // typical Page View Controller Data Source
 extension BreastPageViewController: UIPageViewControllerDataSource {
+
+    func changePage(to index: Int) {
+        guard index >= 0 && index < pages.count else { return }
+        setViewControllers([pages[index]], direction: .forward, animated: false, completion: nil)
+    }
+
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let viewControllerIndex = pages.firstIndex(of: viewController) else { return nil }
         let previousIndex = viewControllerIndex - 1

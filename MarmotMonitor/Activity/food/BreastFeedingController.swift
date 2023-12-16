@@ -46,7 +46,7 @@ class BreastFeedingController: UIViewController {
     }()
 
     // MARK: - PROPERTIES
-    var thePageVC: BreastPageViewController!
+    var pageVC: BreastPageViewController!
 
     var segmentedHeightConstraint: NSLayoutConstraint?
 
@@ -72,18 +72,18 @@ class BreastFeedingController: UIViewController {
     }
 
     private func setupPageController() {
-        thePageVC = BreastPageViewController(pages: [BreastChronoFeedingController(), BreastFeedingManualController()])
-        addChild(thePageVC)
-        thePageVC.view?.translatesAutoresizingMaskIntoConstraints = false
-        scrollArea.addSubview(thePageVC.view)
+        pageVC = BreastPageViewController(pages: [BreastChronoFeedingController(), BreastFeedingManualController()])
+        addChild(pageVC)
+        pageVC.view?.translatesAutoresizingMaskIntoConstraints = false
+        scrollArea.addSubview(pageVC.view)
         NSLayoutConstraint.activate([
-            thePageVC.view.topAnchor.constraint(equalTo: scrollArea.topAnchor),
-            thePageVC.view.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor),
-            thePageVC.view.leftAnchor.constraint(equalTo: scrollArea.leftAnchor),
-            thePageVC.view.rightAnchor.constraint(equalTo: scrollArea.rightAnchor)
+            pageVC.view.topAnchor.constraint(equalTo: scrollArea.topAnchor),
+            pageVC.view.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor),
+            pageVC.view.leftAnchor.constraint(equalTo: scrollArea.leftAnchor),
+            pageVC.view.rightAnchor.constraint(equalTo: scrollArea.rightAnchor)
         ])
-
-        thePageVC.didMove(toParent: self)
+        pageVC.delegate = self
+        pageVC.didMove(toParent: self)
     }
 
     private func setupContraints() {
@@ -129,10 +129,17 @@ class BreastFeedingController: UIViewController {
     }
 
     private func setupButton() {
+        // cancel
         let action = UIAction { _ in
             self.dismiss(animated: true, completion: nil)
         }
         cancelButton.addAction(action, for: .touchUpInside)
+
+        typeSegmented.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
+    }
+
+    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        self.pageVC.changePage(to: self.typeSegmented.selectedSegmentIndex)
     }
 
     private func setupNavigationBar() {
@@ -164,6 +171,14 @@ extension BreastFeedingController: UIPickerViewAccessibilityDelegate {
         } else {
             typeSegmented.setTitleTextAttributes([.font: UIFont(name: "Symbol", size: 15)!], for: .normal)
             typeSegmented.setupSegmentedTitle(with: ["Chronometre", "Saisie Manuelle"])
+        }
+    }
+}
+
+extension BreastFeedingController: UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if completed, let currentPage = pageViewController.viewControllers?.first, let index = pageVC.pages.firstIndex(of: currentPage) {
+            typeSegmented.selectedSegmentIndex = index
         }
     }
 }
