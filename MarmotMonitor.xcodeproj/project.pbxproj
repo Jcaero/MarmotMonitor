@@ -216,6 +216,10 @@
 		474C94592B2B9FE6009A7D74 /* food */ = {
 			isa = PBXGroup;
 			children = (
+				4777ABEE2B2501710055DF4A /* BreastFeedingController.swift */,
+				474C945C2B2BA95B009A7D74 /* BreastChronoFeedingController.swift */,
+				477786CD2B2CF63500A7611D /* BreastFeedingManualController.swift */,
+				4738B4D32B287EC70041ECF0 /* BreastFeedingViewModel.swift */,
 				474C945A2B2B9FFE009A7D74 /* FoodTapBar.swift */,
 				477786CB2B2CF22700A7611D /* BreastPageViewController.swift */,
 			);
@@ -302,10 +306,6 @@
 			isa = PBXGroup;
 			children = (
 				474C94592B2B9FE6009A7D74 /* food */,
-				474C945C2B2BA95B009A7D74 /* BreastChronoFeedingController.swift */,
-				4777ABEE2B2501710055DF4A /* BreastFeedingController.swift */,
-				477786CD2B2CF63500A7611D /* BreastFeedingManualController.swift */,
-				4738B4D32B287EC70041ECF0 /* BreastFeedingViewModel.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";

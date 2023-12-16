@@ -11,7 +11,7 @@ class BreastFeedingController: UIViewController {
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = true
-        scrollView.backgroundColor = .green
+        scrollView.backgroundColor = .clear
         return scrollView
     }()
 
@@ -21,20 +21,12 @@ class BreastFeedingController: UIViewController {
         return view
     }()
 
-    let manualButton: UIButton = {
+    let typeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("manuellement", for: .normal)
-        button.setTitleColor(.duckBlue, for: .normal)
-        button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
-        return button
-    }()
-
-    let chronoButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .red
-        button.setTitle("Chrono", for: .normal)
-        button.setTitleColor(.duckBlue, for: .normal)
-        button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        button.setTitle("saisir manuellement", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.backgroundColor = .duckBlue
+        button.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         return button
     }()
 
@@ -42,7 +34,7 @@ class BreastFeedingController: UIViewController {
         let button = UIButton()
         button.setTitle("Annuler", for: .normal)
         button.setTitleColor(.duckBlue, for: .normal)
-        button.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        button.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         return button
     }()
 
@@ -51,14 +43,6 @@ class BreastFeedingController: UIViewController {
         button.tintColor = .duckBlue
         button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
         return button
-    }()
-
-    let typeStackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.spacing = 20
-        view.distribution = .fillProportionally
-        return view
     }()
 
     // MARK: - PROPERTIES
@@ -81,12 +65,8 @@ class BreastFeedingController: UIViewController {
     private func setupViews() {
         view.addSubview(scrollView)
 
-        [typeStackView, scrollArea, valideButton, cancelButton  ].forEach {
+        [scrollArea, valideButton, cancelButton, typeButton].forEach {
             scrollView.addSubview($0)
-        }
-
-        [manualButton,chronoButton].forEach {
-            typeStackView.addArrangedSubview($0)
         }
     }
 
@@ -106,8 +86,8 @@ class BreastFeedingController: UIViewController {
     }
 
     private func setupContraints() {
-        [manualButton, chronoButton,
-         scrollArea, scrollView, valideButton, cancelButton, typeStackView].forEach {
+        [typeButton,
+         scrollArea, scrollView, valideButton, cancelButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -119,24 +99,13 @@ class BreastFeedingController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            typeStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            typeStackView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            typeStackView.leftAnchor.constraint(equalTo: view.leftAnchor)
+            typeButton.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            typeButton.rightAnchor.constraint(equalTo: view.rightAnchor),
+            typeButton.leftAnchor.constraint(equalTo: view.leftAnchor),
         ])
-        
-//        NSLayoutConstraint.activate([
-//            manualButton.topAnchor.constraint(equalTo: scrollView.topAnchor),
-//            manualButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10)
-//        ])
-//
-//        NSLayoutConstraint.activate([
-//            chronoButton.topAnchor.constraint(equalTo: scrollView.topAnchor),
-//            chronoButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-//            chronoButton.leftAnchor.constraint(greaterThanOrEqualTo: manualButton.rightAnchor, constant: 5)
-//        ])
 
         NSLayoutConstraint.activate([
-            scrollArea.topAnchor.constraint(equalTo: typeStackView.bottomAnchor, constant: 10),
+            scrollArea.topAnchor.constraint(equalTo: typeButton.bottomAnchor, constant: 10),
             scrollArea.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -10),
             scrollArea.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.5),
             scrollArea.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -145,8 +114,7 @@ class BreastFeedingController: UIViewController {
 
         NSLayoutConstraint.activate([
             cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5),
-            cancelButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-//            cancelButton.rightAnchor.constraint(greaterThanOrEqualTo: valideButton.leftAnchor, constant: 10)
+            cancelButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20)
         ])
 
         NSLayoutConstraint.activate([
@@ -185,8 +153,11 @@ extension BreastFeedingController: UIPickerViewAccessibilityDelegate {
 
         guard currentCategory != previousCategory else { return }
         let isAccessibilityCategory = currentCategory.isAccessibilityCategory
-        cancelButton.setupDynamicTextWith(policeName: "Symbol", size: isAccessibilityCategory ? 15 : 25, style: .body)
-        manualButton.setupDynamicTextWith(policeName: "Symbol", size: isAccessibilityCategory ? 15 : 25, style: .body)
-        chronoButton.setupDynamicTextWith(policeName: "Symbol", size: isAccessibilityCategory ? 15 : 25, style: .body)
+        if isAccessibilityCategory {
+            typeButton.setTitle("Manuel", for: .normal)
+        } else {
+            typeButton.setTitle("saisir manuellement", for: .normal)
+        }
+
     }
 }

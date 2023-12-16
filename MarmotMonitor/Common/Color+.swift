@@ -58,7 +58,6 @@ extension UIColor {
 
     // MARK: - BreastFeeding
     static let colorForBreastButton = themed(light: .duckBlueAlpha, dark: .softBlack)
-
 }
 
 private func themed(light: UIColor, dark: UIColor) -> UIColor {
