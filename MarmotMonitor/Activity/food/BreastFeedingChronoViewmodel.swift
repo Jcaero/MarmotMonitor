@@ -8,18 +8,18 @@
 import Foundation
 
 protocol BreastFeedingChronoDelegate: AnyObject {
-    func updateRightTimeLabel(with texte: String)
-    func updateLeftTimeLabel(with texte: String)
-    func updateTotalTimeLabel(with texte: String)
+    func updateRightTimeLabel(with text: String)
+    func updateLeftTimeLabel(with text: String)
+    func updateTotalTimeLabel(with text: String)
 }
 
 final class BreastFeedingChronoViewModel {
     private var rightTime = 0 {
-        didSet { updateDelegateWithTime(rightTime, position: .right);
+        didSet { updateDelegateWithTime(rightTime, position: .right)
             updateTotalTime()}
     }
     private var leftTime = 0 {
-        didSet { updateDelegateWithTime(leftTime, position: .left);
+        didSet { updateDelegateWithTime(leftTime, position: .left)
             updateTotalTime()}
     }
     private var totalTime: Int {
@@ -39,9 +39,9 @@ final class BreastFeedingChronoViewModel {
     func buttonPressed(_ position: Position) {
         switch position {
         case .left:
-            toggleTimer(&leftTimer, incrementTime: { self.leftTime += 1 })
+            toggleTimer(&leftTimer, otherTimer: &rightTimer, incrementTime: { self.leftTime += 1 })
         case .right:
-            toggleTimer(&rightTimer, incrementTime: { self.rightTime += 1 })
+            toggleTimer(&rightTimer, otherTimer: &leftTimer, incrementTime: { self.rightTime += 1 })
         }
     }
 
@@ -55,12 +55,19 @@ final class BreastFeedingChronoViewModel {
     }
 
     // MARK: - Helper Functions
-    private func toggleTimer(_ timer: inout Timer?, incrementTime: @escaping () -> Void) {
+    private func toggleTimer(_ timer: inout Timer?, otherTimer: inout Timer?, incrementTime: @escaping () -> Void) {
+        if timer != nil {
+            stopTimer(&timer)
+        } else {
+            stopTimer(&otherTimer)
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in incrementTime() }
+        }
+    }
+
+    private func stopTimer(_ timer: inout Timer?) {
         if let existingTimer = timer {
             existingTimer.invalidate()
             timer = nil
-        } else {
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in incrementTime() }
         }
     }
 

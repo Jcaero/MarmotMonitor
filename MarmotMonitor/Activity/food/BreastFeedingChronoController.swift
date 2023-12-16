@@ -72,6 +72,7 @@ class BreastFeedingChronoController: UIViewController {
         configuration.contentInsets = .zero
         let button = UIButton(configuration: configuration)
         button.setAccessibility(with: .button, label: "bouton gauche", hint: "lancer le chrono gauche")
+        button.tag = 0
         return button
     }()
 
@@ -84,6 +85,7 @@ class BreastFeedingChronoController: UIViewController {
         configuration.contentInsets = .zero
         let button = UIButton(configuration: configuration)
         button.setAccessibility(with: .button, label: "bouton droit", hint: "lancer le chrono droit")
+        button.tag = 1
         return button
     }()
 
@@ -125,6 +127,7 @@ class BreastFeedingChronoController: UIViewController {
     }()
 
     // MARK: - PROPERTIES
+    var viewModel: BreastFeedingChronoViewModel!
 
     // MARK: - Cycle life
     override func viewDidLoad() {
@@ -136,6 +139,9 @@ class BreastFeedingChronoController: UIViewController {
         setupNavigationBar()
 
         traitCollectionDidChange(nil)
+
+        // Delegate
+        viewModel = BreastFeedingChronoViewModel(delegate: self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -158,6 +164,8 @@ class BreastFeedingChronoController: UIViewController {
             button.isSelected.toggle()
             button.configuration?.image = UIImage(systemName: button.isSelected ? "pause.fill" : "play.fill")!
                 .applyingSymbolConfiguration(.init(pointSize: 40))
+            let position: Position = button.tag == 0 ? .left : .right
+            self.viewModel.buttonPressed(position)
         }
         button.addAction(action, for: .touchUpInside)
     }
@@ -248,5 +256,19 @@ class BreastFeedingChronoController: UIViewController {
         appearance.backgroundColor = .none
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+}
+
+extension BreastFeedingChronoController: BreastFeedingChronoDelegate {
+    func updateRightTimeLabel(with text: String) {
+        rightTimeLabel.text = "Droit\n" + text
+    }
+
+    func updateLeftTimeLabel(with text: String) {
+        leftTimeLabel.text = "Gauche\n" + text
+    }
+
+    func updateTotalTimeLabel(with text: String) {
+        totalTimeBreastLabel.text = "Temps Total : " + text
     }
 }

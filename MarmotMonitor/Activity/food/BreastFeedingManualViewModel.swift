@@ -8,7 +8,7 @@
 import Foundation
 
 protocol BreastFeedingManualDelegate: AnyObject {
-    func updateTotalLabel(with texte: String)
+    func updateTotalLabel(with text: String)
 }
 
 final class BreastFeedingManualViewModel {

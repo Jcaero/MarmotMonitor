@@ -141,10 +141,9 @@ class BreastFeedingChronoViewModelTest: XCTestCase {
         let expectation = XCTestExpectation(description: "Les timers augmentent et appelle le delegate")
 
         viewModel.buttonPressed(.right)
-        viewModel.buttonPressed(.left)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.1) {
-            self.viewModel.buttonPressed(.right)
+            self.viewModel.buttonPressed(.left)
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.1) {
@@ -154,21 +153,21 @@ class BreastFeedingChronoViewModelTest: XCTestCase {
         wait(for: [expectation], timeout: 7.0)
 
         XCTAssertEqual(rightTime, "00:03")
-        XCTAssertEqual(leftTime, "00:05")
-        XCTAssertEqual(totalTime, "00:08")
+        XCTAssertEqual(leftTime, "00:02")
+        XCTAssertEqual(totalTime, "00:05")
     }
 }
 
 extension BreastFeedingChronoViewModelTest: BreastFeedingChronoDelegate {
-    func updateTotalTimeLabel(with texte: String) {
-        totalTime = texte
+    func updateTotalTimeLabel(with text: String) {
+        totalTime = text
     }
 
-    func updateRightTimeLabel(with texte: String) {
-        rightTime = texte
+    func updateRightTimeLabel(with text: String) {
+        rightTime = text
     }
 
-    func updateLeftTimeLabel(with texte: String) {
-        leftTime = texte
+    func updateLeftTimeLabel(with text: String) {
+        leftTime = text
     }
 }

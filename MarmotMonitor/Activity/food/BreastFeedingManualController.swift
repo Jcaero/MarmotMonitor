@@ -214,8 +214,8 @@ class BreastFeedingManualController: UIViewController {
 
 // MARK: - Delegate
 extension BreastFeedingManualController: BreastFeedingManualDelegate {
-    func updateTotalLabel(with texte: String) {
-        totalTimeBreastLabel.text = "Temps Total : " + texte
+    func updateTotalLabel(with text: String) {
+        totalTimeBreastLabel.text = "Temps Total : " + text
     }
 }
 
