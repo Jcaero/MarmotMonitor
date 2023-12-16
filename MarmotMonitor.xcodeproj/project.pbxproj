@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		470009D12B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */; };
+		470009D32B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470009D22B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift */; };
 		4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */; };
 		4711F7742B1E70AB00869A27 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F7732B1E70AB00869A27 /* Person.swift */; };
 		4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D43A2B0A9B5C0085035C /* UILabel+.swift */; };
@@ -73,6 +75,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoViewmodel.swift; sourceTree = "<group>"; };
+		470009D22B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoViewModel.swift; sourceTree = "<group>"; };
 		4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModelTest.swift; sourceTree = "<group>"; };
 		4711F7732B1E70AB00869A27 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		4712D43A2B0A9B5C0085035C /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
@@ -150,6 +154,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		470009D42B2E484900EBEF86 /* food */ = {
+			isa = PBXGroup;
+			children = (
+				470009D22B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift */,
+			);
+			path = food;
+			sourceTree = "<group>";
+		};
+		470009D52B2E485C00EBEF86 /* home */ = {
+			isa = PBXGroup;
+			children = (
+				4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */,
+				470009D42B2E484900EBEF86 /* food */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
 		4712D4392B0A9B2F0085035C /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +242,7 @@
 			children = (
 				4777ABEE2B2501710055DF4A /* BreastFeedingController.swift */,
 				474C945C2B2BA95B009A7D74 /* BreastFeedingChronoController.swift */,
+				470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */,
 				477786CD2B2CF63500A7611D /* BreastFeedingManualController.swift */,
 				4738B4D32B287EC70041ECF0 /* BreastFeedingManualViewModel.swift */,
 				474C945A2B2B9FFE009A7D74 /* FoodTapBar.swift */,
@@ -269,9 +291,9 @@
 		475071F02B09462100DAB527 /* MarmotMonitorTests */ = {
 			isa = PBXGroup;
 			children = (
-				47CB30012B1F400F0054EAC7 /* started */,
-				4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */,
 				47FB1DAC2B2655FD0029EB2E /* BackgroundViewModel.swift */,
+				47CB30012B1F400F0054EAC7 /* started */,
+				470009D52B2E485C00EBEF86 /* home */,
 			);
 			path = MarmotMonitorTests;
 			sourceTree = "<group>";
@@ -495,6 +517,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4747324D2B1234BB0064ABB4 /* ParentNameController.swift in Sources */,
+				470009D12B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift in Sources */,
 				47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */,
 				478E79102B138200004157AF /* String+.swift in Sources */,
 				474C945B2B2B9FFE009A7D74 /* FoodTapBar.swift in Sources */,
@@ -536,6 +559,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				474732582B123F8D0064ABB4 /* BabyNameViewModelTest.swift in Sources */,
+				470009D32B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift in Sources */,
 				478E790D2B138099004157AF /* BirthDayViewModelTest.swift in Sources */,
 				4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */,
 				4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */,
