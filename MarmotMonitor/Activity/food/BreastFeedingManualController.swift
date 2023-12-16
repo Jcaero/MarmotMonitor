@@ -105,7 +105,7 @@ class BreastFeedingManualController: UIViewController {
     }()
 
     // MARK: - PROPERTIES
-    var viewModel: BreastFeedingViewModel!
+    var viewModel: BreastFeedingManualViewModel!
 
     var segmentedHeightConstraint: NSLayoutConstraint?
 
@@ -121,7 +121,7 @@ class BreastFeedingManualController: UIViewController {
         traitCollectionDidChange(nil)
 
         // Delegate
-        viewModel = BreastFeedingViewModel(delegate: self)
+        viewModel = BreastFeedingManualViewModel(delegate: self)
     }
 
     // MARK: - Setup function
@@ -213,7 +213,7 @@ class BreastFeedingManualController: UIViewController {
 }
 
 // MARK: - Delegate
-extension BreastFeedingManualController: BreastFeedingDelegate {
+extension BreastFeedingManualController: BreastFeedingManualDelegate {
     func updateTotalLabel(with texte: String) {
         totalTimeBreastLabel.text = "Temps Total : " + texte
     }

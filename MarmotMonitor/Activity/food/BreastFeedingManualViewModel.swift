@@ -7,20 +7,20 @@
 
 import Foundation
 
-protocol BreastFeedingDelegate: AnyObject {
+protocol BreastFeedingManualDelegate: AnyObject {
     func updateTotalLabel(with texte: String)
 }
 
-final class BreastFeedingViewModel {
+final class BreastFeedingManualViewModel {
     private var rightTime = 0
     private var leftTime = 0
     private var totalTime: Int {
         return rightTime + leftTime
     }
 
-    private weak var delegate: BreastFeedingDelegate?
+    private weak var delegate: BreastFeedingManualDelegate?
 
-    init(delegate: BreastFeedingDelegate?) {
+    init(delegate: BreastFeedingManualDelegate?) {
         self.delegate = delegate
     }
 

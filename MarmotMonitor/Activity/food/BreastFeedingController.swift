@@ -72,7 +72,7 @@ class BreastFeedingController: UIViewController {
     }
 
     private func setupPageController() {
-        pageVC = BreastPageViewController(pages: [BreastChronoFeedingController(), BreastFeedingManualController()])
+        pageVC = BreastPageViewController(pages: [BreastFeedingChronoController(), BreastFeedingManualController()])
         addChild(pageVC)
         pageVC.view?.translatesAutoresizingMaskIntoConstraints = false
         scrollArea.addSubview(pageVC.view)

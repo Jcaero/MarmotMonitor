@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class BreastChronoFeedingController: UIViewController {
+class BreastFeedingChronoController: UIViewController {
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = true
@@ -131,11 +131,18 @@ class BreastChronoFeedingController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        rightButton.layer.cornerRadius = rightButton.frame.width/2
-        rightButton.clipsToBounds = true
-        leftButton.layer.cornerRadius = leftButton.frame.width/2
-        leftButton.clipsToBounds = true
+        super.viewDidAppear(animated)
+
+        setupCornerRadiusOf(rightButton)
+        setupCornerRadiusOf(leftButton)
+
         leftButton.imageView?.contentMode = .scaleAspectFit
+    }
+
+    private func setupCornerRadiusOf(_ button: UIButton) {
+        button.layoutIfNeeded()
+        button.layer.cornerRadius = button.frame.width/2
+        button.clipsToBounds = true
     }
 
     // MARK: - Setup function

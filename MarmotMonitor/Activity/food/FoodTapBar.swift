@@ -17,7 +17,7 @@ class FoodTapBar: UITabBarController {
 
     func setupVCs() {
         let breastController = UINavigationController(rootViewController: BreastFeedingController())
-        let bottleController = UINavigationController(rootViewController: BreastChronoFeedingController())
+        let bottleController = UINavigationController(rootViewController: BreastFeedingChronoController())
         let solidController = UINavigationController(rootViewController: ViewForInformationController())
 
         breastController.tabBarItem = UITabBarItem(title: "Breast", image: UIImage(systemName: "figure.child"), tag: 0)
