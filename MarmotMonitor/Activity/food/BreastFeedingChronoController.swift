@@ -71,6 +71,7 @@ class BreastFeedingChronoController: UIViewController {
         configuration.baseBackgroundColor = .duckBlue
         configuration.contentInsets = .zero
         let button = UIButton(configuration: configuration)
+        button.setAccessibility(with: .button, label: "bouton gauche", hint: "lancer le chrono gauche")
         return button
     }()
 
@@ -82,6 +83,7 @@ class BreastFeedingChronoController: UIViewController {
         configuration.baseBackgroundColor = .duckBlue
         configuration.contentInsets = .zero
         let button = UIButton(configuration: configuration)
+        button.setAccessibility(with: .button, label: "bouton droit", hint: "lancer le chrono droit")
         return button
     }()
 
@@ -143,10 +145,21 @@ class BreastFeedingChronoController: UIViewController {
         setupCornerRadiusOf(leftButton)
     }
 
+    // MARK: - Setup UIButton
     private func setupCornerRadiusOf(_ button: UIButton) {
         button.layoutIfNeeded()
         button.layer.cornerRadius = button.frame.width/2
         button.clipsToBounds = true
+        addActionTo(button)
+    }
+
+    private func addActionTo(_ button: UIButton) {
+        let action = UIAction { _ in
+            button.isSelected.toggle()
+            button.configuration?.image = UIImage(systemName: button.isSelected ? "pause.fill" : "play.fill")!
+                .applyingSymbolConfiguration(.init(pointSize: 40))
+        }
+        button.addAction(action, for: .touchUpInside)
     }
 
     // MARK: - Setup function
