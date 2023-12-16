@@ -25,10 +25,9 @@ class BreastPageViewController: UIPageViewController {
         super.viewDidLoad()
         dataSource = self
         delegate = nil
-
+        view.backgroundColor = .colorForGradientStart
         setViewControllers([pages[0]], direction: .forward, animated: false, completion: nil)
     }
-
 }
 
 // typical Page View Controller Data Source
@@ -51,8 +50,17 @@ extension BreastPageViewController: UIPageViewControllerDataSource {
 }
 
 extension BreastPageViewController: UIPageViewControllerDelegate {
+    
+    private func setupPageControl() {
+            let appearance = UIPageControl.appearance()
+            appearance.pageIndicatorTintColor = .white
+            appearance.currentPageIndicatorTintColor = .duckBlue
+            appearance.backgroundColor = .clear
+    }
+
 
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        setupPageControl()
         return pages.count
     }
 

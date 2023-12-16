@@ -58,7 +58,6 @@ class BreastFeedingController: UIViewController {
         setupPageController()
         setupNavigationBar()
         setupButton()
-
     }
 
     // MARK: - Setup function
