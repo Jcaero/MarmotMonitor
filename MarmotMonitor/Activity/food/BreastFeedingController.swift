@@ -21,13 +21,13 @@ class BreastFeedingController: UIViewController {
         return view
     }()
 
-    let typeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("saisir manuellement", for: .normal)
-        button.setTitleColor(.label, for: .normal)
-        button.backgroundColor = .duckBlue
-        button.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
-        return button
+    let typeSegmented: UISegmentedControl = {
+        let segmented = UISegmentedControl(items: ["Chronometre", "Saisie Manuelle"])
+        segmented.backgroundColor = .clear
+        segmented.selectedSegmentTintColor = .duckBlueAlpha
+        segmented.tintColor = .colorForBreastButton
+        segmented.selectedSegmentIndex = 0 // Gauche
+        return segmented
     }()
 
     let cancelButton: UIButton = {
@@ -48,6 +48,8 @@ class BreastFeedingController: UIViewController {
     // MARK: - PROPERTIES
     var thePageVC: BreastPageViewController!
 
+    var segmentedHeightConstraint: NSLayoutConstraint?
+
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,13 +66,13 @@ class BreastFeedingController: UIViewController {
     private func setupViews() {
         view.addSubview(scrollView)
 
-        [scrollArea, valideButton, cancelButton, typeButton].forEach {
+        [scrollArea, valideButton, cancelButton, typeSegmented].forEach {
             scrollView.addSubview($0)
         }
     }
 
     private func setupPageController() {
-        thePageVC = BreastPageViewController(pages: [BreastFeedingManualController(), BreastChronoFeedingController()])
+        thePageVC = BreastPageViewController(pages: [BreastChronoFeedingController(), BreastFeedingManualController()])
         addChild(thePageVC)
         thePageVC.view?.translatesAutoresizingMaskIntoConstraints = false
         scrollArea.addSubview(thePageVC.view)
@@ -85,7 +87,7 @@ class BreastFeedingController: UIViewController {
     }
 
     private func setupContraints() {
-        [typeButton,
+        [typeSegmented,
          scrollArea, scrollView, valideButton, cancelButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -97,14 +99,16 @@ class BreastFeedingController: UIViewController {
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
 
+        segmentedHeightConstraint = typeSegmented.heightAnchor.constraint(equalToConstant: 40)
         NSLayoutConstraint.activate([
-            typeButton.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            typeButton.rightAnchor.constraint(equalTo: view.rightAnchor),
-            typeButton.leftAnchor.constraint(equalTo: view.leftAnchor),
+            segmentedHeightConstraint!,
+            typeSegmented.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            typeSegmented.rightAnchor.constraint(equalTo: view.rightAnchor),
+            typeSegmented.leftAnchor.constraint(equalTo: view.leftAnchor)
         ])
 
         NSLayoutConstraint.activate([
-            scrollArea.topAnchor.constraint(equalTo: typeButton.bottomAnchor, constant: 10),
+            scrollArea.topAnchor.constraint(equalTo: typeSegmented.bottomAnchor, constant: 10),
             scrollArea.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -10),
             scrollArea.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.5),
             scrollArea.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -152,11 +156,14 @@ extension BreastFeedingController: UIPickerViewAccessibilityDelegate {
 
         guard currentCategory != previousCategory else { return }
         let isAccessibilityCategory = currentCategory.isAccessibilityCategory
-        if isAccessibilityCategory {
-            typeButton.setTitle("Manuel", for: .normal)
-        } else {
-            typeButton.setTitle("saisir manuellement", for: .normal)
-        }
+        segmentedHeightConstraint?.constant = isAccessibilityCategory ? 80 : 40
 
+        if isAccessibilityCategory {
+            typeSegmented.setTitleTextAttributes([.font: UIFont.preferredFont(forTextStyle: .body)], for: .normal)
+            typeSegmented.setupSegmentedTitle(with: ["Chrono", "Manuel"])
+        } else {
+            typeSegmented.setTitleTextAttributes([.font: UIFont(name: "Symbol", size: 15)!], for: .normal)
+            typeSegmented.setupSegmentedTitle(with: ["Chronometre", "Saisie Manuelle"])
+        }
     }
 }

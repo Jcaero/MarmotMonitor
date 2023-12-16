@@ -15,6 +15,7 @@
 		47155BCA2B1DE97000775B27 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BC92B1DE97000775B27 /* TodayViewController.swift */; };
 		47155BCD2B1DEBDB00775B27 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */; };
 		4719ABE52B0E96380088CBE2 /* BabyNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719ABE42B0E96380088CBE2 /* BabyNameController.swift */; };
+		472DDABD2B2DEF1600812024 /* UISegmented+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472DDABC2B2DEF1600812024 /* UISegmented+.swift */; };
 		4735B26B2B1140D8000F2B8C /* ViewForInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */; };
 		4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26D2B1145B7000F2B8C /* GenderController.swift */; };
 		4738B4D22B287D830041ECF0 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B4D12B287D830041ECF0 /* Int+.swift */; };
@@ -80,6 +81,7 @@
 		47155BC92B1DE97000775B27 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 		4719ABE42B0E96380088CBE2 /* BabyNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyNameController.swift; sourceTree = "<group>"; };
+		472DDABC2B2DEF1600812024 /* UISegmented+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmented+.swift"; sourceTree = "<group>"; };
 		4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForInformationController.swift; sourceTree = "<group>"; };
 		4735B26D2B1145B7000F2B8C /* GenderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderController.swift; sourceTree = "<group>"; };
 		4738B4D12B287D830041ECF0 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				47CABD8C2B128A5A00C5919A /* UserDefault+.swift */,
 				478E790A2B137CD1004157AF /* Date+.swift */,
 				478E790F2B138200004157AF /* String+.swift */,
+				472DDABC2B2DEF1600812024 /* UISegmented+.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				474C945B2B2B9FFE009A7D74 /* FoodTapBar.swift in Sources */,
 				474732562B123C900064ABB4 /* ParentNameViewModel.swift in Sources */,
 				476AF6302B27A10100F4935F /* UIButton+.swift in Sources */,
+				472DDABD2B2DEF1600812024 /* UISegmented+.swift in Sources */,
 				4750720E2B09576900DAB527 /* TapBarController.swift in Sources */,
 				47155BCD2B1DEBDB00775B27 /* TodayViewModel.swift in Sources */,
 				4735B26B2B1140D8000F2B8C /* ViewForInformationController.swift in Sources */,
