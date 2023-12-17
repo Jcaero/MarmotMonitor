@@ -185,6 +185,7 @@ extension BirthDayController {
 
         guard currentCategory != previousCategory else { return }
         updateDisplayAccessibility()
+        setupContraints()
     }
 
     /// Update the size of the girl and oy button when the user change the size of the text in the settings

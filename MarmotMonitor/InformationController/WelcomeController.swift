@@ -60,11 +60,3 @@ final class WelcomeController: ViewForInformationController {
         navigationController?.pushViewController(BabyNameController(), animated: true)
     }
 }
-
-// MARK: - Accessibility
-extension WelcomeController {
-    /// Update the display when the user change the size of the text in the settings
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-    }
-}

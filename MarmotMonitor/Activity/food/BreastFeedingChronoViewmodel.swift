@@ -65,7 +65,6 @@ final class BreastFeedingChronoViewModel {
         if timer != nil {
             stopTimer(&timer)
         } else {
-//            setStopImageToButton(of: otherTimer)
             stopTimer(&otherTimer)
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in incrementTime() }
         }

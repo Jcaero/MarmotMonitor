@@ -16,6 +16,9 @@ class BreastFeedingChronoViewModelTest: XCTestCase {
     private var leftTime = "00:00"
     private var rightTime = "00:00"
     private var totalTime = "00:00"
+    
+    private var leftState: MarmotMonitor.ButtonState!
+    private var rightState: MarmotMonitor.ButtonState!
 
     override func setUp() {
         super.setUp()
@@ -141,6 +144,7 @@ class BreastFeedingChronoViewModelTest: XCTestCase {
         let expectation = XCTestExpectation(description: "Les timers augmentent et appelle le delegate")
 
         viewModel.buttonPressed(.right)
+        rightState = .start
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.1) {
             self.viewModel.buttonPressed(.left)
@@ -155,10 +159,41 @@ class BreastFeedingChronoViewModelTest: XCTestCase {
         XCTAssertEqual(rightTime, "00:03")
         XCTAssertEqual(leftTime, "00:02")
         XCTAssertEqual(totalTime, "00:05")
+        XCTAssertEqual(rightState, .stop)
+    }
+
+    func testTotalTimeIsZero_WhenTimerStartedLeftAfterRight_TotalTimeIsNotZero() {
+        let expectation = XCTestExpectation(description: "Les timers augmentent et appelle le delegate")
+
+        viewModel.buttonPressed(.left)
+        leftState = .start
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.1) {
+            self.viewModel.buttonPressed(.right)
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.1) {
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 7.0)
+
+        XCTAssertEqual(leftTime, "00:03")
+        XCTAssertEqual(rightTime, "00:02")
+        XCTAssertEqual(totalTime, "00:05")
+        XCTAssertEqual(leftState, .stop)
     }
 }
 
 extension BreastFeedingChronoViewModelTest: BreastFeedingChronoDelegate {
+    func updateRightButtonImage(with state: MarmotMonitor.ButtonState) {
+        rightState = state
+    }
+
+    func updateLeftButtonImage(with state: MarmotMonitor.ButtonState) {
+        leftState = state
+    }
+
     func updateTotalTimeLabel(with text: String) {
         totalTime = text
     }

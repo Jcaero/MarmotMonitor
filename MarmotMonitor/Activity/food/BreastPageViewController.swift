@@ -56,7 +56,7 @@ extension BreastPageViewController: UIPageViewControllerDataSource {
 }
 
 extension BreastPageViewController: UIPageViewControllerDelegate {
-    
+
     private func setupPageControl() {
             let appearance = UIPageControl.appearance()
             appearance.pageIndicatorTintColor = .white
