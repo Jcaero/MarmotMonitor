@@ -11,6 +11,8 @@ protocol BreastFeedingChronoDelegate: AnyObject {
     func updateRightTimeLabel(with text: String)
     func updateLeftTimeLabel(with text: String)
     func updateTotalTimeLabel(with text: String)
+    func updateRightButtonImage(with state: ButtonState)
+    func updateLeftButtonImage(with state: ButtonState)
 }
 
 final class BreastFeedingChronoViewModel {
@@ -39,9 +41,13 @@ final class BreastFeedingChronoViewModel {
     func buttonPressed(_ position: Position) {
         switch position {
         case .left:
+            setStopImageToButton(of: rightTimer)
             toggleTimer(&leftTimer, otherTimer: &rightTimer, incrementTime: { self.leftTime += 1 })
+
         case .right:
+            setStopImageToButton(of: leftTimer)
             toggleTimer(&rightTimer, otherTimer: &leftTimer, incrementTime: { self.rightTime += 1 })
+
         }
     }
 
@@ -59,6 +65,7 @@ final class BreastFeedingChronoViewModel {
         if timer != nil {
             stopTimer(&timer)
         } else {
+//            setStopImageToButton(of: otherTimer)
             stopTimer(&otherTimer)
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in incrementTime() }
         }
@@ -68,6 +75,17 @@ final class BreastFeedingChronoViewModel {
         if let existingTimer = timer {
             existingTimer.invalidate()
             timer = nil
+        }
+    }
+
+    private func setStopImageToButton(of timer: Timer?) {
+        guard let description = timer else { return }
+        switch description {
+        case leftTimer:
+            delegate?.updateLeftButtonImage(with: .stop)
+        case rightTimer:
+            delegate?.updateRightButtonImage(with: .stop)
+        default: break
         }
     }
 
@@ -104,4 +122,9 @@ final class BreastFeedingChronoViewModel {
 enum Position {
     case left
     case right
+}
+
+enum ButtonState {
+    case start
+    case stop
 }

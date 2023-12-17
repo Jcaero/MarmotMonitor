@@ -64,7 +64,6 @@ extension BreastPageViewController: UIPageViewControllerDelegate {
             appearance.backgroundColor = .clear
     }
 
-
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         setupPageControl()
         return pages.count

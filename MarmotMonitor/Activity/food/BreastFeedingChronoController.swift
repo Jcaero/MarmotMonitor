@@ -260,6 +260,18 @@ class BreastFeedingChronoController: UIViewController {
 }
 
 extension BreastFeedingChronoController: BreastFeedingChronoDelegate {
+    func updateRightButtonImage(with state: ButtonState) {
+        rightButton.isSelected = state == .stop ? false : true
+        rightButton.configuration?.image = UIImage(systemName: rightButton.isSelected ? "pause.fill" : "play.fill")!
+            .applyingSymbolConfiguration(.init(pointSize: 40))
+    }
+
+    func updateLeftButtonImage(with state: ButtonState) {
+        leftButton.isSelected = state == .stop ? false : true
+        leftButton.configuration?.image = UIImage(systemName: leftButton.isSelected ? "pause.fill" : "play.fill")!
+            .applyingSymbolConfiguration(.init(pointSize: 40))
+    }
+
     func updateRightTimeLabel(with text: String) {
         rightTimeLabel.text = "Droit\n" + text
     }
