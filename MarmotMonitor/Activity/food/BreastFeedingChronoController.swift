@@ -59,7 +59,7 @@ class BreastFeedingChronoController: UIViewController {
         label.backgroundColor = .duckBlue
         label.layer.cornerRadius = 15
         label.clipsToBounds = true
-        label.setAccessibility(with: .staticText, label: "", hint: "")
+        label.setAccessibility(with: .staticText, label: "temps total en minute", hint: "")
         return label
     }()
 
@@ -69,6 +69,7 @@ class BreastFeedingChronoController: UIViewController {
             .applyingSymbolConfiguration(.init(pointSize: 40))
         configuration.cornerStyle = .capsule
         configuration.baseBackgroundColor = .duckBlue
+        configuration.baseForegroundColor = .label
         configuration.contentInsets = .zero
         let button = UIButton(configuration: configuration)
         button.setAccessibility(with: .button, label: "bouton gauche", hint: "lancer le chrono gauche")
@@ -82,6 +83,7 @@ class BreastFeedingChronoController: UIViewController {
             .applyingSymbolConfiguration(.init(pointSize: 40))
         configuration.cornerStyle = .capsule
         configuration.baseBackgroundColor = .duckBlue
+        configuration.baseForegroundColor = .label
         configuration.contentInsets = .zero
         let button = UIButton(configuration: configuration)
         button.setAccessibility(with: .button, label: "bouton droit", hint: "lancer le chrono droit")

@@ -58,7 +58,7 @@ class BreastFeedingManualController: UIViewController {
         label.backgroundColor = .duckBlue
         label.layer.cornerRadius = 15
         label.clipsToBounds = true
-        label.setAccessibility(with: .staticText, label: "", hint: "")
+        label.setAccessibility(with: .staticText, label: "temps total en minute", hint: "")
         return label
     }()
 
@@ -216,6 +216,7 @@ class BreastFeedingManualController: UIViewController {
 extension BreastFeedingManualController: BreastFeedingManualDelegate {
     func updateTotalLabel(with text: String) {
         totalTimeBreastLabel.text = "Temps Total : " + text
+        totalTimeBreastLabel.accessibilityValue = "\(String(describing: totalTimeBreastLabel.text))"
     }
 }
 

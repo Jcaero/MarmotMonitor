@@ -35,6 +35,7 @@ class BreastFeedingController: UIViewController {
         button.setTitle("Annuler", for: .normal)
         button.setTitleColor(.duckBlue, for: .normal)
         button.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
+        button.setAccessibility(with: .button, label: "Annuler les informations", hint: "")
         return button
     }()
 
@@ -42,6 +43,7 @@ class BreastFeedingController: UIViewController {
         let button = UIButton()
         button.tintColor = .duckBlue
         button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
+        button.setAccessibility(with: .button, label: "valider les informations", hint: "")
         return button
     }()
 
