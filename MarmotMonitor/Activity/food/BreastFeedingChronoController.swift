@@ -142,6 +142,8 @@ class BreastFeedingChronoController: UIViewController {
 
         // Delegate
         viewModel = BreastFeedingChronoViewModel(delegate: self)
+        addActionTo(rightButton)
+        addActionTo(leftButton)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -156,7 +158,6 @@ class BreastFeedingChronoController: UIViewController {
         button.layoutIfNeeded()
         button.layer.cornerRadius = button.frame.width/2
         button.clipsToBounds = true
-        addActionTo(button)
     }
 
     private func addActionTo(_ button: UIButton) {
