@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		470009D12B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */; };
 		470009D32B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470009D22B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift */; };
+		4704F2C32B2F98310060DCEE /* BottleFeedingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */; };
 		4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */; };
 		4711F7742B1E70AB00869A27 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F7732B1E70AB00869A27 /* Person.swift */; };
 		4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D43A2B0A9B5C0085035C /* UILabel+.swift */; };
@@ -77,6 +78,7 @@
 /* Begin PBXFileReference section */
 		470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoViewmodel.swift; sourceTree = "<group>"; };
 		470009D22B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoViewModel.swift; sourceTree = "<group>"; };
+		4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedingController.swift; sourceTree = "<group>"; };
 		4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModelTest.swift; sourceTree = "<group>"; };
 		4711F7732B1E70AB00869A27 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		4712D43A2B0A9B5C0085035C /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				474C945C2B2BA95B009A7D74 /* BreastFeedingChronoController.swift */,
 				470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */,
 				477786CD2B2CF63500A7611D /* BreastFeedingManualController.swift */,
+				4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */,
 				4738B4D32B287EC70041ECF0 /* BreastFeedingManualViewModel.swift */,
 				474C945A2B2B9FFE009A7D74 /* FoodTapBar.swift */,
 				477786CB2B2CF22700A7611D /* BreastPageViewController.swift */,
@@ -516,6 +519,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4704F2C32B2F98310060DCEE /* BottleFeedingController.swift in Sources */,
 				4747324D2B1234BB0064ABB4 /* ParentNameController.swift in Sources */,
 				470009D12B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift in Sources */,
 				47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */,
