@@ -18,16 +18,16 @@ class FoodTapBar: UITabBarController {
     func setupVCs() {
         let breastController = UINavigationController(rootViewController: BreastFeedingController())
         let bottleController = UINavigationController(rootViewController: BottleFeedingController())
-        let solidController = UINavigationController(rootViewController: ViewForInformationController())
+        let solidController = UINavigationController(rootViewController: SolideFeedingController())
 
-        breastController.tabBarItem = UITabBarItem(title: "Breast", image: UIImage(systemName: "figure.child"), tag: 0)
-        breastController.tabBarItem.accessibilityHint = "appuyer pour afficher la page du jour"
+        breastController.tabBarItem = UITabBarItem(title: "Tétée", image: UIImage(systemName: "figure.child"), tag: 0)
+        breastController.tabBarItem.accessibilityHint = "appuyer pour afficher l'allaitement"
 
-        bottleController.tabBarItem = UITabBarItem(title: "Bottle", image: UIImage(systemName: "waterbottle"), tag: 1)
-        bottleController.tabBarItem.accessibilityHint = "appuyer pour afficher la page de suivie"
+        bottleController.tabBarItem = UITabBarItem(title: "Biberon", image: UIImage(systemName: "waterbottle"), tag: 1)
+        bottleController.tabBarItem.accessibilityHint = "appuyer pour afficher le biberon"
 
-        solidController.tabBarItem = UITabBarItem(title: "Solid", image: UIImage(systemName: "fork.knife"), tag: 2)
-        solidController.tabBarItem.accessibilityHint = "appuyer pour afficher le prochain rendez vous docteur"
+        solidController.tabBarItem = UITabBarItem(title: "Solides", image: UIImage(systemName: "fork.knife"), tag: 2)
+        solidController.tabBarItem.accessibilityHint = "appuyer pour afficher la nourriture solide"
 
         viewControllers = [breastController, bottleController, solidController]
     }
