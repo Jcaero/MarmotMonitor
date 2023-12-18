@@ -70,6 +70,7 @@ class BottleFeedingController: UIViewController {
         slider.maximumTrackTintColor = .label
         slider.tintColor = .duckBlue
         slider.minimumTrackTintColor = .duckBlue
+        slider.thumbTintColor = .colorForDuckBlueToWhite
         slider.addTarget(self, action: #selector(sliderValueDidChange(_:)), for: .valueChanged)
         slider.setAccessibility(with: .adjustable, label: "volume du lait", hint: "")
         return slider
@@ -78,7 +79,7 @@ class BottleFeedingController: UIViewController {
     lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("Annuler", for: .normal)
-        button.setTitleColor(.duckBlue, for: .normal)
+        button.setTitleColor(.colorForDuckBlueToWhite, for: .normal)
         button.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
         button.setAccessibility(with: .button, label: "Annuler les informations", hint: "")
@@ -87,7 +88,7 @@ class BottleFeedingController: UIViewController {
 
     let valideButton: UIButton = {
         let button = UIButton()
-        button.tintColor = .duckBlue
+        button.tintColor = .colorForDuckBlueToWhite
         button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
         button.setAccessibility(with: .button, label: "valider les informations", hint: "")
         return button
@@ -222,6 +223,5 @@ extension BottleFeedingController {
         guard currentCategory != previousCategory else { return }
         let isAccessibilityCategory = currentCategory.isAccessibilityCategory
         timeLabel.text = isAccessibilityCategory ? "Heure" : "Heure du biberon"
-        
     }
 }
