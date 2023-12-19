@@ -51,7 +51,7 @@ class SolideFeedingController: UIViewController {
         return view
     }()
 
-    let tableViewOfIngredients: UITableView = {
+    let tableOfIngredients: UITableView = {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.backgroundColor = .clear
@@ -80,6 +80,8 @@ class SolideFeedingController: UIViewController {
     // MARK: - PROPERTIES
     var viewModel = SolideFeedingViewModel()
 
+    var tableViewHeightConstraint: NSLayoutConstraint?
+
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,12 +91,17 @@ class SolideFeedingController: UIViewController {
         setupContraints()
         setupNavigationBar()
 
-        tableViewOfIngredients.delegate = self
-        tableViewOfIngredients.dataSource = self
-        tableViewOfIngredients.rowHeight = UITableView.automaticDimension
-        tableViewOfIngredients.sectionHeaderHeight = UITableView.automaticDimension
-        tableViewOfIngredients.register(SolideCell.self, forCellReuseIdentifier: SolideCell.reuseIdentifier)
-        tableViewOfIngredients.register(SolideIngredientCell.self, forCellReuseIdentifier: SolideIngredientCell.reuseIdentifier)
+        tableOfIngredients.delegate = self
+        tableOfIngredients.dataSource = self
+        tableOfIngredients.rowHeight = UITableView.automaticDimension
+        tableOfIngredients.sectionHeaderHeight = UITableView.automaticDimension
+        tableOfIngredients.register(SolideCell.self, forCellReuseIdentifier: SolideCell.reuseIdentifier)
+        tableOfIngredients.register(SolideIngredientCell.self, forCellReuseIdentifier: SolideIngredientCell.reuseIdentifier)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupTableViewHeight()
     }
 
     // MARK: - Setup function
@@ -105,14 +112,14 @@ class SolideFeedingController: UIViewController {
 
         scrollView.addSubview(scrollArea)
 
-        [timeLabel, timePicker, separator, tableViewOfIngredients].forEach {
+        [timeLabel, timePicker, separator, tableOfIngredients].forEach {
             scrollArea.addSubview($0)
         }
     }
 
     private func setupContraints() {
         [timeLabel, timePicker, separator,
-         tableViewOfIngredients,
+         tableOfIngredients,
          scrollArea, scrollView,
          valideButton, cancelButton ].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -163,13 +170,21 @@ class SolideFeedingController: UIViewController {
             separator.heightAnchor.constraint(equalToConstant: 2)
         ])
 
+        tableViewHeightConstraint = tableOfIngredients.heightAnchor.constraint(greaterThanOrEqualToConstant: 300)
         NSLayoutConstraint.activate([
-            tableViewOfIngredients.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 15),
-            tableViewOfIngredients.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
-            tableViewOfIngredients.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
-            tableViewOfIngredients.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -10),
-            tableViewOfIngredients.heightAnchor.constraint(greaterThanOrEqualToConstant: 150)
+            tableOfIngredients.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 15),
+            tableOfIngredients.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
+            tableOfIngredients.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
+            tableOfIngredients.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -10),
+            tableViewHeightConstraint!
         ])
+    }
+
+    private func setupTableViewHeight() {
+        guard let cell = tableOfIngredients.cellForRow(at: IndexPath(row: 0, section: 0))
+        else { return }
+        tableViewHeightConstraint?.constant = cell.frame.size.height * CGFloat(viewModel.ingredients.count)
+        tableOfIngredients.layoutIfNeeded()
     }
 
     private func setupNavigationBar() {
