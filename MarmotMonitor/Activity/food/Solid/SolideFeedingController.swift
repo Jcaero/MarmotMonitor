@@ -54,6 +54,8 @@ class SolideFeedingController: UIViewController {
     let tableOfIngredients: UITableView = {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = .duckBlue
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .singleLine
         return tableView
@@ -95,11 +97,11 @@ class SolideFeedingController: UIViewController {
         tableOfIngredients.dataSource = self
         tableOfIngredients.rowHeight = UITableView.automaticDimension
         tableOfIngredients.register(SolideCell.self, forCellReuseIdentifier: SolideCell.reuseIdentifier)
-        tableOfIngredients.register(SolideIngredientCell.self, forCellReuseIdentifier: SolideIngredientCell.reuseIdentifier)
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        tableOfIngredients.reloadData()
         setupTableViewHeight()
     }
 
@@ -180,9 +182,15 @@ class SolideFeedingController: UIViewController {
     }
 
     private func setupTableViewHeight() {
-        guard let cell = tableOfIngredients.cellForRow(at: IndexPath(row: 0, section: 0))
-        else { return }
-        tableViewHeightConstraint?.constant = cell.contentView.frame.size.height * CGFloat(viewModel.ingredients.count)
+        var height: CGFloat = 0
+        for index in 0..<viewModel.ingredients.count {
+            let cell = tableOfIngredients.cellForRow(at: IndexPath(row: index, section: 0))
+            let cellHeight = cell?.contentView.frame.size.height ?? 0
+            if cellHeight > height {
+                height = cellHeight
+            }
+        }
+        tableViewHeightConstraint?.constant = height * CGFloat(viewModel.ingredients.count)
         tableOfIngredients.layoutIfNeeded()
     }
 
@@ -220,20 +228,34 @@ extension SolideFeedingController: UITableViewDelegate {
 
 extension SolideFeedingController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(viewModel.ingredients.count)
         return viewModel.ingredients.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            guard let cell2 = tableView.dequeueReusableCell(withIdentifier: SolideCell.reuseIdentifier, for: indexPath) as? SolideCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SolideCell.reuseIdentifier, for: indexPath) as? SolideCell else {
                 print("erreur de cell")
                 return UITableViewCell()
             }
-            cell2.setupCell(with: viewModel.ingredients[indexPath.row])
-            cell2.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
-            return cell2
+            cell.setupCell(with: viewModel.ingredients[indexPath.row])
+            cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
+        cell.selectionStyle = .none
+            return cell
     }
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 300
+    }
+}
+
+// MARK: - Accessibility
+extension SolideFeedingController {
+    /// Update the display when the user change the size of the text in the settings
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
+
+        guard currentCategory != previousCategory else { return }
+        tableOfIngredients.reloadData()
     }
 }

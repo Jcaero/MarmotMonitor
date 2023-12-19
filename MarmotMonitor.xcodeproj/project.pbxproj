@@ -30,7 +30,6 @@
 		474732582B123F8D0064ABB4 /* BabyNameViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474732572B123F8D0064ABB4 /* BabyNameViewModelTest.swift */; };
 		4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474732592B12432C0064ABB4 /* GenderViewModelTest.swift */; };
 		4747325C2B12456A0064ABB4 /* ParentNameViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4747325B2B12456A0064ABB4 /* ParentNameViewModelTest.swift */; };
-		4748E6482B30DC1B0082A0CE /* SolideIngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4748E6472B30DC1B0082A0CE /* SolideIngredientCell.swift */; };
 		4748E64A2B30DFDF0082A0CE /* SolideFeedingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4748E6492B30DFDF0082A0CE /* SolideFeedingViewModel.swift */; };
 		474C945B2B2B9FFE009A7D74 /* FoodTapBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C945A2B2B9FFE009A7D74 /* FoodTapBar.swift */; };
 		474C945D2B2BA95B009A7D74 /* BreastFeedingChronoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C945C2B2BA95B009A7D74 /* BreastFeedingChronoController.swift */; };
@@ -103,7 +102,6 @@
 		474732572B123F8D0064ABB4 /* BabyNameViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyNameViewModelTest.swift; sourceTree = "<group>"; };
 		474732592B12432C0064ABB4 /* GenderViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewModelTest.swift; sourceTree = "<group>"; };
 		4747325B2B12456A0064ABB4 /* ParentNameViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentNameViewModelTest.swift; sourceTree = "<group>"; };
-		4748E6472B30DC1B0082A0CE /* SolideIngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolideIngredientCell.swift; sourceTree = "<group>"; };
 		4748E6492B30DFDF0082A0CE /* SolideFeedingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolideFeedingViewModel.swift; sourceTree = "<group>"; };
 		474C945A2B2B9FFE009A7D74 /* FoodTapBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTapBar.swift; sourceTree = "<group>"; };
 		474C945C2B2BA95B009A7D74 /* BreastFeedingChronoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoController.swift; sourceTree = "<group>"; };
@@ -378,7 +376,6 @@
 				4792CB582B3063720010AE38 /* SolideFeedingController.swift */,
 				4748E6492B30DFDF0082A0CE /* SolideFeedingViewModel.swift */,
 				4792CB5A2B3068270010AE38 /* SolideCell.swift */,
-				4748E6472B30DC1B0082A0CE /* SolideIngredientCell.swift */,
 			);
 			path = Solid;
 			sourceTree = "<group>";
@@ -576,7 +573,6 @@
 				478E79072B1370DC004157AF /* BirthDayController.swift in Sources */,
 				478E79092B1375F3004157AF /* BirthDayViewModel.swift in Sources */,
 				4719ABE52B0E96380088CBE2 /* BabyNameController.swift in Sources */,
-				4748E6482B30DC1B0082A0CE /* SolideIngredientCell.swift in Sources */,
 				47155BC82B1DE6E000775B27 /* BackgroundViewController.swift in Sources */,
 				47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */,
 				478E790B2B137CD1004157AF /* Date+.swift in Sources */,

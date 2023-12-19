@@ -12,11 +12,12 @@ class SolideCell: UITableViewCell, UITextFieldDelegate {
     // MARK: - liste of UI elements
     let ingredient: UILabel = {
         let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         label.text = "0"
         label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 0
+        label.backgroundColor = .clear
         label.setAccessibility(with: .header, label: "poids de l'ingredient", hint: "")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -28,7 +29,7 @@ class SolideCell: UITableViewCell, UITextFieldDelegate {
             string: "0",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.black]
         )
-        let font = UIFont(name: "Symbol", size: 20)
+        let font = UIFont(name: "Symbol", size: 25)
         let fontMetrics = UIFontMetrics(forTextStyle: .body)
         textField.font = fontMetrics.scaledFont(for: font!)
         textField.adjustsFontForContentSizeCategory = true
@@ -45,7 +46,7 @@ class SolideCell: UITableViewCell, UITextFieldDelegate {
 
     let type: UILabel = {
         let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         label.text = "g"
         label.textColor = .label
         label.textAlignment = .left
@@ -56,6 +57,9 @@ class SolideCell: UITableViewCell, UITextFieldDelegate {
 
     // MARK: - Properties
     static let reuseIdentifier = "SolideCell"
+
+    var normalSizeContrainte: [NSLayoutConstraint] = []
+    var bigSizeContrainte: [NSLayoutConstraint] = []
 
     // MARK: - cycle life
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -68,7 +72,6 @@ class SolideCell: UITableViewCell, UITextFieldDelegate {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
     // MARK: - UI
     private func setupUI() {
         [poids, type].forEach {
@@ -78,25 +81,45 @@ class SolideCell: UITableViewCell, UITextFieldDelegate {
         contentView.addSubview(type)
         contentView.addSubview(poids)
 
-        NSLayoutConstraint.activate([
-            ingredient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            ingredient.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            ingredient.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9)
-        ])
+        prepareContraint()
+    }
 
-        NSLayoutConstraint.activate([
+    private func prepareContraint() {
+        bigSizeContrainte = [
+            ingredient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+            ingredient.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
+            ingredient.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
             poids.topAnchor.constraint(equalTo: ingredient.bottomAnchor, constant: 10),
             poids.rightAnchor.constraint(equalTo: type.leftAnchor, constant: -10),
-            poids.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
             poids.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-            poids.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9)
-        ])
-
-        NSLayoutConstraint.activate([
+            poids.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
             type.topAnchor.constraint(equalTo: ingredient.bottomAnchor, constant: 5),
             type.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
             type.bottomAnchor.constraint(equalTo: poids.bottomAnchor)
-        ])
+        ]
+
+        normalSizeContrainte = [
+            ingredient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+            ingredient.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.40),
+            ingredient.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            poids.topAnchor.constraint(equalTo: ingredient.topAnchor),
+            poids.rightAnchor.constraint(equalTo: type.leftAnchor, constant: -10),
+            poids.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.40),
+            ingredient.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            poids.bottomAnchor.constraint(equalTo: ingredient.bottomAnchor, constant: -5),
+            type.topAnchor.constraint(equalTo: poids.topAnchor),
+            type.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
+            type.bottomAnchor.constraint(equalTo: poids.bottomAnchor)
+        ]
+
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        let isAccessibilityCategory = currentCategory.isAccessibilityCategory
+
+        if isAccessibilityCategory {
+            NSLayoutConstraint.activate(bigSizeContrainte)
+        } else {
+            NSLayoutConstraint.activate(normalSizeContrainte)
+        }
     }
 
     // MARK: - Setup cell
