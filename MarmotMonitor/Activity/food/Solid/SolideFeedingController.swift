@@ -19,7 +19,7 @@ class SolideFeedingController: UIViewController {
 
     let scrollArea: UIView = {
         let view = UIView()
-        view.backgroundColor = .green
+        view.backgroundColor = .clear
         return view
     }()
 

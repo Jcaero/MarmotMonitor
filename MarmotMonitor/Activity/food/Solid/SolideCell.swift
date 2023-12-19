@@ -14,7 +14,7 @@ class SolideCell: UITableViewCell {
         let label = UILabel()
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.text = "0"
-        label.textColor = .white
+        label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 1
         label.setAccessibility(with: .header, label: "poids de l'ingredient", hint: "")
@@ -25,7 +25,7 @@ class SolideCell: UITableViewCell {
         let label = UILabel()
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.text = "g"
-        label.textColor = .white
+        label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 1
         label.setAccessibility(with: .header, label: "", hint: "")
@@ -39,7 +39,7 @@ class SolideCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
-        self.backgroundColor = .red
+        self.backgroundColor = .clear
     }
 
     required init?(coder: NSCoder) {

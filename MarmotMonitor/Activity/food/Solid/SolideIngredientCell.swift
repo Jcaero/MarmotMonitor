@@ -14,9 +14,9 @@ class SolideIngredientCell: UITableViewCell {
         let label = UILabel()
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.text = "0"
-        label.textColor = .white
+        label.textColor = .label
         label.textAlignment = .left
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.setAccessibility(with: .header, label: "poids de l'ingredient", hint: "")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -29,7 +29,8 @@ class SolideIngredientCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
-        self.backgroundColor = .blue
+        self.backgroundColor = .colorForDuckBlueToClear
+        self.layer.cornerRadius = 20
     }
 
     required init?(coder: NSCoder) {

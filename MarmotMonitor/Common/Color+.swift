@@ -61,6 +61,9 @@ extension UIColor {
 
     // MARK: - Common
     static let colorForDuckBlueToWhite = themed(light: .duckBlue, dark: .white)
+
+    // MARK: - SolideIngredientCell
+    static let colorForDuckBlueToClear = themed(light: .duckBlue, dark: .clear)
 }
 
 private func themed(light: UIColor, dark: UIColor) -> UIColor {
