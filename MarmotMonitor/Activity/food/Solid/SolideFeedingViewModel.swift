@@ -8,5 +8,5 @@
 import Foundation
 
 final class SolideFeedingViewModel {
-    let ingredients: [String] = ["Fruit", "", "Légumes", "", "Viandes et protéines", "", "Céréales", "", "Prduits laitiers", "", "Autre(s)", ""]
+    let ingredients: [String] = ["Fruit", "Légumes", "Viandes et protéines", "Céréales", "Prduits laitiers", "Autre(s)",]
 }

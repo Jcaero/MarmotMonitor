@@ -94,7 +94,6 @@ class SolideFeedingController: UIViewController {
         tableOfIngredients.delegate = self
         tableOfIngredients.dataSource = self
         tableOfIngredients.rowHeight = UITableView.automaticDimension
-        tableOfIngredients.sectionHeaderHeight = UITableView.automaticDimension
         tableOfIngredients.register(SolideCell.self, forCellReuseIdentifier: SolideCell.reuseIdentifier)
         tableOfIngredients.register(SolideIngredientCell.self, forCellReuseIdentifier: SolideIngredientCell.reuseIdentifier)
     }
@@ -183,7 +182,7 @@ class SolideFeedingController: UIViewController {
     private func setupTableViewHeight() {
         guard let cell = tableOfIngredients.cellForRow(at: IndexPath(row: 0, section: 0))
         else { return }
-        tableViewHeightConstraint?.constant = cell.frame.size.height * CGFloat(viewModel.ingredients.count)
+        tableViewHeightConstraint?.constant = cell.contentView.frame.size.height * CGFloat(viewModel.ingredients.count)
         tableOfIngredients.layoutIfNeeded()
     }
 
@@ -226,22 +225,15 @@ extension SolideFeedingController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row % 2 == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: SolideIngredientCell.reuseIdentifier, for: indexPath) as? SolideIngredientCell else {
-                print("erreur de cell")
-                return UITableViewCell()
-            }
-            cell.setupCell(with:viewModel.ingredients[indexPath.row])
-            cell.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-            return cell
-        } else {
             guard let cell2 = tableView.dequeueReusableCell(withIdentifier: SolideCell.reuseIdentifier, for: indexPath) as? SolideCell else {
                 print("erreur de cell")
                 return UITableViewCell()
             }
-            cell2.setupCell(with: "\(indexPath.row)")
+            cell2.setupCell(with: viewModel.ingredients[indexPath.row])
             cell2.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
             return cell2
-        }
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }
