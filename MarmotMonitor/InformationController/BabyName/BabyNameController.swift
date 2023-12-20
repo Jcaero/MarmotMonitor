@@ -92,12 +92,12 @@ final class BabyNameController: ViewForInformationController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let textFieldBottomY = babyName.convert(babyName.bounds, to: self.view.window).maxY
-                let screenHeight = UIScreen.main.bounds.height
-                let keyboardTopY = screenHeight - keyboardSize.height
-
-                if textFieldBottomY > keyboardTopY {
-                    self.view.frame.origin.y = -(textFieldBottomY - keyboardTopY) - 40
-                }
+            let screenHeight = UIScreen.main.bounds.height
+            let keyboardTopY = screenHeight - keyboardSize.height
+            
+            if textFieldBottomY > keyboardTopY {
+                self.view.frame.origin.y = -(textFieldBottomY - keyboardTopY) - 40
+            }
         }
     }
 

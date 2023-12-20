@@ -23,7 +23,7 @@ class SolideCell: UITableViewCell {
         return label
     }()
 
-    let poids: UITextField = {
+    let poidsTF: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(
             string: "0",
@@ -66,7 +66,6 @@ class SolideCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
         self.backgroundColor = .clear
-        poids.delegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -74,12 +73,12 @@ class SolideCell: UITableViewCell {
     }
     // MARK: - UI
     private func setupUI() {
-        [poids, type].forEach {
+        [poidsTF, type].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         contentView.addSubview(ingredient)
         contentView.addSubview(type)
-        contentView.addSubview(poids)
+        contentView.addSubview(poidsTF)
 
         prepareContraint()
     }
@@ -89,27 +88,27 @@ class SolideCell: UITableViewCell {
             ingredient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
             ingredient.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
             ingredient.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
-            poids.topAnchor.constraint(equalTo: ingredient.bottomAnchor, constant: 10),
-            poids.rightAnchor.constraint(equalTo: type.leftAnchor, constant: -10),
-            poids.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-            poids.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            poidsTF.topAnchor.constraint(equalTo: ingredient.bottomAnchor, constant: 10),
+            poidsTF.rightAnchor.constraint(equalTo: type.leftAnchor, constant: -10),
+            poidsTF.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            poidsTF.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
             type.topAnchor.constraint(equalTo: ingredient.bottomAnchor, constant: 5),
             type.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
-            type.bottomAnchor.constraint(equalTo: poids.bottomAnchor)
+            type.bottomAnchor.constraint(equalTo: poidsTF.bottomAnchor)
         ]
 
         normalSizeContrainte = [
             ingredient.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
             ingredient.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.40),
             ingredient.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            poids.topAnchor.constraint(equalTo: ingredient.topAnchor),
-            poids.rightAnchor.constraint(equalTo: type.leftAnchor, constant: -10),
-            poids.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.40),
+            poidsTF.topAnchor.constraint(equalTo: ingredient.topAnchor),
+            poidsTF.rightAnchor.constraint(equalTo: type.leftAnchor, constant: -10),
+            poidsTF.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.40),
             ingredient.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-            poids.bottomAnchor.constraint(equalTo: ingredient.bottomAnchor, constant: -5),
-            type.topAnchor.constraint(equalTo: poids.topAnchor),
+            poidsTF.bottomAnchor.constraint(equalTo: ingredient.bottomAnchor, constant: -5),
+            type.topAnchor.constraint(equalTo: poidsTF.topAnchor),
             type.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
-            type.bottomAnchor.constraint(equalTo: poids.bottomAnchor)
+            type.bottomAnchor.constraint(equalTo: poidsTF.bottomAnchor)
         ]
 
         let currentCategory = traitCollection.preferredContentSizeCategory
@@ -130,7 +129,7 @@ class SolideCell: UITableViewCell {
 
 extension SolideCell: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        poids.placeholder = ""
+        poidsTF.placeholder = ""
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {

@@ -57,8 +57,20 @@ class SolideFeedingController: UIViewController {
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = .duckBlue
         tableView.backgroundColor = .clear
-        tableView.separatorStyle = .singleLine
         return tableView
+    }()
+
+    let totalWeight: UILabel = {
+        let label = UILabel()
+        label.text = "Total: 0g"
+        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.textColor = .label
+        label.textAlignment = .center
+        label.backgroundColor = .duckBlue
+        label.layer.cornerRadius = 15
+        label.clipsToBounds = true
+        label.setAccessibility(with: .staticText, label: "total des solides", hint: "")
+        return label
     }()
 
     lazy var cancelButton: UIButton = {
@@ -80,7 +92,7 @@ class SolideFeedingController: UIViewController {
     }()
 
     // MARK: - PROPERTIES
-    var viewModel = SolideFeedingViewModel()
+    var viewModel = SolidFeedingViewModel()
 
     var tableViewHeightConstraint: NSLayoutConstraint?
 
@@ -111,7 +123,7 @@ class SolideFeedingController: UIViewController {
 
         scrollView.addSubview(scrollArea)
 
-        [timeLabel, timePicker, separator, tableOfIngredients].forEach {
+        [timeLabel, timePicker, separator, tableOfIngredients, totalWeight].forEach {
             scrollArea.addSubview($0)
         }
     }
@@ -120,7 +132,7 @@ class SolideFeedingController: UIViewController {
         [timeLabel, timePicker, separator,
          tableOfIngredients,
          scrollArea, scrollView,
-         valideButton, cancelButton ].forEach {
+         totalWeight, valideButton, cancelButton ].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -174,21 +186,28 @@ class SolideFeedingController: UIViewController {
             tableOfIngredients.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 15),
             tableOfIngredients.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
             tableOfIngredients.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
-            tableOfIngredients.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -10),
             tableViewHeightConstraint!
+        ])
+
+        NSLayoutConstraint.activate([
+            totalWeight.topAnchor.constraint(equalTo: tableOfIngredients.bottomAnchor, constant: 10),
+            totalWeight.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
+            totalWeight.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.75),
+            totalWeight.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
+            totalWeight.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -10)
         ])
     }
 
     private func setupTableViewHeight() {
         var height: CGFloat = 0
-        for index in 0..<viewModel.ingredients.count {
+        for index in 0..<viewModel.ingredients.count-1 {
             let cell = tableOfIngredients.cellForRow(at: IndexPath(row: index, section: 0))
             let cellHeight = cell?.contentView.frame.size.height ?? 0
             if cellHeight > height {
                 height = cellHeight
             }
         }
-        tableViewHeightConstraint?.constant = height * CGFloat(viewModel.ingredients.count)
+        tableViewHeightConstraint?.constant = height * CGFloat(viewModel.ingredients.count-1)
         tableOfIngredients.layoutIfNeeded()
     }
 
@@ -241,9 +260,11 @@ extension SolideFeedingController: UITableViewDataSource {
             print("erreur de cell")
             return UITableViewCell()
         }
-        cell.setupCell(with: viewModel.ingredients[indexPath.row])
+        cell.setupCell(with: viewModel.ingredients[indexPath.row].rawValue)
         cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
         cell.selectionStyle = .none
+        cell.poidsTF.tag = indexPath.row
+        cell.poidsTF.delegate = self
         return cell
     }
 
@@ -264,4 +285,25 @@ extension SolideFeedingController {
         guard currentCategory != previousCategory else { return }
         tableOfIngredients.reloadData()
     }
+}
+
+// MARK: - UITextFieldDelegate
+extension SolideFeedingController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
+//        totalWeight.text = "Total =" + "\(viewModel.solidFood.totalWeight) g"
+    }
+
+    @objc func valueChanged(_ textField: UITextField) {
+        viewModel.set(textField.text ?? "", for: textField.tag)
+    }
+}
+
+enum TextFieldData: Int {
+    case fruit = 0
+    case vegetable
+    case meatAndProtein
+    case cereal
+    case dairyProduct
+    case other
 }
