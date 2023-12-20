@@ -91,12 +91,10 @@ class SolideFeedingController: UIViewController {
 
         setupViews()
         setupContraints()
-        setupNavigationBar()
 
-        tableOfIngredients.delegate = self
-        tableOfIngredients.dataSource = self
-        tableOfIngredients.rowHeight = UITableView.automaticDimension
-        tableOfIngredients.register(SolideCell.self, forCellReuseIdentifier: SolideCell.reuseIdentifier)
+        setupNavigationBar()
+        setupTableView()
+
     }
 
     override func viewDidLayoutSubviews() {
@@ -202,6 +200,13 @@ class SolideFeedingController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
 
+    private func setupTableView() {
+        tableOfIngredients.delegate = self
+        tableOfIngredients.dataSource = self
+        tableOfIngredients.rowHeight = UITableView.automaticDimension
+        tableOfIngredients.register(SolideCell.self, forCellReuseIdentifier: SolideCell.reuseIdentifier)
+    }
+
     // MARK: - Action
 
     @objc private func closeView() {
@@ -232,15 +237,16 @@ extension SolideFeedingController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: SolideCell.reuseIdentifier, for: indexPath) as? SolideCell else {
-                print("erreur de cell")
-                return UITableViewCell()
-            }
-            cell.setupCell(with: viewModel.ingredients[indexPath.row])
-            cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SolideCell.reuseIdentifier, for: indexPath) as? SolideCell else {
+            print("erreur de cell")
+            return UITableViewCell()
+        }
+        cell.setupCell(with: viewModel.ingredients[indexPath.row])
+        cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
         cell.selectionStyle = .none
-            return cell
+        return cell
     }
+
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 300
     }

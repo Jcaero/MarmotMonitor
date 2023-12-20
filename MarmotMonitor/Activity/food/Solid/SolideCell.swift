@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SolideCell: UITableViewCell, UITextFieldDelegate {
+class SolideCell: UITableViewCell {
 
     // MARK: - liste of UI elements
     let ingredient: UILabel = {
@@ -27,7 +27,7 @@ class SolideCell: UITableViewCell, UITextFieldDelegate {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(
             string: "0",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.black]
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.label]
         )
         let font = UIFont(name: "Symbol", size: 25)
         let fontMetrics = UIFontMetrics(forTextStyle: .body)
@@ -125,5 +125,20 @@ class SolideCell: UITableViewCell, UITextFieldDelegate {
     // MARK: - Setup cell
     func setupCell(with ingredient: String) {
         self.ingredient.text = ingredient
+    }
+}
+
+extension SolideCell: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        poids.placeholder = ""
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if ((textField.text?.isEmpty) == true) {
+            textField.attributedPlaceholder = NSAttributedString(
+                string: "0",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.label]
+            )
+        }
     }
 }
