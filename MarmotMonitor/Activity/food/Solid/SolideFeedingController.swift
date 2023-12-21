@@ -53,7 +53,6 @@ class SolideFeedingController: UIViewController {
 
     let tableOfIngredients: UITableView = {
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = .duckBlue
         tableView.backgroundColor = .clear
@@ -95,7 +94,7 @@ class SolideFeedingController: UIViewController {
     var viewModel : SolidFeedingViewModel!
 
     var tableViewHeightConstraint: NSLayoutConstraint?
-    
+
     var textFieldActif: UITextField?
 
     // MARK: - Cycle life
@@ -243,20 +242,6 @@ class SolideFeedingController: UIViewController {
 }
 
 extension SolideFeedingController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            print("Coucou")
-        case 1:
-            print("sommeil")
-        case 2:
-            print("couche")
-        case 3:
-            print("Croissance")
-        default:
-            break
-        }
-    }
 }
 
 extension SolideFeedingController: UITableViewDataSource {
