@@ -122,8 +122,13 @@ class SolideCell: UITableViewCell {
     }
 
     // MARK: - Setup cell
-    func setupCell(with ingredient: String) {
-        self.ingredient.text = ingredient
+    func setupCell(with ingredient: Ingredient, value: Int) {
+        self.ingredient.text = ingredient.rawValue
+        if value == 0 {
+            self.poidsTF.placeholder = "0"
+        } else {
+            self.poidsTF.text = String(value)
+        }
     }
 }
 

@@ -92,7 +92,7 @@ class SolideFeedingController: UIViewController {
     }()
 
     // MARK: - PROPERTIES
-    var viewModel = SolidFeedingViewModel()
+    var viewModel : SolidFeedingViewModel!
 
     var tableViewHeightConstraint: NSLayoutConstraint?
 
@@ -100,6 +100,7 @@ class SolideFeedingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .colorForGradientStart
+        viewModel = SolidFeedingViewModel(delegate: self)
 
         setupViews()
         setupContraints()
@@ -260,7 +261,9 @@ extension SolideFeedingController: UITableViewDataSource {
             print("erreur de cell")
             return UITableViewCell()
         }
-        cell.setupCell(with: viewModel.ingredients[indexPath.row].rawValue)
+        let ingredient = viewModel.ingredients[indexPath.row]
+        let poids = viewModel.solidFood[ingredient] ?? 0
+        cell.setupCell(with: ingredient, value: poids)
         cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
         cell.selectionStyle = .none
         cell.poidsTF.tag = indexPath.row
@@ -273,30 +276,24 @@ extension SolideFeedingController: UITableViewDataSource {
     }
 }
 
-// MARK: - Accessibility
-extension SolideFeedingController {
-    /// Update the display when the user change the size of the text in the settings
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        let currentCategory = traitCollection.preferredContentSizeCategory
-        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
-
-        guard currentCategory != previousCategory else { return }
-        tableOfIngredients.reloadData()
-    }
-}
-
 // MARK: - UITextFieldDelegate
 extension SolideFeedingController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
-//        totalWeight.text = "Total =" + "\(viewModel.solidFood.totalWeight) g"
+
     }
 
-    @objc func valueChanged(_ textField: UITextField) {
-        viewModel.set(textField.text ?? "", for: textField.tag)
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.removeTarget(self, action: #selector(valueChanged), for: .editingChanged)
+        viewModel.updateTotal()
+        textField.resignFirstResponder()
     }
+    @objc func valueChanged(_ textField: UITextField) {
+        let ingredient = viewModel.ingredients[textField.tag]
+        viewModel.set(textField.text ?? "", for: ingredient)
+
+    }
+
 }
 
 enum TextFieldData: Int {
@@ -306,4 +303,10 @@ enum TextFieldData: Int {
     case cereal
     case dairyProduct
     case other
+}
+
+extension SolideFeedingController: SolideFeedingProtocol {
+    func updateTotal(with total: String) {
+        totalWeight.text = total
+    }
 }
