@@ -95,6 +95,8 @@ class SolideFeedingController: UIViewController {
     var viewModel : SolidFeedingViewModel!
 
     var tableViewHeightConstraint: NSLayoutConstraint?
+    
+    var textFieldActif: UITextField?
 
     // MARK: - Cycle life
     override func viewDidLoad() {
@@ -108,12 +110,18 @@ class SolideFeedingController: UIViewController {
         setupNavigationBar()
         setupTableView()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableOfIngredients.reloadData()
         setupTableViewHeight()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Setup function
@@ -279,34 +287,50 @@ extension SolideFeedingController: UITableViewDataSource {
 // MARK: - UITextFieldDelegate
 extension SolideFeedingController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        textFieldActif = textField
         textField.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
-
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.removeTarget(self, action: #selector(valueChanged), for: .editingChanged)
         viewModel.updateTotal()
+
+        textFieldActif = nil
         textField.resignFirstResponder()
     }
+
     @objc func valueChanged(_ textField: UITextField) {
         let ingredient = viewModel.ingredients[textField.tag]
         viewModel.set(textField.text ?? "", for: ingredient)
-
     }
-
-}
-
-enum TextFieldData: Int {
-    case fruit = 0
-    case vegetable
-    case meatAndProtein
-    case cereal
-    case dairyProduct
-    case other
 }
 
 extension SolideFeedingController: SolideFeedingProtocol {
     func updateTotal(with total: String) {
         totalWeight.text = total
+    }
+}
+
+extension SolideFeedingController {
+    // MARK: - Keyboard
+    /// Check if the keyboard is displayed above textefield  and move the view if necessary
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let clavierTaille = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+           let textFieldActif = textFieldActif {
+
+            let frameDuTextField = view.convert(textFieldActif.frame, from: textFieldActif.superview)
+            let distanceDuBas = view.frame.height - frameDuTextField.maxY
+
+            if distanceDuBas < clavierTaille.height {
+                let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: self.view.frame.height/2 - distanceDuBas , right: 0)
+                tableOfIngredients.contentInset = contentInset
+                tableOfIngredients.scrollIndicatorInsets = contentInset
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        tableOfIngredients.contentInset = .zero
+        tableOfIngredients.scrollIndicatorInsets = .zero
     }
 }

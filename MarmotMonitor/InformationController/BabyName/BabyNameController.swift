@@ -94,7 +94,7 @@ final class BabyNameController: ViewForInformationController {
             let textFieldBottomY = babyName.convert(babyName.bounds, to: self.view.window).maxY
             let screenHeight = UIScreen.main.bounds.height
             let keyboardTopY = screenHeight - keyboardSize.height
-            
+
             if textFieldBottomY > keyboardTopY {
                 self.view.frame.origin.y = -(textFieldBottomY - keyboardTopY) - 40
             }

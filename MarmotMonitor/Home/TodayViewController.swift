@@ -147,7 +147,7 @@ class TodayViewController: BackgroundViewController {
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
-        
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
