@@ -62,8 +62,8 @@ class SolideFeedingController: UIViewController {
 
     let totalWeight: UILabel = {
         let label = UILabel()
-        label.text = "Total: 0g"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.text = "Total: 0 g"
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .label
         label.textAlignment = .center
         label.backgroundColor = .duckBlue

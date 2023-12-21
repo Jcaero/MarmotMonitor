@@ -12,7 +12,7 @@ class SolideCell: UITableViewCell {
     // MARK: - liste of UI elements
     let ingredient: UILabel = {
         let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.text = "0"
         label.textColor = .label
         label.textAlignment = .left
@@ -29,7 +29,7 @@ class SolideCell: UITableViewCell {
             string: "0",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.label]
         )
-        let font = UIFont(name: "Symbol", size: 25)
+        let font = UIFont(name: "Symbol", size: 20)
         let fontMetrics = UIFontMetrics(forTextStyle: .body)
         textField.font = fontMetrics.scaledFont(for: font!)
         textField.adjustsFontForContentSizeCategory = true
@@ -46,7 +46,7 @@ class SolideCell: UITableViewCell {
 
     let type: UILabel = {
         let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.text = "g"
         label.textColor = .label
         label.textAlignment = .left
@@ -129,6 +129,7 @@ class SolideCell: UITableViewCell {
         } else {
             self.poidsTF.text = String(value)
         }
+        self.poidsTF.accessibilityLabel = value == 0 ? "0" : String(value)
     }
 }
 

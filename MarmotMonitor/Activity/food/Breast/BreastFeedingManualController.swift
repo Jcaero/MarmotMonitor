@@ -52,7 +52,7 @@ class BreastFeedingManualController: UIViewController {
     let totalTimeBreastLabel: UILabel = {
         let label = UILabel()
         label.text = "Temps total: 0"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .label
         label.textAlignment = .center
         label.backgroundColor = .duckBlue
@@ -65,7 +65,7 @@ class BreastFeedingManualController: UIViewController {
     let firstBreastLabel: UILabel = {
         let label = UILabel()
         label.text = "Premier sein ?"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .label
         label.textAlignment = .center
         label.numberOfLines = 0

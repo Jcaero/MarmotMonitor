@@ -53,7 +53,7 @@ class BreastFeedingChronoController: UIViewController {
     let totalTimeBreastLabel: UILabel = {
         let label = UILabel()
         label.text = "Temps total: 0"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .label
         label.textAlignment = .center
         label.backgroundColor = .duckBlue
@@ -66,7 +66,7 @@ class BreastFeedingChronoController: UIViewController {
     let leftButton: UIButton =  {
         var configuration = UIButton.Configuration.filled()
         configuration.image = UIImage(systemName: "play.fill")!
-            .applyingSymbolConfiguration(.init(pointSize: 40))
+            .applyingSymbolConfiguration(.init(pointSize: 30))
         configuration.cornerStyle = .capsule
         configuration.baseBackgroundColor = .duckBlue
         configuration.baseForegroundColor = .label
@@ -80,7 +80,7 @@ class BreastFeedingChronoController: UIViewController {
     let rightButton: UIButton =  {
         var configuration = UIButton.Configuration.filled()
         configuration.image = UIImage(systemName: "play.fill")!
-            .applyingSymbolConfiguration(.init(pointSize: 40))
+            .applyingSymbolConfiguration(.init(pointSize: 30))
         configuration.cornerStyle = .capsule
         configuration.baseBackgroundColor = .duckBlue
         configuration.baseForegroundColor = .label
@@ -94,7 +94,7 @@ class BreastFeedingChronoController: UIViewController {
     let rightTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "Droit\n0 min"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .label
         label.textAlignment = .center
         label.backgroundColor = .clear
@@ -105,7 +105,7 @@ class BreastFeedingChronoController: UIViewController {
     let leftTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "Gauche\n0 min"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .label
         label.textAlignment = .center
         label.backgroundColor = .clear
@@ -166,7 +166,7 @@ class BreastFeedingChronoController: UIViewController {
         let action = UIAction { _ in
             button.isSelected.toggle()
             button.configuration?.image = UIImage(systemName: button.isSelected ? "pause.fill" : "play.fill")!
-                .applyingSymbolConfiguration(.init(pointSize: 40))
+                .applyingSymbolConfiguration(.init(pointSize: 30))
             let position: Position = button.tag == 0 ? .left : .right
             self.viewModel.buttonPressed(position)
         }
@@ -241,10 +241,10 @@ class BreastFeedingChronoController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            leftButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
-            rightButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
-            leftButton.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.25),
-            rightButton.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.25),
+            leftButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
+            rightButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
+            leftButton.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.2),
+            rightButton.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.2),
             rightButton.heightAnchor.constraint(equalTo: rightButton.widthAnchor),
             leftButton.widthAnchor.constraint(equalTo: leftButton.heightAnchor),
             leftTimeLabel.centerXAnchor.constraint(equalTo: leftButton.centerXAnchor),

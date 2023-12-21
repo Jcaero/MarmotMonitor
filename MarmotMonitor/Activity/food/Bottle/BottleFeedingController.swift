@@ -53,7 +53,7 @@ class BottleFeedingController: UIViewController {
     let volumeOfMilkLabel: UILabel = {
         let label = UILabel()
         label.text = "Volume: 0"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .label
         label.textAlignment = .center
         label.backgroundColor = .duckBlue
