@@ -7,20 +7,7 @@
 
 import UIKit
 
-class SleepController: UIViewController {
-    let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.isScrollEnabled = true
-        scrollView.backgroundColor = .clear
-        return scrollView
-    }()
-
-    let scrollArea: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
-
+class SleepController: ActivityController {
     let firstTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "Début du sommeil"
@@ -41,12 +28,6 @@ class SleepController: UIViewController {
         datePicker.backgroundColor = .clear
         datePicker.setAccessibility(with: .selected, label: "", hint: "choisir l'heure du debut")
         return datePicker
-    }()
-
-    let separator: UIView = {
-        let view = UIView()
-        view.backgroundColor = .lightGray
-        return view
     }()
 
     let secondTimeLabel: UILabel = {
@@ -84,71 +65,25 @@ class SleepController: UIViewController {
         return label
     }()
 
-    lazy var cancelButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Annuler", for: .normal)
-        button.setTitleColor(.colorForDuckBlueToWhite, for: .normal)
-        button.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
-        button.addTarget(self, action: #selector(closeView), for: .touchUpInside)
-        button.setAccessibility(with: .button, label: "Annuler les informations", hint: "")
-        return button
-    }()
-
-    let valideButton: UIButton = {
-        let button = UIButton()
-        button.tintColor = .colorForDuckBlueToWhite
-        button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
-        button.setAccessibility(with: .button, label: "valider les informations", hint: "")
-        return button
-    }()
-
     // MARK: - PROPERTIES
-
-
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .colorForGradientStart
-
         setupViews()
         setupContraints()
-        setupNavigationBar()
-
     }
 
     // MARK: - Setup function
     private func setupViews() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(scrollArea)
-
         [firstTimeLabel, firstTimePicker, secondTimeLabel, secondTimePicker, separator, totalTimeLabel].forEach {
             scrollArea.addSubview($0)
         }
-
-        view.addSubview(cancelButton)
-        view.addSubview(valideButton)
     }
 
     private func setupContraints() {
-        [firstTimeLabel, firstTimePicker, secondTimeLabel, secondTimePicker, separator, totalTimeLabel,
-         cancelButton, valideButton,
-         scrollArea, scrollView].forEach {
+        [firstTimeLabel, firstTimePicker, secondTimeLabel, secondTimePicker, separator, totalTimeLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -10),
-            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor)
-        ])
-
-        NSLayoutConstraint.activate([
-            scrollArea.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            scrollArea.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10),
-            scrollArea.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10),
-            scrollArea.widthAnchor.constraint(equalToConstant: (view.frame.width - 20))
-        ])
 
         NSLayoutConstraint.activate([
             firstTimeLabel.topAnchor.constraint(equalTo: scrollArea.topAnchor, constant: 15),
@@ -187,31 +122,5 @@ class SleepController: UIViewController {
             totalTimeLabel.leftAnchor.constraint(greaterThanOrEqualTo: scrollArea.leftAnchor, constant: 20),
             totalTimeLabel.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -30)
         ])
-
-        NSLayoutConstraint.activate([
-            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            cancelButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20)
-        ])
-
-        NSLayoutConstraint.activate([
-            valideButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            valideButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
-            valideButton.widthAnchor.constraint(equalTo: valideButton.heightAnchor),
-            valideButton.heightAnchor.constraint(equalTo: cancelButton.heightAnchor)
-        ])
     }
-
-    private func setupNavigationBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = .none
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-    }
-
-    // MARK: - Action
-    @objc private func closeView() {
-            self.dismiss(animated: true, completion: nil)
-        }
-
 }

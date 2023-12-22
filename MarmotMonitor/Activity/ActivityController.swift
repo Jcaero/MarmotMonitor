@@ -14,13 +14,13 @@ class ActivityController: UIViewController {
         scrollView.backgroundColor = .clear
         return scrollView
     }()
-    
+
     let scrollArea: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
     }()
-    
+
     lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("Annuler", for: .normal)
@@ -30,7 +30,7 @@ class ActivityController: UIViewController {
         button.setAccessibility(with: .button, label: "Annuler les informations", hint: "")
         return button
     }()
-    
+
     let valideButton: UIButton = {
         let button = UIButton()
         button.tintColor = .colorForDuckBlueToWhite
@@ -38,17 +38,45 @@ class ActivityController: UIViewController {
         button.setAccessibility(with: .button, label: "valider les informations", hint: "")
         return button
     }()
-    
+
+    let separator: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        return view
+    }()
+
+    let timeLabel: UILabel = {
+        let label = UILabel()
+        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.textColor = .label
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+
+    let timePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.preferredDatePickerStyle = .compact
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.maximumDate = Date()
+        datePicker.tintColor = .label
+        datePicker.backgroundColor = .clear
+        return datePicker
+    }()
+
+    // MARK: - PROPERTIES
+    var scrollViewTopConstraint: NSLayoutConstraint?
+
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .colorForGradientStart
-        
+
         setupViews()
         setupContraints()
         setupNavigationBar()
     }
-    
+
     // MARK: - Setup function
     private func setupViews() {
         [scrollView, cancelButton, valideButton].forEach {
@@ -56,16 +84,22 @@ class ActivityController: UIViewController {
         }
 
         scrollView.addSubview(scrollArea)
+
+        [separator, timeLabel, timePicker].forEach {
+            scrollArea.addSubview($0)
+        }
     }
 
     private func setupContraints() {
         [scrollArea, scrollView,
-         cancelButton, valideButton].forEach {
+         cancelButton, valideButton, 
+         separator, timeLabel, timePicker].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
+        scrollViewTopConstraint = scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollViewTopConstraint!,
             scrollView.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -10),
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor)
@@ -76,6 +110,25 @@ class ActivityController: UIViewController {
             scrollArea.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10),
             scrollArea.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10),
             scrollArea.widthAnchor.constraint(equalToConstant: (view.frame.width - 20))
+        ])
+
+        NSLayoutConstraint.activate([
+            timeLabel.topAnchor.constraint(equalTo: scrollArea.topAnchor),
+            timeLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20),
+            timeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 20)
+        ])
+
+        NSLayoutConstraint.activate([
+            timePicker.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 15),
+            timePicker.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
+            timePicker.leftAnchor.constraint(greaterThanOrEqualTo: scrollArea.leftAnchor, constant: 20)
+        ])
+
+        NSLayoutConstraint.activate([
+            separator.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 15),
+            separator.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
+            separator.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.8),
+            separator.heightAnchor.constraint(equalToConstant: 2)
         ])
 
         NSLayoutConstraint.activate([

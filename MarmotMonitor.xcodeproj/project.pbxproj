@@ -262,10 +262,10 @@
 		474C94592B2B9FE6009A7D74 /* food */ = {
 			isa = PBXGroup;
 			children = (
+				474C945A2B2B9FFE009A7D74 /* FoodTapBar.swift */,
 				4792CB572B3063300010AE38 /* Solid */,
 				4792CB552B30630A0010AE38 /* Breast */,
 				4792CB562B3063200010AE38 /* Bottle */,
-				474C945A2B2B9FFE009A7D74 /* FoodTapBar.swift */,
 			);
 			path = food;
 			sourceTree = "<group>";
@@ -349,9 +349,9 @@
 		4777ABED2B2500D40055DF4A /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				47494BD42B35ADAD002A0A93 /* ActivityController.swift */,
 				474C94592B2B9FE6009A7D74 /* food */,
 				47494BD12B35A7DF002A0A93 /* sleep */,
-				47494BD42B35ADAD002A0A93 /* ActivityController.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";

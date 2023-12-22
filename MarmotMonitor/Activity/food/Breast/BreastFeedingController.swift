@@ -118,12 +118,12 @@ class BreastFeedingController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5),
+            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             cancelButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20)
         ])
 
         NSLayoutConstraint.activate([
-            valideButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -5),
+            valideButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             valideButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
             valideButton.widthAnchor.constraint(equalTo: valideButton.heightAnchor),
             valideButton.heightAnchor.constraint(equalTo: cancelButton.heightAnchor)
