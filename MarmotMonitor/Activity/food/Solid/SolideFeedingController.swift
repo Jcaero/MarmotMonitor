@@ -255,7 +255,9 @@ extension SolideFeedingController: UITableViewDataSource {
             return UITableViewCell()
         }
         let ingredient = viewModel.ingredients[indexPath.row]
+        print("ingredient : \(ingredient)")
         let poids = viewModel.solidFood[ingredient] ?? 0
+        print("poids : \(poids)")
         cell.setupCell(with: ingredient, value: poids)
         cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
         cell.selectionStyle = .none
@@ -282,6 +284,7 @@ extension SolideFeedingController: UITextFieldDelegate {
 
         textFieldActif = nil
         textField.resignFirstResponder()
+        self.tableOfIngredients.reloadData()
     }
 
     @objc func valueChanged(_ textField: UITextField) {

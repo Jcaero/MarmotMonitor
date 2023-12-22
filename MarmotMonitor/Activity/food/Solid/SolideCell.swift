@@ -125,10 +125,13 @@ class SolideCell: UITableViewCell {
     // MARK: - Setup cell
     func setupCell(with ingredient: Ingredient, value: Int) {
         self.ingredient.text = ingredient.rawValue
+        print("set ingredient : \(ingredient.rawValue)")
         if value == 0 {
             self.poidsTF.placeholder = "0"
+            print("set placeholder")
         } else {
             self.poidsTF.text = String(value)
+            print("set value : \(value)")
         }
         self.poidsTF.accessibilityLabel = value == 0 ? "0" : String(value)
     }
