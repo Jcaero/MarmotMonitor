@@ -289,7 +289,8 @@ extension TodayViewController: UITableViewDelegate {
             let next = FoodTapBar()
             present(next, animated: true, completion: nil)
         case 1:
-            print("sommeil")
+            let next = SleepController()
+            present(next, animated: true, completion: nil)
         case 2:
             print("couche")
         case 3:

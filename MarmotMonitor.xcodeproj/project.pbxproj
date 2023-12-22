@@ -31,6 +31,8 @@
 		4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474732592B12432C0064ABB4 /* GenderViewModelTest.swift */; };
 		4747325C2B12456A0064ABB4 /* ParentNameViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4747325B2B12456A0064ABB4 /* ParentNameViewModelTest.swift */; };
 		4748E64A2B30DFDF0082A0CE /* SolideFeedingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4748E6492B30DFDF0082A0CE /* SolideFeedingViewModel.swift */; };
+		47494BD32B35A7F9002A0A93 /* SleepController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47494BD22B35A7F9002A0A93 /* SleepController.swift */; };
+		47494BD52B35ADAD002A0A93 /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47494BD42B35ADAD002A0A93 /* ActivityController.swift */; };
 		474C945B2B2B9FFE009A7D74 /* FoodTapBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C945A2B2B9FFE009A7D74 /* FoodTapBar.swift */; };
 		474C945D2B2BA95B009A7D74 /* BreastFeedingChronoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C945C2B2BA95B009A7D74 /* BreastFeedingChronoController.swift */; };
 		475071D82B09462000DAB527 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071D72B09462000DAB527 /* AppDelegate.swift */; };
@@ -104,6 +106,8 @@
 		474732592B12432C0064ABB4 /* GenderViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewModelTest.swift; sourceTree = "<group>"; };
 		4747325B2B12456A0064ABB4 /* ParentNameViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentNameViewModelTest.swift; sourceTree = "<group>"; };
 		4748E6492B30DFDF0082A0CE /* SolideFeedingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolideFeedingViewModel.swift; sourceTree = "<group>"; };
+		47494BD22B35A7F9002A0A93 /* SleepController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepController.swift; sourceTree = "<group>"; };
+		47494BD42B35ADAD002A0A93 /* ActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityController.swift; sourceTree = "<group>"; };
 		474C945A2B2B9FFE009A7D74 /* FoodTapBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTapBar.swift; sourceTree = "<group>"; };
 		474C945C2B2BA95B009A7D74 /* BreastFeedingChronoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoController.swift; sourceTree = "<group>"; };
 		475071D42B09462000DAB527 /* MarmotMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarmotMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -247,6 +251,14 @@
 			path = ParentName;
 			sourceTree = "<group>";
 		};
+		47494BD12B35A7DF002A0A93 /* sleep */ = {
+			isa = PBXGroup;
+			children = (
+				47494BD22B35A7F9002A0A93 /* SleepController.swift */,
+			);
+			path = sleep;
+			sourceTree = "<group>";
+		};
 		474C94592B2B9FE6009A7D74 /* food */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +350,8 @@
 			isa = PBXGroup;
 			children = (
 				474C94592B2B9FE6009A7D74 /* food */,
+				47494BD12B35A7DF002A0A93 /* sleep */,
+				47494BD42B35ADAD002A0A93 /* ActivityController.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -571,6 +585,7 @@
 				474732532B1239CF0064ABB4 /* GenderViewModel.swift in Sources */,
 				47155BCA2B1DE97000775B27 /* TodayViewController.swift in Sources */,
 				4747324F2B1238C20064ABB4 /* BabyNameViewModel.swift in Sources */,
+				47494BD52B35ADAD002A0A93 /* ActivityController.swift in Sources */,
 				4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */,
 				4792CB592B3063720010AE38 /* SolideFeedingController.swift in Sources */,
 				478E79072B1370DC004157AF /* BirthDayController.swift in Sources */,
@@ -580,6 +595,7 @@
 				47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */,
 				478E790B2B137CD1004157AF /* Date+.swift in Sources */,
 				4792CB5B2B3068270010AE38 /* SolideCell.swift in Sources */,
+				47494BD32B35A7F9002A0A93 /* SleepController.swift in Sources */,
 				4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */,
 				4738B4D22B287D830041ECF0 /* Int+.swift in Sources */,
 				475071D82B09462000DAB527 /* AppDelegate.swift in Sources */,

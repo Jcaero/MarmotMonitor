@@ -1,13 +1,13 @@
 //
-//  BottleFeedingController.swift
+//  SleepController.swift
 //  MarmotMonitor
 //
-//  Created by pierrick viret on 17/12/2023.
+//  Created by pierrick viret on 22/12/2023.
 //
 
 import UIKit
 
-class BottleFeedingController: UIViewController {
+class SleepController: UIViewController {
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = true
@@ -21,25 +21,25 @@ class BottleFeedingController: UIViewController {
         return view
     }()
 
-    let timeLabel: UILabel = {
+    let firstTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Heure du biberon"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.text = "Début du sommeil"
+        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
         label.textColor = .label
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.setAccessibility(with: .staticText, label: "heure du biberon", hint: "")
+        label.setAccessibility(with: .staticText, label: "debut du sommeil", hint: "")
         return label
     }()
 
-    let timePicker: UIDatePicker = {
+    let firstTimePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.preferredDatePickerStyle = .compact
         datePicker.datePickerMode = .dateAndTime
         datePicker.maximumDate = Date()
         datePicker.tintColor = .label
         datePicker.backgroundColor = .clear
-        datePicker.setAccessibility(with: .selected, label: "", hint: "choisir l'heure du biberon")
+        datePicker.setAccessibility(with: .selected, label: "", hint: "choisir l'heure du debut")
         return datePicker
     }()
 
@@ -49,30 +49,39 @@ class BottleFeedingController: UIViewController {
         return view
     }()
 
-    let volumeOfMilkLabel: UILabel = {
+    let secondTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Volume: 0"
+        label.text = "Heure de fin"
+        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
+        label.textColor = .label
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.setAccessibility(with: .staticText, label: "choisir l'heure de fin", hint: "")
+        return label
+    }()
+
+    let secondTimePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.preferredDatePickerStyle = .compact
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.maximumDate = Date()
+        datePicker.tintColor = .label
+        datePicker.backgroundColor = .clear
+        datePicker.setAccessibility(with: .selected, label: "", hint: "choisir l'heure de la tétée")
+        return datePicker
+    }()
+
+    let totalTimeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Temps total: 0"
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .label
         label.textAlignment = .center
         label.backgroundColor = .duckBlue
         label.layer.cornerRadius = 15
         label.clipsToBounds = true
-        label.setAccessibility(with: .staticText, label: "volume du lait", hint: "")
+        label.setAccessibility(with: .staticText, label: "temps total en minute", hint: "")
         return label
-    }()
-
-    lazy var volumeSlider: UISlider = {
-        let slider = UISlider()
-        slider.maximumValue = 400
-        slider.minimumValue = 0
-        slider.maximumTrackTintColor = .label
-        slider.tintColor = .duckBlue
-        slider.minimumTrackTintColor = .duckBlue
-        slider.thumbTintColor = .colorForDuckBlueToWhite
-        slider.addTarget(self, action: #selector(sliderValueDidChange(_:)), for: .valueChanged)
-        slider.setAccessibility(with: .adjustable, label: "volume du lait", hint: "")
-        return slider
     }()
 
     lazy var cancelButton: UIButton = {
@@ -95,6 +104,7 @@ class BottleFeedingController: UIViewController {
 
     // MARK: - PROPERTIES
 
+
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,28 +114,25 @@ class BottleFeedingController: UIViewController {
         setupContraints()
         setupNavigationBar()
 
-        traitCollectionDidChange(nil)
-
     }
 
     // MARK: - Setup function
     private func setupViews() {
-        [scrollView, cancelButton, valideButton].forEach {
-            view.addSubview($0)
-        }
-
+        view.addSubview(scrollView)
         scrollView.addSubview(scrollArea)
 
-        [timeLabel, timePicker, separator, volumeOfMilkLabel, volumeSlider].forEach {
+        [firstTimeLabel, firstTimePicker, secondTimeLabel, secondTimePicker, separator, totalTimeLabel].forEach {
             scrollArea.addSubview($0)
         }
+
+        view.addSubview(cancelButton)
+        view.addSubview(valideButton)
     }
 
     private func setupContraints() {
-        [timeLabel, timePicker, separator,
-         volumeOfMilkLabel, volumeSlider,
-         scrollArea, scrollView,
-         cancelButton, valideButton].forEach {
+        [firstTimeLabel, firstTimePicker, secondTimeLabel, secondTimePicker, separator, totalTimeLabel,
+         cancelButton, valideButton,
+         scrollArea, scrollView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -144,36 +151,41 @@ class BottleFeedingController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            timeLabel.topAnchor.constraint(equalTo: scrollArea.topAnchor),
-            timeLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20),
-            timeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 20)
+            firstTimeLabel.topAnchor.constraint(equalTo: scrollArea.topAnchor, constant: 15),
+            firstTimeLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20),
+            firstTimeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 20)
         ])
 
         NSLayoutConstraint.activate([
-            timePicker.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 20),
-            timePicker.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
-            timePicker.leftAnchor.constraint(greaterThanOrEqualTo: scrollArea.leftAnchor, constant: 20)
+            firstTimePicker.topAnchor.constraint(equalTo: firstTimeLabel.bottomAnchor, constant: 30),
+            firstTimePicker.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
+            firstTimePicker.leftAnchor.constraint(greaterThanOrEqualTo: scrollArea.leftAnchor, constant: 20)
         ])
 
         NSLayoutConstraint.activate([
-            separator.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 30),
-            separator.leftAnchor.constraint(equalTo: volumeOfMilkLabel.leftAnchor, constant: 40),
-            separator.rightAnchor.constraint(equalTo: volumeOfMilkLabel.rightAnchor, constant: -40),
+            separator.topAnchor.constraint(equalTo: firstTimePicker.bottomAnchor, constant: 15),
+            separator.leftAnchor.constraint(equalTo: totalTimeLabel.leftAnchor, constant: 40),
+            separator.rightAnchor.constraint(equalTo: totalTimeLabel.rightAnchor, constant: -40),
             separator.heightAnchor.constraint(equalToConstant: 2)
         ])
 
         NSLayoutConstraint.activate([
-            volumeOfMilkLabel.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 30),
-            volumeOfMilkLabel.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
-            volumeOfMilkLabel.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.75),
-            volumeOfMilkLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
+            secondTimeLabel.topAnchor.constraint(equalTo: separator.topAnchor, constant: 20),
+            secondTimeLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20),
+            secondTimeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 20)
         ])
 
         NSLayoutConstraint.activate([
-            volumeSlider.topAnchor.constraint(equalTo: volumeOfMilkLabel.bottomAnchor, constant: 30),
-            volumeSlider.leftAnchor.constraint(equalTo: volumeOfMilkLabel.leftAnchor),
-            volumeSlider.rightAnchor.constraint(equalTo: volumeOfMilkLabel.rightAnchor),
-            volumeSlider.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -30)
+            secondTimePicker.topAnchor.constraint(equalTo: secondTimeLabel.bottomAnchor, constant: 30),
+            secondTimePicker.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
+            secondTimePicker.leftAnchor.constraint(greaterThanOrEqualTo: scrollArea.leftAnchor, constant: 20)
+        ])
+
+        NSLayoutConstraint.activate([
+            totalTimeLabel.topAnchor.constraint(equalTo: secondTimePicker.bottomAnchor, constant: 30),
+            totalTimeLabel.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
+            totalTimeLabel.leftAnchor.constraint(greaterThanOrEqualTo: scrollArea.leftAnchor, constant: 20),
+            totalTimeLabel.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -30)
         ])
 
         NSLayoutConstraint.activate([
@@ -197,30 +209,9 @@ class BottleFeedingController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
 
-    // MARK: - Actions
-    @objc func sliderValueDidChange(_ sender:UISlider!) {
-            // Use this code below only if you want UISlider to snap to values step by step
-            let roundedStepValue = round(sender.value / 5) * 5
-            volumeOfMilkLabel.text = "Volume: \(Int(roundedStepValue)) ml"
-        }
-
+    // MARK: - Action
     @objc private func closeView() {
             self.dismiss(animated: true, completion: nil)
         }
 
-}
-
-// MARK: - accessibility
-extension BottleFeedingController {
-    /// Update the display when the user change the size of the text in the settings
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        let currentCategory = traitCollection.preferredContentSizeCategory
-        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
-
-        guard currentCategory != previousCategory else { return }
-        let isAccessibilityCategory = currentCategory.isAccessibilityCategory
-        timeLabel.text = isAccessibilityCategory ? "Heure" : "Heure du biberon"
-    }
 }
