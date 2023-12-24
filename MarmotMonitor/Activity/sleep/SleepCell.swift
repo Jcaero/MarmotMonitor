@@ -34,6 +34,19 @@ class SleepCell: UITableViewCell {
         return label
     }()
 
+    let statusButton: UIButton =  {
+        var configuration = UIButton.Configuration.filled()
+        configuration.image = UIImage(systemName: "chevron.right")!
+            .applyingSymbolConfiguration(.init(pointSize: 30))
+        configuration.cornerStyle = .capsule
+        configuration.baseBackgroundColor = .duckBlue
+        configuration.baseForegroundColor = .label
+        configuration.contentInsets = .zero
+        let button = UIButton(configuration: configuration)
+        button.setAccessibility(with: .button, label: "", hint: "ouvrir le picker")
+        return button
+    }()
+
     let durationLabel: UILabel = {
         let label = UILabel()
         label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
@@ -61,17 +74,13 @@ class SleepCell: UITableViewCell {
     }
     // MARK: - UI
     private func setupUI() {
-        [title, dateLabel, durationLabel].forEach {
+        [title, dateLabel, durationLabel, statusButton].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
 
     private func setupContraint() {
-        [title, dateLabel, durationLabel].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-
         NSLayoutConstraint.activate([
             title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             title.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
@@ -79,16 +88,34 @@ class SleepCell: UITableViewCell {
         ])
 
         NSLayoutConstraint.activate([
+            statusButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            statusButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
+            statusButton.heightAnchor.constraint(equalTo: statusButton.widthAnchor),
+            statusButton.heightAnchor.constraint(equalTo: dateLabel.heightAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10),
-            dateLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
+            dateLabel.rightAnchor.constraint(equalTo: statusButton.leftAnchor, constant: -10),
             dateLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
             dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
+    }
+
+    private func setupButton() {
+        let setImage = UIImage(systemName: "chevron.right")!
+            .applyingSymbolConfiguration(.init(pointSize: 15))
+        let cancelImage = UIImage(systemName: "x.circle")!
+            .applyingSymbolConfiguration(.init(pointSize: 15))
+        let image = self.dateLabel.text == "Pas encore de date" ? setImage : cancelImage
+        statusButton.setImage(image, for: .normal)
     }
 
     // MARK: - Setup cell
     func setupCell(with title: String, date: String) {
         self.title.text = title
         self.dateLabel.text = date
+
+        setupButton()
     }
 }
