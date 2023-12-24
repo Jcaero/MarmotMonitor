@@ -7,41 +7,28 @@
 
 import UIKit
 
-class SleepController: ActivityController {
-    let firstTimeLabel: UILabel = {
+class SleepController: BackGroundActivity {
+
+    let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Début du sommeil"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
+        label.text = "Sommeil"
         label.textColor = .label
         label.textAlignment = .center
-        label.numberOfLines = 0
-        label.setAccessibility(with: .staticText, label: "debut du sommeil", hint: "")
+        label.numberOfLines = 1
+        label.setAccessibility(with: .header, label: "Sommeil", hint: "")
         return label
     }()
 
-    let firstTimePicker: UIDatePicker = {
-        let datePicker = UIDatePicker()
-        datePicker.preferredDatePickerStyle = .compact
-        datePicker.datePickerMode = .dateAndTime
-        datePicker.maximumDate = Date()
-        datePicker.tintColor = .label
-        datePicker.backgroundColor = .clear
-        datePicker.setAccessibility(with: .selected, label: "", hint: "choisir l'heure du debut")
-        return datePicker
+    let tableOfIngredients: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = .duckBlue
+        tableView.backgroundColor = .clear
+        return tableView
     }()
 
-    let secondTimeLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Heure de fin"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
-        label.textColor = .label
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.setAccessibility(with: .staticText, label: "choisir l'heure de fin", hint: "")
-        return label
-    }()
-
-    let secondTimePicker: UIDatePicker = {
+    let stopTimePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.preferredDatePickerStyle = .compact
         datePicker.datePickerMode = .dateAndTime
@@ -52,75 +39,139 @@ class SleepController: ActivityController {
         return datePicker
     }()
 
-    let totalTimeLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Temps total: 0"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
-        label.textColor = .label
-        label.textAlignment = .center
-        label.backgroundColor = .duckBlue
-        label.layer.cornerRadius = 15
-        label.clipsToBounds = true
-        label.setAccessibility(with: .staticText, label: "temps total en minute", hint: "")
-        return label
-    }()
-
     // MARK: - PROPERTIES
+    var tableViewHeightConstraint: NSLayoutConstraint?
+    var dateData: [String] = ["Pas encore de date","Pas encore de date"]
+
+    var selectedLabel: Int = 0 {
+        didSet {
+            if selectedLabel == 0 {
+                tableOfIngredients.reloadData()
+            }
+        }
+    }
+
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupContraints()
+
+        setupTableView()
     }
 
     // MARK: - Setup function
     private func setupViews() {
-        [firstTimeLabel, firstTimePicker, secondTimeLabel, secondTimePicker, separator, totalTimeLabel].forEach {
+        [titleLabel, tableOfIngredients].forEach {
             scrollArea.addSubview($0)
         }
     }
 
     private func setupContraints() {
-        [firstTimeLabel, firstTimePicker, secondTimeLabel, secondTimePicker, separator, totalTimeLabel].forEach {
+        [titleLabel,tableOfIngredients].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
         NSLayoutConstraint.activate([
-            firstTimeLabel.topAnchor.constraint(equalTo: scrollArea.topAnchor, constant: 15),
-            firstTimeLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20),
-            firstTimeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 20)
+            titleLabel.topAnchor.constraint(equalTo: scrollArea.topAnchor, constant: 50),
+            titleLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
+            titleLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10)
         ])
 
+        tableViewHeightConstraint = tableOfIngredients.heightAnchor.constraint(greaterThanOrEqualToConstant: 300)
         NSLayoutConstraint.activate([
-            firstTimePicker.topAnchor.constraint(equalTo: firstTimeLabel.bottomAnchor, constant: 30),
-            firstTimePicker.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
-            firstTimePicker.leftAnchor.constraint(greaterThanOrEqualTo: scrollArea.leftAnchor, constant: 20)
+            tableOfIngredients.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
+            tableOfIngredients.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
+            tableOfIngredients.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
+            tableViewHeightConstraint!,
+            tableOfIngredients.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -10)
         ])
+    }
 
-        NSLayoutConstraint.activate([
-            separator.topAnchor.constraint(equalTo: firstTimePicker.bottomAnchor, constant: 15),
-            separator.leftAnchor.constraint(equalTo: totalTimeLabel.leftAnchor, constant: 40),
-            separator.rightAnchor.constraint(equalTo: totalTimeLabel.rightAnchor, constant: -40),
-            separator.heightAnchor.constraint(equalToConstant: 2)
-        ])
+    private func setupTableViewHeight() {
+        var height: CGFloat = 0
+        let cell = tableOfIngredients.cellForRow(at: IndexPath(row: 1, section: 0))
+        let cellHeight = cell?.contentView.frame.size.height ?? 0
+        if cellHeight > height {
+            height = cellHeight
+        }
+        tableViewHeightConstraint?.constant = height * 2
+        tableOfIngredients.layoutIfNeeded()
+    }
 
-        NSLayoutConstraint.activate([
-            secondTimeLabel.topAnchor.constraint(equalTo: separator.topAnchor, constant: 20),
-            secondTimeLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20),
-            secondTimeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 20)
-        ])
+    private func setupTableView() {
+        tableOfIngredients.delegate = self
+        tableOfIngredients.dataSource = self
+        tableOfIngredients.rowHeight = UITableView.automaticDimension
+        tableOfIngredients.register(SleepCell.self, forCellReuseIdentifier: SleepCell.reuseIdentifier)
+    }
+}
 
-        NSLayoutConstraint.activate([
-            secondTimePicker.topAnchor.constraint(equalTo: secondTimeLabel.bottomAnchor, constant: 30),
-            secondTimePicker.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
-            secondTimePicker.leftAnchor.constraint(greaterThanOrEqualTo: scrollArea.leftAnchor, constant: 20)
-        ])
+extension SleepController {
+    private func setupTapGesture(with label: UILabel) {
+        label.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showDatePicker))
+        label.addGestureRecognizer(tapGesture)
+    }
 
-        NSLayoutConstraint.activate([
-            totalTimeLabel.topAnchor.constraint(equalTo: secondTimePicker.bottomAnchor, constant: 30),
-            totalTimeLabel.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
-            totalTimeLabel.leftAnchor.constraint(greaterThanOrEqualTo: scrollArea.leftAnchor, constant: 20),
-            totalTimeLabel.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -30)
-        ])
+    @objc func showDatePicker(_ sender: UITapGestureRecognizer) {
+        // save the label which is selected
+        if let label = sender.view as? UILabel {
+            selectedLabel = label.tag
+        }
+
+        // Configurez le datePicker comme vous le souhaitez
+        stopTimePicker.datePickerMode = .date
+        stopTimePicker.preferredDatePickerStyle = .wheels // ou .automatic pour le style par défaut
+        stopTimePicker.backgroundColor = UIColor.white
+
+        // put the datePicker on the view
+        stopTimePicker.frame = CGRect(x: 0, y: self.view.frame.height - 300, width: self.view.frame.width, height: 300)
+        self.view.addSubview(stopTimePicker)
+
+        // Done button for closing datepicker
+        let doneButton = UIButton(type: .system)
+        doneButton.frame = CGRect(x: self.view.frame.width - 70, y: self.view.frame.height - 300, width: 70, height: 30)
+        doneButton.setTitle("Done", for: .normal)
+        doneButton.addTarget(self, action: #selector(dismissDatePicker), for: .touchUpInside)
+        self.view.addSubview(doneButton)
+    }
+
+    @objc func dismissDatePicker() {
+        // Fermez le datePicker et le bouton 'Done'
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let dateTexte = dateFormatter.string(from: stopTimePicker.date)
+        dateData[selectedLabel] = dateTexte
+        selectedLabel = 0
+        stopTimePicker.removeFromSuperview()
+        if let doneButton = self.view.subviews.first(where: { $0 is UIButton && ($0 as! UIButton).currentTitle == "Done" }) {
+            doneButton.removeFromSuperview()
+        }
+    }
+}
+
+extension SleepController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SleepCell.reuseIdentifier, for: indexPath) as? SleepCell else {
+            print("erreur de cell")
+            return UITableViewCell()
+        }
+        let title = indexPath.row == 0 ? "Heure de début" : "Heure de fin"
+        cell.setupCell(with: "\(title)", date: dateData[indexPath.row])
+        cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
+        cell.selectionStyle = .none
+        cell.dateLabel.tag = indexPath.row
+        setupTapGesture(with: cell.dateLabel)
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
     }
 }

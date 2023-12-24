@@ -43,6 +43,8 @@
 		475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */; };
 		475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */; };
 		4750720E2B09576900DAB527 /* TapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750720D2B09576900DAB527 /* TapBarController.swift */; };
+		4767543A2B37912F00C83E6D /* BackGroundActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476754392B37912F00C83E6D /* BackGroundActivity.swift */; };
+		4767543C2B3792BC00C83E6D /* SleepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767543B2B3792BC00C83E6D /* SleepCell.swift */; };
 		476AF6302B27A10100F4935F /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF62F2B27A10100F4935F /* UIButton+.swift */; };
 		477786CC2B2CF22700A7611D /* BreastPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477786CB2B2CF22700A7611D /* BreastPageViewController.swift */; };
 		477786CE2B2CF63500A7611D /* BreastFeedingManualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477786CD2B2CF63500A7611D /* BreastFeedingManualController.swift */; };
@@ -122,6 +124,8 @@
 		475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITests.swift; sourceTree = "<group>"; };
 		475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4750720D2B09576900DAB527 /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
+		476754392B37912F00C83E6D /* BackGroundActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundActivity.swift; sourceTree = "<group>"; };
+		4767543B2B3792BC00C83E6D /* SleepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCell.swift; sourceTree = "<group>"; };
 		476AF62F2B27A10100F4935F /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		477786CB2B2CF22700A7611D /* BreastPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastPageViewController.swift; sourceTree = "<group>"; };
 		477786CD2B2CF63500A7611D /* BreastFeedingManualController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingManualController.swift; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				47494BD22B35A7F9002A0A93 /* SleepController.swift */,
+				4767543B2B3792BC00C83E6D /* SleepCell.swift */,
 			);
 			path = sleep;
 			sourceTree = "<group>";
@@ -349,6 +354,7 @@
 		4777ABED2B2500D40055DF4A /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				476754392B37912F00C83E6D /* BackGroundActivity.swift */,
 				47494BD42B35ADAD002A0A93 /* ActivityController.swift */,
 				474C94592B2B9FE6009A7D74 /* food */,
 				47494BD12B35A7DF002A0A93 /* sleep */,
@@ -584,8 +590,10 @@
 				4735B26B2B1140D8000F2B8C /* ViewForInformationController.swift in Sources */,
 				474732532B1239CF0064ABB4 /* GenderViewModel.swift in Sources */,
 				47155BCA2B1DE97000775B27 /* TodayViewController.swift in Sources */,
+				4767543C2B3792BC00C83E6D /* SleepCell.swift in Sources */,
 				4747324F2B1238C20064ABB4 /* BabyNameViewModel.swift in Sources */,
 				47494BD52B35ADAD002A0A93 /* ActivityController.swift in Sources */,
+				4767543A2B37912F00C83E6D /* BackGroundActivity.swift in Sources */,
 				4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */,
 				4792CB592B3063720010AE38 /* SolideFeedingController.swift in Sources */,
 				478E79072B1370DC004157AF /* BirthDayController.swift in Sources */,
