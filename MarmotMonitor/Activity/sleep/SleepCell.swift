@@ -40,9 +40,10 @@ class SleepCell: UITableViewCell {
             .applyingSymbolConfiguration(.init(pointSize: 30))
         configuration.cornerStyle = .capsule
         configuration.baseBackgroundColor = .duckBlue
-        configuration.baseForegroundColor = .label
+        configuration.baseForegroundColor = .white
         configuration.contentInsets = .zero
         let button = UIButton(configuration: configuration)
+        button.addTarget(self, action: #selector(clearLabel), for: .touchUpInside)
         button.setAccessibility(with: .button, label: "", hint: "ouvrir le picker")
         return button
     }()
@@ -118,4 +119,9 @@ class SleepCell: UITableViewCell {
 
         setupButton()
     }
+
+    @objc func clearLabel() {
+            self.dateLabel.text = "Pas encore de date"
+            setupButton()
+        }
 }
