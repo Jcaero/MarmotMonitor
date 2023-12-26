@@ -292,7 +292,8 @@ extension TodayViewController: UITableViewDelegate {
             let next = SleepController()
             present(next, animated: true, completion: nil)
         case 2:
-            print("couche")
+            let next = DiaperController()
+            present(next, animated: true, completion: nil)
         case 3:
             print("Croissance")
         default:

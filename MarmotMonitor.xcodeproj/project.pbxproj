@@ -58,6 +58,8 @@
 		4792CB592B3063720010AE38 /* SolideFeedingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4792CB582B3063720010AE38 /* SolideFeedingController.swift */; };
 		4792CB5B2B3068270010AE38 /* SolideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4792CB5A2B3068270010AE38 /* SolideCell.swift */; };
 		47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A3A3532B0FE7FD00447362 /* WelcomeController.swift */; };
+		47AF89762B3A28200068FE1F /* diaperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF89752B3A28200068FE1F /* diaperController.swift */; };
+		47AF89782B3A29E90068FE1F /* diaperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF89772B3A29E90068FE1F /* diaperCell.swift */; };
 		47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8C2B128A5A00C5919A /* UserDefault+.swift */; };
 		47CABD8F2B128D6A00C5919A /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8E2B128D6A00C5919A /* UIApplication.swift */; };
 		47CABD912B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */; };
@@ -139,6 +141,8 @@
 		4792CB582B3063720010AE38 /* SolideFeedingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolideFeedingController.swift; sourceTree = "<group>"; };
 		4792CB5A2B3068270010AE38 /* SolideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolideCell.swift; sourceTree = "<group>"; };
 		47A3A3532B0FE7FD00447362 /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
+		47AF89752B3A28200068FE1F /* diaperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diaperController.swift; sourceTree = "<group>"; };
+		47AF89772B3A29E90068FE1F /* diaperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diaperCell.swift; sourceTree = "<group>"; };
 		47CABD8C2B128A5A00C5919A /* UserDefault+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+.swift"; sourceTree = "<group>"; };
 		47CABD8E2B128D6A00C5919A /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorAuditAccessibility.swift; sourceTree = "<group>"; };
@@ -358,6 +362,7 @@
 				47494BD42B35ADAD002A0A93 /* ActivityController.swift */,
 				474C94592B2B9FE6009A7D74 /* food */,
 				47494BD12B35A7DF002A0A93 /* sleep */,
+				47AF89742B3A28110068FE1F /* diaper */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -401,6 +406,15 @@
 				477B86922B3384D100333768 /* meal.swift */,
 			);
 			path = Solid;
+			sourceTree = "<group>";
+		};
+		47AF89742B3A28110068FE1F /* diaper */ = {
+			isa = PBXGroup;
+			children = (
+				47AF89752B3A28200068FE1F /* diaperController.swift */,
+				47AF89772B3A29E90068FE1F /* diaperCell.swift */,
+			);
+			path = diaper;
 			sourceTree = "<group>";
 		};
 		47CB30012B1F400F0054EAC7 /* started */ = {
@@ -605,9 +619,11 @@
 				4792CB5B2B3068270010AE38 /* SolideCell.swift in Sources */,
 				47494BD32B35A7F9002A0A93 /* SleepController.swift in Sources */,
 				4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */,
+				47AF89782B3A29E90068FE1F /* diaperCell.swift in Sources */,
 				4738B4D22B287D830041ECF0 /* Int+.swift in Sources */,
 				475071D82B09462000DAB527 /* AppDelegate.swift in Sources */,
 				477786CC2B2CF22700A7611D /* BreastPageViewController.swift in Sources */,
+				47AF89762B3A28200068FE1F /* diaperController.swift in Sources */,
 				474C945D2B2BA95B009A7D74 /* BreastFeedingChronoController.swift in Sources */,
 				4777ABEF2B2501710055DF4A /* BreastFeedingController.swift in Sources */,
 				4738B4D42B287EC70041ECF0 /* BreastFeedingManualViewModel.swift in Sources */,

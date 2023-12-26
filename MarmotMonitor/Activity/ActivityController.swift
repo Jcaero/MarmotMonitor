@@ -35,7 +35,6 @@ class ActivityController: BackGroundActivity {
 
     // MARK: - PROPERTIES
 
-
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()

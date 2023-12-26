@@ -34,7 +34,7 @@ class SleepCell: UITableViewCell {
         return label
     }()
 
-    let statusButton: UIButton =  {
+    lazy var statusButton: UIButton =  {
         var configuration = UIButton.Configuration.filled()
         configuration.image = UIImage(systemName: "chevron.right")!
             .applyingSymbolConfiguration(.init(pointSize: 30))
