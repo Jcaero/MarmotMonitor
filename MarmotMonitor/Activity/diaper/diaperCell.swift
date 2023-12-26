@@ -77,12 +77,11 @@ class DiaperCell: UITableViewCell {
     }
 
     private func setupImage(_ selected: Bool) {
-        let imageNotSelected = UIImage(systemName: "square")!
+        let imageNotSelected = UIImage(systemName: "circle")!
             .applyingSymbolConfiguration(.init(pointSize: 15))
-        let imageSelected = UIImage(systemName: "checkmark.square")!
+        let imageSelected = UIImage(systemName: "checkmark.circle")!
             .applyingSymbolConfiguration(.init(pointSize: 15))
         statusImage.image = selected ? imageSelected : imageNotSelected
     }
 
 }
-

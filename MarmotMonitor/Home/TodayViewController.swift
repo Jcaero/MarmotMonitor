@@ -295,7 +295,8 @@ extension TodayViewController: UITableViewDelegate {
             let next = DiaperController()
             present(next, animated: true, completion: nil)
         case 3:
-            print("Croissance")
+            let next = GrowthController()
+            present(next, animated: true, completion: nil)
         default:
             break
         }
