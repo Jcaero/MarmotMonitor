@@ -108,6 +108,7 @@ class GrowthCell: UITableViewCell {
             valueTF.bottomAnchor.constraint(equalTo: category.bottomAnchor, constant: -5),
             unitOfMesure.topAnchor.constraint(equalTo: valueTF.topAnchor),
             unitOfMesure.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
+            unitOfMesure.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1),
             unitOfMesure.bottomAnchor.constraint(equalTo: valueTF.bottomAnchor)
         ]
 
