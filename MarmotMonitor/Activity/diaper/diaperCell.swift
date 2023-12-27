@@ -58,15 +58,14 @@ class DiaperCell: UITableViewCell {
             statusImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             statusImage.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
             statusImage.heightAnchor.constraint(equalTo: statusImage.widthAnchor),
-            statusImage.heightAnchor.constraint(equalTo: title.heightAnchor),
             statusImage.heightAnchor.constraint(greaterThanOrEqualToConstant: 25)
         ])
 
         NSLayoutConstraint.activate([
             title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            title.rightAnchor.constraint(equalTo: statusImage.leftAnchor, constant: -10),
             title.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-            title.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            title.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            title.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.7)
         ])
     }
 
