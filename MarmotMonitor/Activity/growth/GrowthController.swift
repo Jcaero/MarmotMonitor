@@ -26,7 +26,7 @@ class GrowthController: ActivityController {
 
     var textFieldActif: UITextField?
 
-    let category: [String] = ["Taille", "Poids", "Tête"]
+    let category: [Growth] = [.height, .weight, .head]
     var growth : [String : Int] = [:]
 
     // MARK: - Cycle life
@@ -60,7 +60,9 @@ class GrowthController: ActivityController {
     }
 
     private func setupContraints() {
-            tableOfGrowth.translatesAutoresizingMaskIntoConstraints = false
+        tableOfGrowth.translatesAutoresizingMaskIntoConstraints = false
+
+        scrollViewTopConstraint?.constant = 30
 
         tableViewHeightConstraint = tableOfGrowth.heightAnchor.constraint(greaterThanOrEqualToConstant: 300)
         NSLayoutConstraint.activate([
@@ -114,7 +116,7 @@ extension GrowthController: UITableViewDataSource {
             return UITableViewCell()
         }
         let category = category[indexPath.row]
-        let value = growth[category] ?? 0
+        let value = growth[category.title] ?? 0
         cell.setupCell(with: category, value: value)
         cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
         cell.selectionStyle = .none
@@ -144,7 +146,7 @@ extension GrowthController: UITextFieldDelegate {
     }
 
     @objc func valueChanged(_ textField: UITextField) {
-        let category = category[textField.tag]
+        let category = category[textField.tag].title
 
         guard let value = Int(textField.text ?? "") else { return }
         growth[category] = value

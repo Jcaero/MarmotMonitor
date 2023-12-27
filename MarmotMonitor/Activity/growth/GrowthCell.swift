@@ -122,8 +122,13 @@ class GrowthCell: UITableViewCell {
     }
 
     // MARK: - Setup cell
-    func setupCell(with category: String, value: Int) {
-        self.category.text = category
+    func setupCell(with category: Growth, value: Int) {
+        self.category.text = category.title
+        self.unitOfMesure.text = category.unit
+        setupTF(with: value)
+    }
+
+    private func setupTF(with value: Int) {
         if value == 0 {
             self.valueTF.placeholder = "0"
         } else {

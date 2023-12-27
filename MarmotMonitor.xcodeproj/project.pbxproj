@@ -10,6 +10,7 @@
 		470009D12B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */; };
 		470009D32B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470009D22B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift */; };
 		4704F2C32B2F98310060DCEE /* BottleFeedingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */; };
+		470991972B3C40B200590174 /* Growth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470991962B3C40B200590174 /* Growth.swift */; };
 		4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */; };
 		4711F7742B1E70AB00869A27 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F7732B1E70AB00869A27 /* Person.swift */; };
 		4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D43A2B0A9B5C0085035C /* UILabel+.swift */; };
@@ -91,6 +92,7 @@
 		470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoViewmodel.swift; sourceTree = "<group>"; };
 		470009D22B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoViewModel.swift; sourceTree = "<group>"; };
 		4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedingController.swift; sourceTree = "<group>"; };
+		470991962B3C40B200590174 /* Growth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Growth.swift; sourceTree = "<group>"; };
 		4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModelTest.swift; sourceTree = "<group>"; };
 		4711F7732B1E70AB00869A27 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		4712D43A2B0A9B5C0085035C /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 			children = (
 				47A0E6B52B3B13B400F894A1 /* GrowthController.swift */,
 				474EE9052B3B69100047054B /* GrowthCell.swift */,
+				470991962B3C40B200590174 /* Growth.swift */,
 			);
 			path = growth;
 			sourceTree = "<group>";
@@ -643,6 +646,7 @@
 				474C945D2B2BA95B009A7D74 /* BreastFeedingChronoController.swift in Sources */,
 				4777ABEF2B2501710055DF4A /* BreastFeedingController.swift in Sources */,
 				4738B4D42B287EC70041ECF0 /* BreastFeedingManualViewModel.swift in Sources */,
+				470991972B3C40B200590174 /* Growth.swift in Sources */,
 				47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */,
 				475071E22B09462000DAB527 /* MarmotMonitor.xcdatamodeld in Sources */,
 				477786CE2B2CF63500A7611D /* BreastFeedingManualController.swift in Sources */,
