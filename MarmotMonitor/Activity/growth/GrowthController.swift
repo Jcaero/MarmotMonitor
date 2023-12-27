@@ -27,7 +27,7 @@ class GrowthController: ActivityController {
     var textFieldActif: UITextField?
 
     let category: [Growth] = [.height, .weight, .head]
-    var growth : [String : Int] = [:]
+    var growth : [String : Double] = [:]
 
     // MARK: - Cycle life
     override func viewDidLoad() {
@@ -148,7 +148,7 @@ extension GrowthController: UITextFieldDelegate {
     @objc func valueChanged(_ textField: UITextField) {
         let category = category[textField.tag].title
 
-        guard let value = Int(textField.text ?? "") else { return }
+        guard let value = Double(textField.text ?? "") else { return }
         growth[category] = value
     }
 }

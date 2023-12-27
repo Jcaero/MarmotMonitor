@@ -35,7 +35,7 @@ class GrowthCell: UITableViewCell {
         textField.textColor = .label
         textField.textAlignment = .right
         textField.borderStyle = .none
-        textField.keyboardType = .numberPad
+        textField.keyboardType = .decimalPad
         textField.backgroundColor = .clear
         textField.tintColor = .label
         textField.adjustsFontSizeToFitWidth = true
@@ -123,13 +123,13 @@ class GrowthCell: UITableViewCell {
     }
 
     // MARK: - Setup cell
-    func setupCell(with category: Growth, value: Int) {
+    func setupCell(with category: Growth, value: Double) {
         self.category.text = category.title
         self.unitOfMesure.text = category.unit
         setupTF(with: value)
     }
 
-    private func setupTF(with value: Int) {
+    private func setupTF(with value: Double) {
         if value == 0 {
             self.valueTF.placeholder = "0"
         } else {
