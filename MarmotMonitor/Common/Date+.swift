@@ -21,4 +21,15 @@ extension Date {
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
+
+    func toStringWithTimeAndDayMonthYear() -> String {
+        let dateFormatter = DateFormatter()
+        let calendar = Calendar.current
+
+        let currentDate = calendar.startOfDay(for: Date())
+        let selectedDate = calendar.startOfDay(for: self)
+
+        dateFormatter.dateFormat = currentDate == selectedDate ? "HH:mm" : "dd/MM/yyyy HH:mm"
+        return dateFormatter.string(from: self)
+    }
 }

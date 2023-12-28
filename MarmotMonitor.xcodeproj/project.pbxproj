@@ -19,6 +19,7 @@
 		47155BCA2B1DE97000775B27 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BC92B1DE97000775B27 /* TodayViewController.swift */; };
 		47155BCD2B1DEBDB00775B27 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */; };
 		4719ABE52B0E96380088CBE2 /* BabyNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719ABE42B0E96380088CBE2 /* BabyNameController.swift */; };
+		4726966A2B3D8A18006BC301 /* SleepViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472696692B3D8A18006BC301 /* SleepViewModel.swift */; };
 		472DDABD2B2DEF1600812024 /* UISegmented+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472DDABC2B2DEF1600812024 /* UISegmented+.swift */; };
 		4735B26B2B1140D8000F2B8C /* ViewForInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */; };
 		4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26D2B1145B7000F2B8C /* GenderController.swift */; };
@@ -101,6 +102,7 @@
 		47155BC92B1DE97000775B27 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 		4719ABE42B0E96380088CBE2 /* BabyNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyNameController.swift; sourceTree = "<group>"; };
+		472696692B3D8A18006BC301 /* SleepViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepViewModel.swift; sourceTree = "<group>"; };
 		472DDABC2B2DEF1600812024 /* UISegmented+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmented+.swift"; sourceTree = "<group>"; };
 		4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForInformationController.swift; sourceTree = "<group>"; };
 		4735B26D2B1145B7000F2B8C /* GenderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderController.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				47494BD22B35A7F9002A0A93 /* SleepController.swift */,
+				472696692B3D8A18006BC301 /* SleepViewModel.swift */,
 				4767543B2B3792BC00C83E6D /* SleepCell.swift */,
 			);
 			path = sleep;
@@ -628,6 +631,7 @@
 				47494BD52B35ADAD002A0A93 /* ActivityController.swift in Sources */,
 				4767543A2B37912F00C83E6D /* BackGroundActivity.swift in Sources */,
 				4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */,
+				4726966A2B3D8A18006BC301 /* SleepViewModel.swift in Sources */,
 				4792CB592B3063720010AE38 /* SolideFeedingController.swift in Sources */,
 				478E79072B1370DC004157AF /* BirthDayController.swift in Sources */,
 				478E79092B1375F3004157AF /* BirthDayViewModel.swift in Sources */,

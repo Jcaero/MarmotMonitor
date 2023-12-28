@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SleepController: BackGroundActivity {
+class SleepController: BackGroundActivity, SleepDelegate {
 
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -30,30 +30,32 @@ class SleepController: BackGroundActivity {
 
     let stopTimePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
-        datePicker.preferredDatePickerStyle = .compact
+        datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .dateAndTime
         datePicker.maximumDate = Date()
         datePicker.tintColor = .label
-        datePicker.backgroundColor = .clear
+        datePicker.backgroundColor = .duckBlue
         datePicker.setAccessibility(with: .selected, label: "", hint: "choisir l'heure de la tétée")
         return datePicker
     }()
 
-    // MARK: - PROPERTIES
-    var tableViewHeightConstraint: NSLayoutConstraint?
-    var dateData: [String] = ["Pas encore de date","Pas encore de date"]
+    let doneButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Done", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        return button
+    }()
 
-    var selectedLabel: Int = 0 {
-        didSet {
-            if selectedLabel == 0 {
-                tableOfIngredients.reloadData()
-            }
-        }
-    }
+    // MARK: - PROPERTIES
+    var viewModel : SleepViewModel!
+
+    var tableViewHeightConstraint: NSLayoutConstraint?
 
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = SleepViewModel(delegate: self)
+
         setupViews()
         setupContraints()
 
@@ -117,37 +119,30 @@ extension SleepController {
     @objc func showDatePicker(_ sender: UITapGestureRecognizer) {
         // save the label which is selected
         if let label = sender.view as? UILabel {
-            selectedLabel = label.tag
+            viewModel.setSelectedLabel(with: label.tag)
         }
-
-        // Configurez le datePicker comme vous le souhaitez
-        stopTimePicker.datePickerMode = .date
-        stopTimePicker.preferredDatePickerStyle = .wheels // ou .automatic pour le style par défaut
-        stopTimePicker.backgroundColor = UIColor.white
 
         // put the datePicker on the view
         stopTimePicker.frame = CGRect(x: 0, y: self.view.frame.height - 300, width: self.view.frame.width, height: 300)
         self.view.addSubview(stopTimePicker)
 
         // Done button for closing datepicker
-        let doneButton = UIButton(type: .system)
         doneButton.frame = CGRect(x: self.view.frame.width - 70, y: self.view.frame.height - 300, width: 70, height: 30)
-        doneButton.setTitle("Done", for: .normal)
         doneButton.addTarget(self, action: #selector(dismissDatePicker), for: .touchUpInside)
         self.view.addSubview(doneButton)
     }
 
     @objc func dismissDatePicker() {
-        // Fermez le datePicker et le bouton 'Done'
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        let dateTexte = dateFormatter.string(from: stopTimePicker.date)
-        dateData[selectedLabel] = dateTexte
-        selectedLabel = 0
+        viewModel.setDate(with: stopTimePicker.date)
+
         stopTimePicker.removeFromSuperview()
         if let doneButton = self.view.subviews.first(where: { $0 is UIButton && ($0 as! UIButton).currentTitle == "Done" }) {
             doneButton.removeFromSuperview()
         }
+    }
+
+    func updateData() {
+        tableOfIngredients.reloadData()
     }
 }
 
@@ -163,7 +158,7 @@ extension SleepController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         let title = indexPath.row == 0 ? "Heure de début" : "Heure de fin"
-        cell.setupCell(with: "\(title)", date: dateData[indexPath.row])
+        cell.setupCell(with: "\(title)", date: viewModel.dateData[indexPath.row])
         cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
         cell.selectionStyle = .none
         cell.dateLabel.tag = indexPath.row
