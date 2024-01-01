@@ -51,12 +51,21 @@ final class BreastFeedingChronoViewModel {
         }
     }
 
-    func razButtonPressed(_ position: Position) {
+    func resetButtonPressed() {
+        razTimer(&leftTimer, time: &leftTime)
+        razTimer(&rightTimer, time: &rightTime)
+    }
+
+    func manualButtonPressed(_ position: Position, time: Int) {
         switch position {
         case .left:
             razTimer(&leftTimer, time: &leftTime)
+            delegate?.updateLeftButtonImage(with: .stop)
+            leftTime = time*60
         case .right:
             razTimer(&rightTimer, time: &rightTime)
+            delegate?.updateRightButtonImage(with: .stop)
+            rightTime = time*60
         }
     }
 
