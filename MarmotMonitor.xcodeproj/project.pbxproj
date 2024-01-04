@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		470009D12B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */; };
-		470009D32B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470009D22B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift */; };
 		4704F2C32B2F98310060DCEE /* BottleFeedingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */; };
 		470991972B3C40B200590174 /* Growth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470991962B3C40B200590174 /* Growth.swift */; };
 		4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */; };
@@ -87,7 +86,6 @@
 
 /* Begin PBXFileReference section */
 		470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoViewmodel.swift; sourceTree = "<group>"; };
-		470009D22B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoViewModel.swift; sourceTree = "<group>"; };
 		4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedingController.swift; sourceTree = "<group>"; };
 		470991962B3C40B200590174 /* Growth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Growth.swift; sourceTree = "<group>"; };
 		4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModelTest.swift; sourceTree = "<group>"; };
@@ -176,19 +174,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		470009D42B2E484900EBEF86 /* food */ = {
-			isa = PBXGroup;
-			children = (
-				470009D22B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift */,
-			);
-			path = food;
-			sourceTree = "<group>";
-		};
 		470009D52B2E485C00EBEF86 /* home */ = {
 			isa = PBXGroup;
 			children = (
 				4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */,
-				470009D42B2E484900EBEF86 /* food */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -651,7 +640,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				474732582B123F8D0064ABB4 /* BabyNameViewModelTest.swift in Sources */,
-				470009D32B2E484000EBEF86 /* BreastFeedingChronoViewModel.swift in Sources */,
 				478E790D2B138099004157AF /* BirthDayViewModelTest.swift in Sources */,
 				4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */,
 				4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */,

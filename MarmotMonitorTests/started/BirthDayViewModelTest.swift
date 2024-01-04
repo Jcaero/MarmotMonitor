@@ -33,7 +33,7 @@ class BirthDayViewModelTest: XCTestCase {
         let testBabyDate = "25/11/2023"
         let testDate = testBabyDate.toDate()
 
-        viewModel.saveBirthDate(date: testDate!)
+        viewModel.save(date: .date(testDate!))
 
         let savedName = defaults.string(forKey: UserInfoKey.birthDay.rawValue)
         XCTAssertEqual(savedName, testBabyDate)
@@ -42,7 +42,7 @@ class BirthDayViewModelTest: XCTestCase {
     func testBabyHaveDate_WhenSaveBabyDate_DateHasBeenSave() {
         let testBabyDate = "25/11/2023"
 
-        viewModel.saveBirthDate(stringDate: testBabyDate)
+        viewModel.save(date: .stringDate(testBabyDate))
 
         let savedName = defaults.string(forKey: UserInfoKey.birthDay.rawValue)
         XCTAssertEqual(savedName, testBabyDate)
@@ -51,7 +51,7 @@ class BirthDayViewModelTest: XCTestCase {
     func testBabyHaveWrongDate_WhenSaveBabyDate_ShowAlert() {
         let testBabyDate = "25/18/2023"
 
-        viewModel.saveBirthDate(stringDate: testBabyDate)
+        viewModel.save(date: .stringDate(testBabyDate))
 
         XCTAssertEqual(alerteTitle, "Erreur")
         XCTAssertEqual(alerteDesciption, "Le format de la date de naissance n'est pas valide")
@@ -60,7 +60,7 @@ class BirthDayViewModelTest: XCTestCase {
     func testBabyHaveLettre_WhenSaveBabyDate_ShowAlert() {
         let testBabyDate = "test"
 
-        viewModel.saveBirthDate(stringDate: testBabyDate)
+        viewModel.save(date: .stringDate(testBabyDate))
 
         XCTAssertEqual(alerteTitle, "Erreur")
         XCTAssertEqual(alerteDesciption, "Le format de la date de naissance n'est pas valide")
@@ -69,7 +69,7 @@ class BirthDayViewModelTest: XCTestCase {
     func testBabyHaveNil_WhenSaveBabyDate_ShowAlert() {
         let testBabyDate = ""
 
-        viewModel.saveBirthDate(stringDate: testBabyDate)
+        viewModel.save(date: .stringDate(testBabyDate))
 
         XCTAssertEqual(alerteTitle, "Erreur")
         XCTAssertEqual(alerteDesciption, "Le format de la date de naissance n'est pas valide")
@@ -79,7 +79,7 @@ class BirthDayViewModelTest: XCTestCase {
         let testDate = Date()
         let datePlusTenDays = Calendar.current.date(byAdding: .day, value: 10, to: testDate)
 
-        viewModel.saveBirthDate(date: datePlusTenDays!)
+        viewModel.save(date: .date(datePlusTenDays!))
 
         XCTAssertEqual(alerteTitle, "Erreur")
         XCTAssertEqual(alerteDesciption, "Veuillez entrer une date de naissance antérieure à la date d'aujourd'hui.")

@@ -8,6 +8,7 @@
 import UIKit
 
 class TabBarController: UITabBarController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVCs()
@@ -36,26 +37,23 @@ class TabBarController: UITabBarController {
     }
 
     func setupTabBar() {
-
         let appearance = UITabBarAppearance()
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = .none
 
-        // setup normal Attributes
         let normalAttributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.lightGray,
             .font: UIFont(name: "Courier New", size: 15)!
         ]
 
-        // setup selected Attributes
         let selectedAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.black]
+            .foregroundColor: UIColor.black
+        ]
 
         appearance.stackedLayoutAppearance.normal.titleTextAttributes = normalAttributes
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = selectedAttributes
 
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = tabBar.standardAppearance
-
     }
 }

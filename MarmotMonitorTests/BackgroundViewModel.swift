@@ -9,7 +9,7 @@ import XCTest
 
 @testable import MarmotMonitor
 
-class BackgroundViewModelTest: XCTestCase {
+class BackgroundViewModelTest: XCTestCase{
 
     var viewModel: BackgroundViewModel!
     var babyNameViewModel: BabyNameViewModel!
@@ -22,7 +22,7 @@ class BackgroundViewModelTest: XCTestCase {
         super.setUp()
         defaults = UserDefaults(suiteName: #file)
         viewModel = BackgroundViewModel(defaults: defaults)
-        genderViewModel = GenderViewModel(defaults: defaults)
+        genderViewModel = GenderViewModel(defaults: defaults, delegate: self)
     }
 
     override func tearDown() {
@@ -31,7 +31,7 @@ class BackgroundViewModelTest: XCTestCase {
     }
 
     func testBabyHaveGender_WhenSetRequestGender_receiveGender() {
-        genderViewModel.setGirlGender()
+        genderViewModel.buttonTappedWithGender(.girl)
         genderViewModel.saveGender()
 
         let gender = viewModel.getGender()
@@ -40,10 +40,19 @@ class BackgroundViewModelTest: XCTestCase {
     }
 
     func testBabyHaveNoGender_WhenSetRequestGender_receiveNil() {
-        genderViewModel.clearGender()
+        genderViewModel.buttonTappedWithGender(.none)
         genderViewModel.saveGender()
         let gender = viewModel.getGender()
 
         XCTAssertEqual(gender, nil)
+    }
+}
+
+extension BackgroundViewModelTest: GenderDelegate {
+    func didChangeGender() {
+        genderViewModel.saveGender()
+    }
+
+    func showGender(_ gender: MarmotMonitor.Gender) {
     }
 }

@@ -18,9 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let savedName = UserDefaults.standard.string(forKey: UserInfoKey.babyName.rawValue)
         print("savedName: \(String(describing: savedName))")
-        let home = savedName != nil ? TabBarController() : WelcomeController()
+        let home = savedName != nil ? TabBarController() : UINavigationController(rootViewController: WelcomeController())
 
-        let navController = UINavigationController(rootViewController: home)
+        let navController = home
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
 

@@ -8,16 +8,16 @@
 import UIKit
 
 final class WelcomeController: ViewForInformationController {
-        // MARK: - Properties
-        let welcomeTitle: UILabel = {
-            let label = UILabel()
-            label.text = "Bonjour"
-            label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
-            label.textColor = .colorForLabelBlackToBlue
-            label.textAlignment = .left
-            label.numberOfLines = 0
-            return label
-        }()
+    // MARK: - Properties
+    let welcomeTitle: UILabel = {
+        let label = UILabel()
+        label.text = "Bonjour"
+        label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
+        label.textColor = .colorForLabelBlackToBlue
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
+    }()
 
     let subTitle: UILabel = {
         let label = UILabel()
@@ -29,29 +29,29 @@ final class WelcomeController: ViewForInformationController {
         return label
     }()
 
-        // MARK: - ViewDidLoad
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            setupViews()
-            setupContraints()
+    // MARK: - ViewDidLoad
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+        setupContraints()
 
-            nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+    }
+
+    // MARK: - function
+
+    private func setupViews() {
+
+        [welcomeTitle, subTitle].forEach {
+            stackView.addArrangedSubview($0)
         }
+    }
 
-        // MARK: - function
-
-        private func setupViews() {
-
-            [welcomeTitle, subTitle].forEach {
-                stackView.addArrangedSubview($0)
-            }
+    private func setupContraints() {
+        [welcomeTitle, subTitle].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
         }
-
-        private func setupContraints() {
-            [welcomeTitle, subTitle].forEach {
-                $0.translatesAutoresizingMaskIntoConstraints = false
-            }
-        }
+    }
 
     // MARK: - Action
     @objc private func nextButtonTapped() {

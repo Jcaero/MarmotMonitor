@@ -6,26 +6,26 @@
 //
 import Foundation
 
+protocol GenderDelegate: AnyObject {
+    func showGender(_ gender: Gender)
+}
+
 final class GenderViewModel {
     private let defaults: UserDefaults
     var gender: Gender = .none
 
+    private weak var delegate: GenderDelegate?
+
     // MARK: - init
     // init for test
-    init(defaults: UserDefaults = UserDefaults.standard) {
+    init(defaults: UserDefaults = UserDefaults.standard, delegate: GenderDelegate?) {
         self.defaults = defaults
+        self.delegate = delegate
     }
 
-    func setBoyGender() {
-        gender = .boy
-    }
-
-    func setGirlGender() {
-        gender = .girl
-    }
-
-    func clearGender() {
-        gender = .none
+    func buttonTappedWithGender(_ gender: Gender) {
+        self.gender = gender != self.gender ? gender : .none
+        delegate?.showGender(self.gender)
     }
 
     func saveGender() {

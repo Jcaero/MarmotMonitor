@@ -8,6 +8,7 @@
 import UIKit
 
 final class GenderController: ViewForInformationController {
+    
     let genreTitre: UILabel = {
         let label = UILabel()
         label.text = "La petite marmotte est-elle un garçon ou une fille ?"
@@ -31,6 +32,7 @@ final class GenderController: ViewForInformationController {
     let boyButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "boy"), for: .normal)
+        button.layer.borderColor = UIColor.blue.cgColor
         button.setAccessibility(with: .button, label: "Garçon", hint: "Choisir le sexe masculin")
         return button
     }()
@@ -38,6 +40,7 @@ final class GenderController: ViewForInformationController {
     let girlButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "girl"), for: .normal)
+        button.layer.borderColor = UIColor.heavyPink.cgColor
         button.setAccessibility(with: .button, label: "Fille", hint: "Choisir le sexe féminin")
         return button
     }()
@@ -50,11 +53,12 @@ final class GenderController: ViewForInformationController {
     private var boyButtonHeightConstraint: NSLayoutConstraint?
     private var girlButtonHeightConstraint: NSLayoutConstraint?
 
-    private let viewModel = GenderViewModel()
+    private var viewModel: GenderViewModel!
 
     // MARK: - cicle life
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = GenderViewModel(delegate: self)
 
         setupView()
         setupContraints()
@@ -108,45 +112,11 @@ final class GenderController: ViewForInformationController {
 
     // MARK: - function
     @objc func boyButtonTapped() {
-        if boyButton.layer.borderWidth == 2 {
-            clearGender()
-        } else {
-            setBoyGender()
-        }
+        viewModel.buttonTappedWithGender(.boy)
     }
 
     @objc func girlButtonTapped() {
-        if girlButton.layer.borderWidth == 2 {
-            clearGender()
-        } else {
-            setGirlGender()
-        }
-    }
-
-    private func setGirlGender() {
-        girlButton.layer.borderWidth = 2
-        boyButton.layer.borderWidth = 0
-        girlButton.layer.borderColor = UIColor.heavyPink.cgColor
-        addShadow(to: pastelArea, with: .heavyPink)
-
-        viewModel.setGirlGender()
-    }
-
-    private func setBoyGender() {
-        boyButton.layer.borderWidth = 2
-        girlButton.layer.borderWidth = 0
-        boyButton.layer.borderColor = UIColor.blue.cgColor
-        addShadow(to: pastelArea, with: .blue)
-
-        viewModel.setBoyGender()
-    }
-
-    private func clearGender() {
-        boyButton.layer.borderWidth = 0
-        girlButton.layer.borderWidth = 0
-        removeShadow(to: pastelArea)
-
-        viewModel.clearGender()
+        viewModel.buttonTappedWithGender(.girl)
     }
 
     private func addShadow(to view: UIView, with color: UIColor) {
@@ -160,7 +130,7 @@ final class GenderController: ViewForInformationController {
     private func removeShadow(to view: UIView) {
         view.layer.shadowColor = nil
         view.layer.shadowOpacity = 0
-        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.shadowOffset = .zero
         view.layer.shadowRadius = 0
     }
 }
@@ -196,5 +166,26 @@ extension GenderController {
     @objc private func nextButtonTapped() {
         viewModel.saveGender()
         navigationController?.pushViewController(ParentNameController(), animated: true)
+    }
+}
+
+extension GenderController: GenderDelegate {
+    func showGender(_ gender: Gender) {
+        guard gender != .none else {
+            clearGender()
+            return
+        }
+
+        girlButton.layer.borderWidth = gender == .girl ? 2 : 0
+        boyButton.layer.borderWidth = gender == .boy ? 2 : 0
+
+        let color = gender == .girl ? UIColor.heavyPink : .blue
+        addShadow(to: pastelArea, with: color)
+    }
+
+    private func clearGender() {
+        boyButton.layer.borderWidth = 0
+        girlButton.layer.borderWidth = 0
+        removeShadow(to: pastelArea)
     }
 }

@@ -22,7 +22,7 @@ class TodayViewModelTest: XCTestCase, BirthDayDelegate {
         defaults = UserDefaults(suiteName: #file)
         viewModel = TodayViewModel(defaults: defaults)
         babyNameViewModel = BabyNameViewModel(defaults: defaults)
-        genderViewModel = GenderViewModel(defaults: defaults)
+        genderViewModel = GenderViewModel(defaults: defaults, delegate: self)
         parentViewModel = ParentNameViewModel(defaults: defaults)
         birthDayViewModel = BirthDayViewModel(defaults: defaults, delegate: self)
     }
@@ -37,9 +37,9 @@ class TodayViewModelTest: XCTestCase, BirthDayDelegate {
 
         switch person.gender {
         case "Garçon":
-            genderViewModel.setBoyGender()
+            genderViewModel.buttonTappedWithGender(.boy)
         case "Fille":
-            genderViewModel.setGirlGender()
+            genderViewModel.buttonTappedWithGender(.girl)
         default: break
         }
         genderViewModel.saveGender()
@@ -49,7 +49,7 @@ class TodayViewModelTest: XCTestCase, BirthDayDelegate {
         }
 
         if let date = person.birthDay {
-            birthDayViewModel.saveBirthDate(stringDate: date)
+            birthDayViewModel.save(date: .stringDate(date))
         }
     }
 
@@ -176,5 +176,10 @@ extension TodayViewModelTest {
     }
 
     func pushToNextView() {
+    }
+}
+
+extension TodayViewModelTest: GenderDelegate {
+    func showGender(_ gender: MarmotMonitor.Gender) {
     }
 }

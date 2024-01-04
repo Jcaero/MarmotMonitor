@@ -111,9 +111,9 @@ extension BirthDayController {
     // MARK: - Action
     @objc private func nextButtonTapped() {
         if isPickerHidden {
-            viewModel.saveBirthDate(stringDate: birthDayTF.text ?? "")
+            viewModel.save(date: .stringDate(birthDayTF.text ?? ""))
         } else {
-            viewModel.saveBirthDate(date: birthDay.date)
+            viewModel.save(date: .date(birthDay.date))
         }
     }
 
