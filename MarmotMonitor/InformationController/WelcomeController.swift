@@ -41,7 +41,6 @@ final class WelcomeController: ViewForInformationController {
     // MARK: - function
 
     private func setupViews() {
-
         [welcomeTitle, subTitle].forEach {
             stackView.addArrangedSubview($0)
         }

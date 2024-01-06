@@ -9,7 +9,7 @@ import UIKit
 
 class BackgroundViewController: UIViewController {
     // MARK: - Propriete
-    private let viewModel = BackgroundViewModel()
+    private let userDefaultsManager = UserDefaultsManager()
 
     // MARK: - Cycle life
     override func viewDidLoad() {
@@ -25,7 +25,7 @@ class BackgroundViewController: UIViewController {
 
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
-        let gender = viewModel.getGender()
+        let gender = userDefaultsManager.getGender()
         if gender == "Fille" {
             gradient.colors = [UIColor.colorForGradientStartPink.cgColor, UIColor.colorForGradientEnd.cgColor]
         } else {

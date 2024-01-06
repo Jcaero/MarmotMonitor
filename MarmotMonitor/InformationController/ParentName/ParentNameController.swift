@@ -42,7 +42,7 @@ class ParentNameController: ViewForInformationController {
     }()
 
     // MARK: - Properties
-    private let viewModel = ParentNameViewModel()
+    private let userDefaultsManager = UserDefaultsManager()
 
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -131,7 +131,7 @@ extension ParentNameController: UITextFieldDelegate {
 extension ParentNameController {
     // MARK: - Action
     @objc private func nextButtonTapped() {
-        viewModel.saveParentName(name: parentName.text ?? "")
+        userDefaultsManager.saveParentName(parentName.text)
         navigationController?.pushViewController(BirthDayController(), animated: true)
     }
 }

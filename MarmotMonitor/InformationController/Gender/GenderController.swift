@@ -8,7 +8,7 @@
 import UIKit
 
 final class GenderController: ViewForInformationController {
-    
+
     let genreTitre: UILabel = {
         let label = UILabel()
         label.text = "La petite marmotte est-elle un garçon ou une fille ?"
@@ -54,6 +54,7 @@ final class GenderController: ViewForInformationController {
     private var girlButtonHeightConstraint: NSLayoutConstraint?
 
     private var viewModel: GenderViewModel!
+    private let userDefaultsManager = UserDefaultsManager()
 
     // MARK: - cicle life
     override func viewDidLoad() {
@@ -164,7 +165,7 @@ extension GenderController {
 extension GenderController {
     // MARK: - Action
     @objc private func nextButtonTapped() {
-        viewModel.saveGender()
+        userDefaultsManager.saveGender(viewModel.gender)
         navigationController?.pushViewController(ParentNameController(), animated: true)
     }
 }

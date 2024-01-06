@@ -42,7 +42,7 @@ final class BabyNameController: ViewForInformationController {
     }()
 
     // MARK: - Propriete
-    private let viewModel = BabyNameViewModel()
+    private let userDefaultsManager = UserDefaultsManager()
 
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -146,7 +146,7 @@ extension BabyNameController: UITextFieldDelegate {
 extension BabyNameController {
     // MARK: - Action
     @objc private func nextButtonTapped() {
-        viewModel.saveBabyName(name: babyName.text ?? "")
+        userDefaultsManager.saveBabyName(babyName.text)
         navigationController?.pushViewController(GenderController(), animated: true)
     }
 }

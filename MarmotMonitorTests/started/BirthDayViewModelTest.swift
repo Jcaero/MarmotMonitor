@@ -11,7 +11,7 @@ import XCTest
 class BirthDayViewModelTest: XCTestCase {
 
     private var viewModel: BirthDayViewModel!
-    private var defaults: UserDefaults!
+    private var userDafaultsManager: UserDefaultsManager!
 
     private var alerteTitle: String?
     private var alerteDesciption: String?
@@ -19,13 +19,18 @@ class BirthDayViewModelTest: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        defaults = UserDefaults(suiteName: #file)
-        viewModel = BirthDayViewModel(defaults: defaults, delegate: self)
+        userDafaultsManager = UserDefaultsManager(defaults: UserDefaults(suiteName: #file)!)
+        
+        viewModel = BirthDayViewModel(userDefaultsManager: userDafaultsManager, delegate: self)
         pushNavigation = false
     }
 
     override func tearDown() {
-        defaults.removePersistentDomain(forName: #file)
+        viewModel = nil
+        userDafaultsManager = nil
+        pushNavigation = nil
+        alerteTitle = nil
+        alerteDesciption = nil
         super.tearDown()
     }
 
@@ -35,7 +40,7 @@ class BirthDayViewModelTest: XCTestCase {
 
         viewModel.save(date: .date(testDate!))
 
-        let savedName = defaults.string(forKey: UserInfoKey.birthDay.rawValue)
+        let savedName = userDafaultsManager.getBirthDay()
         XCTAssertEqual(savedName, testBabyDate)
     }
 
@@ -44,7 +49,7 @@ class BirthDayViewModelTest: XCTestCase {
 
         viewModel.save(date: .stringDate(testBabyDate))
 
-        let savedName = defaults.string(forKey: UserInfoKey.birthDay.rawValue)
+        let savedName = userDafaultsManager.getBirthDay()
         XCTAssertEqual(savedName, testBabyDate)
     }
 

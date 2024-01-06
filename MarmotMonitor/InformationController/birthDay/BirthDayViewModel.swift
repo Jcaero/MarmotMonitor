@@ -12,11 +12,11 @@ protocol BirthDayDelegate: AnyObject {
 import Foundation
 
 final class BirthDayViewModel {
-    private let defaults: UserDefaults
+    private let userDefaultsManager: UserDefaultsManager!
     private weak var delegate: BirthDayDelegate?
 
-    init(defaults: UserDefaults = UserDefaults.standard, delegate: BirthDayDelegate?) {
-        self.defaults = defaults
+    init(userDefaultsManager:UserDefaultsManager = UserDefaultsManager(), delegate: BirthDayDelegate?) {
+        self.userDefaultsManager = userDefaultsManager
         self.delegate = delegate
     }
 
@@ -38,8 +38,7 @@ final class BirthDayViewModel {
         let dateIsValid = check(dateString)
 
         if dateIsValid {
-            defaults.set(dateString, forKey: UserInfoKey.birthDay.rawValue)
-
+            userDefaultsManager.saveDateOfBirth(dateString)
             delegate?.pushToNextView()
         }
     }

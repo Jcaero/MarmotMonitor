@@ -11,29 +11,19 @@ protocol GenderDelegate: AnyObject {
 }
 
 final class GenderViewModel {
-    private let defaults: UserDefaults
     var gender: Gender = .none
 
     private weak var delegate: GenderDelegate?
 
     // MARK: - init
     // init for test
-    init(defaults: UserDefaults = UserDefaults.standard, delegate: GenderDelegate?) {
-        self.defaults = defaults
+    init(delegate: GenderDelegate?) {
         self.delegate = delegate
     }
 
     func buttonTappedWithGender(_ gender: Gender) {
         self.gender = gender != self.gender ? gender : .none
         delegate?.showGender(self.gender)
-    }
-
-    func saveGender() {
-        if gender != .none {
-            defaults.set(gender.description, forKey: UserInfoKey.gender.rawValue)
-        } else {
-            defaults.removeObject(forKey: UserInfoKey.gender.rawValue)
-        }
     }
 }
 
