@@ -196,8 +196,7 @@ class TodayViewController: BackgroundViewController {
     private func setupContraints() {
         [scrollView, currentDate, welcomeLabel,
          babyImage, babyYear, babyMonth, yearLabel, monthLabel,
-         scrollArea,
-         tableView, tableViewArea, tableViewName].forEach {
+         scrollArea, tableView, tableViewArea, tableViewName].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -318,9 +317,10 @@ extension TodayViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        cell.textLabel?.text = viewModel.acitivityCellTitle[indexPath.row]
-        cell.detailTextLabel?.text = viewModel.acitivityCellSubTitle[indexPath.row]
-        cell.imageView?.image = UIImage(named: viewModel.imageName[indexPath.row])
+        let activitie = TodayViewModel.activities[indexPath.row]
+        cell.textLabel?.text = activitie.cellTitle
+        cell.detailTextLabel?.text = activitie.cellSubTitle
+        cell.imageView?.image = UIImage(named: activitie.imageName)
         cell.backgroundColor = .clear
         cell.accessoryType = .disclosureIndicator
         return cell

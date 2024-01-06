@@ -7,25 +7,32 @@
 
 import Foundation
 
-class TodayViewModel {
-    private let defaults: UserDefaults
-    let imageName = ["biberon", "couche", "sommeil", "croissance"]
-    let acitivityCellTitle = ["Dernière tétée/biberon", "Dernier sommeil", "Dernière couche", "Croissance"]
-    let acitivityCellSubTitle = ["Saisir la tétée/le biberon", "Saisir le sommeil", "Saisir la couche", "Ajouter une mesure"]
+struct Activity {
+    let imageName: String
+    let cellTitle: String
+    let cellSubTitle: String
+}
 
-    init(defaults: UserDefaults = UserDefaults.standard) {
-        self.defaults = defaults
+class TodayViewModel {
+    private let userDefaultsManager: UserDefaultManagerProtocol!
+
+    static let activities: [Activity] = [
+           Activity(imageName: "biberon", cellTitle: "Dernière tétée/biberon", cellSubTitle: "Saisir la tétée/le biberon"),
+           Activity(imageName: "couche", cellTitle: "Dernier sommeil", cellSubTitle: "Saisir le sommeil"),
+           Activity(imageName: "sommeil", cellTitle: "Dernière couche", cellSubTitle: "Saisir la couche"),
+           Activity(imageName: "croissance", cellTitle: "Croissance", cellSubTitle: "Ajouter une mesure")
+       ]
+
+    init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {
+        self.userDefaultsManager = userDefaultsManager
     }
 
     // MARK: - Person Data
-    func requestPersonData() -> Person? {
-        guard let babyName = defaults.string(forKey: UserInfoKey.babyName.rawValue) else { return nil }
-
-        let gender = defaults.string(forKey: UserInfoKey.gender.rawValue)
-
-        let parentName = defaults.string(forKey: UserInfoKey.parentName.rawValue)
-
-        let birthDayString = defaults.string(forKey: UserInfoKey.birthDay.rawValue)
+    private func requestPersonData() -> Person? {
+        guard let babyName = userDefaultsManager.getBabyName() else { return nil }
+        let gender = userDefaultsManager.getGender()
+        let parentName = userDefaultsManager.getParentName()
+        let birthDayString = userDefaultsManager.getBirthDay()
 
         return Person(name: babyName, gender: gender, parentName: parentName, birthDay: birthDayString)
     }

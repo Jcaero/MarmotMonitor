@@ -7,7 +7,18 @@
 
 import Foundation
 
-final class UserDefaultsManager {
+protocol UserDefaultManagerProtocol {
+    func saveBabyName(_ name: String?)
+    func saveGender(_ gender: Gender)
+    func saveParentName(_ name: String?)
+    func saveDateOfBirth(_ date: String?)
+    func getBabyName() -> String?
+    func getGender() -> String?
+    func getParentName() -> String?
+    func getBirthDay() -> String?
+}
+
+final class UserDefaultsManager: UserDefaultManagerProtocol {
     private let defaults: UserDefaults
 
     init(defaults: UserDefaults = UserDefaults.standard) {
@@ -54,9 +65,16 @@ final class UserDefaultsManager {
     }
 
     // Get Value
+    func getBabyName() -> String? {
+        return defaults.string(forKey: UserInfoKey.babyName.rawValue)
+    }
 
     func getGender() -> String? {
         return defaults.string(forKey: UserInfoKey.gender.rawValue)
+    }
+
+    func getParentName() -> String? {
+        return defaults.string(forKey: UserInfoKey.parentName.rawValue)
     }
 
     func getBirthDay() -> String? {

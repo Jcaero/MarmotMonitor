@@ -28,7 +28,7 @@ class UserDefaultsManagerTests: XCTestCase {
 
         userDefaultsManager.saveBabyName(testBabyName)
 
-        let savedName = defaults.string(forKey: UserInfoKey.babyName.rawValue)
+        let savedName = userDefaultsManager.getBabyName()
         XCTAssertEqual(savedName, testBabyName)
     }
 
@@ -37,7 +37,7 @@ class UserDefaultsManagerTests: XCTestCase {
 
         userDefaultsManager.saveBabyName(testBabyName)
 
-        let savedName = defaults.string(forKey: UserInfoKey.babyName.rawValue)
+        let savedName = userDefaultsManager.getBabyName()
         XCTAssertEqual(savedName, nil)
     }
 
@@ -46,7 +46,7 @@ class UserDefaultsManagerTests: XCTestCase {
 
         userDefaultsManager.saveBabyName(testBabyName)
 
-        let savedName = defaults.string(forKey: UserInfoKey.babyName.rawValue)
+        let savedName = userDefaultsManager.getBabyName()
         XCTAssertEqual(savedName, "Test")
     }
 
@@ -80,31 +80,31 @@ class UserDefaultsManagerTests: XCTestCase {
         let parentName = "Test"
         userDefaultsManager.saveParentName(parentName)
 
-        let savedGender = defaults.string(forKey: UserInfoKey.parentName.rawValue)
-        XCTAssertEqual(savedGender, parentName)
+        let savedParent = userDefaultsManager.getParentName()
+        XCTAssertEqual(savedParent, parentName)
     }
 
     func testParentHaveNameWithCapitalized_WhenSaveParent_ParentNameIsSave() {
         let parentName = "TeSt"
         userDefaultsManager.saveParentName(parentName)
 
-        let savedGender = defaults.string(forKey: UserInfoKey.parentName.rawValue)
-        XCTAssertEqual(savedGender, "Test")
+        let savedParent = userDefaultsManager.getParentName()
+        XCTAssertEqual(savedParent, "Test")
     }
 
     func testParentHaveNoName_WhenSaveParent_ParentNameIsNil() {
         let parentName = ""
         userDefaultsManager.saveParentName(parentName)
 
-        let savedGender = defaults.string(forKey: UserInfoKey.parentName.rawValue)
-        XCTAssertEqual(savedGender, nil)
+        let savedParent = userDefaultsManager.getParentName()
+        XCTAssertEqual(savedParent, nil)
     }
 
     func testParentIsNil_WhenSaveParent_ParentNameIsNil() {
         userDefaultsManager.saveParentName(nil)
 
-        let savedGender = defaults.string(forKey: UserInfoKey.parentName.rawValue)
-        XCTAssertEqual(savedGender, nil)
+        let savedParent = userDefaultsManager.getParentName()
+        XCTAssertEqual(savedParent, nil)
     }
 
     // MARK: - BirthDay
@@ -113,8 +113,8 @@ class UserDefaultsManagerTests: XCTestCase {
 
         userDefaultsManager.saveDateOfBirth(testBabyDate)
 
-        let savedName = defaults.string(forKey: UserInfoKey.birthDay.rawValue)
-        XCTAssertEqual(savedName, testBabyDate)
+        let savedBirthDay = userDefaultsManager.getBirthDay()
+        XCTAssertEqual(savedBirthDay, testBabyDate)
     }
 
     func testBabyHaveNoDate_WhenSaveBabyDate_NoDateHasBeenSave() {
@@ -122,15 +122,15 @@ class UserDefaultsManagerTests: XCTestCase {
 
         userDefaultsManager.saveDateOfBirth(testBabyDate)
 
-        let savedName = defaults.string(forKey: UserInfoKey.birthDay.rawValue)
-        XCTAssertEqual(savedName, nil)
+        let savedBirthDay = userDefaultsManager.getBirthDay()
+        XCTAssertEqual(savedBirthDay, nil)
     }
 
     func testBabyHaveNoData_WhenSaveBabyDate_NoDateHasBeenSave() {
 
         userDefaultsManager.saveDateOfBirth(nil)
 
-        let savedName = defaults.string(forKey: UserInfoKey.birthDay.rawValue)
-        XCTAssertEqual(savedName, nil)
+        let savedBirthDay = userDefaultsManager.getBirthDay()
+        XCTAssertEqual(savedBirthDay, nil)
     }
 }

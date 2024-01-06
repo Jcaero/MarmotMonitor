@@ -136,7 +136,7 @@ extension SleepController {
         viewModel.setDate(with: stopTimePicker.date)
 
         stopTimePicker.removeFromSuperview()
-        if let doneButton = self.view.subviews.first(where: { $0 is UIButton && ($0 as! UIButton).currentTitle == "Done" }) {
+        if let doneButton = self.view.subviews.first(where: { $0 is UIButton && ($0 as? UIButton)?.currentTitle == "Done" }) {
             doneButton.removeFromSuperview()
         }
     }
