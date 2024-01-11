@@ -20,9 +20,8 @@ extension DateActivity {
 
     public var activityArray: [Activity] {
         let set = activity as? Set<Activity> ?? []
-        return set.sorted {
-            $0.unwrappedName < $1.unwrappedName
-        }
+        return set.filter { _ in date != nil }
+            .sorted { _,_ in date > date }
     }
 }
 

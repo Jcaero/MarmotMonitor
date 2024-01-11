@@ -16,6 +16,9 @@ protocol UserDefaultManagerProtocol {
     func getGender() -> String?
     func getParentName() -> String?
     func getBirthDay() -> String?
+    
+//    func save(property: MarmotProperty)
+//    func get(property: MarmotProperty)
 }
 
 final class UserDefaultsManager: UserDefaultManagerProtocol {

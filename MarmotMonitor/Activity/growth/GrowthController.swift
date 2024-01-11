@@ -26,7 +26,7 @@ class GrowthController: ActivityController {
 
     var textFieldActif: UITextField?
 
-    let category: [Growth] = [.height, .weight, .head]
+    let category: [GrowthField] = [.height, .weight, .head]
     var growth : [String : Double] = [:]
 
     // MARK: - Cycle life

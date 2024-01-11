@@ -123,7 +123,7 @@ class GrowthCell: UITableViewCell {
     }
 
     // MARK: - Setup cell
-    func setupCell(with category: Growth, value: Double) {
+    func setupCell(with category: GrowthField, value: Double) {
         self.category.text = category.title
         self.unitOfMesure.text = category.unit
         setupTF(with: value)

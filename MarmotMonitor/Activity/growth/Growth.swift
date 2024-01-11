@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Growth {
+enum GrowthField {
     case height
     case weight
     case head

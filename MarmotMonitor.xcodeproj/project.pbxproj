@@ -61,6 +61,27 @@
 		47CABD8F2B128D6A00C5919A /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8E2B128D6A00C5919A /* UIApplication.swift */; };
 		47CABD912B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */; };
 		47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */; };
+		47D8DA5F2B4B37F000D97CD1 /* Solid+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA4F2B4B37F000D97CD1 /* Solid+CoreDataClass.swift */; };
+		47D8DA602B4B37F000D97CD1 /* Solid+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA502B4B37F000D97CD1 /* Solid+CoreDataProperties.swift */; };
+		47D8DA632B4B37F000D97CD1 /* Sleep+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA532B4B37F000D97CD1 /* Sleep+CoreDataClass.swift */; };
+		47D8DA642B4B37F000D97CD1 /* Sleep+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA542B4B37F000D97CD1 /* Sleep+CoreDataProperties.swift */; };
+		47D8DA652B4B37F000D97CD1 /* Bottle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA552B4B37F000D97CD1 /* Bottle+CoreDataClass.swift */; };
+		47D8DA662B4B37F000D97CD1 /* Bottle+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA562B4B37F000D97CD1 /* Bottle+CoreDataProperties.swift */; };
+		47D8DA672B4B37F000D97CD1 /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA572B4B37F000D97CD1 /* Activity+CoreDataClass.swift */; };
+		47D8DA682B4B37F000D97CD1 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA582B4B37F000D97CD1 /* Activity+CoreDataProperties.swift */; };
+		47D8DA692B4B37F000D97CD1 /* Breast+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA592B4B37F000D97CD1 /* Breast+CoreDataClass.swift */; };
+		47D8DA6A2B4B37F000D97CD1 /* Breast+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA5A2B4B37F000D97CD1 /* Breast+CoreDataProperties.swift */; };
+		47D8DA6B2B4B37F000D97CD1 /* Diaper+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA5B2B4B37F000D97CD1 /* Diaper+CoreDataClass.swift */; };
+		47D8DA6C2B4B37F000D97CD1 /* Diaper+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA5C2B4B37F000D97CD1 /* Diaper+CoreDataProperties.swift */; };
+		47D8DA6D2B4B37F000D97CD1 /* Growth+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA5D2B4B37F000D97CD1 /* Growth+CoreDataClass.swift */; };
+		47D8DA6E2B4B37F000D97CD1 /* Growth+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA5E2B4B37F000D97CD1 /* Growth+CoreDataProperties.swift */; };
+		47D8DA712B4B405800D97CD1 /* DateActivity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA6F2B4B405800D97CD1 /* DateActivity+CoreDataClass.swift */; };
+		47D8DA722B4B405800D97CD1 /* DateActivity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA702B4B405800D97CD1 /* DateActivity+CoreDataProperties.swift */; };
+		47D8DA742B4B45BE00D97CD1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA732B4B45BE00D97CD1 /* CoreDataManager.swift */; };
+		47D8DA762B4B461D00D97CD1 /* MarmotMonitorSaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA752B4B461D00D97CD1 /* MarmotMonitorSaveManager.swift */; };
+		47D8DA792B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA782B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift */; };
+		47D8DA7B2B4B4A0100D97CD1 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA7A2B4B4A0100D97CD1 /* TestCase.swift */; };
+		47D8DA7D2B4B4A9D00D97CD1 /* CoreDataManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA7C2B4B4A9D00D97CD1 /* CoreDataManagerMock.swift */; };
 		47E2A40B2B49848B008E75DD /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E2A40A2B49848B008E75DD /* UserDefaultManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -140,6 +161,27 @@
 		47CABD8E2B128D6A00C5919A /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorAuditAccessibility.swift; sourceTree = "<group>"; };
 		47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		47D8DA4F2B4B37F000D97CD1 /* Solid+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Solid+CoreDataClass.swift"; sourceTree = "<group>"; };
+		47D8DA502B4B37F000D97CD1 /* Solid+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Solid+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		47D8DA532B4B37F000D97CD1 /* Sleep+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sleep+CoreDataClass.swift"; sourceTree = "<group>"; };
+		47D8DA542B4B37F000D97CD1 /* Sleep+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sleep+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		47D8DA552B4B37F000D97CD1 /* Bottle+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bottle+CoreDataClass.swift"; sourceTree = "<group>"; };
+		47D8DA562B4B37F000D97CD1 /* Bottle+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bottle+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		47D8DA572B4B37F000D97CD1 /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		47D8DA582B4B37F000D97CD1 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		47D8DA592B4B37F000D97CD1 /* Breast+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Breast+CoreDataClass.swift"; sourceTree = "<group>"; };
+		47D8DA5A2B4B37F000D97CD1 /* Breast+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Breast+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		47D8DA5B2B4B37F000D97CD1 /* Diaper+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diaper+CoreDataClass.swift"; sourceTree = "<group>"; };
+		47D8DA5C2B4B37F000D97CD1 /* Diaper+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diaper+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		47D8DA5D2B4B37F000D97CD1 /* Growth+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Growth+CoreDataClass.swift"; sourceTree = "<group>"; };
+		47D8DA5E2B4B37F000D97CD1 /* Growth+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Growth+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		47D8DA6F2B4B405800D97CD1 /* DateActivity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateActivity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		47D8DA702B4B405800D97CD1 /* DateActivity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateActivity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		47D8DA732B4B45BE00D97CD1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		47D8DA752B4B461D00D97CD1 /* MarmotMonitorSaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorSaveManager.swift; sourceTree = "<group>"; };
+		47D8DA782B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitoSaveManagerTest.swift; sourceTree = "<group>"; };
+		47D8DA7A2B4B4A0100D97CD1 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
+		47D8DA7C2B4B4A9D00D97CD1 /* CoreDataManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerMock.swift; sourceTree = "<group>"; };
 		47E2A40A2B49848B008E75DD /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -306,6 +348,7 @@
 				474732572B123F8D0064ABB4 /* UserDefaultsManagerTest.swift */,
 				47CB30012B1F400F0054EAC7 /* started */,
 				470009D52B2E485C00EBEF86 /* home */,
+				47D8DA772B4B496100D97CD1 /* CoreDataTest */,
 			);
 			path = MarmotMonitorTests;
 			sourceTree = "<group>";
@@ -335,6 +378,24 @@
 			isa = PBXGroup;
 			children = (
 				475071E02B09462000DAB527 /* MarmotMonitor.xcdatamodeld */,
+				47D8DA732B4B45BE00D97CD1 /* CoreDataManager.swift */,
+				47D8DA752B4B461D00D97CD1 /* MarmotMonitorSaveManager.swift */,
+				47D8DA4F2B4B37F000D97CD1 /* Solid+CoreDataClass.swift */,
+				47D8DA502B4B37F000D97CD1 /* Solid+CoreDataProperties.swift */,
+				47D8DA532B4B37F000D97CD1 /* Sleep+CoreDataClass.swift */,
+				47D8DA542B4B37F000D97CD1 /* Sleep+CoreDataProperties.swift */,
+				47D8DA552B4B37F000D97CD1 /* Bottle+CoreDataClass.swift */,
+				47D8DA562B4B37F000D97CD1 /* Bottle+CoreDataProperties.swift */,
+				47D8DA572B4B37F000D97CD1 /* Activity+CoreDataClass.swift */,
+				47D8DA582B4B37F000D97CD1 /* Activity+CoreDataProperties.swift */,
+				47D8DA592B4B37F000D97CD1 /* Breast+CoreDataClass.swift */,
+				47D8DA5A2B4B37F000D97CD1 /* Breast+CoreDataProperties.swift */,
+				47D8DA5B2B4B37F000D97CD1 /* Diaper+CoreDataClass.swift */,
+				47D8DA5C2B4B37F000D97CD1 /* Diaper+CoreDataProperties.swift */,
+				47D8DA5D2B4B37F000D97CD1 /* Growth+CoreDataClass.swift */,
+				47D8DA5E2B4B37F000D97CD1 /* Growth+CoreDataProperties.swift */,
+				47D8DA6F2B4B405800D97CD1 /* DateActivity+CoreDataClass.swift */,
+				47D8DA702B4B405800D97CD1 /* DateActivity+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -415,6 +476,16 @@
 				478E790C2B138099004157AF /* BirthDayViewModelTest.swift */,
 			);
 			path = started;
+			sourceTree = "<group>";
+		};
+		47D8DA772B4B496100D97CD1 /* CoreDataTest */ = {
+			isa = PBXGroup;
+			children = (
+				47D8DA782B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift */,
+				47D8DA7A2B4B4A0100D97CD1 /* TestCase.swift */,
+				47D8DA7C2B4B4A9D00D97CD1 /* CoreDataManagerMock.swift */,
+			);
+			path = CoreDataTest;
 			sourceTree = "<group>";
 		};
 		47FB1DAE2B265BD90029EB2E /* BackgroundView */ = {
@@ -578,40 +649,58 @@
 			buildActionMask = 2147483647;
 			files = (
 				4704F2C32B2F98310060DCEE /* BottleFeedingController.swift in Sources */,
+				47D8DA672B4B37F000D97CD1 /* Activity+CoreDataClass.swift in Sources */,
 				4747324D2B1234BB0064ABB4 /* ParentNameController.swift in Sources */,
+				47D8DA6C2B4B37F000D97CD1 /* Diaper+CoreDataProperties.swift in Sources */,
 				474EE9062B3B69100047054B /* GrowthCell.swift in Sources */,
+				47D8DA762B4B461D00D97CD1 /* MarmotMonitorSaveManager.swift in Sources */,
 				470009D12B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift in Sources */,
+				47D8DA6A2B4B37F000D97CD1 /* Breast+CoreDataProperties.swift in Sources */,
 				47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */,
 				478E79102B138200004157AF /* String+.swift in Sources */,
 				4748E64A2B30DFDF0082A0CE /* SolideFeedingViewModel.swift in Sources */,
+				47D8DA632B4B37F000D97CD1 /* Sleep+CoreDataClass.swift in Sources */,
 				474C945B2B2B9FFE009A7D74 /* FoodTapBar.swift in Sources */,
 				47E2A40B2B49848B008E75DD /* UserDefaultManager.swift in Sources */,
 				476AF6302B27A10100F4935F /* UIButton+.swift in Sources */,
 				472DDABD2B2DEF1600812024 /* UISegmented+.swift in Sources */,
+				47D8DA642B4B37F000D97CD1 /* Sleep+CoreDataProperties.swift in Sources */,
 				4750720E2B09576900DAB527 /* TapBarController.swift in Sources */,
 				47155BCD2B1DEBDB00775B27 /* TodayViewModel.swift in Sources */,
 				4735B26B2B1140D8000F2B8C /* ViewForInformationController.swift in Sources */,
+				47D8DA712B4B405800D97CD1 /* DateActivity+CoreDataClass.swift in Sources */,
 				47A0E6B62B3B13B400F894A1 /* GrowthController.swift in Sources */,
+				47D8DA602B4B37F000D97CD1 /* Solid+CoreDataProperties.swift in Sources */,
 				474732532B1239CF0064ABB4 /* GenderViewModel.swift in Sources */,
+				47D8DA6E2B4B37F000D97CD1 /* Growth+CoreDataProperties.swift in Sources */,
 				47155BCA2B1DE97000775B27 /* TodayViewController.swift in Sources */,
 				4767543C2B3792BC00C83E6D /* SleepCell.swift in Sources */,
+				47D8DA662B4B37F000D97CD1 /* Bottle+CoreDataProperties.swift in Sources */,
 				47494BD52B35ADAD002A0A93 /* ActivityController.swift in Sources */,
+				47D8DA682B4B37F000D97CD1 /* Activity+CoreDataProperties.swift in Sources */,
 				4767543A2B37912F00C83E6D /* BackGroundActivity.swift in Sources */,
 				4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */,
 				4726966A2B3D8A18006BC301 /* SleepViewModel.swift in Sources */,
+				47D8DA722B4B405800D97CD1 /* DateActivity+CoreDataProperties.swift in Sources */,
 				4792CB592B3063720010AE38 /* SolideFeedingController.swift in Sources */,
 				478E79072B1370DC004157AF /* BirthDayController.swift in Sources */,
 				478E79092B1375F3004157AF /* BirthDayViewModel.swift in Sources */,
+				47D8DA6B2B4B37F000D97CD1 /* Diaper+CoreDataClass.swift in Sources */,
 				4719ABE52B0E96380088CBE2 /* BabyNameController.swift in Sources */,
+				47D8DA652B4B37F000D97CD1 /* Bottle+CoreDataClass.swift in Sources */,
 				47155BC82B1DE6E000775B27 /* BackgroundViewController.swift in Sources */,
 				47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */,
+				47D8DA5F2B4B37F000D97CD1 /* Solid+CoreDataClass.swift in Sources */,
 				478E790B2B137CD1004157AF /* Date+.swift in Sources */,
+				47D8DA742B4B45BE00D97CD1 /* CoreDataManager.swift in Sources */,
 				4792CB5B2B3068270010AE38 /* SolideCell.swift in Sources */,
 				47494BD32B35A7F9002A0A93 /* SleepController.swift in Sources */,
 				4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */,
 				47AF89782B3A29E90068FE1F /* diaperCell.swift in Sources */,
 				4738B4D22B287D830041ECF0 /* Int+.swift in Sources */,
+				47D8DA6D2B4B37F000D97CD1 /* Growth+CoreDataClass.swift in Sources */,
 				475071D82B09462000DAB527 /* AppDelegate.swift in Sources */,
+				47D8DA692B4B37F000D97CD1 /* Breast+CoreDataClass.swift in Sources */,
 				47AF89762B3A28200068FE1F /* diaperController.swift in Sources */,
 				4777ABEF2B2501710055DF4A /* BreastFeedingController.swift in Sources */,
 				470991972B3C40B200590174 /* Growth.swift in Sources */,
@@ -628,8 +717,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47D8DA792B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift in Sources */,
 				474732582B123F8D0064ABB4 /* UserDefaultsManagerTest.swift in Sources */,
+				47D8DA7B2B4B4A0100D97CD1 /* TestCase.swift in Sources */,
 				478E790D2B138099004157AF /* BirthDayViewModelTest.swift in Sources */,
+				47D8DA7D2B4B4A9D00D97CD1 /* CoreDataManagerMock.swift in Sources */,
 				4748658A2B49F1AF00CB5E29 /* UserDefaultsManagerMock.swift in Sources */,
 				4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */,
 				4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */,
