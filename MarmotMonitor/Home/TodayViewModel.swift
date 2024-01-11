@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ActivityType {
+struct ActivityData {
     let imageName: String
     let cellTitle: String
     let cellSubTitle: String
@@ -16,11 +16,11 @@ struct ActivityType {
 class TodayViewModel {
     private let userDefaultsManager: UserDefaultManagerProtocol!
 
-    static let activities: [ActivityType] = [
-           ActivityType(imageName: "biberon", cellTitle: "Dernière tétée/biberon", cellSubTitle: "Saisir la tétée/le biberon"),
-           ActivityType(imageName: "couche", cellTitle: "Dernier sommeil", cellSubTitle: "Saisir le sommeil"),
-           ActivityType(imageName: "sommeil", cellTitle: "Dernière couche", cellSubTitle: "Saisir la couche"),
-           ActivityType(imageName: "croissance", cellTitle: "Croissance", cellSubTitle: "Ajouter une mesure")
+    static let activities: [ActivityData] = [
+           ActivityData(imageName: "biberon", cellTitle: "Dernière tétée/biberon", cellSubTitle: "Saisir la tétée/le biberon"),
+           ActivityData(imageName: "couche", cellTitle: "Dernier sommeil", cellSubTitle: "Saisir le sommeil"),
+           ActivityData(imageName: "sommeil", cellTitle: "Dernière couche", cellSubTitle: "Saisir la couche"),
+           ActivityData(imageName: "croissance", cellTitle: "Croissance", cellSubTitle: "Ajouter une mesure")
        ]
 
     init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {

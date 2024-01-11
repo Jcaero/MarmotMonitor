@@ -25,7 +25,6 @@ final class CoreDataManager: CoreDataManagerProtocol {
 
     // MARK: - INIT
     init(modelName: String) {
-
         persistentContainer = NSPersistentContainer(name: modelName)
         viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
@@ -38,17 +37,17 @@ final class CoreDataManager: CoreDataManagerProtocol {
     }
 
     func save() {
-        if viewContext.hasChanges {
-            do {
-                try viewContext.save()
-            } catch {
-                print("Error while saving: \(error.localizedDescription )")
-            }
+        guard viewContext.hasChanges else {
+            return
+        }
+        do {
+            try self.viewContext.save()
+        } catch {
+            print("Error while saving: \(error.localizedDescription )")
         }
     }
 
     var viewContext: NSManagedObjectContext {
-        return persistentContainer.newBackgroundContext()
-//        return persistentContainer.viewContext
+        return persistentContainer.viewContext
     }
 }

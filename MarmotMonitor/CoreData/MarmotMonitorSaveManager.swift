@@ -8,12 +8,16 @@ import CoreData
 import UIKit
 
 protocol MarmotMonitorSaveManagerProtocol {
-    func saveDiaper(_ state: String, date: Date)
-    func saveBottle(_ quantity: Int, date: Date)
-    func fetchDiapers() -> [Diaper]
-    func testDiaperFetch() -> [Diaper]
+    func saveActivity(_ activityType: ActivityType, date: Date)
     func fetchDateActivities() -> [DateActivity]
     func saveDate(date: Date)
+    func fetchDateActivitiesWithDate(from startDate: Date, to endDate: Date) -> [DateActivity]
+    func clearDatabase()
+}
+
+enum ActivityType {
+    case diaper(state: String)
+    case bottle(quantity: Int)
 }
 
 final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
@@ -32,90 +36,129 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
 
     // MARK: - Save
     func saveDate(date: Date) {
-        let activityDate = DateActivity(context: context)
-        activityDate.date = date
+        let activityDate = fetchOrCreateDateActivity(for: date)
 
         coreDataManager.save()
     }
 
-    func saveDiaper(_ state: String, date: Date) {
-        let activityDate = DateActivity(context: context)
-        activityDate.date = date
+    func saveActivity(_ activityType: ActivityType, date: Date) {
+        let activityDate = fetchOrCreateDateActivity(for: date)
 
-        let diaper = Diaper(context: context)
-        diaper.state = state
+        switch activityType {
+        case .diaper(let state):
+            let diaper = Diaper(context: context)
+            diaper.state = state
+            activityDate.addToActivity(diaper)
 
-        activityDate.addToActivity(diaper)
+        case .bottle(let quantity):
+            let bottle = Bottle(context: context)
+            bottle.quantity = Int16(quantity)
+            activityDate.addToActivity(bottle)
+        }
+
         coreDataManager.save()
     }
 
-    func saveBottle(_ quantity: Int, date: Date) {
-        let activityDate = DateActivity(context: context)
-        activityDate.date = date
+    private func fetchDateActivity(for date: Date) -> DateActivity? {
+        let fetchRequest: NSFetchRequest<DateActivity> = DateActivity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "date == %@", date as NSDate)
+        fetchRequest.fetchLimit = 1
 
-        let bottle = Bottle(context: context)
-        bottle.quantity = Int16(quantity)
+        do {
+            let results = try context.fetch(fetchRequest)
+            return results.first
+        } catch {
+            print("Erreur lors de la récupération de DateActivity: \(error)")
+            return nil
+        }
+    }
 
-        activityDate.addToActivity(bottle)
-        coreDataManager.save()
+    private func createDateActivity(for date: Date) -> DateActivity {
+        let newActivity = DateActivity(context: context)
+        newActivity.date = date
+        return newActivity
+    }
+
+    /// Fetches a DateActivity object for a given date, or creates one if none is found
+    /// - Parameter date: The date to fetch or create an activity for
+    private func fetchOrCreateDateActivity(for date: Date) -> DateActivity {
+        if let existingActivity = fetchDateActivity(for: date) {
+            return existingActivity
+        } else {
+            return createDateActivity(for: date)
+        }
     }
 
     // MARK: - Fetch
-    private func fetchActivities<T: Activity>(ofType type: T.Type, in context: NSManagedObjectContext) -> [T] {
-        let request = NSFetchRequest<T>(entityName: String(describing: type))
-        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        do {
-            let results = try context.fetch(request)
-            return results
-        } catch {
-            print("Erreur lors de la récupération des activités: \(error)")
-            return []
-        }
-    }
 
-    func testDiaperFetch() -> [Diaper] {
-        do {
-            return try context.fetch(Diaper.fetchRequest())
-        } catch {
-            print("Erreur lors de la récupération des activités: \(error)")
-            return []
-        }
-    }
-
-    func fetchDiapers() -> [Diaper] {
-        return fetchActivities(ofType: Diaper.self, in: context)
-    }
-
+    /// Fetches all DateActivity objects from the last 7 days
     func fetchDateActivities() -> [DateActivity] {
-        let request = NSFetchRequest<DateActivity>(entityName: "DateActivity")
-        // range les dates par ordre décroissant
-        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        var fetchedResults = [DateActivity]()
 
-        // test predicate
-        // get the current calendar
-        let calendar = Calendar.current
-        // get the start of the day of the selected date
-        let startDate = calendar.date(byAdding: .day, value: -7, to: Date())!
-        // get the start of the day after the selected date
-        let endDate = calendar.startOfDay(for: Date())
-        // create a predicate to filter between start date and end date
-        let predicate = NSPredicate(format: "date >= %@ AND date < %@", startDate as NSDate, endDate as NSDate)
-        request.predicate = predicate
+            let request = NSFetchRequest<DateActivity>(entityName: "DateActivity")
+            request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+
+            // Prépare un prédicat pour filtrer les activités des 7 derniers jours
+            let calendar = Calendar.current
+            let startDate = calendar.date(byAdding: .day, value: -7, to: Date())!
+            let endDate = calendar.startOfDay(for: Date())
+            let predicate = NSPredicate(format: "date >= %@ AND date < %@", startDate as NSDate, endDate as NSDate)
+            request.predicate = predicate
+
+            do {
+                let results = try context.fetch(request)
+                // Enlève les dates sans activités
+                fetchedResults = results.filter { !$0.activityArray.isEmpty }
+            } catch {
+                print("Erreur lors de la récupération des activités: \(error)")
+            }
+
+        return fetchedResults
+    }
+
+    /// Fetches all DateActivity objects between two dates
+    /// - Parameters:
+    ///  - startDate: The start date
+    ///  - endDate: The end date
+    func fetchDateActivitiesWithDate(from startDate: Date, to endDate: Date) -> [DateActivity] {
+        var fetchedResults = [DateActivity]()
+
+            let request = NSFetchRequest<DateActivity>(entityName: "DateActivity")
+            request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+
+            // Utilise les dates de début et de fin fournies en tant que paramètres pour le prédicat
+            let predicate = NSPredicate(format: "date >= %@ AND date < %@", startDate as NSDate, endDate as NSDate)
+            request.predicate = predicate
+
+            do {
+                let results = try context.fetch(request)
+                // Enlève les dates sans activités
+                fetchedResults = results.filter { !$0.activityArray.isEmpty }
+            } catch {
+                print("Erreur lors de la récupération des activités: \(error)")
+            }
+
+        return fetchedResults
+    }
+
+    /// delete all data from database
+    func clearDatabase() {
+        let entities = context.persistentStoreCoordinator!.managedObjectModel.entities
+        for entity in entities {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+            do {
+                try context.execute(deleteRequest)
+            } catch let error as NSError {
+                print("Erreur lors de la suppression des entités \(entity.name!): \(error), \(error.userInfo)")
+            }
+        }
 
         do {
-            let results = try context.fetch(request)
-            // enleve les dates sans activités
-            return results.filter { $0.activityArray.isEmpty == false }
-        } catch {
-            print("Erreur lors de la récupération des activités: \(error)")
-            return []
+            try context.save()
+        } catch let error as NSError {
+            print("Erreur lors de la sauvegarde du contexte: \(error), \(error.userInfo)")
         }
     }
 }
-
-//
-//    return dateActivities.map { dateActivity in
-//        let diapers = dateActivity.activityArray.compactMap { $0 as? Diaper }
-//        let bottles = dateActivity.activityArray.compactMap { $0 as? Bottle }
-//        return (dateActivity, diapers, bottles)
-//    }

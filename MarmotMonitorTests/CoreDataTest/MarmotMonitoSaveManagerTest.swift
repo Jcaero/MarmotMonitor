@@ -22,16 +22,8 @@ final class MarmotMonitoSaveManagerTest: TestCase {
     }
 
     override func tearDownWithError() throws {
+        marmotMonitorSaveManager.clearDatabase()
         marmotMonitorSaveManager = nil
-    }
-
-    func testCoreDataHaveDiaper_WhenCallFethDiaper_ReturnArrayOfDiaper() {
-        let date = Date()
-        marmotMonitorSaveManager.saveDiaper("Urine", date: date)
-
-        let result = marmotMonitorSaveManager.fetchDiapers()
-
-        XCTAssertEqual(result[0].state, "Urine")
     }
 
     func testCoreData() {
@@ -39,9 +31,9 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         let testSecondDate = "06/01/2023".toDate()
         let testThirdDate = "05/01/2024".toDate()
     
-        marmotMonitorSaveManager.saveDiaper("Urine", date: testFirstDate!)
-        marmotMonitorSaveManager.saveDiaper("Mixte", date: testSecondDate!)
-        marmotMonitorSaveManager.saveBottle(100, date: testFirstDate!)
+        marmotMonitorSaveManager.saveActivity(.diaper(state: "Urine"), date: testFirstDate!)
+        marmotMonitorSaveManager.saveActivity(.diaper(state: "Mixte"), date: testThirdDate!)
+        marmotMonitorSaveManager.saveActivity(.bottle(quantity: 100), date: testFirstDate!)
         marmotMonitorSaveManager.saveDate(date: testThirdDate!)
 
         let dateActivities = marmotMonitorSaveManager.fetchDateActivities()
@@ -56,15 +48,25 @@ final class MarmotMonitoSaveManagerTest: TestCase {
 //        XCTAssertEqual(result[0].state, "Mixte")
     }
 
+    func testCoreDataAvecDate() {
+        let testFirstDate = "07/01/2024 22:30".toDateWithTime()
+        let testSecondDate = "06/01/2023".toDate()
+        let testThirdDate = "05/01/2024".toDate()
+        let activityEndDate = "08/01/2024".toDate()
+        let activityStartDate = "06/01/2024".toDate()
+    
+        marmotMonitorSaveManager.saveActivity(.diaper(state: "Urine"), date: testFirstDate!)
+        marmotMonitorSaveManager.saveActivity(.diaper(state: "Mixte"), date: testThirdDate!)
+        marmotMonitorSaveManager.saveActivity(.bottle(quantity: 100), date: testFirstDate!)
+        marmotMonitorSaveManager.saveDate(date: testThirdDate!)
 
-    func testCoreDataHaveBottle_WhenCallFethBottle_ReturnArrayOfBottle() {
-        let date = Date()
-        marmotMonitorSaveManager.saveBottle(100, date: date)
+        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: activityStartDate!, to: activityEndDate!)
+        print ("dateActivities activityArray = \(dateActivities[0].activityArray.count)")
+        let diapers = dateActivities.filter { $0.activityArray.contains(where: { $0 is Diaper }) }
 
-        let result = marmotMonitorSaveManager.fetchDiapers()
-
-        XCTAssertEqual(result[0].state, "Urine")
+        print ("dateActivities = \(dateActivities.count)")
+        print ("diapers = \(diapers.count)")
+        print ("\(String(describing: dateActivities[0].date))")
     }
-
 }
 

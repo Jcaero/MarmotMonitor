@@ -55,6 +55,20 @@ class CoreDataManagerMock: CoreDataManagerProtocol {
         }
     }
 
+    func clearDatabase() {
+            let context = persistentContainer.viewContext
+
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "YourEntityName") // Remplacez par le nom de votre entité
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+            do {
+                try context.execute(deleteRequest)
+                try context.save()
+            } catch let error as NSError {
+                print("Erreur lors de la suppression des données: \(error), \(error.userInfo)")
+            }
+        }
+
     var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }

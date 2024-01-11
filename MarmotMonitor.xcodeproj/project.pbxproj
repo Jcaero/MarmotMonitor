@@ -259,6 +259,29 @@
 			path = InformationController;
 			sourceTree = "<group>";
 		};
+		4745DB7A2B501ED7003C440D /* model */ = {
+			isa = PBXGroup;
+			children = (
+				47D8DA4F2B4B37F000D97CD1 /* Solid+CoreDataClass.swift */,
+				47D8DA502B4B37F000D97CD1 /* Solid+CoreDataProperties.swift */,
+				47D8DA532B4B37F000D97CD1 /* Sleep+CoreDataClass.swift */,
+				47D8DA542B4B37F000D97CD1 /* Sleep+CoreDataProperties.swift */,
+				47D8DA552B4B37F000D97CD1 /* Bottle+CoreDataClass.swift */,
+				47D8DA562B4B37F000D97CD1 /* Bottle+CoreDataProperties.swift */,
+				47D8DA572B4B37F000D97CD1 /* Activity+CoreDataClass.swift */,
+				47D8DA582B4B37F000D97CD1 /* Activity+CoreDataProperties.swift */,
+				47D8DA592B4B37F000D97CD1 /* Breast+CoreDataClass.swift */,
+				47D8DA5A2B4B37F000D97CD1 /* Breast+CoreDataProperties.swift */,
+				47D8DA5B2B4B37F000D97CD1 /* Diaper+CoreDataClass.swift */,
+				47D8DA5C2B4B37F000D97CD1 /* Diaper+CoreDataProperties.swift */,
+				47D8DA5D2B4B37F000D97CD1 /* Growth+CoreDataClass.swift */,
+				47D8DA5E2B4B37F000D97CD1 /* Growth+CoreDataProperties.swift */,
+				47D8DA6F2B4B405800D97CD1 /* DateActivity+CoreDataClass.swift */,
+				47D8DA702B4B405800D97CD1 /* DateActivity+CoreDataProperties.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		474732502B1239300064ABB4 /* BabyName */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,22 +403,7 @@
 				475071E02B09462000DAB527 /* MarmotMonitor.xcdatamodeld */,
 				47D8DA732B4B45BE00D97CD1 /* CoreDataManager.swift */,
 				47D8DA752B4B461D00D97CD1 /* MarmotMonitorSaveManager.swift */,
-				47D8DA4F2B4B37F000D97CD1 /* Solid+CoreDataClass.swift */,
-				47D8DA502B4B37F000D97CD1 /* Solid+CoreDataProperties.swift */,
-				47D8DA532B4B37F000D97CD1 /* Sleep+CoreDataClass.swift */,
-				47D8DA542B4B37F000D97CD1 /* Sleep+CoreDataProperties.swift */,
-				47D8DA552B4B37F000D97CD1 /* Bottle+CoreDataClass.swift */,
-				47D8DA562B4B37F000D97CD1 /* Bottle+CoreDataProperties.swift */,
-				47D8DA572B4B37F000D97CD1 /* Activity+CoreDataClass.swift */,
-				47D8DA582B4B37F000D97CD1 /* Activity+CoreDataProperties.swift */,
-				47D8DA592B4B37F000D97CD1 /* Breast+CoreDataClass.swift */,
-				47D8DA5A2B4B37F000D97CD1 /* Breast+CoreDataProperties.swift */,
-				47D8DA5B2B4B37F000D97CD1 /* Diaper+CoreDataClass.swift */,
-				47D8DA5C2B4B37F000D97CD1 /* Diaper+CoreDataProperties.swift */,
-				47D8DA5D2B4B37F000D97CD1 /* Growth+CoreDataClass.swift */,
-				47D8DA5E2B4B37F000D97CD1 /* Growth+CoreDataProperties.swift */,
-				47D8DA6F2B4B405800D97CD1 /* DateActivity+CoreDataClass.swift */,
-				47D8DA702B4B405800D97CD1 /* DateActivity+CoreDataProperties.swift */,
+				4745DB7A2B501ED7003C440D /* model */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
