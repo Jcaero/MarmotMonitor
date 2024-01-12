@@ -15,7 +15,7 @@ extension Breast {
         return NSFetchRequest<Breast>(entityName: "Breast")
     }
 
-    @NSManaged public var first: Int16
+    @NSManaged public var first: String
     @NSManaged public var leftDuration: Int16
     @NSManaged public var rightDuration: Int16
 

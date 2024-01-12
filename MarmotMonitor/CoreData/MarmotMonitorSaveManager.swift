@@ -7,6 +7,10 @@
 import CoreData
 import UIKit
 
+protocol MarmotMonitorSaveManagerDelegate: AnyObject {
+    func showAlert(title: String, description: String)
+}
+
 protocol MarmotMonitorSaveManagerProtocol {
     func saveActivity(_ activityType: ActivityType, date: Date)
     func fetchDateActivitiesWithDate(from startDate: Date, to endDate: Date) -> [DateActivity]
@@ -19,23 +23,32 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
 
     private let coreDataManager: CoreDataManagerProtocol
     private let context: NSManagedObjectContext!
+    private weak var delegate: MarmotMonitorSaveManagerDelegate?
 
     // MARK: - Init
 
-    init(coreDataManager: CoreDataManagerProtocol = CoreDataManager.sharedInstance) {
+    init(coreDataManager: CoreDataManagerProtocol = CoreDataManager.sharedInstance, delegate: MarmotMonitorSaveManagerDelegate?) {
         self.coreDataManager = coreDataManager
         context = coreDataManager.viewContext
+        self.delegate = delegate
     }
 
     // MARK: - Save
     /// Saves an activity to the database
     /// - Note: If no DateActivity object exists for the given date, one will be created
     /// - Note: If a DateActivity object already exists for the given date, the activity will be added to it
+    /// - Note: If one of the same activity type already exists for the given date, an alert will be shown
     /// - Parameters:
     ///  - activityType: The type of activity to save
     ///  - date: The date to save the activity for
     func saveActivity(_ activityType: ActivityType, date: Date) {
         let activityDate = fetchOrCreateDateActivity(for: date)
+        
+        let activityExists = verifyExistenceOf(activityType, in: activityDate)
+        guard !activityExists else {
+            delegate?.showAlert(title: "Erreur", description: activityType.alertMessage)
+            return
+        }
 
         switch activityType {
         case .diaper(let state):
@@ -47,8 +60,26 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
             let bottle = Bottle(context: context)
             bottle.quantity = Int16(quantity)
             activityDate.addToActivity(bottle)
+
+        case .breast(duration: let breastSession):
+            let breast = Breast(context: context)
+            breast.leftDuration = Int16(breastSession.leftDuration)
+            breast.rightDuration = Int16(breastSession.rightDuration)
+            breast.first = breastSession.first.rawValue
+            activityDate.addToActivity(breast)
         }
         coreDataManager.save()
+    }
+
+    private func verifyExistenceOf(_ activityType: ActivityType, in dateActivity: DateActivity) -> Bool {
+        switch activityType {
+        case .diaper:
+            return dateActivity.activityArray.contains(where: { $0 as? Diaper != nil })
+        case .bottle:
+            return dateActivity.activityArray.contains(where: { $0 as? Bottle != nil })
+        case .breast:
+            return dateActivity.activityArray.contains(where: { $0 as? Breast != nil })
+        }
     }
 
     /// Fetches a DateActivity object for a given date, or creates one if none is found
