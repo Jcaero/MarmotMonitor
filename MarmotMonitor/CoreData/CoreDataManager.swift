@@ -12,6 +12,7 @@ protocol CoreDataManagerProtocol {
     var viewContext: NSManagedObjectContext { get }
     func load(completion: (() -> Void)?)
     func save()
+    func clearDatabase()
 }
 
 final class CoreDataManager: CoreDataManagerProtocol {
@@ -49,5 +50,20 @@ final class CoreDataManager: CoreDataManagerProtocol {
 
     var viewContext: NSManagedObjectContext {
         return persistentContainer.viewContext
+    }
+
+    func clearDatabase() {
+        let entities = persistentContainer.managedObjectModel.entities
+        for entity in entities {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+            do {
+                try persistentContainer.viewContext.execute(deleteRequest)
+            } catch let error as NSError {
+                print("Erreur lors de la suppression des entités \(entity.name!): \(error), \(error.userInfo)")
+            }
+        }
+        save()
     }
 }

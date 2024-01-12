@@ -9,15 +9,8 @@ import UIKit
 
 protocol MarmotMonitorSaveManagerProtocol {
     func saveActivity(_ activityType: ActivityType, date: Date)
-    func fetchDateActivities() -> [DateActivity]
-    func saveDate(date: Date)
     func fetchDateActivitiesWithDate(from startDate: Date, to endDate: Date) -> [DateActivity]
     func clearDatabase()
-}
-
-enum ActivityType {
-    case diaper(state: String)
-    case bottle(quantity: Int)
 }
 
 final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
@@ -35,19 +28,19 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
     }
 
     // MARK: - Save
-    func saveDate(date: Date) {
-        let activityDate = fetchOrCreateDateActivity(for: date)
-
-        coreDataManager.save()
-    }
-
+    /// Saves an activity to the database
+    /// - Note: If no DateActivity object exists for the given date, one will be created
+    /// - Note: If a DateActivity object already exists for the given date, the activity will be added to it
+    /// - Parameters:
+    ///  - activityType: The type of activity to save
+    ///  - date: The date to save the activity for
     func saveActivity(_ activityType: ActivityType, date: Date) {
         let activityDate = fetchOrCreateDateActivity(for: date)
 
         switch activityType {
         case .diaper(let state):
             let diaper = Diaper(context: context)
-            diaper.state = state
+            diaper.state = state.rawValue
             activityDate.addToActivity(diaper)
 
         case .bottle(let quantity):
@@ -55,10 +48,34 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
             bottle.quantity = Int16(quantity)
             activityDate.addToActivity(bottle)
         }
-
         coreDataManager.save()
     }
 
+    /// Fetches a DateActivity object for a given date, or creates one if none is found
+    /// - Parameter date: The date to fetch or create an activity for
+    /// - Returns: The DateActivity object for the given date
+    /// - Note: If no DateActivity object exists for the given date, one will be created
+    private func fetchOrCreateDateActivity(for date: Date) -> DateActivity {
+        if let existingActivity = fetchDateActivity(for: date) {
+            return existingActivity
+        } else {
+            return createDateActivity(for: date)
+        }
+    }
+
+    /// Creates a DateActivity object for a given date
+    /// - Parameter date: The date to create an activity for
+    /// - Returns: The newly created DateActivity object
+    private func createDateActivity(for date: Date) -> DateActivity {
+        let newActivity = DateActivity(context: context)
+        newActivity.date = date
+        return newActivity
+    }
+
+    // MARK: - Fetch
+    /// Fetches DateActivity objects for a given date
+    /// - Parameter date: The date to fetch activities for
+    /// - Returns: The DateActivity object for the given date
     private func fetchDateActivity(for date: Date) -> DateActivity? {
         let fetchRequest: NSFetchRequest<DateActivity> = DateActivity.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "date == %@", date as NSDate)
@@ -68,97 +85,65 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
             let results = try context.fetch(fetchRequest)
             return results.first
         } catch {
-            print("Erreur lors de la récupération de DateActivity: \(error)")
+            print("No date Activity found for \(date)")
             return nil
         }
     }
 
-    private func createDateActivity(for date: Date) -> DateActivity {
-        let newActivity = DateActivity(context: context)
-        newActivity.date = date
-        return newActivity
-    }
+//    /// Fetches all DateActivity objects from the last 7 days
+//    func fetchDateActivities() -> [DateActivity] {
+//        var fetchedResults = [DateActivity]()
+//
+//            let request = NSFetchRequest<DateActivity>(entityName: "DateActivity")
+//            request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+//
+//            // Prépare un prédicat pour filtrer les activités des 7 derniers jours
+//            let calendar = Calendar.current
+//            let startDate = calendar.date(byAdding: .day, value: -7, to: Date())!
+//            let endDate = calendar.startOfDay(for: Date())
+//            let predicate = NSPredicate(format: "date >= %@ AND date < %@", startDate as NSDate, endDate as NSDate)
+//            request.predicate = predicate
+//
+//            do {
+//                let results = try context.fetch(request)
+//                // Enlève les dates sans activités
+//                fetchedResults = results.filter { !$0.activityArray.isEmpty }
+//            } catch {
+//                print("Erreur lors de la récupération des activités: \(error)")
+//            }
+//
+//        return fetchedResults
+//    }
 
-    /// Fetches a DateActivity object for a given date, or creates one if none is found
-    /// - Parameter date: The date to fetch or create an activity for
-    private func fetchOrCreateDateActivity(for date: Date) -> DateActivity {
-        if let existingActivity = fetchDateActivity(for: date) {
-            return existingActivity
-        } else {
-            return createDateActivity(for: date)
-        }
-    }
-
-    // MARK: - Fetch
-
-    /// Fetches all DateActivity objects from the last 7 days
-    func fetchDateActivities() -> [DateActivity] {
-        var fetchedResults = [DateActivity]()
-
-            let request = NSFetchRequest<DateActivity>(entityName: "DateActivity")
-            request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-
-            // Prépare un prédicat pour filtrer les activités des 7 derniers jours
-            let calendar = Calendar.current
-            let startDate = calendar.date(byAdding: .day, value: -7, to: Date())!
-            let endDate = calendar.startOfDay(for: Date())
-            let predicate = NSPredicate(format: "date >= %@ AND date < %@", startDate as NSDate, endDate as NSDate)
-            request.predicate = predicate
-
-            do {
-                let results = try context.fetch(request)
-                // Enlève les dates sans activités
-                fetchedResults = results.filter { !$0.activityArray.isEmpty }
-            } catch {
-                print("Erreur lors de la récupération des activités: \(error)")
-            }
-
-        return fetchedResults
-    }
-
-    /// Fetches all DateActivity objects between two dates
+    /// Fetches only all DateActivity objects between two dates
     /// - Parameters:
     ///  - startDate: The start date
     ///  - endDate: The end date
+    ///  - Returns: The DateActivity objects between the two dates
+    ///  - Note: The start date is included, the end date is excluded
     func fetchDateActivitiesWithDate(from startDate: Date, to endDate: Date) -> [DateActivity] {
         var fetchedResults = [DateActivity]()
 
-            let request = NSFetchRequest<DateActivity>(entityName: "DateActivity")
-            request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        let request = NSFetchRequest<DateActivity>(entityName: "DateActivity")
+//          Ici ou dans le fichier DataProprieties via le sorted  activityArray
+//        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
 
-            // Utilise les dates de début et de fin fournies en tant que paramètres pour le prédicat
-            let predicate = NSPredicate(format: "date >= %@ AND date < %@", startDate as NSDate, endDate as NSDate)
-            request.predicate = predicate
+        let predicate = NSPredicate(format: "date >= %@ AND date < %@", startDate as NSDate, endDate as NSDate)
+        request.predicate = predicate
 
-            do {
-                let results = try context.fetch(request)
-                // Enlève les dates sans activités
-                fetchedResults = results.filter { !$0.activityArray.isEmpty }
-            } catch {
-                print("Erreur lors de la récupération des activités: \(error)")
-            }
+        do {
+            let results = try context.fetch(request)
+            fetchedResults = results.filter { !$0.activityArray.isEmpty }
+        } catch {
+            print("Erreur lors de la récupération des activités: \(error)")
+        }
 
         return fetchedResults
     }
 
+    // MARK: - Clear
     /// delete all data from database
     func clearDatabase() {
-        let entities = context.persistentStoreCoordinator!.managedObjectModel.entities
-        for entity in entities {
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-            do {
-                try context.execute(deleteRequest)
-            } catch let error as NSError {
-                print("Erreur lors de la suppression des entités \(entity.name!): \(error), \(error.userInfo)")
-            }
-        }
-
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Erreur lors de la sauvegarde du contexte: \(error), \(error.userInfo)")
-        }
+        coreDataManager.clearDatabase()
     }
 }
