@@ -170,32 +170,132 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         }
     }
 
+    // MARK: - Activity Type Sleep
+    func testCoreDataHaveNoData_WhenSaveActivityOfSleep_CoreDataHaveData() {
+        marmotMonitorSaveManager.saveActivity(.sleep(duration: 100), date: testFirstDateSeven)
+        
+        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        
+        XCTAssertEqual(dateActivities.count, 1)
 
-    
-    func testCoreDataAvecDatePlayground() {
+        let duration = (dateActivities.first?.activityArray.first as! Sleep).duration
+        XCTAssertEqual(duration, 100)
+    }
+
+    func testCoreDataHaveData_WhenSaveActivityOfSleep_ShowAlerteAndNotSave() {
+        marmotMonitorSaveManager.saveActivity(.sleep(duration: 100), date: testFirstDateSeven)
+        marmotMonitorSaveManager.saveActivity(.sleep(duration: 200), date: testFirstDateSeven)
         
+        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        
+        XCTAssertEqual(dateActivities.count, 1)
+
+        let duration = (dateActivities.first?.activityArray.first as! Sleep).duration
+        XCTAssertEqual(duration, 100)
+        XCTAssertEqual(alerteDescription, ActivityType.sleep(duration: 100).alertMessage)
+    }
+
+    func testCoreDataHaveDiaperData_WhenSaveActivityOfSleepAtSameDate_CoreDataHaveTwoData() {
         marmotMonitorSaveManager.saveActivity(.diaper(state: .wet), date: testFirstDateSeven)
-        marmotMonitorSaveManager.saveActivity(.diaper(state: .both), date: testFirstDateSeven)
-        marmotMonitorSaveManager.saveActivity(.diaper(state: .both), date: testThirdDateFive)
-        marmotMonitorSaveManager.saveActivity(.bottle(quantity: 100), date: testFirstDateSeven)
+        marmotMonitorSaveManager.saveActivity(.sleep(duration: 100), date: testFirstDateSeven)
         
-        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: activityStartDateSix, to: activityEndDateEight)
-        print ("dateActivities activityArray = \(dateActivities[0].activityArray.count)")
-        let diapers = dateActivities.filter { $0.activityArray.contains(where: { $0 is Diaper }) }
+        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
         
-        print ("dateActivities = \(dateActivities.count)")
-        print ("diapers = \(diapers.count)")
-        print ("\(String(describing: dateActivities[0].date))")
+        XCTAssertEqual(dateActivities.count, 1)
+        XCTAssertEqual(dateActivities[0].activityArray.count, 2)
         
-        if let firstDateActivity = diapers.first {
-            firstDateActivity.activityArray.forEach { activity in
-                if let diaper = activity as? Diaper {
-                    print("Diaper state = \(String(describing: diaper.state))")
-                }
-            }
+
+        if let sleep = dateActivities.first?.activityArray.first(where: { $0 is Sleep }) as? Sleep {
+            XCTAssertEqual(sleep.duration, 100)
+        } else {
+            XCTFail("Sleep non trouvé")
         }
     }
-    
+
+    // MARK: - Growth
+    func testCoreDataHaveNoData_WhenSaveActivityOfGrowth_CoreDataHaveData() {
+        marmotMonitorSaveManager.saveActivity(.growth(weight: 370, height: 52, headCircumference: 26), date: testFirstDateSeven)
+        
+        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        
+        XCTAssertEqual(dateActivities.count, 1)
+
+        let weight = (dateActivities.first?.activityArray.first as! Growth).weight
+        XCTAssertEqual(weight, 370)
+    }
+
+    func testCoreDataHaveData_WhenSaveActivityOfGrowth_ShowAlerteAndNotSave() {
+        marmotMonitorSaveManager.saveActivity(.growth(weight: 370, height: 52, headCircumference: 26), date: testFirstDateSeven)
+        marmotMonitorSaveManager.saveActivity(.growth(weight: 500, height: 80, headCircumference: 40), date: testFirstDateSeven)
+        
+        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        
+        XCTAssertEqual(dateActivities.count, 1)
+
+        let weight = (dateActivities.first?.activityArray.first as! Growth).weight
+        XCTAssertEqual(weight, 370)
+        XCTAssertEqual(alerteDescription, ActivityType.growth(weight: 370, height: 52, headCircumference: 26).alertMessage)
+    }
+
+    func testCoreDataHaveDiaperData_WhenSaveActivityOfGrowthAtSameDate_CoreDataHaveTwoData() {
+        marmotMonitorSaveManager.saveActivity(.diaper(state: .wet), date: testFirstDateSeven)
+        marmotMonitorSaveManager.saveActivity(.growth(weight: 370, height: 52, headCircumference: 26), date: testFirstDateSeven)
+        
+        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        
+        XCTAssertEqual(dateActivities.count, 1)
+        XCTAssertEqual(dateActivities[0].activityArray.count, 2)
+        
+
+        if let growth = dateActivities.first?.activityArray.first(where: { $0 is Growth }) as? Growth {
+            XCTAssertEqual(growth.height, 52)
+        } else {
+            XCTFail("Growth non trouvé")
+        }
+    }
+
+    // MARK: - Activity Type Solid
+    func testCoreDataHaveNoData_WhenSaveActivityOfSolid_CoreDataHaveData() {
+
+        marmotMonitorSaveManager.saveActivity(.solide(composition: solidData1), date: testFirstDateSeven)
+        
+        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        
+        XCTAssertEqual(dateActivities.count, 1)
+
+        let vegetable = (dateActivities.first?.activityArray.first as! Solid).vegetable
+        XCTAssertEqual(vegetable, 250)
+    }
+
+    func testCoreDataHaveData_WhenSaveActivityOfSolid_ShowAlerteAndNotSave() {
+        marmotMonitorSaveManager.saveActivity(.solide(composition: solidData1), date: testFirstDateSeven)
+        marmotMonitorSaveManager.saveActivity(.solide(composition: solidData2), date: testFirstDateSeven)
+        
+        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        
+        XCTAssertEqual(dateActivities.count, 1)
+
+        let vegetable = (dateActivities.first?.activityArray.first as! Solid).vegetable
+        XCTAssertEqual(vegetable, 250)
+        XCTAssertEqual(alerteDescription, ActivityType.solide(composition: solidData1).alertMessage)
+    }
+
+    func testCoreDataHaveDiaperData_WhenSaveActivityOfSolidAtSameDate_CoreDataHaveTwoData() {
+        marmotMonitorSaveManager.saveActivity(.diaper(state: .wet), date: testFirstDateSeven)
+        marmotMonitorSaveManager.saveActivity(.solide(composition: solidData1), date: testFirstDateSeven)
+        
+        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        
+        XCTAssertEqual(dateActivities.count, 1)
+        XCTAssertEqual(dateActivities[0].activityArray.count, 2)
+        
+
+        if let solid = dateActivities.first?.activityArray.first(where: { $0 is Solid }) as? Solid {
+            XCTAssertEqual(solid.vegetable, 250)
+        } else {
+            XCTFail("solid non trouvé")
+        }
+    }
 }
 
 extension MarmotMonitoSaveManagerTest: MarmotMonitorSaveManagerDelegate {

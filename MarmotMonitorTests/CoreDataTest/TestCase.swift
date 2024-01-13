@@ -16,4 +16,18 @@ class TestCase: XCTestCase {
 
     let activityEndDateEight = "08/01/2024".toDate() ?? Date()
     let activityStartDateSix = "06/01/2024".toDate() ?? Date()
+
+    let solidData1 = SolidQuantity(vegetable: 250,
+                                  meat: 250,
+                                  fruit: 250,
+                                  dairyProduct: 250,
+                                  cereal: 250,
+                                  other: 250)
+
+    let solidData2 = SolidQuantity(vegetable: 100,
+                                  meat: 100,
+                                  fruit: 100,
+                                  dairyProduct: 100,
+                                  cereal: 100,
+                                  other: 100)
 }

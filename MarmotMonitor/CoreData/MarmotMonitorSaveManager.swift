@@ -43,7 +43,7 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
     ///  - date: The date to save the activity for
     func saveActivity(_ activityType: ActivityType, date: Date) {
         let activityDate = fetchOrCreateDateActivity(for: date)
-        
+
         let activityExists = verifyExistenceOf(activityType, in: activityDate)
         guard !activityExists else {
             delegate?.showAlert(title: "Erreur", description: activityType.alertMessage)
@@ -67,6 +67,28 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
             breast.rightDuration = Int16(breastSession.rightDuration)
             breast.first = breastSession.first.rawValue
             activityDate.addToActivity(breast)
+
+        case .sleep(duration: let duration):
+            let sleep = Sleep(context: context)
+            sleep.duration = Int16(duration)
+            activityDate.addToActivity(sleep)
+
+        case .growth(weight: let weight, height: let height, headCircumference: let headCircumference):
+            let growth = Growth(context: context)
+            growth.weight = Int16(weight)
+            growth.height = Int16(height)
+            growth.headCircumfeence = Int16(headCircumference)
+            activityDate.addToActivity(growth)
+
+        case .solide(composition: let composition):
+            let solid = Solid(context: context)
+            solid.vegetable = Int16(composition.vegetable)
+            solid.meat = Int16(composition.meat)
+            solid.fruit = Int16(composition.fruit)
+            solid.dairyProduct = Int16(composition.dairyProduct)
+            solid.cereal = Int16(composition.cereal)
+            solid.other = Int16(composition.other)
+            activityDate.addToActivity(solid)
         }
         coreDataManager.save()
     }
@@ -79,6 +101,12 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
             return dateActivity.activityArray.contains(where: { $0 as? Bottle != nil })
         case .breast:
             return dateActivity.activityArray.contains(where: { $0 as? Breast != nil })
+        case .sleep:
+            return dateActivity.activityArray.contains(where: { $0 as? Sleep != nil })
+        case .growth:
+            return dateActivity.activityArray.contains(where: { $0 as? Growth != nil })
+        case .solide:
+            return dateActivity.activityArray.contains(where: { $0 as? Solid != nil })
         }
     }
 
