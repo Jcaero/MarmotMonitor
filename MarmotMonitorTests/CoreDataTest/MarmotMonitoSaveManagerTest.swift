@@ -162,7 +162,6 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         XCTAssertEqual(dateActivities.count, 1)
         XCTAssertEqual(dateActivities[0].activityArray.count, 2)
         
-        let rightDuration = (dateActivities.first?.activityArray.first as! Breast).rightDuration
         if let breast = dateActivities.first?.activityArray.first(where: { $0 is Breast }) as? Breast {
             XCTAssertEqual(breast.rightDuration, 120)
         } else {
