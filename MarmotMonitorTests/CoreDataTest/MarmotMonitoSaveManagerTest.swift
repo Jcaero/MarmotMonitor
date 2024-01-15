@@ -11,17 +11,12 @@ import XCTest
 
 final class MarmotMonitoSaveManagerTest: TestCase {
     var marmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol!
-    static var needLoad: Bool = true
     
     var alerteTitle = ""
     var alerteDescription = ""
     
     override func setUpWithError() throws {
         marmotMonitorSaveManager = MarmotMonitorSaveManager(coreDataManager: CoreDataManagerMock.sharedInstance, delegate: self)
-        if MarmotMonitoSaveManagerTest.needLoad {
-            CoreDataManagerMock.sharedInstance.load()
-            MarmotMonitoSaveManagerTest.needLoad = false
-        }
     }
     
     override func tearDownWithError() throws {

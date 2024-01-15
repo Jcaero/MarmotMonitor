@@ -1,76 +1,70 @@
 //
-//  CoreDataManagerMock.swift
+//  testCoreDataStack.swift
 //  MarmotMonitorTests
 //
-//  Created by pierrick viret on 07/01/2024.
+//  Created by pierrick viret on 15/01/2024.
 //
-
-import UIKit
 import CoreData
-
 @testable import MarmotMonitor
 
 class CoreDataManagerMock: CoreDataManagerProtocol {
+    
     // MARK: - Singleton
-
-    static let sharedInstance = CoreDataManager(modelName: "MarmotMonitor")
-
-    // MARK: - Propertie
-    private let persistentContainer: NSPersistentContainer
-
+    
+    static let sharedInstance = CoreDataManagerMock()
+    
     // MARK: - INIT
-    init(modelName: String) {
-
-        persistentContainer = {
-        let description = NSPersistentStoreDescription()
-        description.url = URL(fileURLWithPath: "/dev/null")
-        let container = NSPersistentContainer(name: modelName)
-        container.persistentStoreDescriptions = [description]
-        container.loadPersistentStores { _, error in
+    lazy var persistentContainer: NSPersistentContainer = {
+        let persistentStoreDescription = NSPersistentStoreDescription()
+        persistentStoreDescription.type = NSInMemoryStoreType
+        
+        let container = NSPersistentContainer(name: "MarmotMonitor")
+        container.persistentStoreDescriptions = [persistentStoreDescription]
+        
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-        }
+        })
         return container
     }()
+
+    // MARK: - Properties
+    
+    lazy var viewContext: NSManagedObjectContext = {
+        let viewContext = persistentContainer.viewContext
         viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        print("init container")
-    }
-
-    func load(completion: (() -> Void)? = nil) {
-        persistentContainer.loadPersistentStores { (_, error) in
-            guard error == nil else { fatalError(error!.localizedDescription)}
-            print("load container")
-            completion?()
-        }
-    }
-
+        return viewContext
+    }()
+    
     func save() {
-        if viewContext.hasChanges {
-            do {
-                try viewContext.save()
-            } catch {
-                print("Error while saving: \(error.localizedDescription )")
-            }
+        guard viewContext.hasChanges else {
+            return
+        }
+        do {
+            try self.viewContext.save()
+        } catch {
+            print("Error while saving: \(error.localizedDescription )")
         }
     }
-
-    var viewContext: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
-
+    
     func clearDatabase() {
         let entities = persistentContainer.managedObjectModel.entities
+        
         for entity in entities {
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            fetchRequest.includesPropertyValues = false
 
             do {
-                try persistentContainer.viewContext.execute(deleteRequest)
+                let items = try viewContext.fetch(fetchRequest) as! [NSManagedObject]
+                for item in items {
+                    viewContext.delete(item)
+                }
             } catch let error as NSError {
                 print("Erreur lors de la suppression des entités \(entity.name!): \(error), \(error.userInfo)")
             }
+            viewContext.refreshAllObjects()
+            save()
         }
-        save()
     }
 }

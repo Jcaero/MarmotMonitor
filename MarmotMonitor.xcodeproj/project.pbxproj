@@ -63,6 +63,7 @@
 		47CABD8F2B128D6A00C5919A /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8E2B128D6A00C5919A /* UIApplication.swift */; };
 		47CABD912B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */; };
 		47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */; };
+		47D7E1B82B5566950038C6E2 /* CoreDataManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7E1B72B5566950038C6E2 /* CoreDataManagerMock.swift */; };
 		47D8DA5F2B4B37F000D97CD1 /* Solid+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA4F2B4B37F000D97CD1 /* Solid+CoreDataClass.swift */; };
 		47D8DA602B4B37F000D97CD1 /* Solid+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA502B4B37F000D97CD1 /* Solid+CoreDataProperties.swift */; };
 		47D8DA632B4B37F000D97CD1 /* Sleep+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA532B4B37F000D97CD1 /* Sleep+CoreDataClass.swift */; };
@@ -83,7 +84,6 @@
 		47D8DA762B4B461D00D97CD1 /* MarmotMonitorSaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA752B4B461D00D97CD1 /* MarmotMonitorSaveManager.swift */; };
 		47D8DA792B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA782B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift */; };
 		47D8DA7B2B4B4A0100D97CD1 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA7A2B4B4A0100D97CD1 /* TestCase.swift */; };
-		47D8DA7D2B4B4A9D00D97CD1 /* CoreDataManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA7C2B4B4A9D00D97CD1 /* CoreDataManagerMock.swift */; };
 		47E2A40B2B49848B008E75DD /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E2A40A2B49848B008E75DD /* UserDefaultManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -165,6 +165,7 @@
 		47CABD8E2B128D6A00C5919A /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorAuditAccessibility.swift; sourceTree = "<group>"; };
 		47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		47D7E1B72B5566950038C6E2 /* CoreDataManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerMock.swift; sourceTree = "<group>"; };
 		47D8DA4F2B4B37F000D97CD1 /* Solid+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Solid+CoreDataClass.swift"; sourceTree = "<group>"; };
 		47D8DA502B4B37F000D97CD1 /* Solid+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Solid+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		47D8DA532B4B37F000D97CD1 /* Sleep+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sleep+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -185,7 +186,6 @@
 		47D8DA752B4B461D00D97CD1 /* MarmotMonitorSaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorSaveManager.swift; sourceTree = "<group>"; };
 		47D8DA782B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitoSaveManagerTest.swift; sourceTree = "<group>"; };
 		47D8DA7A2B4B4A0100D97CD1 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
-		47D8DA7C2B4B4A9D00D97CD1 /* CoreDataManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerMock.swift; sourceTree = "<group>"; };
 		47E2A40A2B49848B008E75DD /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -495,8 +495,8 @@
 			isa = PBXGroup;
 			children = (
 				47D8DA782B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift */,
+				47D7E1B72B5566950038C6E2 /* CoreDataManagerMock.swift */,
 				47D8DA7A2B4B4A0100D97CD1 /* TestCase.swift */,
-				47D8DA7C2B4B4A9D00D97CD1 /* CoreDataManagerMock.swift */,
 				4779579C2B547ADD0021178D /* BenchMarkTest.swift */,
 			);
 			path = CoreDataTest;
@@ -736,11 +736,11 @@
 				474732582B123F8D0064ABB4 /* UserDefaultsManagerTest.swift in Sources */,
 				47D8DA7B2B4B4A0100D97CD1 /* TestCase.swift in Sources */,
 				478E790D2B138099004157AF /* BirthDayViewModelTest.swift in Sources */,
-				47D8DA7D2B4B4A9D00D97CD1 /* CoreDataManagerMock.swift in Sources */,
 				4748658A2B49F1AF00CB5E29 /* UserDefaultsManagerMock.swift in Sources */,
 				4779579D2B547ADD0021178D /* BenchMarkTest.swift in Sources */,
 				4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */,
 				4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */,
+				47D7E1B82B5566950038C6E2 /* CoreDataManagerMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

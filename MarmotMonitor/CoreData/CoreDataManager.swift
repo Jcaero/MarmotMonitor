@@ -10,32 +10,32 @@ import CoreData
 
 protocol CoreDataManagerProtocol {
     var viewContext: NSManagedObjectContext { get }
-    func load(completion: (() -> Void)?)
     func save()
     func clearDatabase()
 }
 
-final class CoreDataManager: CoreDataManagerProtocol {
+class CoreDataManager: CoreDataManagerProtocol {
 
     // MARK: - Singleton
+    static let sharedInstance = CoreDataManager()
 
-    static let sharedInstance = CoreDataManager(modelName: "MarmotMonitor")
+    // MARK: - Properties
 
-    // MARK: - Propertie
-    private let persistentContainer: NSPersistentContainer
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "MarmotMonitor")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
 
-    // MARK: - INIT
-    init(modelName: String) {
-        persistentContainer = NSPersistentContainer(name: modelName)
+    lazy var viewContext: NSManagedObjectContext = {
+        let viewContext = persistentContainer.viewContext
         viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-    }
-
-    func load(completion: (() -> Void)? = nil) {
-        persistentContainer.loadPersistentStores { (_, error) in
-            guard error == nil else { fatalError(error!.localizedDescription)}
-            completion?()
-        }
-    }
+        return viewContext
+    }()
 
     func save() {
         guard viewContext.hasChanges else {
@@ -48,22 +48,23 @@ final class CoreDataManager: CoreDataManagerProtocol {
         }
     }
 
-    var viewContext: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
-
     func clearDatabase() {
         let entities = persistentContainer.managedObjectModel.entities
+        
         for entity in entities {
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
+            
+            fetchRequest.includesPropertyValues = false
             do {
-                try persistentContainer.viewContext.execute(deleteRequest)
+                let items = try viewContext.fetch(fetchRequest) as! [NSManagedObject]
+                for item in items {
+                    viewContext.delete(item)
+                }
             } catch let error as NSError {
                 print("Erreur lors de la suppression des entités \(entity.name!): \(error), \(error.userInfo)")
             }
+            viewContext.refreshAllObjects()
+            save()
         }
-        save()
     }
 }
