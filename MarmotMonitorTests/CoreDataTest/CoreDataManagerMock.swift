@@ -32,8 +32,9 @@ class CoreDataManagerMock: CoreDataManagerProtocol {
     // MARK: - Properties
     
     lazy var viewContext: NSManagedObjectContext = {
-        let viewContext = persistentContainer.viewContext
+        let viewContext = persistentContainer.newBackgroundContext()
         viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        viewContext.automaticallyMergesChangesFromParent = true
         return viewContext
     }()
     
