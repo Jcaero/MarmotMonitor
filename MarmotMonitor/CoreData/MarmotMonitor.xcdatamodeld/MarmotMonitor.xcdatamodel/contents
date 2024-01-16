@@ -4,12 +4,11 @@
         <relationship name="date" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DateActivity" inverseName="activity" inverseEntity="DateActivity"/>
     </entity>
     <entity name="Bottle" representedClassName="Bottle" parentEntity="Activity" syncable="YES">
-        <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="quantity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Breast" representedClassName="Breast" parentEntity="Activity" syncable="YES">
-        <attribute name="first" attributeType="String"/>
-        <attribute name="leftDuration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="rightDuration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="leftDuration" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rightDuration" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="DateActivity" representedClassName="DateActivity" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
@@ -21,7 +20,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="Diaper" representedClassName="Diaper" parentEntity="Activity" syncable="YES">
-        <attribute name="state" optional="YES" attributeType="String"/>
+        <attribute name="state" attributeType="String"/>
     </entity>
     <entity name="Growth" representedClassName="Growth" parentEntity="Activity" syncable="YES">
         <attribute name="headCircumfeence" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -29,7 +28,7 @@
         <attribute name="weight" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Sleep" representedClassName="Sleep" parentEntity="Activity" syncable="YES">
-        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="duration" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Solid" representedClassName="Solid" parentEntity="Activity" syncable="YES">
         <attribute name="cereal" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

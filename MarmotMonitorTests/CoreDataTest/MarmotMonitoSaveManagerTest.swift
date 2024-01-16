@@ -121,7 +121,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
 
     // MARK: - Activity Type Breast
     func testCoreDataHaveNoData_WhenSaveActivityOfBreast_CoreDataHaveData() {
-        let breastData = BreastDuration(leftDuration: 120, rightDuration: 120, first: .left)
+        let breastData = BreastDuration(leftDuration: 120, rightDuration: 120)
         marmotMonitorSaveManager.saveActivity(.breast(duration: breastData), date: testFirstDateSeven)
         
         let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
@@ -133,8 +133,8 @@ final class MarmotMonitoSaveManagerTest: TestCase {
     }
 
     func testCoreDataHaveData_WhenSaveActivityOfBreast_ShowAlerteAndNotSave() {
-        let breastDataFirst = BreastDuration(leftDuration: 120, rightDuration: 120, first: .left)
-        let breastDataSecond = BreastDuration(leftDuration: 200, rightDuration: 200, first: .right)
+        let breastDataFirst = BreastDuration(leftDuration: 120, rightDuration: 120)
+        let breastDataSecond = BreastDuration(leftDuration: 200, rightDuration: 200)
         marmotMonitorSaveManager.saveActivity(.breast(duration: breastDataFirst), date: testFirstDateSeven)
         marmotMonitorSaveManager.saveActivity(.breast(duration: breastDataSecond), date: testFirstDateSeven)
         
@@ -149,7 +149,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
 
     func testCoreDataHaveDiaperData_WhenSaveActivityOfBreastAtSameDate_CoreDataHaveTwoData() {
         marmotMonitorSaveManager.saveActivity(.diaper(state: .wet), date: testFirstDateSeven)
-        let breastData = BreastDuration(leftDuration: 120, rightDuration: 120, first: .left)
+        let breastData = BreastDuration(leftDuration: 120, rightDuration: 120)
         marmotMonitorSaveManager.saveActivity(.breast(duration: breastData), date: testFirstDateSeven)
         
         let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)

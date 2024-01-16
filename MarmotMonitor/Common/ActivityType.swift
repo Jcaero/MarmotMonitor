@@ -43,15 +43,9 @@ enum State: String {
     case both = "Mixte"
 }
 
-enum BreastSide: String {
-    case left = "Gauche"
-    case right = "Droite"
-}
-
 struct BreastDuration {
     let leftDuration: Int
     let rightDuration: Int
-    let first: BreastSide
 }
 
 struct SolidQuantity {

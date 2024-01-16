@@ -66,7 +66,6 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
                 let breast = Breast(context: self.context)
                 breast.leftDuration = Int16(breastSession.leftDuration)
                 breast.rightDuration = Int16(breastSession.rightDuration)
-                breast.first = breastSession.first.rawValue
                 activityDate.addToActivity(breast)
 
             case .sleep(duration: let duration):
