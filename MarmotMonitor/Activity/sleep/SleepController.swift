@@ -28,6 +28,17 @@ class SleepController: BackGroundActivity, SleepDelegate {
         return tableView
     }()
 
+    let durationLabel: UILabel = {
+        let label = UILabel()
+        label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
+        label.text = ""
+        label.textColor = .label
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.setAccessibility(with: .header, label: "", hint: "durée du sommeil")
+        return label
+    }()
+
     let stopTimePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.preferredDatePickerStyle = .wheels
@@ -35,7 +46,7 @@ class SleepController: BackGroundActivity, SleepDelegate {
         datePicker.maximumDate = Date()
         datePicker.tintColor = .label
         datePicker.backgroundColor = .duckBlue
-        datePicker.setAccessibility(with: .selected, label: "", hint: "choisir l'heure de la tétée")
+        datePicker.setAccessibility(with: .selected, label: "", hint: "choisir l'heure du dodo")
         return datePicker
     }()
 
@@ -60,6 +71,7 @@ class SleepController: BackGroundActivity, SleepDelegate {
         setupContraints()
 
         setupTableView()
+        updateDuration(with: "Pas encore de durée")
     }
 
     override func viewDidLayoutSubviews() {
@@ -70,13 +82,13 @@ class SleepController: BackGroundActivity, SleepDelegate {
 
     // MARK: - Setup function
     private func setupViews() {
-        [titleLabel, tableOfSleepData].forEach {
+        [titleLabel, tableOfSleepData, durationLabel].forEach {
             scrollArea.addSubview($0)
         }
     }
 
     private func setupContraints() {
-        [titleLabel,tableOfSleepData].forEach {
+        [titleLabel,tableOfSleepData, durationLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -91,8 +103,14 @@ class SleepController: BackGroundActivity, SleepDelegate {
             tableOfSleepData.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
             tableOfSleepData.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
             tableOfSleepData.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
-            tableViewHeightConstraint!,
-            tableOfSleepData.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -10)
+            tableViewHeightConstraint!
+        ])
+
+        NSLayoutConstraint.activate([
+            durationLabel.topAnchor.constraint(equalTo: tableOfSleepData.bottomAnchor, constant: 30),
+            durationLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
+            durationLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
+            durationLabel.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -10)
         ])
     }
 
@@ -113,6 +131,10 @@ class SleepController: BackGroundActivity, SleepDelegate {
         tableOfSleepData.rowHeight = UITableView.automaticDimension
         tableOfSleepData.register(SleepCell.self, forCellReuseIdentifier: SleepCell.reuseIdentifier)
     }
+
+    func updateDuration(with duration: String) {
+        durationLabel.text = duration
+    }
 }
 
 extension SleepController {
@@ -120,6 +142,19 @@ extension SleepController {
         label.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showDatePicker))
         label.addGestureRecognizer(tapGesture)
+    }
+
+    private func setupTapGesture(with button: UIButton) {
+        button.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clearDate))
+        button.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func clearDate (_ sender: UITapGestureRecognizer) {
+        if let button = sender.view as? UIButton {
+            viewModel.setSelectedLabel(with: button.tag)
+            viewModel.clearDate()
+        }
     }
 
     @objc func showDatePicker(_ sender: UITapGestureRecognizer) {
@@ -167,8 +202,11 @@ extension SleepController: UITableViewDelegate, UITableViewDataSource {
         cell.setupCell(with: "\(title)", date: viewModel.dateData[indexPath.row])
         cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
         cell.selectionStyle = .none
+        // Add tag for gesture
         cell.dateLabel.tag = indexPath.row
         setupTapGesture(with: cell.dateLabel)
+        cell.statusButton.tag = indexPath.row
+        setupTapGesture(with: cell.statusButton)
         return cell
     }
 

@@ -45,6 +45,7 @@ class SleepCell: UITableViewCell {
         let button = UIButton(configuration: configuration)
         button.addTarget(self, action: #selector(clearLabel), for: .touchUpInside)
         button.setAccessibility(with: .button, label: "", hint: "ouvrir le picker")
+        button.isSelected = false
         return button
     }()
 
