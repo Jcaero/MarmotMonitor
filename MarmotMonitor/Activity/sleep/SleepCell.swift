@@ -92,7 +92,8 @@ class SleepCell: UITableViewCell {
             statusButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             statusButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
             statusButton.heightAnchor.constraint(equalTo: statusButton.widthAnchor),
-            statusButton.heightAnchor.constraint(equalTo: dateLabel.heightAnchor)
+            statusButton.heightAnchor.constraint(lessThanOrEqualTo: contentView.heightAnchor, multiplier: 0.5),
+            statusButton.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.25)
         ])
 
         NSLayoutConstraint.activate([
@@ -105,9 +106,9 @@ class SleepCell: UITableViewCell {
 
     private func setupButton() {
         let setImage = UIImage(systemName: "chevron.right")!
-            .applyingSymbolConfiguration(.init(pointSize: 15))
+            .applyingSymbolConfiguration(.init(pointSize: title.font.pointSize))
         let cancelImage = UIImage(systemName: "x.circle")!
-            .applyingSymbolConfiguration(.init(pointSize: 15))
+            .applyingSymbolConfiguration(.init(pointSize: title.font.pointSize))
         let image = self.dateLabel.text == "Pas encore de date" ? setImage : cancelImage
         statusButton.setImage(image, for: .normal)
     }

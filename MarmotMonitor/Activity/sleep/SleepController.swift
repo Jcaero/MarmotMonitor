@@ -20,7 +20,7 @@ class SleepController: BackGroundActivity, SleepDelegate {
         return label
     }()
 
-    let tableOfIngredients: UITableView = {
+    let tableOfSleepData: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = .duckBlue
@@ -62,15 +62,21 @@ class SleepController: BackGroundActivity, SleepDelegate {
         setupTableView()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableOfSleepData.reloadData()
+        setupTableViewHeight()
+    }
+
     // MARK: - Setup function
     private func setupViews() {
-        [titleLabel, tableOfIngredients].forEach {
+        [titleLabel, tableOfSleepData].forEach {
             scrollArea.addSubview($0)
         }
     }
 
     private func setupContraints() {
-        [titleLabel,tableOfIngredients].forEach {
+        [titleLabel,tableOfSleepData].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -80,32 +86,32 @@ class SleepController: BackGroundActivity, SleepDelegate {
             titleLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10)
         ])
 
-        tableViewHeightConstraint = tableOfIngredients.heightAnchor.constraint(greaterThanOrEqualToConstant: 300)
+        tableViewHeightConstraint = tableOfSleepData.heightAnchor.constraint(greaterThanOrEqualToConstant: 300)
         NSLayoutConstraint.activate([
-            tableOfIngredients.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
-            tableOfIngredients.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
-            tableOfIngredients.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
+            tableOfSleepData.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
+            tableOfSleepData.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
+            tableOfSleepData.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
             tableViewHeightConstraint!,
-            tableOfIngredients.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -10)
+            tableOfSleepData.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -10)
         ])
     }
 
     private func setupTableViewHeight() {
         var height: CGFloat = 0
-        let cell = tableOfIngredients.cellForRow(at: IndexPath(row: 1, section: 0))
+        let cell = tableOfSleepData.cellForRow(at: IndexPath(row: 0, section: 0))
         let cellHeight = cell?.contentView.frame.size.height ?? 0
         if cellHeight > height {
             height = cellHeight
         }
         tableViewHeightConstraint?.constant = height * 2
-        tableOfIngredients.layoutIfNeeded()
+        tableOfSleepData.layoutIfNeeded()
     }
 
     private func setupTableView() {
-        tableOfIngredients.delegate = self
-        tableOfIngredients.dataSource = self
-        tableOfIngredients.rowHeight = UITableView.automaticDimension
-        tableOfIngredients.register(SleepCell.self, forCellReuseIdentifier: SleepCell.reuseIdentifier)
+        tableOfSleepData.delegate = self
+        tableOfSleepData.dataSource = self
+        tableOfSleepData.rowHeight = UITableView.automaticDimension
+        tableOfSleepData.register(SleepCell.self, forCellReuseIdentifier: SleepCell.reuseIdentifier)
     }
 }
 
@@ -142,7 +148,7 @@ extension SleepController {
     }
 
     func updateData() {
-        tableOfIngredients.reloadData()
+        tableOfSleepData.reloadData()
     }
 }
 
