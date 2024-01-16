@@ -51,10 +51,10 @@ class CoreDataManager: CoreDataManagerProtocol {
 
     func clearDatabase() {
         let entities = persistentContainer.managedObjectModel.entities
-        
+
         for entity in entities {
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
-            
+
             fetchRequest.includesPropertyValues = false
             do {
                 let items = try viewContext.fetch(fetchRequest) as! [NSManagedObject]

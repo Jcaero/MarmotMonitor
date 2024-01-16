@@ -74,11 +74,11 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
                 sleep.duration = Int16(duration)
                 activityDate.addToActivity(sleep)
 
-            case .growth(weight: let weight, height: let height, headCircumference: let headCircumference):
+            case .growth(data: let growthData):
                 let growth = Growth(context: self.context)
-                growth.weight = Int16(weight)
-                growth.height = Int16(height)
-                growth.headCircumfeence = Int16(headCircumference)
+                growth.weight = Int16(growthData.weight)
+                growth.height = Int16(growthData.height)
+                growth.headCircumfeence = Int16(growthData.headCircumference)
                 activityDate.addToActivity(growth)
 
             case .solide(composition: let composition):

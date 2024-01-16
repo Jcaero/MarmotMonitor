@@ -208,7 +208,8 @@ final class MarmotMonitoSaveManagerTest: TestCase {
 
     // MARK: - Growth
     func testCoreDataHaveNoData_WhenSaveActivityOfGrowth_CoreDataHaveData() {
-        marmotMonitorSaveManager.saveActivity(.growth(weight: 370, height: 52, headCircumference: 26), date: testFirstDateSeven)
+        let data = GrowthData(weight: 370, height: 52, headCircumference: 26)
+        marmotMonitorSaveManager.saveActivity(.growth(data: data), date: testFirstDateSeven)
         
         let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
         
@@ -219,8 +220,10 @@ final class MarmotMonitoSaveManagerTest: TestCase {
     }
 
     func testCoreDataHaveData_WhenSaveActivityOfGrowth_ShowAlerteAndNotSave() {
-        marmotMonitorSaveManager.saveActivity(.growth(weight: 370, height: 52, headCircumference: 26), date: testFirstDateSeven)
-        marmotMonitorSaveManager.saveActivity(.growth(weight: 500, height: 80, headCircumference: 40), date: testFirstDateSeven)
+        let data = GrowthData(weight: 370, height: 52, headCircumference: 26)
+        let data2 = GrowthData(weight: 500, height: 80, headCircumference: 40)
+        marmotMonitorSaveManager.saveActivity(.growth(data: data), date: testFirstDateSeven)
+        marmotMonitorSaveManager.saveActivity(.growth(data: data2), date: testFirstDateSeven)
         
         let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
         
@@ -228,12 +231,13 @@ final class MarmotMonitoSaveManagerTest: TestCase {
 
         let weight = (dateActivities.first?.activityArray.first as! Growth).weight
         XCTAssertEqual(weight, 370)
-        XCTAssertEqual(alerteDescription, ActivityType.growth(weight: 370, height: 52, headCircumference: 26).alertMessage)
+        XCTAssertEqual(alerteDescription, ActivityType.growth(data: data).alertMessage)
     }
 
     func testCoreDataHaveDiaperData_WhenSaveActivityOfGrowthAtSameDate_CoreDataHaveTwoData() {
         marmotMonitorSaveManager.saveActivity(.diaper(state: .wet), date: testFirstDateSeven)
-        marmotMonitorSaveManager.saveActivity(.growth(weight: 370, height: 52, headCircumference: 26), date: testFirstDateSeven)
+        let data = GrowthData(weight: 370, height: 52, headCircumference: 26)
+        marmotMonitorSaveManager.saveActivity(.growth(data: data), date: testFirstDateSeven)
         
         let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
         

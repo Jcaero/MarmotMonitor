@@ -12,7 +12,7 @@ enum ActivityType {
     case bottle(quantity: Int)
     case breast(duration: BreastDuration)
     case sleep(duration: Int)
-    case growth(weight: Int, height: Int, headCircumference: Int)
+    case growth(data: GrowthData)
     case solide(composition: SolidQuantity)
 
     var alertMessage: String {
@@ -27,10 +27,14 @@ enum ActivityType {
                return "Un temps de sommeil a déja été enregistrée à cette date."
            case .growth:
                return "Une mesure de croissance a déja été enregistrée à cette date."
-           case .solide(composition: let composition):
+           case .solide:
                return "Un repas a déja été enregistrée à cette date."
            }
        }
+
+    static var diaperAlert: String {
+            return "Une couche a déjà été enregistrée à cette date."
+        }
 }
 
 enum State: String {
@@ -57,4 +61,10 @@ struct SolidQuantity {
     let dairyProduct: Int
     let cereal: Int
     let other: Int
+}
+
+struct GrowthData {
+    let weight: Int
+    let height: Int
+    let headCircumference: Int
 }
