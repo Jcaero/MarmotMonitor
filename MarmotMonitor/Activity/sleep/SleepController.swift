@@ -71,7 +71,6 @@ class SleepController: BackGroundActivity, SleepDelegate {
         setupContraints()
 
         setupTableView()
-        updateDuration(with: "Pas encore de durée")
     }
 
     override func viewDidLayoutSubviews() {

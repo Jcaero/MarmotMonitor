@@ -85,12 +85,12 @@ class SleepCell: UITableViewCell {
     private func setupContraint() {
         NSLayoutConstraint.activate([
             title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            title.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
+            title.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.8),
             title.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10)
         ])
 
         NSLayoutConstraint.activate([
-            statusButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            statusButton.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
             statusButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
             statusButton.heightAnchor.constraint(equalTo: statusButton.widthAnchor),
             statusButton.heightAnchor.constraint(lessThanOrEqualTo: contentView.heightAnchor, multiplier: 0.5),
@@ -99,7 +99,8 @@ class SleepCell: UITableViewCell {
 
         NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10),
-            dateLabel.rightAnchor.constraint(equalTo: statusButton.leftAnchor, constant: -10),
+//            dateLabel.rightAnchor.constraint(equalTo: statusButton.leftAnchor, constant: -10),
+            dateLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.75),
             dateLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
             dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])

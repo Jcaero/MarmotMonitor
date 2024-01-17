@@ -299,6 +299,8 @@ extension TodayViewController: UITableViewDelegate {
         default:
             break
         }
+
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
