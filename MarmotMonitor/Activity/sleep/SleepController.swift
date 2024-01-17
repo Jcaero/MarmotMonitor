@@ -198,7 +198,7 @@ extension SleepController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         let title = indexPath.row == 0 ? "Heure de début" : "Heure de fin"
-        cell.setupCell(with: "\(title)", date: viewModel.dateData[indexPath.row])
+        cell.setupCell(with: "\(title)", date: viewModel.sleepData[indexPath.row])
         cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
         cell.selectionStyle = .none
         // Add tag for gesture

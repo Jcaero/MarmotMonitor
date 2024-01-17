@@ -160,7 +160,6 @@ extension SolideFeedingController: UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.removeTarget(self, action: #selector(valueChanged), for: .editingChanged)
-        viewModel.updateTotal()
 
         textFieldActif = nil
         textField.resignFirstResponder()
@@ -176,6 +175,7 @@ extension SolideFeedingController: UITextFieldDelegate {
 extension SolideFeedingController: SolideFeedingProtocol {
     func updateTotal(with total: String) {
         totalWeight.text = total
+        self.tableOfIngredients.reloadData()
     }
 }
 

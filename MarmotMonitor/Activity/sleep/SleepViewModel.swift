@@ -16,9 +16,9 @@ final class SleepViewModel {
 
     private weak var delegate: SleepDelegate?
 
-    var selectedLabel: Int = 0
+    private var selectedLabel: Int = 0
 
-    var dateData: [String] {
+    var sleepData: [String] {
         var firstDate = "Pas encore de date"
         var secondDate = "Pas encore de date"
         if sleepDate.first != nil && sleepDate.first is Date {
@@ -39,11 +39,10 @@ final class SleepViewModel {
 
     // MARK: - Function
     func setDate(with date: Date) {
-        if selectedLabel >= 0 && selectedLabel < sleepDate.count {
-            sleepDate[selectedLabel] = date
-            delegate?.updateData()
-            updateDuration()
-        }
+        guard selectedLabel >= 0, selectedLabel < sleepDate.count else {return}
+        sleepDate[selectedLabel] = date
+        delegate?.updateData()
+        updateDuration()
     }
 
     func clearDate() {

@@ -24,9 +24,10 @@ final class SolidFeedingViewModel {
     func set(_ value: String, for ingredient: Ingredient) {
         guard let value = Int(value) else { return }
         solidFood[ingredient] = value
+        updateTotal()
     }
 
-    func updateTotal() {
+    private func updateTotal() {
         var total = 0
         solidFood.forEach { (_ , value) in
             total += value

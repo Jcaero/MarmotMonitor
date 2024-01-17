@@ -20,6 +20,9 @@
 		47155BCD2B1DEBDB00775B27 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */; };
 		4719ABE52B0E96380088CBE2 /* BabyNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719ABE42B0E96380088CBE2 /* BabyNameController.swift */; };
 		4726966A2B3D8A18006BC301 /* SleepViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472696692B3D8A18006BC301 /* SleepViewModel.swift */; };
+		472848222B58154700AA6B35 /* BreastFeedingChronoViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472848212B58154700AA6B35 /* BreastFeedingChronoViewModelTest.swift */; };
+		472848242B5819FE00AA6B35 /* SolidFeedingViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472848232B5819FD00AA6B35 /* SolidFeedingViewModelTest.swift */; };
+		472848262B5824AB00AA6B35 /* SleepViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472848252B5824AB00AA6B35 /* SleepViewModelTest.swift */; };
 		472DDABD2B2DEF1600812024 /* UISegmented+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472DDABC2B2DEF1600812024 /* UISegmented+.swift */; };
 		4735B26B2B1140D8000F2B8C /* ViewForInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */; };
 		4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26D2B1145B7000F2B8C /* GenderController.swift */; };
@@ -119,6 +122,9 @@
 		47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 		4719ABE42B0E96380088CBE2 /* BabyNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyNameController.swift; sourceTree = "<group>"; };
 		472696692B3D8A18006BC301 /* SleepViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepViewModel.swift; sourceTree = "<group>"; };
+		472848212B58154700AA6B35 /* BreastFeedingChronoViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoViewModelTest.swift; sourceTree = "<group>"; };
+		472848232B5819FD00AA6B35 /* SolidFeedingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidFeedingViewModelTest.swift; sourceTree = "<group>"; };
+		472848252B5824AB00AA6B35 /* SleepViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepViewModelTest.swift; sourceTree = "<group>"; };
 		472DDABC2B2DEF1600812024 /* UISegmented+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmented+.swift"; sourceTree = "<group>"; };
 		4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForInformationController.swift; sourceTree = "<group>"; };
 		4735B26D2B1145B7000F2B8C /* GenderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderController.swift; sourceTree = "<group>"; };
@@ -220,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */,
+				474732572B123F8D0064ABB4 /* UserDefaultsManagerTest.swift */,
 				474865892B49F1AF00CB5E29 /* UserDefaultsManagerMock.swift */,
 			);
 			path = home;
@@ -251,6 +258,16 @@
 				4711F7732B1E70AB00869A27 /* Person.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		472848202B58146F00AA6B35 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				472848212B58154700AA6B35 /* BreastFeedingChronoViewModelTest.swift */,
+				472848232B5819FD00AA6B35 /* SolidFeedingViewModelTest.swift */,
+				472848252B5824AB00AA6B35 /* SleepViewModelTest.swift */,
+			);
+			path = Activity;
 			sourceTree = "<group>";
 		};
 		4735B26C2B11455C000F2B8C /* InformationController */ = {
@@ -376,7 +393,7 @@
 		475071F02B09462100DAB527 /* MarmotMonitorTests */ = {
 			isa = PBXGroup;
 			children = (
-				474732572B123F8D0064ABB4 /* UserDefaultsManagerTest.swift */,
+				472848202B58146F00AA6B35 /* Activity */,
 				47CB30012B1F400F0054EAC7 /* started */,
 				470009D52B2E485C00EBEF86 /* home */,
 				47D8DA772B4B496100D97CD1 /* CoreDataTest */,
@@ -737,11 +754,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				47D8DA792B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift in Sources */,
+				472848222B58154700AA6B35 /* BreastFeedingChronoViewModelTest.swift in Sources */,
+				472848242B5819FE00AA6B35 /* SolidFeedingViewModelTest.swift in Sources */,
 				474732582B123F8D0064ABB4 /* UserDefaultsManagerTest.swift in Sources */,
 				47D8DA7B2B4B4A0100D97CD1 /* TestCase.swift in Sources */,
 				478E790D2B138099004157AF /* BirthDayViewModelTest.swift in Sources */,
 				4748658A2B49F1AF00CB5E29 /* UserDefaultsManagerMock.swift in Sources */,
 				4779579D2B547ADD0021178D /* BenchMarkTest.swift in Sources */,
+				472848262B5824AB00AA6B35 /* SleepViewModelTest.swift in Sources */,
 				4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */,
 				4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */,
 				47D7E1B82B5566950038C6E2 /* CoreDataManagerMock.swift in Sources */,
