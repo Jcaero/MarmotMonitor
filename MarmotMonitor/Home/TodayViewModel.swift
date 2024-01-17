@@ -18,8 +18,8 @@ class TodayViewModel {
 
     static let activities: [ActivityData] = [
            ActivityData(imageName: "biberon", cellTitle: "Dernière tétée/biberon", cellSubTitle: "Saisir la tétée/le biberon"),
-           ActivityData(imageName: "couche", cellTitle: "Dernier sommeil", cellSubTitle: "Saisir le sommeil"),
-           ActivityData(imageName: "sommeil", cellTitle: "Dernière couche", cellSubTitle: "Saisir la couche"),
+           ActivityData(imageName: "couchesommeil", cellTitle: "Dernier sommeil", cellSubTitle: "Saisir le sommeil"),
+           ActivityData(imageName: "couche", cellTitle: "Dernière couche", cellSubTitle: "Saisir la couche"),
            ActivityData(imageName: "croissance", cellTitle: "Croissance", cellSubTitle: "Ajouter une mesure")
        ]
 
