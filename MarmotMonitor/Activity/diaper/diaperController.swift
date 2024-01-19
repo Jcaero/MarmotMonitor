@@ -18,18 +18,20 @@ class DiaperController: ActivityController {
 
     // MARK: - PROPERTIES
     var tableViewHeightConstraint: NSLayoutConstraint?
-    var typeOfDiaper: [String] = ["Urine", "Souillée", "Mixte"]
-    var statusOfDiaper: [Bool] = [false, false, false]
+
+    var viewModel : DiaperViewModel!
 
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = DiaperViewModel(delegate: self)
+
         view.backgroundColor = .colorForGradientStart
 
         setupViews()
         setupContraints()
         setupTimePickerAndLabel()
-
+        setupValideButton()
         setupTableView()
     }
 
@@ -66,6 +68,16 @@ class DiaperController: ActivityController {
         timePicker.setAccessibility(with: .selected, label: "", hint: "choisir l'heure de la couche")
     }
 
+    private func setupValideButton() {
+        valideButton.setAccessibility(with: .button, label: "Valider", hint: "Valider le choix de la couche")
+        valideButton.addTarget(self, action: #selector(valideButtonSet), for: .touchUpInside)
+    }
+
+    @objc func valideButtonSet() {
+        viewModel.saveDiaper(at: timePicker.date)
+        self.dismiss(animated: true, completion: nil)
+    }
+
     private func setupTableViewHeight() {
         var height: CGFloat = 0
         let cell = tableOfDiaper.cellForRow(at: IndexPath(row: 0, section: 0))
@@ -82,18 +94,16 @@ class DiaperController: ActivityController {
     }
 }
 
-    extension DiaperController: UITableViewDelegate {
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let status = statusOfDiaper[indexPath.row]
-            statusOfDiaper = [false, false, false]
-            statusOfDiaper[indexPath.row] = !status
-            tableView.reloadData()
-        }
+extension DiaperController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let diaper = viewModel.diaperStates[indexPath.row]
+        viewModel.selectDiaper(diaper: diaper)
     }
+}
 
 extension DiaperController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return typeOfDiaper.count
+        return viewModel.diaperStates.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,9 +111,9 @@ extension DiaperController: UITableViewDataSource {
             print("erreur de cell")
             return UITableViewCell()
         }
-        let type = typeOfDiaper[indexPath.row]
-        let status = statusOfDiaper[indexPath.row]
-        cell.setupCell(with: type, selected: status)
+        let type = viewModel.diaperStates[indexPath.row]
+        let status = viewModel.diaperStatus[type]!
+        cell.setupCell(with: type.rawValue, selected: status)
         cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
         cell.selectionStyle = .none
         return cell
@@ -111,5 +121,18 @@ extension DiaperController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 300
+    }
+}
+
+extension DiaperController: DiaperDelegate {
+    func alert(title: String, description: String) {
+//        showSimpleAlerte(with: title, message: description)
+        let alertVC = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
+
+    func updateData() {
+        tableOfDiaper.reloadData()
     }
 }

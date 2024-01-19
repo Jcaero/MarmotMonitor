@@ -47,6 +47,7 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
 
             let activityExists = self.verifyExistenceOf(activityType, in: activityDate)
             guard !activityExists else {
+                print("saverManager: Activity already exists")
                 self.delegate?.showAlert(title: "Erreur", description: activityType.alertMessage)
                 return
             }
@@ -129,7 +130,7 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
     private func createDateActivity(for date: Date) -> DateActivity {
         context.performAndWait {
             let newActivity = DateActivity(context: context)
-            newActivity.date = date
+            newActivity.date = date.removeSeconds()
             return newActivity
         }
     }
@@ -141,7 +142,7 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
     private func fetchDateActivity(for date: Date) -> DateActivity? {
         context.performAndWait {
             let fetchRequest: NSFetchRequest<DateActivity> = DateActivity.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "date == %@", date as NSDate)
+            fetchRequest.predicate = NSPredicate(format: "date == %@", date.removeSeconds() as NSDate)
             fetchRequest.fetchLimit = 1
 
             do {

@@ -8,7 +8,7 @@
 import Foundation
 
 enum ActivityType {
-    case diaper(state: State)
+    case diaper(state: DiaperState)
     case bottle(quantity: Int)
     case breast(duration: BreastDuration)
     case sleep(duration: Int)
@@ -18,17 +18,17 @@ enum ActivityType {
     var alertMessage: String {
            switch self {
            case .diaper:
-               return "Une couche a déja été enregistrée à cette date."
+               return "Une couche a déjà été enregistrée à cette date."
            case .bottle:
-               return "Un biberon a déja été enregistrée à cette date."
+               return "Un biberon a déjà été enregistrée à cette date."
            case .breast:
-               return "Une session d'allaitement a déja été enregistrée à cette date."
+               return "Une session d'allaitement a déjà été enregistrée à cette date."
            case .sleep:
-               return "Un temps de sommeil a déja été enregistrée à cette date."
+               return "Un temps de sommeil a déjà été enregistrée à cette date."
            case .growth:
-               return "Une mesure de croissance a déja été enregistrée à cette date."
+               return "Une mesure de croissance a déjà été enregistrée à cette date."
            case .solide:
-               return "Un repas a déja été enregistrée à cette date."
+               return "Un repas a déjà été enregistrée à cette date."
            }
        }
 
@@ -37,7 +37,7 @@ enum ActivityType {
         }
 }
 
-enum State: String {
+enum DiaperState: String, CaseIterable {
     case wet = "Urine"
     case dirty = "Souillée"
     case both = "Mixte"

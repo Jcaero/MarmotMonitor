@@ -22,6 +22,12 @@ extension Date {
         return formatter.string(from: self)
     }
 
+    func removeSeconds() -> Date {
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: self)
+        return calendar.date(from: dateComponents)!
+    }
+
     func toStringWithTimeAndDayMonthYear() -> String {
         let dateFormatter = DateFormatter()
         let calendar = Calendar.current

@@ -24,6 +24,7 @@
 		472848242B5819FE00AA6B35 /* SolidFeedingViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472848232B5819FD00AA6B35 /* SolidFeedingViewModelTest.swift */; };
 		472848262B5824AB00AA6B35 /* SleepViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472848252B5824AB00AA6B35 /* SleepViewModelTest.swift */; };
 		472DDABD2B2DEF1600812024 /* UISegmented+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472DDABC2B2DEF1600812024 /* UISegmented+.swift */; };
+		473321C32B5AA29500452F27 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473321C22B5AA29500452F27 /* UIViewController+.swift */; };
 		4735B26B2B1140D8000F2B8C /* ViewForInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */; };
 		4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26D2B1145B7000F2B8C /* GenderController.swift */; };
 		4738B4D22B287D830041ECF0 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B4D12B287D830041ECF0 /* Int+.swift */; };
@@ -45,6 +46,8 @@
 		475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */; };
 		475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */; };
 		4750720E2B09576900DAB527 /* TapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750720D2B09576900DAB527 /* TapBarController.swift */; };
+		475BD8EF2B597FBF003F1158 /* DiaperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475BD8EE2B597FBF003F1158 /* DiaperViewModel.swift */; };
+		475BD8F12B59B43F003F1158 /* DiaperViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475BD8F02B59B43F003F1158 /* DiaperViewModelTest.swift */; };
 		4767543A2B37912F00C83E6D /* BackGroundActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476754392B37912F00C83E6D /* BackGroundActivity.swift */; };
 		4767543C2B3792BC00C83E6D /* SleepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767543B2B3792BC00C83E6D /* SleepCell.swift */; };
 		476AF6302B27A10100F4935F /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF62F2B27A10100F4935F /* UIButton+.swift */; };
@@ -126,6 +129,7 @@
 		472848232B5819FD00AA6B35 /* SolidFeedingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidFeedingViewModelTest.swift; sourceTree = "<group>"; };
 		472848252B5824AB00AA6B35 /* SleepViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepViewModelTest.swift; sourceTree = "<group>"; };
 		472DDABC2B2DEF1600812024 /* UISegmented+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmented+.swift"; sourceTree = "<group>"; };
+		473321C22B5AA29500452F27 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForInformationController.swift; sourceTree = "<group>"; };
 		4735B26D2B1145B7000F2B8C /* GenderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderController.swift; sourceTree = "<group>"; };
 		4738B4D12B287D830041ECF0 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 		475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITests.swift; sourceTree = "<group>"; };
 		475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4750720D2B09576900DAB527 /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
+		475BD8EE2B597FBF003F1158 /* DiaperViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaperViewModel.swift; sourceTree = "<group>"; };
+		475BD8F02B59B43F003F1158 /* DiaperViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaperViewModelTest.swift; sourceTree = "<group>"; };
 		476754392B37912F00C83E6D /* BackGroundActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundActivity.swift; sourceTree = "<group>"; };
 		4767543B2B3792BC00C83E6D /* SleepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCell.swift; sourceTree = "<group>"; };
 		476AF62F2B27A10100F4935F /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
@@ -236,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				4738B4D12B287D830041ECF0 /* Int+.swift */,
+				473321C22B5AA29500452F27 /* UIViewController+.swift */,
 				476AF62F2B27A10100F4935F /* UIButton+.swift */,
 				4712D43A2B0A9B5C0085035C /* UILabel+.swift */,
 				4712D43C2B0A9BC50085035C /* UIView+.swift */,
@@ -266,6 +273,7 @@
 				472848212B58154700AA6B35 /* BreastFeedingChronoViewModelTest.swift */,
 				472848232B5819FD00AA6B35 /* SolidFeedingViewModelTest.swift */,
 				472848252B5824AB00AA6B35 /* SleepViewModelTest.swift */,
+				475BD8F02B59B43F003F1158 /* DiaperViewModelTest.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -497,6 +505,7 @@
 			isa = PBXGroup;
 			children = (
 				47AF89752B3A28200068FE1F /* diaperController.swift */,
+				475BD8EE2B597FBF003F1158 /* DiaperViewModel.swift */,
 				47AF89772B3A29E90068FE1F /* diaperCell.swift */,
 			);
 			path = diaper;
@@ -684,11 +693,13 @@
 			files = (
 				4704F2C32B2F98310060DCEE /* BottleFeedingController.swift in Sources */,
 				47D8DA672B4B37F000D97CD1 /* Activity+CoreDataClass.swift in Sources */,
+				475BD8EF2B597FBF003F1158 /* DiaperViewModel.swift in Sources */,
 				4747324D2B1234BB0064ABB4 /* ParentNameController.swift in Sources */,
 				47D8DA6C2B4B37F000D97CD1 /* Diaper+CoreDataProperties.swift in Sources */,
 				474EE9062B3B69100047054B /* GrowthCell.swift in Sources */,
 				47D8DA762B4B461D00D97CD1 /* MarmotMonitorSaveManager.swift in Sources */,
 				470009D12B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift in Sources */,
+				473321C32B5AA29500452F27 /* UIViewController+.swift in Sources */,
 				471480AF2B513AF20084589B /* ActivityType.swift in Sources */,
 				47D8DA6A2B4B37F000D97CD1 /* Breast+CoreDataProperties.swift in Sources */,
 				47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */,
@@ -765,6 +776,7 @@
 				4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */,
 				4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */,
 				47D7E1B82B5566950038C6E2 /* CoreDataManagerMock.swift in Sources */,
+				475BD8F12B59B43F003F1158 /* DiaperViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

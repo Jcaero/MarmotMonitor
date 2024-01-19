@@ -49,7 +49,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         XCTAssertEqual(dateActivities.count, 1)
 
         let state = (dateActivities.first?.activityArray.first as! Diaper).state
-        XCTAssertEqual(state, State.wet.rawValue)
+        XCTAssertEqual(state, DiaperState.wet.rawValue)
     }
 
     func testCoreDataHaveData_WhenSaveActivity_CoreDataHaveTwoData() {
@@ -61,7 +61,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         XCTAssertEqual(dateActivities.count, 2)
 
         let state = (dateActivities.first?.activityArray.first as! Diaper).state
-        XCTAssertEqual(state, State.both.rawValue)
+        XCTAssertEqual(state, DiaperState.both.rawValue)
     }
 
     func testCoreDataHaveData_WhenSaveActivityAtSameDate_ShowAlerteAndNotSave() {
@@ -73,7 +73,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         XCTAssertEqual(dateActivities.count, 1)
 
         let state = (dateActivities.first?.activityArray.first as! Diaper).state
-        XCTAssertEqual(state, State.wet.rawValue)
+        XCTAssertEqual(state, DiaperState.wet.rawValue)
         XCTAssertEqual(alerteDescription, ActivityType.diaper(state: .wet).alertMessage)
     }
 
