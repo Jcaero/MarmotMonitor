@@ -15,13 +15,15 @@ class DiaperViewModelTest: TestCase {
     private var coreDatatManager: MarmotMonitorSaveManager!
     private var isDataUpdate: Bool!
     private var alerteMessage: String!
+    private var isNextView: Bool!
 
     override func setUp() {
         super.setUp()
-        coreDatatManager = MarmotMonitorSaveManager(coreDataManager: CoreDataManagerMock.sharedInstance, delegate: self)
+        coreDatatManager = MarmotMonitorSaveManager(coreDataManager: CoreDataManagerMock.sharedInstance)
         viewModel = DiaperViewModel(delegate: self, coreDataManager: coreDatatManager)
         isDataUpdate = false
         alerteMessage = ""
+        isNextView = false
     }
     
     override func tearDown() {
@@ -121,6 +123,10 @@ class DiaperViewModelTest: TestCase {
 }
 
 extension DiaperViewModelTest: DiaperDelegate {
+    func nextView() {
+        isNextView = true
+    }
+    
     func alert(title: String, description: String) {
         alerteMessage = description
     }
@@ -128,11 +134,5 @@ extension DiaperViewModelTest: DiaperDelegate {
     func updateData() {
         isDataUpdate = true
     }
-}
-
-extension DiaperViewModelTest: MarmotMonitorSaveManagerDelegate {
-        func showAlert(title: String, description: String) {
-            alerteMessage = description
-        }
 }
 

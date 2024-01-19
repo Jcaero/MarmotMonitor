@@ -15,7 +15,7 @@ final class BenchMarkTest: TestCase {
     var alerteDescription = ""
     
     override func setUpWithError() throws {
-        marmotMonitorSaveManager = MarmotMonitorSaveManager(coreDataManager: CoreDataManagerMock.sharedInstance, delegate: self)
+        marmotMonitorSaveManager = MarmotMonitorSaveManager(coreDataManager: CoreDataManagerMock.sharedInstance)
     }
     
     override func tearDownWithError() throws {
@@ -30,7 +30,7 @@ final class BenchMarkTest: TestCase {
         for i in 0..<1000 {
             // Créer une nouvelle date pour chaque itération
             if let newDate = calendar.date(byAdding: .day, value: -i, to: Date()) {
-                marmotMonitorSaveManager.saveActivity(.diaper(state: .wet), date: newDate)
+                marmotMonitorSaveManager.saveActivity(.diaper(state: .wet), date: newDate, onSuccess: {} , onError: {_ in })
             }
         }
 
@@ -47,7 +47,7 @@ final class BenchMarkTest: TestCase {
             for i in 0..<1000 {
                 // Créer une nouvelle date pour chaque itération
                 if let newDate = calendar.date(byAdding: .day, value: -i, to: Date()) {
-                    marmotMonitorSaveManager.saveActivity(.diaper(state: .wet), date: newDate)
+                    marmotMonitorSaveManager.saveActivity(.diaper(state: .wet), date: newDate, onSuccess: {} , onError: {_ in })
                 }
             }
         }
@@ -55,13 +55,8 @@ final class BenchMarkTest: TestCase {
 
     func testBenchmarkSaveOneActivity() {
         measure {
-            marmotMonitorSaveManager.saveActivity(.diaper(state: .wet), date: Date())
+            marmotMonitorSaveManager.saveActivity(.diaper(state: .wet), date: Date(), onSuccess: {} , onError: {_ in })
         }
-    }
-}
-
-extension BenchMarkTest: MarmotMonitorSaveManagerDelegate {
-    func showAlert(title: String, description: String) {
     }
 }
     

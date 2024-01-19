@@ -75,7 +75,6 @@ class DiaperController: ActivityController {
 
     @objc func valideButtonSet() {
         viewModel.saveDiaper(at: timePicker.date)
-        self.dismiss(animated: true, completion: nil)
     }
 
     private func setupTableViewHeight() {
@@ -134,5 +133,9 @@ extension DiaperController: DiaperDelegate {
 
     func updateData() {
         tableOfDiaper.reloadData()
+    }
+
+    func nextView() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

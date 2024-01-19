@@ -9,10 +9,11 @@ import Foundation
 
 protocol DiaperDelegate: AnyObject {
     func updateData()
+    func nextView()
     func alert(title: String, description: String)
 }
 
-final class DiaperViewModel:MarmotMonitorSaveManagerDelegate {
+final class DiaperViewModel {
 
     private weak var delegate: DiaperDelegate?
     private var coreDataManager: MarmotMonitorSaveManager!
@@ -26,7 +27,7 @@ final class DiaperViewModel:MarmotMonitorSaveManagerDelegate {
 
     init(delegate: DiaperDelegate?, coreDataManager: MarmotMonitorSaveManager? = nil) {
         self.delegate = delegate
-        self.coreDataManager = coreDataManager ?? MarmotMonitorSaveManager(delegate: self)
+        self.coreDataManager = coreDataManager ?? MarmotMonitorSaveManager()
     }
 
     func selectDiaper( diaper: DiaperState) {
@@ -48,7 +49,10 @@ final class DiaperViewModel:MarmotMonitorSaveManagerDelegate {
     // MARK: - Core Data
     func saveDiaper(at date: Date) {
         guard let state = firstTrueDiaperState() else { return }
-        coreDataManager.saveActivity(.diaper(state: state), date: date)
+        coreDataManager.saveActivity(.diaper(state: state),
+                                     date: date,
+                                     onSuccess: { self.delegate?.nextView() },
+                                     onError: { description in self.showAlert(title: "Erreur", description: description) })
     }
 
     private func firstTrueDiaperState() -> DiaperState? {

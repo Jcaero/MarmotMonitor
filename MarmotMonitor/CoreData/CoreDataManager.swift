@@ -10,7 +10,7 @@ import CoreData
 
 protocol CoreDataManagerProtocol {
     var viewContext: NSManagedObjectContext { get }
-    func save()
+    func save() throws
     func clearDatabase()
 }
 
@@ -38,15 +38,11 @@ class CoreDataManager: CoreDataManagerProtocol {
         return viewContext
     }()
 
-    func save() {
+    func save() throws {
         guard viewContext.hasChanges else {
             return
         }
-        do {
-            try self.viewContext.save()
-        } catch {
-            print("Error while saving: \(error.localizedDescription )")
-        }
+        try viewContext.save()
     }
 
     func clearDatabase() {
@@ -57,15 +53,22 @@ class CoreDataManager: CoreDataManagerProtocol {
 
             fetchRequest.includesPropertyValues = false
             do {
-                let items = try viewContext.fetch(fetchRequest) as! [NSManagedObject]
-                for item in items {
-                    viewContext.delete(item)
+                let items = try viewContext.fetch(fetchRequest)
+                if let managedObjects = items as? [NSManagedObject] {
+                    for item in managedObjects {
+                        viewContext.delete(item)
+                    }
                 }
             } catch let error as NSError {
                 print("Erreur lors de la suppression des entités \(entity.name!): \(error), \(error.userInfo)")
             }
             viewContext.refreshAllObjects()
-            save()
+
+            do {
+                try save()
+            } catch {
+                print("Error while saving: \(error.localizedDescription)")
+            }
         }
     }
 }

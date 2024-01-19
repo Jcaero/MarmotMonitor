@@ -7,12 +7,8 @@
 import CoreData
 import UIKit
 
-protocol MarmotMonitorSaveManagerDelegate: AnyObject {
-    func showAlert(title: String, description: String)
-}
-
 protocol MarmotMonitorSaveManagerProtocol {
-    func saveActivity(_ activityType: ActivityType, date: Date)
+    func saveActivity(_ activityType: ActivityType, date: Date, onSuccess: (() -> Void), onError: ((String) -> Void))
     func fetchDateActivitiesWithDate(from startDate: Date, to endDate: Date) -> [DateActivity]
     func clearDatabase()
 }
@@ -23,14 +19,12 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
 
     private let coreDataManager: CoreDataManagerProtocol
     private let context: NSManagedObjectContext!
-    private weak var delegate: MarmotMonitorSaveManagerDelegate?
 
     // MARK: - Init
 
-    init(coreDataManager: CoreDataManagerProtocol = CoreDataManager.sharedInstance, delegate: MarmotMonitorSaveManagerDelegate?) {
+    init(coreDataManager: CoreDataManagerProtocol = CoreDataManager.sharedInstance) {
         self.coreDataManager = coreDataManager
         context = coreDataManager.viewContext
-        self.delegate = delegate
     }
 
     // MARK: - Save
@@ -41,14 +35,13 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
     /// - Parameters:
     ///  - activityType: The type of activity to save
     ///  - date: The date to save the activity for
-    func saveActivity(_ activityType: ActivityType, date: Date) {
+    func saveActivity(_ activityType: ActivityType, date: Date, onSuccess: (() -> Void), onError: ((String) -> Void)) {
         context.performAndWait {
             let activityDate = self.fetchOrCreateDateActivity(for: date)
 
             let activityExists = self.verifyExistenceOf(activityType, in: activityDate)
             guard !activityExists else {
-                print("saverManager: Activity already exists")
-                self.delegate?.showAlert(title: "Erreur", description: activityType.alertMessage)
+                onError(activityType.alertMessage)
                 return
             }
 
@@ -91,7 +84,14 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
                 solid.other = Int16(composition.other)
                 activityDate.addToActivity(solid)
             }
-            self.coreDataManager.save()
+
+            do {
+                try self.coreDataManager.save()
+                    onSuccess()
+            } catch {
+                print("saverManager: Error saving context: \(error)")
+                    onError("Impossible de sauvegarder l'activité.")
+            }
         }
     }
 
