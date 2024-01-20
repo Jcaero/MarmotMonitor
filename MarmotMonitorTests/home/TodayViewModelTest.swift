@@ -9,22 +9,34 @@ import XCTest
 
 @testable import MarmotMonitor
 
-class TodayViewModelTest: XCTestCase {
-    var viewModel: TodayViewModel!
+class TodayViewModelTest: TestCase {
+    private var viewModel: TodayViewModel!
+    private var coreDatatManager: MarmotMonitorSaveManager!
+    
+    private var saveActivity1 = false
+    private var alerteDescription = ""
 
     override func setUp() {
         super.setUp()
+        coreDatatManager = MarmotMonitorSaveManager(coreDataManager: CoreDataManagerMock.sharedInstance)
+        viewModel = TodayViewModel(marmotMonitorSaveManager: coreDatatManager)
+        
+        saveActivity1 = false
+        alerteDescription = ""
     }
 
     override func tearDown() {
-        viewModel = nil
         super.tearDown()
+        viewModel = nil
+        coreDatatManager.clearDatabase()
+        coreDatatManager = nil
     }
 
     func saveData(person: Person) {
         
     }
 
+    // MARK: - test userdefault
     func testUserDefaultHaveData_WhenRequestLabelText_receiveLabeltexte() {
         let date = Date().toStringWithDayMonthYear()
         let baby = Person(name: "Bébé", gender: "Fille", parentName: "Pierrick", birthDay: date )
@@ -96,5 +108,32 @@ class TodayViewModelTest: XCTestCase {
 
         XCTAssertEqual(year, "")
         XCTAssertEqual(month, "")
+    }
+
+    // MARK: - Test coreData
+    func testCoreDataHaveData_WhenFetchData_TableViewIsUpdate(){
+        coreDatatManager.saveActivity(.diaper(state: .wet),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { saveActivity1 = true} ,
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+        XCTAssertEqual(alerteDescription, "")
+
+        let activityTitle = viewModel.activities[2].cellSubTitle
+        viewModel.fetchLastActivities()
+        
+        let activityTitleAfter = viewModel.activities[2].cellSubTitle
+        
+        XCTAssertEqual(activityTitle, "Saisir la couche")
+        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 Urine")
+    }
+
+    func testCoreDataHaveNoData_WhenFetchData_TableViewIsUpdate(){
+        let activityTitle = viewModel.activities[2].cellSubTitle
+        viewModel.fetchLastActivities()
+        
+        let activityTitleAfter = viewModel.activities[2].cellSubTitle
+        
+        XCTAssertEqual(activityTitle, "Saisir la couche")
+        XCTAssertEqual(activityTitleAfter, "Saisir la couche")
     }
 }

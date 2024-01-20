@@ -25,9 +25,9 @@ final class DiaperViewModel {
         .both: false
     ]
 
-    init(delegate: DiaperDelegate?, coreDataManager: MarmotMonitorSaveManager? = nil) {
+    init(delegate: DiaperDelegate?, coreDataManager: MarmotMonitorSaveManager = MarmotMonitorSaveManager()) {
         self.delegate = delegate
-        self.coreDataManager = coreDataManager ?? MarmotMonitorSaveManager()
+        self.coreDataManager = coreDataManager
     }
 
     func selectDiaper( diaper: DiaperState) {

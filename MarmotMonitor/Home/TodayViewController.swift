@@ -160,11 +160,15 @@ class TodayViewController: BackgroundViewController {
         babyYear.setAccessibility(with: .staticText, label: "\(String(describing: babyYear.text))", hint: "année du bébé")
         babyMonth.text = viewModel.babyMonth()
         babyMonth.setAccessibility(with: .staticText, label: "\(String(describing: babyMonth.text))", hint: "mois du bébé")
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         imageGradient.frame = babyImage.bounds
+
+        viewModel.fetchLastActivities()
+        tableView.reloadData()
     }
 
     override func viewDidLayoutSubviews() {
@@ -319,7 +323,7 @@ extension TodayViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        let activitie = TodayViewModel.activities[indexPath.row]
+        let activitie = viewModel.activities[indexPath.row]
         cell.textLabel?.text = activitie.cellTitle
         cell.detailTextLabel?.text = activitie.cellSubTitle
         cell.imageView?.image = UIImage(named: activitie.imageName)

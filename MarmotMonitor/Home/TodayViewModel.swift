@@ -15,16 +15,18 @@ struct ActivityData {
 
 class TodayViewModel {
     private let userDefaultsManager: UserDefaultManagerProtocol!
+    private let marmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol!
 
-    static let activities: [ActivityData] = [
+    var activities: [ActivityData] = [
            ActivityData(imageName: "biberon", cellTitle: "Dernière tétée/biberon", cellSubTitle: "Saisir la tétée/le biberon"),
            ActivityData(imageName: "sommeil", cellTitle: "Dernier sommeil", cellSubTitle: "Saisir le sommeil"),
            ActivityData(imageName: "couche", cellTitle: "Dernière couche", cellSubTitle: "Saisir la couche"),
            ActivityData(imageName: "croissance", cellTitle: "Croissance", cellSubTitle: "Ajouter une mesure")
        ]
 
-    init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {
+    init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager(), marmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol = MarmotMonitorSaveManager()) {
         self.userDefaultsManager = userDefaultsManager
+        self.marmotMonitorSaveManager = marmotMonitorSaveManager
     }
 
     // MARK: - Person Data
@@ -65,5 +67,13 @@ class TodayViewModel {
     func babyMonth() -> String {
         guard let age = babyAge() else { return "" }
         return "\(age.month ?? 0)"
+    }
+
+    // MARK: - Update Last Value
+    func fetchLastActivities() {
+        guard let result = marmotMonitorSaveManager.fetchFirstDiaperActivity(), let status = result.activity.state else { return }
+        let date = result.date.toStringWithTimeAndDayMonthYear()
+        let cellTitle = date + " " + status
+        activities[2]=ActivityData(imageName: "couche", cellTitle: "Dernière couche", cellSubTitle: cellTitle)
     }
 }

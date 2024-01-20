@@ -10,6 +10,7 @@ import UIKit
 protocol MarmotMonitorSaveManagerProtocol {
     func saveActivity(_ activityType: ActivityType, date: Date, onSuccess: (() -> Void), onError: ((String) -> Void))
     func fetchDateActivitiesWithDate(from startDate: Date, to endDate: Date) -> [DateActivity]
+    func fetchFirstDiaperActivity() -> (activity: Diaper, date: Date)?
     func clearDatabase()
 }
 
@@ -179,6 +180,36 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
 
             return fetchedResults
         }
+    }
+
+    private func fetchAllActivity() -> [DateActivity] {
+        context.performAndWait {
+            var fetchedResults = [DateActivity]()
+            let request = NSFetchRequest<DateActivity>(entityName: "DateActivity")
+            request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+
+            do {
+                let results = try context.fetch(request)
+                fetchedResults = results.filter { !$0.activityArray.isEmpty }
+            } catch {
+                print("Erreur lors de la récupération des activités: \(error)")
+            }
+
+            return fetchedResults
+        }
+    }
+
+    func fetchFirstDiaperActivity() -> (activity: Diaper, date: Date)? {
+        let allActivities = fetchAllActivity()
+
+        for dateActivity in allActivities {
+            for activity in dateActivity.activityArray {
+                if let diaperActivity = activity as? Diaper {
+                    return (diaperActivity, dateActivity.date)
+                }
+            }
+        }
+        return nil
     }
 
     // MARK: - Clear

@@ -418,4 +418,30 @@ final class MarmotMonitoSaveManagerTest: TestCase {
             XCTFail("solid non trouvé")
         }
     }
+
+    // MARK: - Fetch Last Diaper Activity
+    func testCoreDataHaveDiaperData_WhenFetchLastActivity_ResultHaveActivity() {
+        marmotMonitorSaveManager.saveActivity(.diaper(state: .wet),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { saveActivity1 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        marmotMonitorSaveManager.saveActivity(.diaper(state: .dirty),
+                                              date: testSecondDateSix,
+                                              onSuccess: { saveActivity2 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+        
+        marmotMonitorSaveManager.saveActivity(.diaper(state: .both),
+                                              date: testThirdDateFive,
+                                              onSuccess: { saveActivity2 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        
+        let dateActivities = marmotMonitorSaveManager.fetchFirstDiaperActivity()
+        let date = dateActivities?.date.toStringWithTimeAndDayMonthYear()
+        let status = dateActivities?.activity.state
+        
+        XCTAssertEqual(date, "06/01/2023 00:00")
+        XCTAssertEqual(status, "Souillée")
+    }
 }

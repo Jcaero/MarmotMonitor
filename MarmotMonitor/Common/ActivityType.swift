@@ -15,6 +15,10 @@ enum ActivityType {
     case growth(data: GrowthData)
     case solide(composition: SolidQuantity)
 
+    static var allTitle : [String] {
+        return ["Couche", "Biberon", "Allaitement", "Sommeil", "Croissance", "Repas"]
+    }
+
     var alertMessage: String {
            switch self {
            case .diaper:
