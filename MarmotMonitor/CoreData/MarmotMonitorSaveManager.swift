@@ -201,8 +201,9 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
 
     func fetchFirstDiaperActivity() -> (activity: Diaper, date: Date)? {
         let allActivities = fetchAllActivity()
+        let sortedActivities = allActivities.sorted { $0.date > $1.date }
 
-        for dateActivity in allActivities {
+        for dateActivity in sortedActivities {
             for activity in dateActivity.activityArray {
                 if let diaperActivity = activity as? Diaper {
                     return (diaperActivity, dateActivity.date)

@@ -153,7 +153,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
                                               onError: {alerteMessage in alerteDescription = alerteMessage})
         XCTAssertEqual(alerteDescription, "")
         
-        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: activityStartDateSix, to: activityEndDateEight)
         
         XCTAssertEqual(dateActivities.count, 1)
         XCTAssertEqual(dateActivities[0].activityArray.count, 2)
@@ -219,7 +219,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
                                               onSuccess: { saveActivity2 = true},
                                               onError: {alerteMessage in alerteDescription = alerteMessage})
         
-        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        let dateActivities = marmotMonitorSaveManager.fetchDateActivitiesWithDate(from: testSecondDateSix, to: activityEndDateEight)
         
         XCTAssertEqual(dateActivities.count, 1)
         XCTAssertEqual(dateActivities[0].activityArray.count, 2)
@@ -422,12 +422,12 @@ final class MarmotMonitoSaveManagerTest: TestCase {
     // MARK: - Fetch Last Diaper Activity
     func testCoreDataHaveDiaperData_WhenFetchLastActivity_ResultHaveActivity() {
         marmotMonitorSaveManager.saveActivity(.diaper(state: .wet),
-                                              date: testFirstDateSeven,
+                                              date: testSecondDateSix,
                                               onSuccess: { saveActivity1 = true},
                                               onError: {alerteMessage in alerteDescription = alerteMessage})
 
         marmotMonitorSaveManager.saveActivity(.diaper(state: .dirty),
-                                              date: testSecondDateSix,
+                                              date: testFirstDateSeven,
                                               onSuccess: { saveActivity2 = true},
                                               onError: {alerteMessage in alerteDescription = alerteMessage})
         
@@ -441,7 +441,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         let date = dateActivities?.date.toStringWithTimeAndDayMonthYear()
         let status = dateActivities?.activity.state
         
-        XCTAssertEqual(date, "06/01/2023 00:00")
+        XCTAssertEqual(date, "07/01/2024 22:30")
         XCTAssertEqual(status, "Souillée")
     }
 }
