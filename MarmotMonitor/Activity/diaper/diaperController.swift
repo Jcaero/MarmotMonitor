@@ -126,17 +126,7 @@ extension DiaperController: UITableViewDataSource {
 }
 
 extension DiaperController: DiaperDelegate {
-    func alert(title: String, description: String) {
-        let alertVC = UIAlertController(title: title, message: description, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
-    }
-
     func updateData() {
         tableOfDiaper.reloadData()
-    }
-
-    func nextView() {
-        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -183,16 +183,6 @@ extension SolideFeedingController: UITextFieldDelegate {
 }
 
 extension SolideFeedingController: SolideFeedingProtocol {
-    func nextView() {
-        self.dismiss(animated: true, completion: nil)
-    }
-
-    func alert(title: String, description: String) {
-        let alertVC = UIAlertController(title: title, message: description, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
-    }
-
     func updateTotal(with total: String) {
         totalWeight.text = total
         self.tableOfIngredients.reloadData()

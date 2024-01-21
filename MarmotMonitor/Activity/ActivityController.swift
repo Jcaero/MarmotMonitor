@@ -74,4 +74,15 @@ class ActivityController: BackGroundActivity {
             separator.heightAnchor.constraint(equalToConstant: 2)
         ])
     }
+
+    func nextView() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    func alert(title: String, description: String) {
+        let alertVC = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
+
 }
