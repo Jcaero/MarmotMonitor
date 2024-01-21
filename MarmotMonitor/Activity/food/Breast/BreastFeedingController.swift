@@ -173,7 +173,7 @@ class BreastFeedingController: ActivityController {
     }
 
     private func setupValideButton() {
-        valideButton.setAccessibility(with: .button, label: "Valider", hint: "Valider le choix de la couche")
+        valideButton.setAccessibility(with: .button, label: "Valider", hint: "Valider la valeur de la tétée")
         valideButton.addTarget(self, action: #selector(valideButtonSet), for: .touchUpInside)
     }
 

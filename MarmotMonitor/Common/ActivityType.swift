@@ -39,6 +39,9 @@ enum ActivityType {
     static var diaperAlert: String {
             return "Une couche a déjà été enregistrée à cette date."
         }
+    static var solidAlert: String {
+            return "Un repas a déjà été enregistrée à cette date."
+        }
 }
 
 enum DiaperState: String, CaseIterable {

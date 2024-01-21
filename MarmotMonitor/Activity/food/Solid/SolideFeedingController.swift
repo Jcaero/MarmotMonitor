@@ -47,6 +47,7 @@ class SolideFeedingController: ActivityController {
         setupViews()
         setupContraints()
         setupTimePickerAndLabel()
+        setupValideButton()
 
         setupTableView()
 
@@ -98,6 +99,15 @@ class SolideFeedingController: ActivityController {
         timeLabel.setAccessibility(with: .staticText, label: "heure du repas", hint: "")
 
         timePicker.setAccessibility(with: .selected, label: "", hint: "choisir l'heure du repas")
+    }
+
+    private func setupValideButton() {
+        valideButton.setAccessibility(with: .button, label: "Valider", hint: "Valider le repas")
+        valideButton.addTarget(self, action: #selector(valideButtonSet), for: .touchUpInside)
+    }
+
+    @objc func valideButtonSet() {
+        viewModel.saveSolid(at: timePicker.date)
     }
 
     private func setupTableViewHeight() {
@@ -173,6 +183,16 @@ extension SolideFeedingController: UITextFieldDelegate {
 }
 
 extension SolideFeedingController: SolideFeedingProtocol {
+    func nextView() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    func alert(title: String, description: String) {
+        let alertVC = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
+
     func updateTotal(with total: String) {
         totalWeight.text = total
         self.tableOfIngredients.reloadData()

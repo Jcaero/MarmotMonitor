@@ -10,7 +10,7 @@ import Foundation
 enum Ingredient: String, CaseIterable {
     case fruit = "Fruit"
     case vegetable = "Légumes"
-    case meatAndProtein = "Viandes et protéines"
+    case meat = "Viandes et protéines"
     case cereal = "Céréales"
     case dairyProduct = "Produits laitiers"
     case other = "Autre(s)"
