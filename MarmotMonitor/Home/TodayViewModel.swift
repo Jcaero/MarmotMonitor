@@ -71,9 +71,60 @@ class TodayViewModel {
 
     // MARK: - Update Last Value
     func fetchLastActivities() {
-        guard let result = marmotMonitorSaveManager.fetchFirstDiaperActivity(), let status = result.activity.state else { return }
+        fetchDiaper()
+        fetchFood()
+    }
+
+    private func fetchDiaper() {
+        guard let result = marmotMonitorSaveManager.fetchFirstActivity(ofType: Diaper.self), let status = result.activity.state else { return }
         let date = result.date.toStringWithTimeAndDayMonthYear()
         let cellTitle = date + " " + status
         activities[2]=ActivityData(imageName: "couche", cellTitle: "Dernière couche", cellSubTitle: cellTitle)
+    }
+
+    private func fetchFood() {
+        var cellTitle: String = ""
+        var dateActivity: [Date] = []
+
+        let bottleResult = marmotMonitorSaveManager.fetchFirstActivity(ofType: Bottle.self)
+        let breastResult = marmotMonitorSaveManager.fetchFirstActivity(ofType: Breast.self)
+        let solidResult = marmotMonitorSaveManager.fetchFirstActivity(ofType: Solid.self)
+
+        if let bottleDate = bottleResult?.date {
+            dateActivity.append(bottleDate)
+        }
+        if let breastDate = breastResult?.date {
+            dateActivity.append(breastDate)
+        }
+        if let solidDate = solidResult?.date {
+            dateActivity.append(solidDate)
+        }
+
+        guard !dateActivity.isEmpty else { return }
+
+        if let mostRecentActivity = dateActivity.sorted(by: { $0 > $1 }).first {
+            switch mostRecentActivity {
+            case bottleResult?.date:
+                let quantity = String(bottleResult!.activity.intQuantity)
+                let date = bottleResult!.date.toStringWithTimeAndDayMonthYear()
+                cellTitle = date + " biberon de " + quantity + " ml"
+
+            case breastResult?.date:
+                let date = breastResult!.date.toStringWithTimeAndDayMonthYear()
+                let duration = breastResult!.activity.totalDuration
+                let stringDuration = duration.toTimeString()
+                cellTitle = date + " tétée de " + stringDuration
+
+            case solidResult?.date:
+                let date = solidResult!.date.toStringWithTimeAndDayMonthYear()
+                let quantity = String(solidResult!.activity.total)
+                cellTitle = date + " aliments: " + quantity + " g"
+
+            default:
+                break
+            }
+        }
+
+        activities[0] = ActivityData(imageName: "biberon", cellTitle: "Dernière tétée/biberon", cellSubTitle: cellTitle)
     }
 }

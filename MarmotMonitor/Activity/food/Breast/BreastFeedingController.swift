@@ -141,7 +141,6 @@ class BreastFeedingController: ActivityController {
         super.viewDidLoad()
         view.backgroundColor = .colorForGradientStart
 
-        setupTimePickerAndLabel()
         setupViews()
         setupContraints()
         setupNavigationBar()
@@ -154,6 +153,9 @@ class BreastFeedingController: ActivityController {
         addActionTo(leftButton)
 
         setupManuallyAction()
+
+        setupTimePickerAndLabel()
+        setupValideButton()
     }
 
         override func viewDidAppear(_ animated: Bool) {
@@ -168,6 +170,15 @@ class BreastFeedingController: ActivityController {
         timeLabel.setAccessibility(with: .staticText, label: "heure de la tétée", hint: "")
 
         timePicker.setAccessibility(with: .selected, label: "", hint: "choisir heure de la tétée")
+    }
+
+    private func setupValideButton() {
+        valideButton.setAccessibility(with: .button, label: "Valider", hint: "Valider le choix de la couche")
+        valideButton.addTarget(self, action: #selector(valideButtonSet), for: .touchUpInside)
+    }
+
+    @objc func valideButtonSet() {
+        viewModel.saveBreast(at: timePicker.date)
     }
 
     // MARK: - Setup UIButton
@@ -284,6 +295,16 @@ class BreastFeedingController: ActivityController {
 }
 
 extension BreastFeedingController: BreastFeedingChronoDelegate {
+    func nextView() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    func alert(title: String, description: String) {
+        let alertVC = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
+
     func updateRightButtonImage(with state: ButtonState) {
         rightButton.isSelected = state == .stop ? false : true
         rightButton.configuration?.image = UIImage(systemName: rightButton.isSelected ? "pause.fill" : "play.fill")!

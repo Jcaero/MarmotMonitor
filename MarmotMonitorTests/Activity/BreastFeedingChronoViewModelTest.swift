@@ -9,9 +9,12 @@ import Foundation
 import XCTest
 @testable import MarmotMonitor
 
-class BreastFeedingChronoViewModelTest: XCTestCase {
-
+class BreastFeedingChronoViewModelTest: TestCase {
     private var viewModel: BreastFeedingChronoViewModel!
+    private var coreDatatManager: MarmotMonitorSaveManager!
+
+    private var alerteMessage: String!
+    private var isNextView: Bool!
 
     private var leftTime = "00:00"
     private var rightTime = "00:00"
@@ -22,17 +25,23 @@ class BreastFeedingChronoViewModelTest: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        viewModel = BreastFeedingChronoViewModel(delegate: self)
+        coreDatatManager = MarmotMonitorSaveManager(coreDataManager: CoreDataManagerMock.sharedInstance)
+        viewModel = BreastFeedingChronoViewModel(delegate: self, coreDataManager: coreDatatManager)
         leftTime = "00:00"
         rightTime = "00:00"
         totalTime = "00:00"
+        alerteMessage = ""
+        isNextView = false
     }
 
     override func tearDown() {
         super.tearDown()
         viewModel = nil
+        coreDatatManager.clearDatabase()
+        coreDatatManager = nil
     }
 
+    // MARK: - button
     func testTimerIsOFF_WhenTappeLeftButton_TimeStarted() {
         let expectation = XCTestExpectation(description: "Le timer augmente leftTime et appelle le delegate")
 
@@ -187,9 +196,42 @@ class BreastFeedingChronoViewModelTest: XCTestCase {
         XCTAssertEqual(rightTime, "25:00")
         XCTAssertEqual(totalTime, "25:00")
     }
+
+    // MARK: - CORE Data
+    func testTimeIsSet_WhenSaveBreast_BreastIsSave() {
+
+        viewModel.manualButtonPressed(.left, time: 25)
+        viewModel.saveBreast(at: testFirstDateSeven)
+        
+        let dateActivities = coreDatatManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        
+        XCTAssertEqual(dateActivities.count, 1)
+
+        let timeLeft = (dateActivities.first?.activityArray.first as! Breast).leftDuration
+        XCTAssertEqual(timeLeft, 1500)
+    }
+
+    func testNoTimeIsSet_WhenSaveBreast_NoBreastIsSave() {
+
+        viewModel.saveBreast(at: testFirstDateSeven)
+        
+        let dateActivities = coreDatatManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        
+        XCTAssertEqual(dateActivities.count, 0)
+        XCTAssertEqual(alerteMessage, "Aucun temps n'a été enregistré")
+    }
+
 }
 
 extension BreastFeedingChronoViewModelTest: BreastFeedingChronoDelegate {
+    func nextView() {
+        isNextView = true
+    }
+    
+    func alert(title: String, description: String) {
+        alerteMessage = description
+    }
+    
     func updateRightButtonImage(with state: MarmotMonitor.ButtonState) {
         rightState = state
     }

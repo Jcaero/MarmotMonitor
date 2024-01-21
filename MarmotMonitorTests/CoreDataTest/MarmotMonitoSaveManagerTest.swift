@@ -419,7 +419,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         }
     }
 
-    // MARK: - Fetch Last Diaper Activity
+    // MARK: - Fetch Last Activity
     func testCoreDataHaveDiaperData_WhenFetchLastActivity_ResultHaveActivity() {
         marmotMonitorSaveManager.saveActivity(.diaper(state: .wet),
                                               date: testSecondDateSix,
@@ -437,11 +437,88 @@ final class MarmotMonitoSaveManagerTest: TestCase {
                                               onError: {alerteMessage in alerteDescription = alerteMessage})
 
         
-        let dateActivities = marmotMonitorSaveManager.fetchFirstDiaperActivity()
+        let dateActivities = marmotMonitorSaveManager.fetchFirstActivity(ofType: Diaper.self)
         let date = dateActivities?.date.toStringWithTimeAndDayMonthYear()
         let status = dateActivities?.activity.state
         
         XCTAssertEqual(date, "07/01/2024 22:30")
         XCTAssertEqual(status, "Souillée")
+    }
+
+    func testCoreDataHaveBottleData_WhenFetchLastActivity_ResultHaveActivity() {
+        marmotMonitorSaveManager.saveActivity(.bottle(quantity: 100),
+                                              date: testSecondDateSix,
+                                              onSuccess: { saveActivity1 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        marmotMonitorSaveManager.saveActivity(.bottle(quantity: 150),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { saveActivity2 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+        
+        marmotMonitorSaveManager.saveActivity(.diaper(state: .both),
+                                              date: testThirdDateFive,
+                                              onSuccess: { saveActivity2 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        
+        let dateActivities = marmotMonitorSaveManager.fetchFirstActivity(ofType: Bottle.self)
+        let date = dateActivities?.date.toStringWithTimeAndDayMonthYear()
+        let quantity = dateActivities?.activity.quantity
+        
+        XCTAssertEqual(date, "07/01/2024 22:30")
+        XCTAssertEqual(quantity, 150)
+    }
+
+    func testCoreDataHaveBreastData_WhenFetchLastActivity_ResultHaveActivity() {
+        let breastDataSecond = BreastDuration(leftDuration: 200, rightDuration: 200)
+        marmotMonitorSaveManager.saveActivity(.breast(duration: breastDataSecond),
+                                              date: testSecondDateSix,
+                                              onSuccess: { saveActivity1 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        let breastDataFirst = BreastDuration(leftDuration: 150, rightDuration: 150)
+        marmotMonitorSaveManager.saveActivity(.breast(duration: breastDataFirst),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { saveActivity2 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+        
+        marmotMonitorSaveManager.saveActivity(.diaper(state: .both),
+                                              date: testThirdDateFive,
+                                              onSuccess: { saveActivity2 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        
+        let dateActivities = marmotMonitorSaveManager.fetchFirstActivity(ofType: Breast.self)
+        let date = dateActivities?.date.toStringWithTimeAndDayMonthYear()
+        let duration = dateActivities?.activity.rightDuration
+        
+        XCTAssertEqual(date, "07/01/2024 22:30")
+        XCTAssertEqual(duration, 150)
+    }
+
+    func testCoreDataHaveSolidData_WhenFetchLastActivity_ResultHaveActivity() {
+        marmotMonitorSaveManager.saveActivity(.solide(composition: solidData1),
+                                              date: testSecondDateSix,
+                                              onSuccess: { saveActivity1 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        marmotMonitorSaveManager.saveActivity(.bottle(quantity: 100),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { saveActivity2 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+        
+        marmotMonitorSaveManager.saveActivity(.diaper(state: .both),
+                                              date: testThirdDateFive,
+                                              onSuccess: { saveActivity2 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        
+        let dateActivities = marmotMonitorSaveManager.fetchFirstActivity(ofType: Solid.self)
+        let date = dateActivities?.date.toStringWithTimeAndDayMonthYear()
+        let total = dateActivities?.activity.total
+        
+        XCTAssertEqual(date, "06/01/2023 00:00")
+        XCTAssertEqual(total, 1500)
     }
 }

@@ -22,4 +22,8 @@ extension Solid {
     @NSManaged public var other: Int16
     @NSManaged public var vegetable: Int16
 
+    public var total: Int {
+        let total = cereal + dairyProduct + fruit + meat + other + vegetable
+        return Int(total)
+    }
 }

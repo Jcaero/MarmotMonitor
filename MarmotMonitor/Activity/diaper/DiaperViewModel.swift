@@ -65,6 +65,5 @@ final class DiaperViewModel {
     // MARK: - MarmotMonitorSaveManagerDelegate
     func showAlert(title: String, description: String) {
         delegate?.alert(title: title, description: description)
-        print("diaperViewModel erreur")
     }
 }

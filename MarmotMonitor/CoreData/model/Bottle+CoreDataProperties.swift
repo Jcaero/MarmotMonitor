@@ -17,4 +17,8 @@ extension Bottle {
 
     @NSManaged public var quantity: Int16
 
+    public var intQuantity: Int {
+        return Int(quantity)
+    }
+
 }

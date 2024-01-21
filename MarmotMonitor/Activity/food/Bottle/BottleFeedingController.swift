@@ -34,12 +34,20 @@ class BottleFeedingController: ActivityController {
         return slider
     }()
 
+    // MARK: - PROPERTIES
+    var viewModel : BottleFeedingViewModel!
+
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = BottleFeedingViewModel(delegate: self)
+
         setupViews()
         setupContraints()
+
         setupTimePickerAndLabel()
+        setupValideButton()
+
         traitCollectionDidChange(nil)
     }
 
@@ -77,10 +85,21 @@ class BottleFeedingController: ActivityController {
         timePicker.setAccessibility(with: .selected, label: "", hint: "choisir l'heure du biberon")
     }
 
+    private func setupValideButton() {
+        valideButton.setAccessibility(with: .button, label: "Valider", hint: "Valider le choix de la couche")
+        valideButton.addTarget(self, action: #selector(valideButtonSet), for: .touchUpInside)
+    }
+
+    @objc func valideButtonSet() {
+        viewModel.saveBottle(at: timePicker.date)
+    }
+
     // MARK: - Actions
     @objc func sliderValueDidChange(_ sender:UISlider!) {
         let roundedStepValue = round(sender.value / 5) * 5
-        volumeOfMilkLabel.text = "Volume: \(Int(roundedStepValue)) ml"
+        let value = Int(roundedStepValue)
+        viewModel.setQuantity(value)
+        volumeOfMilkLabel.text = "Volume: \(value) ml"
     }
 }
 
@@ -96,5 +115,18 @@ extension BottleFeedingController {
         guard currentCategory != previousCategory else { return }
         let isAccessibilityCategory = currentCategory.isAccessibilityCategory
         timeLabel.text = isAccessibilityCategory ? "Heure" : "Heure du biberon"
+    }
+}
+
+// MARK: - Protocol
+extension BottleFeedingController: BottleFeedingDelegate {
+    func nextView() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    func alert(title: String, description: String) {
+        let alertVC = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
     }
 }

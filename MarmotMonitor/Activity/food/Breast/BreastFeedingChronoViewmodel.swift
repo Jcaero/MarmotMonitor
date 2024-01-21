@@ -13,6 +13,8 @@ protocol BreastFeedingChronoDelegate: AnyObject {
     func updateTotalTimeLabel(with text: String)
     func updateRightButtonImage(with state: ButtonState)
     func updateLeftButtonImage(with state: ButtonState)
+    func nextView()
+    func alert(title: String, description: String)
 }
 
 final class BreastFeedingChronoViewModel {
@@ -31,10 +33,14 @@ final class BreastFeedingChronoViewModel {
     private var rightTimer: Timer?
     private var leftTimer: Timer?
 
+    // MARK: - Protocol / delegate
     private weak var delegate: BreastFeedingChronoDelegate?
+    private var coreDataManager: MarmotMonitorSaveManager!
 
-    init(delegate: BreastFeedingChronoDelegate?) {
+    // MARK: - INIT
+    init(delegate: BreastFeedingChronoDelegate?, coreDataManager: MarmotMonitorSaveManager = MarmotMonitorSaveManager()) {
         self.delegate = delegate
+        self.coreDataManager = coreDataManager
     }
 
     // MARK: - Function
@@ -50,11 +56,27 @@ final class BreastFeedingChronoViewModel {
 
         }
     }
-//
-//    func resetButtonPressed() {
-//        razTimer(&leftTimer, time: &leftTime)
-//        razTimer(&rightTimer, time: &rightTime)
-//    }
+    // MARK: - Core Data
+    func saveBreast(at date: Date) {
+        guard (rightTime != 0) || (leftTime != 0)
+        else {
+            showAlert(title: "Erreur", description: "Aucun temps n'a été enregistré")
+            return
+        }
+
+        let duration = BreastDuration(leftDuration: leftTime, rightDuration: rightTime)
+        coreDataManager.saveActivity(.breast(duration: duration),
+                                     date: date,
+                                     onSuccess: { self.delegate?.nextView() },
+                                     onError: { description in self.showAlert(title: "Erreur", description: description) })
+    }
+
+    // MARK: - Alert
+    private func showAlert(title: String, description: String) {
+        delegate?.alert(title: title, description: description)
+    }
+
+    // MARK: - Function
 
     func manualButtonPressed(_ position: Position, time: Int) {
         switch position {

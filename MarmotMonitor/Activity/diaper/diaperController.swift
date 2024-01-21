@@ -30,8 +30,10 @@ class DiaperController: ActivityController {
 
         setupViews()
         setupContraints()
+
         setupTimePickerAndLabel()
         setupValideButton()
+
         setupTableView()
     }
 
@@ -125,7 +127,6 @@ extension DiaperController: UITableViewDataSource {
 
 extension DiaperController: DiaperDelegate {
     func alert(title: String, description: String) {
-//        showSimpleAlerte(with: title, message: description)
         let alertVC = UIAlertController(title: title, message: description, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)

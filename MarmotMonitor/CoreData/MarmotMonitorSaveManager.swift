@@ -10,7 +10,7 @@ import UIKit
 protocol MarmotMonitorSaveManagerProtocol {
     func saveActivity(_ activityType: ActivityType, date: Date, onSuccess: (() -> Void), onError: ((String) -> Void))
     func fetchDateActivitiesWithDate(from startDate: Date, to endDate: Date) -> [DateActivity]
-    func fetchFirstDiaperActivity() -> (activity: Diaper, date: Date)?
+    func fetchFirstActivity<T>(ofType type: T.Type) -> (activity: T, date: Date)? where T:Activity
     func clearDatabase()
 }
 
@@ -199,15 +199,75 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
         }
     }
 
+    /// Fetches first activity of diaper
+    /// - Returns: The first diaper activity
+    /// - Note: If no diaper activity exists, returns nil
     func fetchFirstDiaperActivity() -> (activity: Diaper, date: Date)? {
-        let allActivities = fetchAllActivity()
-        let sortedActivities = allActivities.sorted { $0.date > $1.date }
+        return fetchFirstActivity(ofType: Diaper.self)
+//        let allActivities = fetchAllActivity()
+//        let sortedActivities = allActivities.sorted { $0.date > $1.date }
+//
+//        for dateActivity in sortedActivities {
+//            for activity in dateActivity.activityArray {
+//                if let diaperActivity = activity as? Diaper {
+//                    return (diaperActivity, dateActivity.date)
+//                }
+//            }
+//        }
+//        return nil
+    }
 
-        for dateActivity in sortedActivities {
-            for activity in dateActivity.activityArray {
-                if let diaperActivity = activity as? Diaper {
-                    return (diaperActivity, dateActivity.date)
-                }
+    func fetchFirstBottleActivity() -> (activity: Bottle, date: Date)? {
+        return fetchFirstActivity(ofType: Bottle.self)
+//        let allActivities = fetchAllActivity()
+//        let sortedActivities = allActivities.sorted { $0.date > $1.date }
+//
+//        for dateActivity in sortedActivities {
+//            for activity in dateActivity.activityArray {
+//                if let bottleActivity = activity as? Bottle {
+//                    return (bottleActivity, dateActivity.date)
+//                }
+//            }
+//        }
+//        return nil
+    }
+
+    func fetchFirstBreastActivity() -> (activity: Breast, date: Date)? {
+        return fetchFirstActivity(ofType: Breast.self)
+//        let allActivities = fetchAllActivity()
+//        let sortedActivities = allActivities.sorted { $0.date > $1.date }
+//
+//        for dateActivity in sortedActivities {
+//            for activity in dateActivity.activityArray {
+//                if let breastActivity = activity as? Breast {
+//                    return (breastActivity, dateActivity.date)
+//                }
+//            }
+//        }
+//        return nil
+    }
+
+    func fetchFirstSolidActivity() -> (activity: Solid, date: Date)? {
+        return fetchFirstActivity(ofType: Solid.self)
+//        let allActivities = fetchAllActivity()
+//        let sortedActivities = allActivities.sorted { $0.date > $1.date }
+//
+//        for dateActivity in sortedActivities {
+//            for activity in dateActivity.activityArray {
+//                if let solidActivity = activity as? Solid {
+//                    return (solidActivity, dateActivity.date)
+//                }
+//            }
+//        }
+//        return nil
+    }
+
+    func fetchFirstActivity<T>(ofType type: T.Type) -> (activity: T, date: Date)? where T:Activity {
+        let allActivities = fetchAllActivity().sorted { $0.date > $1.date }
+
+        for dateActivity in allActivities {
+            if let activity = dateActivity.activityArray.first(where: { $0 is T }) as? T {
+                return (activity, dateActivity.date)
             }
         }
         return nil

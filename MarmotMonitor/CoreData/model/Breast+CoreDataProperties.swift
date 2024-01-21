@@ -18,4 +18,9 @@ extension Breast {
     @NSManaged public var leftDuration: Int16
     @NSManaged public var rightDuration: Int16
 
+    public var totalDuration: Int {
+        let total = leftDuration + rightDuration
+        return Int(total)
+    }
+
 }

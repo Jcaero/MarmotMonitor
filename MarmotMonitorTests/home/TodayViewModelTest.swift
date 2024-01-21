@@ -32,10 +32,6 @@ class TodayViewModelTest: TestCase {
         coreDatatManager = nil
     }
 
-    func saveData(person: Person) {
-        
-    }
-
     // MARK: - test userdefault
     func testUserDefaultHaveData_WhenRequestLabelText_receiveLabeltexte() {
         let date = Date().toStringWithDayMonthYear()
@@ -111,7 +107,21 @@ class TodayViewModelTest: TestCase {
     }
 
     // MARK: - Test coreData
-    func testCoreDataHaveData_WhenFetchData_TableViewIsUpdate(){
+    func testCoreDataHaveNoData_WhenFetchData_TableViewIsUpdate(){
+        viewModel.fetchLastActivities()
+        
+        let activityMeal = viewModel.activities[0].cellSubTitle
+        let activitySleep = viewModel.activities[1].cellSubTitle
+        let activityDiaper = viewModel.activities[2].cellSubTitle
+        let activityGrowth = viewModel.activities[3].cellSubTitle
+        
+        XCTAssertEqual(activityMeal, "Saisir la tétée/le biberon")
+        XCTAssertEqual(activitySleep, "Saisir le sommeil")
+        XCTAssertEqual(activityDiaper, "Saisir la couche")
+        XCTAssertEqual(activityGrowth, "Ajouter une mesure")
+    }
+
+    func testCoreDataHaveData_WhenFetchDiaperData_TableViewIsUpdate(){
         coreDatatManager.saveActivity(.diaper(state: .wet),
                                               date: testFirstDateSeven,
                                               onSuccess: { saveActivity1 = true} ,
@@ -127,13 +137,19 @@ class TodayViewModelTest: TestCase {
         XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 Urine")
     }
 
-    func testCoreDataHaveNoData_WhenFetchData_TableViewIsUpdate(){
-        let activityTitle = viewModel.activities[2].cellSubTitle
+    func testCoreDataHaveData_WhenFetchBottleData_TableViewIsUpdate(){
+        coreDatatManager.saveActivity(.bottle(quantity: 100),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { saveActivity1 = true} ,
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+        XCTAssertEqual(alerteDescription, "")
+
+        let activityTitle = viewModel.activities[0].cellSubTitle
         viewModel.fetchLastActivities()
         
-        let activityTitleAfter = viewModel.activities[2].cellSubTitle
+        let activityTitleAfter = viewModel.activities[0].cellSubTitle
         
-        XCTAssertEqual(activityTitle, "Saisir la couche")
-        XCTAssertEqual(activityTitleAfter, "Saisir la couche")
+        XCTAssertEqual(activityTitle, "Saisir la tétée/le biberon")
+        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 biberon de 100 ml")
     }
 }

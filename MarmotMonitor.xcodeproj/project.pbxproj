@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		470009D12B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */; };
 		4704F2C32B2F98310060DCEE /* BottleFeedingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */; };
+		470808222B5D5046004258A5 /* BottleFeedingViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470808212B5D5046004258A5 /* BottleFeedingViewModelTest.swift */; };
 		470991972B3C40B200590174 /* Growth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470991962B3C40B200590174 /* Growth.swift */; };
 		4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */; };
 		4711F7742B1E70AB00869A27 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F7732B1E70AB00869A27 /* Person.swift */; };
@@ -28,6 +29,7 @@
 		4735B26B2B1140D8000F2B8C /* ViewForInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */; };
 		4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26D2B1145B7000F2B8C /* GenderController.swift */; };
 		4738B4D22B287D830041ECF0 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B4D12B287D830041ECF0 /* Int+.swift */; };
+		47467D0E2B5C6114006AB25B /* BottleFeedingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47467D0D2B5C6114006AB25B /* BottleFeedingViewModel.swift */; };
 		4747324D2B1234BB0064ABB4 /* ParentNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4747324C2B1234BB0064ABB4 /* ParentNameController.swift */; };
 		474732532B1239CF0064ABB4 /* GenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474732522B1239CF0064ABB4 /* GenderViewModel.swift */; };
 		474732582B123F8D0064ABB4 /* UserDefaultsManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474732572B123F8D0064ABB4 /* UserDefaultsManagerTest.swift */; };
@@ -114,6 +116,7 @@
 /* Begin PBXFileReference section */
 		470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoViewmodel.swift; sourceTree = "<group>"; };
 		4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedingController.swift; sourceTree = "<group>"; };
+		470808212B5D5046004258A5 /* BottleFeedingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedingViewModelTest.swift; sourceTree = "<group>"; };
 		470991962B3C40B200590174 /* Growth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Growth.swift; sourceTree = "<group>"; };
 		4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModelTest.swift; sourceTree = "<group>"; };
 		4711F7732B1E70AB00869A27 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
@@ -133,6 +136,7 @@
 		4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForInformationController.swift; sourceTree = "<group>"; };
 		4735B26D2B1145B7000F2B8C /* GenderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderController.swift; sourceTree = "<group>"; };
 		4738B4D12B287D830041ECF0 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
+		47467D0D2B5C6114006AB25B /* BottleFeedingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedingViewModel.swift; sourceTree = "<group>"; };
 		4747324C2B1234BB0064ABB4 /* ParentNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentNameController.swift; sourceTree = "<group>"; };
 		474732522B1239CF0064ABB4 /* GenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewModel.swift; sourceTree = "<group>"; };
 		474732572B123F8D0064ABB4 /* UserDefaultsManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManagerTest.swift; sourceTree = "<group>"; };
@@ -274,6 +278,7 @@
 				472848232B5819FD00AA6B35 /* SolidFeedingViewModelTest.swift */,
 				472848252B5824AB00AA6B35 /* SleepViewModelTest.swift */,
 				475BD8F02B59B43F003F1158 /* DiaperViewModelTest.swift */,
+				470808212B5D5046004258A5 /* BottleFeedingViewModelTest.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -476,6 +481,7 @@
 			isa = PBXGroup;
 			children = (
 				4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */,
+				47467D0D2B5C6114006AB25B /* BottleFeedingViewModel.swift */,
 			);
 			path = Bottle;
 			sourceTree = "<group>";
@@ -733,6 +739,7 @@
 				478E79072B1370DC004157AF /* BirthDayController.swift in Sources */,
 				478E79092B1375F3004157AF /* BirthDayViewModel.swift in Sources */,
 				47D8DA6B2B4B37F000D97CD1 /* Diaper+CoreDataClass.swift in Sources */,
+				47467D0E2B5C6114006AB25B /* BottleFeedingViewModel.swift in Sources */,
 				4719ABE52B0E96380088CBE2 /* BabyNameController.swift in Sources */,
 				47D8DA652B4B37F000D97CD1 /* Bottle+CoreDataClass.swift in Sources */,
 				47155BC82B1DE6E000775B27 /* BackgroundViewController.swift in Sources */,
@@ -776,6 +783,7 @@
 				4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */,
 				4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */,
 				47D7E1B82B5566950038C6E2 /* CoreDataManagerMock.swift in Sources */,
+				470808222B5D5046004258A5 /* BottleFeedingViewModelTest.swift in Sources */,
 				475BD8F12B59B43F003F1158 /* DiaperViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
