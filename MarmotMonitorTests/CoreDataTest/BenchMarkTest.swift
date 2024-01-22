@@ -10,6 +10,7 @@ import XCTest
 final class BenchMarkTest: TestCase {
 
     var marmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol!
+    var todayViewModel: TodayViewModel!
     
     var alerteTitle = ""
     var alerteDescription = ""
@@ -41,21 +42,52 @@ final class BenchMarkTest: TestCase {
         }
     }
 
-    func testBenchmarkSaveActivity() {
-        measure {
-            let calendar = Calendar.current
-            for i in 0..<1000 {
-                // Créer une nouvelle date pour chaque itération
-                if let newDate = calendar.date(byAdding: .day, value: -i, to: Date()) {
-                    marmotMonitorSaveManager.saveActivity(.diaper(state: .wet), date: newDate, onSuccess: {} , onError: {_ in })
-                }
-            }
-        }
-    }
-
     func testBenchmarkSaveOneActivity() {
         measure {
             marmotMonitorSaveManager.saveActivity(.diaper(state: .wet), date: Date(), onSuccess: {} , onError: {_ in })
+        }
+    }
+
+    
+    func testBenchmarkFetchTodayActivityWith1000Items() {
+        let calendar = Calendar.current
+        let ActivityType: [ActivityType] = [
+            .diaper(state: .wet),
+            .diaper(state: .dirty),
+            .bottle(quantity: 100),
+            .bottle(quantity: 200),
+            .breast(duration: BreastDuration(leftDuration: 120, rightDuration: 120)),
+            .breast(duration: BreastDuration(leftDuration: 200, rightDuration: 150)),
+            .sleep(duration: 100),
+            .sleep(duration: 300),
+            .growth(data: GrowthData(weight: 370, height: 52, headCircumference: 26)),
+            .growth(data: GrowthData(weight: 400, height: 55, headCircumference: 27)),
+            .solide(composition: SolidQuantity(vegetable: 250,
+                                               meat: 250,
+                                               fruit: 250,
+                                               dairyProduct: 250,
+                                               cereal: 250,
+                                               other: 250)),
+            .solide(composition: SolidQuantity(vegetable: 300,
+                                               meat: 300,
+                                               fruit: 300,
+                                               dairyProduct: 300,
+                                               cereal: 300,
+                                               other: 300))
+        ]
+        
+        
+        for i in 0..<1000 {
+            // Créer une nouvelle date pour chaque itération
+            if let newDate = calendar.date(byAdding: .day, value: -i, to: Date()) {
+                let randomActivity = ActivityType.randomElement()!
+                marmotMonitorSaveManager.saveActivity(randomActivity, date: newDate, onSuccess: {} , onError: {_ in })
+            }
+        }
+
+        measure {
+            todayViewModel = TodayViewModel(marmotMonitorSaveManager: marmotMonitorSaveManager)
+            todayViewModel.fetchLastActivities()
         }
     }
 }
