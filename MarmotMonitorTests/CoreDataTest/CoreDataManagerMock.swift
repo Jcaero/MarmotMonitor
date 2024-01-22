@@ -10,8 +10,9 @@ import CoreData
 class CoreDataManagerMock: CoreDataManagerProtocol {
     
     // MARK: - Singleton
-    
     static let sharedInstance = CoreDataManagerMock()
+    
+    var saveIsOk = true
     
     // MARK: - INIT
     lazy var persistentContainer: NSPersistentContainer = {

@@ -168,4 +168,21 @@ class TodayViewModelTest: TestCase {
         XCTAssertEqual(activityTitle, "Saisir le sommeil")
         XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 01 H 00 min")
     }
+
+    func testCoreDataHaveData_WhenFetchGrowthData_TableViewIsUpdate(){
+        let data = GrowthData(weight: 25.0, height: 51.3, headCircumference: 0.0)
+        coreDatatManager.saveActivity(.growth(data: data),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { saveActivity1 = true} ,
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+        XCTAssertEqual(alerteDescription, "")
+
+        let activityTitle = viewModel.activities[3].cellSubTitle
+        viewModel.fetchLastActivities()
+        
+        let activityTitleAfter = viewModel.activities[3].cellSubTitle
+        
+        XCTAssertEqual(activityTitle, "Ajouter une mesure")
+        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 Taille: 51.3 cm Poids: 25.0 Kg")
+    }
 }

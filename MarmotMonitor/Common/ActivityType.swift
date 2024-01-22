@@ -42,6 +42,9 @@ enum ActivityType {
     static var solidAlert: String {
             return "Un repas a déjà été enregistrée à cette date."
         }
+    static var growthAlert: String {
+            return "Une mesure de croissance a déjà été enregistrée à cette date."
+        }
 }
 
 enum DiaperState: String, CaseIterable {
@@ -65,7 +68,28 @@ struct SolidQuantity {
 }
 
 struct GrowthData {
-    let weight: Int
-    let height: Int
-    let headCircumference: Int
+    let weight: Double
+    let height: Double
+    let headCircumference: Double
+}
+
+enum GrowthField {
+    case height
+    case weight
+    case head
+
+    var unit: String {
+        switch self {
+        case .height, .head: return "cm"
+        case .weight: return "g"
+        }
+    }
+
+    var title: String {
+        switch self {
+        case .height: return "Taille"
+        case .weight: return "Poids"
+        case .head: return "Tête"
+        }
+    }
 }

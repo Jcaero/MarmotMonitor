@@ -113,9 +113,8 @@ final class BreastFeedingChronoViewModel {
         switch description {
         case leftTimer:
             delegate?.updateLeftButtonImage(with: .stop)
-        case rightTimer:
+        default:
             delegate?.updateRightButtonImage(with: .stop)
-        default: break
         }
     }
 

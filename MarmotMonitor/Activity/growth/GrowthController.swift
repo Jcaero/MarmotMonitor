@@ -22,21 +22,23 @@ class GrowthController: ActivityController {
     }()
 
     // MARK: - PROPERTIES
-    var tableViewHeightConstraint: NSLayoutConstraint?
+    private var viewModel: GrowthViewModel!
+    private var tableViewHeightConstraint: NSLayoutConstraint?
 
-    var textFieldActif: UITextField?
-
-    let category: [GrowthField] = [.height, .weight, .head]
-    var growth : [String : Double] = [:]
+    private var textFieldActif: UITextField?
 
     // MARK: - Cycle life
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = GrowthViewModel(delegate: self)
+
         view.backgroundColor = .colorForGradientStart
 
         setupViews()
         setupContraints()
+
         setupTimePickerAndLabel()
+        setupValideButton()
 
         setupTableView()
 
@@ -81,16 +83,25 @@ class GrowthController: ActivityController {
         timePicker.setAccessibility(with: .selected, label: "", hint: "choisir la date de la mesure")
     }
 
+    private func setupValideButton() {
+        valideButton.setAccessibility(with: .button, label: "Valider", hint: "Valider la croissance")
+        valideButton.addTarget(self, action: #selector(valideButtonSet), for: .touchUpInside)
+    }
+
+    @objc func valideButtonSet() {
+        viewModel.saveGrowth(at: timePicker.date)
+    }
+
     private func setupTableViewHeight() {
         var height: CGFloat = 0
-        for index in 0..<category.count-1 {
+        for index in 0..<viewModel.category.count-1 {
             let cell = tableOfGrowth.cellForRow(at: IndexPath(row: index, section: 0))
             let cellHeight = cell?.contentView.frame.size.height ?? 0
             if cellHeight > height {
                 height = cellHeight
             }
         }
-        tableViewHeightConstraint?.constant = height * CGFloat(category.count)
+        tableViewHeightConstraint?.constant = height * CGFloat(viewModel.category.count)
         tableOfGrowth.layoutIfNeeded()
     }
 
@@ -107,7 +118,7 @@ extension GrowthController: UITableViewDelegate {
 
 extension GrowthController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return category.count
+        return viewModel.category.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,8 +126,8 @@ extension GrowthController: UITableViewDataSource {
             print("erreur de cell")
             return UITableViewCell()
         }
-        let category = category[indexPath.row]
-        let value = growth[category.title] ?? 0
+        let category = viewModel.category[indexPath.row]
+        let value = viewModel.growthData[category.title] ?? 0
         cell.setupCell(with: category, value: value)
         cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
         cell.selectionStyle = .none
@@ -146,10 +157,7 @@ extension GrowthController: UITextFieldDelegate {
     }
 
     @objc func valueChanged(_ textField: UITextField) {
-        let category = category[textField.tag].title
-
-        guard let value = Double(textField.text ?? "") else { return }
-        growth[category] = value
+        viewModel.setGrowth(with: textField.text, inPosition: textField.tag)
     }
 }
 
@@ -174,5 +182,11 @@ extension GrowthController {
     @objc func keyboardWillHide(notification: NSNotification) {
         tableOfGrowth.contentInset = .zero
         tableOfGrowth.scrollIndicatorInsets = .zero
+    }
+}
+
+extension GrowthController: GrowthDelegate {
+    func updateData() {
+        tableOfGrowth.reloadData()
     }
 }

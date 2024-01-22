@@ -74,6 +74,7 @@ class TodayViewModel {
         fetchDiaper()
         fetchFood()
         fetchSleep()
+        fetchGrowth()
     }
 
     private func fetchDiaper() {
@@ -136,5 +137,20 @@ class TodayViewModel {
         let stringDuration = Int(duration).toTimeString()
         let cellTitle = date + " " + stringDuration
         activities[1] = ActivityData(imageName: "sommeil", cellTitle: "Dernier sommeil", cellSubTitle: cellTitle)
+    }
+
+    private func fetchGrowth() {
+        guard let result = marmotMonitorSaveManager.fetchFirstActivity(ofType: Growth.self) else { return }
+        let date = result.date.toStringWithTimeAndDayMonthYear()
+
+        var cellTitle = date + " "
+        if result.activity.height != 0 {
+            cellTitle += "Taille: " + String(result.activity.height) + " cm "
+        }
+        if result.activity.weight != 0 {
+            cellTitle += "Poids: " + String(result.activity.weight) + " Kg"
+        }
+
+        activities[3] = ActivityData(imageName: "croissance", cellTitle: "Croissance", cellSubTitle: cellTitle)
     }
 }

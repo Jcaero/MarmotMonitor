@@ -15,8 +15,8 @@ extension Growth {
         return NSFetchRequest<Growth>(entityName: "Growth")
     }
 
-    @NSManaged public var headCircumfeence: Int16
-    @NSManaged public var height: Int16
-    @NSManaged public var weight: Int16
+    @NSManaged public var headCircumfeence: Double
+    @NSManaged public var height: Double
+    @NSManaged public var weight: Double
 
 }

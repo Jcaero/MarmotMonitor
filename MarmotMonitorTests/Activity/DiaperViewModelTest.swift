@@ -4,8 +4,6 @@
 //
 //  Created by pierrick viret on 18/01/2024.
 //
-
-import Foundation
 import XCTest
 @testable import MarmotMonitor
 

@@ -70,9 +70,9 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
 
             case .growth(data: let growthData):
                 let growth = Growth(context: self.context)
-                growth.weight = Int16(growthData.weight)
-                growth.height = Int16(growthData.height)
-                growth.headCircumfeence = Int16(growthData.headCircumference)
+                growth.weight = growthData.weight
+                growth.height = growthData.height
+                growth.headCircumfeence = growthData.headCircumference
                 activityDate.addToActivity(growth)
 
             case .solide(composition: let composition):
@@ -90,7 +90,6 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
                 try self.coreDataManager.save()
                     onSuccess()
             } catch {
-                print("saverManager: Error saving context: \(error)")
                     onError("Impossible de sauvegarder l'activité.")
             }
         }
