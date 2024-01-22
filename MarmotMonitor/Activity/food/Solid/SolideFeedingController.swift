@@ -4,9 +4,6 @@
 //
 //  Created by pierrick viret on 18/12/2023.
 //
-
-import Foundation
-
 import UIKit
 
 class SolideFeedingController: ActivityController {
@@ -35,7 +32,6 @@ class SolideFeedingController: ActivityController {
     var viewModel : SolidFeedingViewModel!
 
     var tableViewHeightConstraint: NSLayoutConstraint?
-
     var textFieldActif: UITextField?
 
     // MARK: - Cycle life
@@ -46,10 +42,10 @@ class SolideFeedingController: ActivityController {
 
         setupViews()
         setupContraints()
+        setupTableView()
+
         setupTimePickerAndLabel()
         setupValideButton()
-
-        setupTableView()
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -94,6 +90,7 @@ class SolideFeedingController: ActivityController {
         ])
     }
 
+    // MARK: - Update Background View
     private func setupTimePickerAndLabel() {
         timeLabel.text = "Heure de début"
         timeLabel.setAccessibility(with: .staticText, label: "heure du repas", hint: "")
@@ -110,6 +107,7 @@ class SolideFeedingController: ActivityController {
         viewModel.saveSolid(at: timePicker.date)
     }
 
+    // MARK: - TableViews
     private func setupTableViewHeight() {
         var height: CGFloat = 0
         for index in 0..<viewModel.ingredients.count-1 {
@@ -131,10 +129,7 @@ class SolideFeedingController: ActivityController {
     }
 }
 
-extension SolideFeedingController: UITableViewDelegate {
-}
-
-extension SolideFeedingController: UITableViewDataSource {
+extension SolideFeedingController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.ingredients.count
     }
@@ -165,27 +160,39 @@ extension SolideFeedingController: UITableViewDataSource {
 extension SolideFeedingController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textFieldActif = textField
-        textField.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
+        addDoneButtonToDecimalPad(textField)
     }
 
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.removeTarget(self, action: #selector(valueChanged), for: .editingChanged)
-
-        textFieldActif = nil
-        textField.resignFirstResponder()
-        self.tableOfIngredients.reloadData()
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
     }
 
-    @objc func valueChanged(_ textField: UITextField) {
-        let ingredient = viewModel.ingredients[textField.tag]
-        viewModel.set(textField.text ?? "", for: ingredient)
-    }
+     // MARK: - Setup keyboard
+       func addDoneButtonToDecimalPad(_ textField: UITextField) {
+           let toolbar = UIToolbar()
+           toolbar.sizeToFit()
+
+           let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+           let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
+
+           toolbar.setItems([flexSpace, doneButton], animated: false)
+           toolbar.isUserInteractionEnabled = true
+
+           textField.inputAccessoryView = toolbar
+       }
+
+       @objc func doneButtonAction() {
+           // Dismiss the keyboard
+           textFieldActif?.resignFirstResponder()
+
+           viewModel.set(textFieldActif?.text ?? "", for: textFieldActif!.tag)
+           textFieldActif = nil
+       }
 }
 
 extension SolideFeedingController: SolideFeedingProtocol {
     func updateTotal(with total: String) {
         totalWeight.text = total
-        self.tableOfIngredients.reloadData()
     }
 }
 

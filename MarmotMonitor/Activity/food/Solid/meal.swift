@@ -14,4 +14,8 @@ enum Ingredient: String, CaseIterable {
     case cereal = "Céréales"
     case dairyProduct = "Produits laitiers"
     case other = "Autre(s)"
+
+    var index: Int? {
+            return Ingredient.allCases.firstIndex(of: self)
+    }
 }

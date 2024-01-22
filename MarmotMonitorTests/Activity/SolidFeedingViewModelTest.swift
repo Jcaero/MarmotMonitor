@@ -35,7 +35,7 @@ class SolidFeedingViewModelTest: TestCase {
     
     func testWhenSetOneIngredient_IngredientIsInsert() {
         
-        viewModel.set("100", for: .cereal)
+        viewModel.set("100", for: Ingredient.cereal.index!)
         
         XCTAssertEqual(viewModel.solidFood[.cereal], 100)
         XCTAssertEqual(viewModel.solidFood[.fruit], nil)
@@ -44,9 +44,8 @@ class SolidFeedingViewModelTest: TestCase {
     }
 
     func testWhenSetTwoIngredients_IngredientsIsInsert() {
-        
-        viewModel.set("100", for: .cereal)
-        viewModel.set("200", for: .fruit)
+        viewModel.set("100", for: Ingredient.cereal.index!)
+        viewModel.set("200", for: Ingredient.fruit.index!)
         
         XCTAssertEqual(viewModel.solidFood[.cereal], 100)
         XCTAssertEqual(viewModel.solidFood[.fruit], 200)
@@ -55,9 +54,8 @@ class SolidFeedingViewModelTest: TestCase {
     }
 
     func testWhenSetString_IngredientsIsNotInsert() {
-        
-        viewModel.set("test", for: .cereal)
-        viewModel.set("200", for: .fruit)
+        viewModel.set("test", for: Ingredient.cereal.index!)
+        viewModel.set("200", for: Ingredient.fruit.index!)
         
         XCTAssertEqual(viewModel.solidFood[.cereal], nil)
         XCTAssertEqual(viewModel.solidFood[.fruit], 200)
@@ -65,9 +63,8 @@ class SolidFeedingViewModelTest: TestCase {
     }
 
     func testWhenSetNegatifNumbers_IngredientsIsNotInsert() {
-        
-        viewModel.set("-100", for: .cereal)
-        viewModel.set("200", for: .fruit)
+        viewModel.set("-100", for: Ingredient.cereal.index!)
+        viewModel.set("200", for: Ingredient.fruit.index!)
         
         XCTAssertEqual(viewModel.solidFood[.cereal], nil)
         XCTAssertEqual(viewModel.solidFood[.fruit], 200)
@@ -89,8 +86,8 @@ class SolidFeedingViewModelTest: TestCase {
         
         XCTAssertEqual(startedDateActivities.count, 0)
         
-        viewModel.set("100", for: .cereal)
-        viewModel.set("50", for: .fruit)
+        viewModel.set("100", for: Ingredient.cereal.index!)
+        viewModel.set("50", for: Ingredient.fruit.index!)
         viewModel.saveSolid(at: testFirstDateSeven)
         
         let dateActivities = coreDatatManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
@@ -104,14 +101,14 @@ class SolidFeedingViewModelTest: TestCase {
     // MARK: - Alert
     func testSolidIsSave_WhenSaveSolid_ShowAlerte() {
 
-        viewModel.set("100", for: .meat)
-        viewModel.set("50", for: .dairyProduct)
+        viewModel.set("100", for: Ingredient.meat.index!)
+        viewModel.set("50", for: Ingredient.dairyProduct.index!)
         viewModel.saveSolid(at: testFirstDateSeven)
         
         let dateActivities = coreDatatManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
         XCTAssertEqual(dateActivities.count, 1)
     
-        viewModel.set("100", for: .fruit)
+        viewModel.set("100", for: Ingredient.fruit.index!)
         viewModel.saveSolid(at: testFirstDateSeven)
 
         let total = (dateActivities.first?.activityArray.first as! Solid).total

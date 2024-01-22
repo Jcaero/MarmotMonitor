@@ -81,7 +81,6 @@ class SolideCell: UITableViewCell {
         contentView.addSubview(poidsTF)
 
         prepareContraint()
-        addDoneButtonToDecimalPad()
     }
 
     private func prepareContraint() {
@@ -134,25 +133,6 @@ class SolideCell: UITableViewCell {
             print("set value : \(value)")
         }
         self.poidsTF.accessibilityLabel = value == 0 ? "0" : String(value)
-    }
-
-    // MARK: - Setup keyboard
-    func addDoneButtonToDecimalPad() {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
-
-        toolbar.setItems([flexSpace, doneButton], animated: false)
-        toolbar.isUserInteractionEnabled = true
-
-        poidsTF.inputAccessoryView = toolbar
-    }
-
-    @objc func doneButtonAction() {
-        // Dismiss the keyboard
-        poidsTF.resignFirstResponder()
     }
 }
 

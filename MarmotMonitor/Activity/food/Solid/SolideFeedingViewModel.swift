@@ -20,16 +20,19 @@ final class SolidFeedingViewModel {
     let ingredients: [Ingredient] = Ingredient.allCases
     var solidFood : [Ingredient : Int] = [:]
 
-    var totalFood: Int {
+    private var totalFood: Int {
         solidFood.reduce(0) { $0 + $1.value }
     }
 
+    // MARK: - Init
     init(delegate: SolideFeedingProtocol?, coreDataManager: MarmotMonitorSaveManager = MarmotMonitorSaveManager()) {
         self.delegate = delegate
         self.coreDataManager = coreDataManager
     }
 
-    func set(_ value: String, for ingredient: Ingredient) {
+    // MARK: - Functions
+    func set(_ value: String, for ingredientNumber: Int) {
+        let ingredient = ingredients[ingredientNumber]
         guard let intValue = Int(value), intValue >= 0 else {
             showAlert(title: "Erreur de saisie", description: "Veuillez entrer une valeur positive")
             return
