@@ -9,22 +9,30 @@ import Foundation
 import XCTest
 @testable import MarmotMonitor
 
-class SleepViewModelTest: XCTestCase {
+class SleepViewModelTest: TestCase {
     private var viewModel: SleepViewModel!
-    
+    private var coreDatatManager: MarmotMonitorSaveManager!
+
     private var isDataUpdate: Bool!
     private var duration: String!
+    private var alerteMessage: String!
+    private var isNextView: Bool!
 
     override func setUp() {
         super.setUp()
-        viewModel = SleepViewModel(delegate: self)
+        coreDatatManager = MarmotMonitorSaveManager(coreDataManager: CoreDataManagerMock.sharedInstance)
+        viewModel = SleepViewModel(delegate: self, coreDataManager: coreDatatManager)
         isDataUpdate = false
         duration = ""
+        alerteMessage = ""
+        isNextView = false
     }
     
     override func tearDown() {
         super.tearDown()
         viewModel = nil
+        coreDatatManager.clearDatabase()
+        coreDatatManager = nil
     }
     
     func testSleepHasNoData_WhenSetDateAndSelectedZero_DataIsSaveAndRequestUpdate() {
@@ -99,11 +107,65 @@ class SleepViewModelTest: XCTestCase {
         viewModel.setDate(with: startedDate)
         
         XCTAssertTrue(isDataUpdate)
-        XCTAssertEqual(duration, "erreur de date")
+        XCTAssertEqual(duration, "")
+        XCTAssertEqual(alerteMessage, "Erreur de date")
+    }
+
+    // MARK: - Core Data
+    func testNoDateSet_WhenSaveSleep_NoSleepIsSave() {
+
+        viewModel.saveSleep()
+        
+        let dateActivities = coreDatatManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        
+        XCTAssertEqual(dateActivities.count, 0)
+    }
+
+    func testDateSet_WhenSaveSleep_SleepIsSave() {
+        viewModel.setSelectedLabel(with: 0)
+        viewModel.setDate(with: sleeptestCaseStarted)
+        viewModel.setSelectedLabel(with: 1)
+        viewModel.setDate(with: sleeptestCaseEnd)
+        
+        XCTAssertTrue(isDataUpdate)
+        XCTAssertEqual(duration, "1h 0min")
+        
+        viewModel.saveSleep()
+        
+        let dateActivities = coreDatatManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        
+        XCTAssertEqual(dateActivities.count, 1)
+
+        let duration = (dateActivities.first?.activityArray.first as! Sleep).duration
+        XCTAssertEqual(duration, 3600)
+    }
+
+    // MARK: - Alert
+    func testDiaperIsSave_WhenSaveDiaper_ShowAlerte() {
+        viewModel.setSelectedLabel(with: 0)
+        viewModel.setDate(with: sleeptestCaseStarted)
+        viewModel.setSelectedLabel(with: 1)
+        viewModel.setDate(with: sleeptestCaseEnd)
+        
+        viewModel.saveSleep()
+        
+        let dateActivities = coreDatatManager.fetchDateActivitiesWithDate(from: testFirstDateSeven, to: activityEndDateEight)
+        XCTAssertEqual(dateActivities.count, 1)
+
+        viewModel.saveSleep()
+        XCTAssertEqual(alerteMessage, ActivityType.sleep(duration:  1).alertMessage)
     }
 }
 
 extension SleepViewModelTest: SleepDelegate {
+    func nextView() {
+        isNextView = true
+    }
+    
+    func alert(title: String, description: String) {
+        alerteMessage = description
+    }
+    
     func updateData() {
         isDataUpdate = true
     }

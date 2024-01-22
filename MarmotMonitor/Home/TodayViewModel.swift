@@ -73,6 +73,7 @@ class TodayViewModel {
     func fetchLastActivities() {
         fetchDiaper()
         fetchFood()
+        fetchSleep()
     }
 
     private func fetchDiaper() {
@@ -126,5 +127,14 @@ class TodayViewModel {
         }
 
         activities[0] = ActivityData(imageName: "biberon", cellTitle: "Dernière tétée/biberon", cellSubTitle: cellTitle)
+    }
+
+    private func fetchSleep() {
+        guard let result = marmotMonitorSaveManager.fetchFirstActivity(ofType: Sleep.self) else { return }
+        let date = result.date.toStringWithTimeAndDayMonthYear()
+        let duration = result.activity.duration
+        let stringDuration = Int(duration).toTimeString()
+        let cellTitle = date + " " + stringDuration
+        activities[1] = ActivityData(imageName: "sommeil", cellTitle: "Dernier sommeil", cellSubTitle: cellTitle)
     }
 }

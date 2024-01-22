@@ -152,4 +152,20 @@ class TodayViewModelTest: TestCase {
         XCTAssertEqual(activityTitle, "Saisir la tétée/le biberon")
         XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 biberon de 100 ml")
     }
+
+    func testCoreDataHaveData_WhenFetchSleepData_TableViewIsUpdate(){
+        coreDatatManager.saveActivity(.sleep(duration: 3600),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { saveActivity1 = true} ,
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+        XCTAssertEqual(alerteDescription, "")
+
+        let activityTitle = viewModel.activities[1].cellSubTitle
+        viewModel.fetchLastActivities()
+        
+        let activityTitleAfter = viewModel.activities[1].cellSubTitle
+        
+        XCTAssertEqual(activityTitle, "Saisir le sommeil")
+        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 01 H 00 min")
+    }
 }

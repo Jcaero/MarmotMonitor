@@ -16,6 +16,9 @@ class TestCase: XCTestCase {
 
     let activityEndDateEight = "08/01/2024".toDate() ?? Date()
     let activityStartDateSix = "06/01/2024".toDate() ?? Date()
+    
+    let sleeptestCaseStarted = "07/01/2024 22:30".toDateWithTime() ?? Date()
+    let sleeptestCaseEnd = "07/01/2024 23:30".toDateWithTime() ?? Date()
 
     let solidData1 = SolidQuantity(vegetable: 250,
                                   meat: 250,

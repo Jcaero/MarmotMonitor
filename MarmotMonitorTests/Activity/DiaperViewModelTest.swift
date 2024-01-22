@@ -13,6 +13,7 @@ class DiaperViewModelTest: TestCase {
 
     private var viewModel: DiaperViewModel!
     private var coreDatatManager: MarmotMonitorSaveManager!
+
     private var isDataUpdate: Bool!
     private var alerteMessage: String!
     private var isNextView: Bool!

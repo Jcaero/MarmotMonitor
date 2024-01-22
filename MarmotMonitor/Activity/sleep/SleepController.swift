@@ -8,7 +8,6 @@
 import UIKit
 
 class SleepController: BackGroundActivity, SleepDelegate {
-
     let titleLabel: UILabel = {
         let label = UILabel()
         label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
@@ -69,6 +68,8 @@ class SleepController: BackGroundActivity, SleepDelegate {
 
         setupViews()
         setupContraints()
+
+        setupValideButton()
 
         setupTableView()
     }
@@ -131,6 +132,15 @@ class SleepController: BackGroundActivity, SleepDelegate {
         tableOfSleepData.register(SleepCell.self, forCellReuseIdentifier: SleepCell.reuseIdentifier)
     }
 
+    private func setupValideButton() {
+        valideButton.setAccessibility(with: .button, label: "Valider", hint: "Valider le dodo")
+        valideButton.addTarget(self, action: #selector(valideButtonSet), for: .touchUpInside)
+    }
+
+    @objc func valideButtonSet() {
+        viewModel.saveSleep()
+    }
+
     func updateDuration(with duration: String) {
         durationLabel.text = duration
     }
@@ -183,6 +193,16 @@ extension SleepController {
 
     func updateData() {
         tableOfSleepData.reloadData()
+    }
+
+    func nextView() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    func alert(title: String, description: String) {
+        let alertVC = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
     }
 }
 
