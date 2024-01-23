@@ -36,6 +36,8 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
     /// - Parameters:
     ///  - activityType: The type of activity to save
     ///  - date: The date to save the activity for
+    ///
+    // onResult: Result<(), String>
     func saveActivity(_ activityType: ActivityType, date: Date, onSuccess: (() -> Void), onError: ((String) -> Void)) {
         context.performAndWait {
             let activityDate = self.fetchOrCreateDateActivity(for: date)

@@ -33,4 +33,6 @@ class TestCase: XCTestCase {
                                   dairyProduct: 100,
                                   cereal: 100,
                                   other: 100)
+
+    let mockDiaper = ActivityType.diaper(state: .both)
 }

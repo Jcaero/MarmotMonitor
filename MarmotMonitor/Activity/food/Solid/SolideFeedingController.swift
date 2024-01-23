@@ -167,27 +167,27 @@ extension SolideFeedingController: UITextFieldDelegate {
         return true
     }
 
-     // MARK: - Setup keyboard
-       func addDoneButtonToDecimalPad(_ textField: UITextField) {
-           let toolbar = UIToolbar()
-           toolbar.sizeToFit()
+    // MARK: - Setup keyboard
+    func addDoneButtonToDecimalPad(_ textField: UITextField) {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
 
-           let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-           let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
 
-           toolbar.setItems([flexSpace, doneButton], animated: false)
-           toolbar.isUserInteractionEnabled = true
+        toolbar.setItems([flexSpace, doneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
 
-           textField.inputAccessoryView = toolbar
-       }
+        textField.inputAccessoryView = toolbar
+    }
 
-       @objc func doneButtonAction() {
-           // Dismiss the keyboard
-           textFieldActif?.resignFirstResponder()
+    @objc func doneButtonAction() {
+        // Dismiss the keyboard
+        textFieldActif?.resignFirstResponder()
 
-           viewModel.set(textFieldActif?.text ?? "", for: textFieldActif!.tag)
-           textFieldActif = nil
-       }
+        viewModel.set(textFieldActif?.text ?? "", for: textFieldActif!.tag)
+        textFieldActif = nil
+    }
 }
 
 extension SolideFeedingController: SolideFeedingProtocol {

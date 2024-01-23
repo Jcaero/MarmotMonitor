@@ -127,7 +127,7 @@ class SolideCell: UITableViewCell {
         print("set ingredient : \(ingredient.rawValue)")
         if value == 0 {
             self.poidsTF.placeholder = "0"
-            print("set placeholder")
+            print("set placeholder: \(String(describing: self.poidsTF.placeholder))")
         } else {
             self.poidsTF.text = String(value)
             print("set value : \(value)")

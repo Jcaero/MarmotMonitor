@@ -105,7 +105,7 @@ class DiaperViewModelTest: TestCase {
 
     // MARK: - Alert
     func testDiaperIsSave_WhenSaveDiaper_ShowAlerte() {
-
+        let diaperAlert = mockDiaper.alertMessage
         viewModel.selectDiaper(diaper: .wet)
         viewModel.saveDiaper(at: testFirstDateSeven)
         
