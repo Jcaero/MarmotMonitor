@@ -23,13 +23,13 @@ class MonitorViewController: BackgroundViewController {
         super.viewDidLoad()
         setupViews()
         setupContraints()
-        
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MonitorCell.self, forCellReuseIdentifier: MonitorCell.reuseIdentifier)
     }
 
-    let date = ["07/11/2023".toDate()!, "08/11/2023".toDate()!]
+    let date = ["07/11/2023".toDate()!, "08/11/2023".toDate()!, "09/11/2023".toDate()!]
 
     //  MARK: - Setup views
 
@@ -53,17 +53,22 @@ extension MonitorViewController: UITableViewDelegate {
 
 extension MonitorViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        3
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MonitorCell.reuseIdentifier, for: indexPath) as? MonitorCell else {
             print("erreur de cell")
             return UITableViewCell()
         }
-        cell.setupCell(with: date[indexPath.row], elements: [])
+        // test
+        if indexPath.row == 0 {
+            cell.setupCell(with: date[indexPath.row], elements: [], style: .rod)
+        } else if indexPath.row == 1  {
+            cell.setupCell(with: date[indexPath.row], elements: [], style: .round)
+        } else {
+            cell.setupCell(with: date[indexPath.row], elements: [], style: .ligne)
+        }
         return cell
     }
-    
-    
 }

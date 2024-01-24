@@ -38,4 +38,10 @@ extension Date {
         dateFormatter.dateFormat = currentDate == selectedDate ? "HH:mm" : "dd/MM/yyyy HH:mm"
         return dateFormatter.string(from: self)
     }
+
+    func getHourAndMin() -> (hour: Int?, min: Int?) {
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.hour, .minute], from: self)
+        return (dateComponents.hour, dateComponents.minute)
+    }
 }

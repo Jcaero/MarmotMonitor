@@ -49,6 +49,7 @@
 		4750720E2B09576900DAB527 /* TapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750720D2B09576900DAB527 /* TapBarController.swift */; };
 		475BD8EF2B597FBF003F1158 /* DiaperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475BD8EE2B597FBF003F1158 /* DiaperViewModel.swift */; };
 		475BD8F12B59B43F003F1158 /* DiaperViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475BD8F02B59B43F003F1158 /* DiaperViewModelTest.swift */; };
+		475F9FC02B6109D9001C4A4E /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475F9FBF2B6109D9001C4A4E /* GraphView.swift */; };
 		4767543A2B37912F00C83E6D /* BackGroundActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476754392B37912F00C83E6D /* BackGroundActivity.swift */; };
 		4767543C2B3792BC00C83E6D /* SleepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767543B2B3792BC00C83E6D /* SleepCell.swift */; };
 		476AF6302B27A10100F4935F /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF62F2B27A10100F4935F /* UIButton+.swift */; };
@@ -97,7 +98,7 @@
 		47E2A40B2B49848B008E75DD /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E2A40A2B49848B008E75DD /* UserDefaultManager.swift */; };
 		47F81B9D2B6058430042A055 /* MonitorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81B9C2B6058430042A055 /* MonitorViewController.swift */; };
 		47F81B9F2B605AEC0042A055 /* MonitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81B9E2B605AEC0042A055 /* MonitorCell.swift */; };
-		47F81BA12B605F610042A055 /* ShowActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81BA02B605F610042A055 /* ShowActivity.swift */; };
+		47F81BA12B605F610042A055 /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81BA02B605F610042A055 /* GraphType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +165,7 @@
 		4750720D2B09576900DAB527 /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
 		475BD8EE2B597FBF003F1158 /* DiaperViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaperViewModel.swift; sourceTree = "<group>"; };
 		475BD8F02B59B43F003F1158 /* DiaperViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaperViewModelTest.swift; sourceTree = "<group>"; };
+		475F9FBF2B6109D9001C4A4E /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		476754392B37912F00C83E6D /* BackGroundActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundActivity.swift; sourceTree = "<group>"; };
 		4767543B2B3792BC00C83E6D /* SleepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCell.swift; sourceTree = "<group>"; };
 		476AF62F2B27A10100F4935F /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
@@ -212,7 +214,7 @@
 		47E2A40A2B49848B008E75DD /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		47F81B9C2B6058430042A055 /* MonitorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorViewController.swift; sourceTree = "<group>"; };
 		47F81B9E2B605AEC0042A055 /* MonitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorCell.swift; sourceTree = "<group>"; };
-		47F81BA02B605F610042A055 /* ShowActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowActivity.swift; sourceTree = "<group>"; };
+		47F81BA02B605F610042A055 /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -552,7 +554,8 @@
 			children = (
 				47F81B9C2B6058430042A055 /* MonitorViewController.swift */,
 				47F81B9E2B605AEC0042A055 /* MonitorCell.swift */,
-				47F81BA02B605F610042A055 /* ShowActivity.swift */,
+				475F9FBF2B6109D9001C4A4E /* GraphView.swift */,
+				47F81BA02B605F610042A055 /* GraphType.swift */,
 			);
 			path = Monitor;
 			sourceTree = "<group>";
@@ -748,11 +751,12 @@
 				474732532B1239CF0064ABB4 /* GenderViewModel.swift in Sources */,
 				47D8DA6E2B4B37F000D97CD1 /* Growth+CoreDataProperties.swift in Sources */,
 				47155BCA2B1DE97000775B27 /* TodayViewController.swift in Sources */,
-				47F81BA12B605F610042A055 /* ShowActivity.swift in Sources */,
+				47F81BA12B605F610042A055 /* GraphType.swift in Sources */,
 				4767543C2B3792BC00C83E6D /* SleepCell.swift in Sources */,
 				47D8DA662B4B37F000D97CD1 /* Bottle+CoreDataProperties.swift in Sources */,
 				47494BD52B35ADAD002A0A93 /* ActivityController.swift in Sources */,
 				47D8DA682B4B37F000D97CD1 /* Activity+CoreDataProperties.swift in Sources */,
+				475F9FC02B6109D9001C4A4E /* GraphView.swift in Sources */,
 				4767543A2B37912F00C83E6D /* BackGroundActivity.swift in Sources */,
 				4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */,
 				4726966A2B3D8A18006BC301 /* SleepViewModel.swift in Sources */,
