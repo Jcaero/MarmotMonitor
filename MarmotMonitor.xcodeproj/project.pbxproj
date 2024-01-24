@@ -95,6 +95,9 @@
 		47D8DA792B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA782B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift */; };
 		47D8DA7B2B4B4A0100D97CD1 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA7A2B4B4A0100D97CD1 /* TestCase.swift */; };
 		47E2A40B2B49848B008E75DD /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E2A40A2B49848B008E75DD /* UserDefaultManager.swift */; };
+		47F81B9D2B6058430042A055 /* MonitorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81B9C2B6058430042A055 /* MonitorViewController.swift */; };
+		47F81B9F2B605AEC0042A055 /* MonitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81B9E2B605AEC0042A055 /* MonitorCell.swift */; };
+		47F81BA12B605F610042A055 /* ShowActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81BA02B605F610042A055 /* ShowActivity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +210,9 @@
 		47D8DA782B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitoSaveManagerTest.swift; sourceTree = "<group>"; };
 		47D8DA7A2B4B4A0100D97CD1 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
 		47E2A40A2B49848B008E75DD /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		47F81B9C2B6058430042A055 /* MonitorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorViewController.swift; sourceTree = "<group>"; };
+		47F81B9E2B605AEC0042A055 /* MonitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorCell.swift; sourceTree = "<group>"; };
+		47F81BA02B605F610042A055 /* ShowActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowActivity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,6 +405,7 @@
 				4735B26C2B11455C000F2B8C /* InformationController */,
 				47155BCB2B1DE9D400775B27 /* Home */,
 				4777ABED2B2500D40055DF4A /* Activity */,
+				47F81B9B2B6057FB0042A055 /* Monitor */,
 				4712D4392B0A9B2F0085035C /* Common */,
 				4750720B2B09471000DAB527 /* Ressources */,
 				4750720C2B09477000DAB527 /* CoreData */,
@@ -538,6 +545,16 @@
 				4779579C2B547ADD0021178D /* BenchMarkTest.swift */,
 			);
 			path = CoreDataTest;
+			sourceTree = "<group>";
+		};
+		47F81B9B2B6057FB0042A055 /* Monitor */ = {
+			isa = PBXGroup;
+			children = (
+				47F81B9C2B6058430042A055 /* MonitorViewController.swift */,
+				47F81B9E2B605AEC0042A055 /* MonitorCell.swift */,
+				47F81BA02B605F610042A055 /* ShowActivity.swift */,
+			);
+			path = Monitor;
 			sourceTree = "<group>";
 		};
 		47FB1DAE2B265BD90029EB2E /* BackgroundView */ = {
@@ -712,6 +729,7 @@
 				471480AF2B513AF20084589B /* ActivityType.swift in Sources */,
 				47D8DA6A2B4B37F000D97CD1 /* Breast+CoreDataProperties.swift in Sources */,
 				47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */,
+				47F81B9F2B605AEC0042A055 /* MonitorCell.swift in Sources */,
 				478E79102B138200004157AF /* String+.swift in Sources */,
 				4748E64A2B30DFDF0082A0CE /* SolideFeedingViewModel.swift in Sources */,
 				47D8DA632B4B37F000D97CD1 /* Sleep+CoreDataClass.swift in Sources */,
@@ -730,6 +748,7 @@
 				474732532B1239CF0064ABB4 /* GenderViewModel.swift in Sources */,
 				47D8DA6E2B4B37F000D97CD1 /* Growth+CoreDataProperties.swift in Sources */,
 				47155BCA2B1DE97000775B27 /* TodayViewController.swift in Sources */,
+				47F81BA12B605F610042A055 /* ShowActivity.swift in Sources */,
 				4767543C2B3792BC00C83E6D /* SleepCell.swift in Sources */,
 				47D8DA662B4B37F000D97CD1 /* Bottle+CoreDataProperties.swift in Sources */,
 				47494BD52B35ADAD002A0A93 /* ActivityController.swift in Sources */,
@@ -761,6 +780,7 @@
 				47AF89762B3A28200068FE1F /* diaperController.swift in Sources */,
 				4777ABEF2B2501710055DF4A /* BreastFeedingController.swift in Sources */,
 				47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */,
+				47F81B9D2B6058430042A055 /* MonitorViewController.swift in Sources */,
 				475071E22B09462000DAB527 /* MarmotMonitor.xcdatamodeld in Sources */,
 				47D7895F2B5E96AD00B4912D /* GrowthViewModel.swift in Sources */,
 				4711F7742B1E70AB00869A27 /* Person.swift in Sources */,
