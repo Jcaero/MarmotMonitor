@@ -19,10 +19,19 @@ class MonitorCell: UITableViewCell {
         return label
     }()
 
-    let graph = GraphView()
+    let graph = GraphView(style: .rod)
+
+    private let stackViewActivities: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .equalSpacing
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     // MARK: - Properties
     static let reuseIdentifier = "MonitorCell"
+    private var activities: [GraphActivity] = []
 
     // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -36,11 +45,10 @@ class MonitorCell: UITableViewCell {
     }
 
     private func setupUI() {
-        date.translatesAutoresizingMaskIntoConstraints = false
-        graph.translatesAutoresizingMaskIntoConstraints = false
-
-        contentView.addSubview(date)
-        contentView.addSubview(graph)
+        [date, graph, stackViewActivities].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview($0)
+        }
 
         NSLayoutConstraint.activate([
             date.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
@@ -50,19 +58,30 @@ class MonitorCell: UITableViewCell {
             graph.topAnchor.constraint(equalTo: date.bottomAnchor, constant: 10),
             graph.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             graph.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-//            graph.heightAnchor.constraint(equalToConstant: 80),
-            graph.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            graph.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
+
+            stackViewActivities.topAnchor.constraint(equalTo: graph.bottomAnchor, constant: 10),
+            stackViewActivities.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            stackViewActivities.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            stackViewActivities.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
+            stackViewActivities.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
 
     // MARK: - Configure
-    func setupCell(with date: Date, elements: [ShowActivity], style: GraphType) {
-        // test
-        let date1 = "07/11/2023 15:30".toDateWithTime()!
-        let date2 = "07/11/2023 07:30".toDateWithTime()!
-        let exemple: [ShowActivity] = [ ShowActivity(color: .red, timeStart: date1, duration: 60), ShowActivity(color: .blue, timeStart: date2, duration: 240) ]
-
+    func setupCell(with date: Date, elementsToGraph: [GraphActivity], style: GraphType, elementsToLegend: [String:String]) {
+        activities = elementsToGraph
         self.date.text = date.toStringWithDayMonthYear()
-        graph.setupGraphView(with: exemple, style: style)
+        graph.setupGraphView(with: elementsToGraph)
+
+//        updateLegend(with: elementsToLegend)
+    }
+
+    private func updateLegend(with elements: [String:String]) {
+        elements.forEach { element in
+            let view = LegendGraphView(information: element.value, imageName: element.key)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            stackViewActivities.addArrangedSubview(view)
+        }
     }
 }

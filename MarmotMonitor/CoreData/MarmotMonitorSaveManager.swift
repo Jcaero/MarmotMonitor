@@ -11,6 +11,7 @@ protocol MarmotMonitorSaveManagerProtocol {
     func saveActivity(_ activityType: ActivityType, date: Date, onSuccess: (() -> Void), onError: ((String) -> Void))
     func fetchDateActivitiesWithDate(from startDate: Date, to endDate: Date) -> [DateActivity]
     func fetchFirstActivity<T>(ofType type: T.Type) -> (activity: T, date: Date)? where T:Activity
+    func fetchAllActivity() -> [DateActivity]
     func clearDatabase()
 }
 
@@ -35,9 +36,7 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
     /// - Note: If one of the same activity type already exists for the given date, an alert will be shown
     /// - Parameters:
     ///  - activityType: The type of activity to save
-    ///  - date: The date to save the activity for
-    ///
-    // onResult: Result<(), String>
+    ///  - date: The date to save the activity for onResult: Result<(), String>
     func saveActivity(_ activityType: ActivityType, date: Date, onSuccess: (() -> Void), onError: ((String) -> Void)) {
         context.performAndWait {
             let activityDate = self.fetchOrCreateDateActivity(for: date)
@@ -77,7 +76,7 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
                 growth.headCircumfeence = growthData.headCircumference
                 activityDate.addToActivity(growth)
 
-            case .solide(composition: let composition):
+            case .solid(composition: let composition):
                 let solid = Solid(context: self.context)
                 solid.vegetable = Int16(composition.vegetable)
                 solid.meat = Int16(composition.meat)
@@ -109,7 +108,7 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
             return dateActivity.activityArray.contains(where: { $0 as? Sleep != nil })
         case .growth:
             return dateActivity.activityArray.contains(where: { $0 as? Growth != nil })
-        case .solide:
+        case .solid:
             return dateActivity.activityArray.contains(where: { $0 as? Solid != nil })
         }
     }
@@ -183,7 +182,9 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
         }
     }
 
-    private func fetchAllActivity() -> [DateActivity] {
+    ///  Fetches all DateActivity objects
+    ///  - Returns: All DateActivity objects
+    func fetchAllActivity() -> [DateActivity] {
         context.performAndWait {
             var fetchedResults = [DateActivity]()
             let request = NSFetchRequest<DateActivity>(entityName: "DateActivity")
@@ -205,62 +206,18 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
     /// - Note: If no diaper activity exists, returns nil
     func fetchFirstDiaperActivity() -> (activity: Diaper, date: Date)? {
         return fetchFirstActivity(ofType: Diaper.self)
-//        let allActivities = fetchAllActivity()
-//        let sortedActivities = allActivities.sorted { $0.date > $1.date }
-//
-//        for dateActivity in sortedActivities {
-//            for activity in dateActivity.activityArray {
-//                if let diaperActivity = activity as? Diaper {
-//                    return (diaperActivity, dateActivity.date)
-//                }
-//            }
-//        }
-//        return nil
     }
 
     func fetchFirstBottleActivity() -> (activity: Bottle, date: Date)? {
         return fetchFirstActivity(ofType: Bottle.self)
-//        let allActivities = fetchAllActivity()
-//        let sortedActivities = allActivities.sorted { $0.date > $1.date }
-//
-//        for dateActivity in sortedActivities {
-//            for activity in dateActivity.activityArray {
-//                if let bottleActivity = activity as? Bottle {
-//                    return (bottleActivity, dateActivity.date)
-//                }
-//            }
-//        }
-//        return nil
     }
 
     func fetchFirstBreastActivity() -> (activity: Breast, date: Date)? {
         return fetchFirstActivity(ofType: Breast.self)
-//        let allActivities = fetchAllActivity()
-//        let sortedActivities = allActivities.sorted { $0.date > $1.date }
-//
-//        for dateActivity in sortedActivities {
-//            for activity in dateActivity.activityArray {
-//                if let breastActivity = activity as? Breast {
-//                    return (breastActivity, dateActivity.date)
-//                }
-//            }
-//        }
-//        return nil
     }
 
     func fetchFirstSolidActivity() -> (activity: Solid, date: Date)? {
         return fetchFirstActivity(ofType: Solid.self)
-//        let allActivities = fetchAllActivity()
-//        let sortedActivities = allActivities.sorted { $0.date > $1.date }
-//
-//        for dateActivity in sortedActivities {
-//            for activity in dateActivity.activityArray {
-//                if let solidActivity = activity as? Solid {
-//                    return (solidActivity, dateActivity.date)
-//                }
-//            }
-//        }
-//        return nil
     }
 
     func fetchFirstActivity<T>(ofType type: T.Type) -> (activity: T, date: Date)? where T:Activity {

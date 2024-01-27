@@ -55,7 +55,7 @@ final class SolidFeedingViewModel {
 
         let foods = createSolidQuantity()
 
-        coreDataManager.saveActivity(.solide(composition: foods),
+        coreDataManager.saveActivity(.solid(composition: foods),
                                      date: date,
                                      onSuccess: { self.delegate?.nextView() },
                                      onError: { description in self.showAlert(title: "Erreur", description: description) })

@@ -22,6 +22,12 @@ extension Date {
         return formatter.string(from: self)
     }
 
+    func convertToFrenchTimeZone() -> Date {
+            guard let timeZone = TimeZone(identifier: "Europe/Paris") else { return self }
+            let timeZoneOffset = TimeInterval(timeZone.secondsFromGMT(for: self))
+            return self.addingTimeInterval(timeZoneOffset)
+        }
+
     func removeSeconds() -> Date {
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: self)
@@ -43,5 +49,11 @@ extension Date {
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.hour, .minute], from: self)
         return (dateComponents.hour, dateComponents.minute)
+    }
+
+    func dateWithNoTime() -> Date {
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.year, .month, .day], from: self)
+        return calendar.date(from: dateComponents)!
     }
 }

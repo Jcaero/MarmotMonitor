@@ -16,9 +16,11 @@ class MonitorViewController: BackgroundViewController {
         tableView.isScrollEnabled = false
         tableView.separatorStyle = .singleLine
         tableView.layer.cornerRadius = 20
+        tableView.isScrollEnabled = true
         return tableView
     }()
 
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -29,10 +31,15 @@ class MonitorViewController: BackgroundViewController {
         tableView.register(MonitorCell.self, forCellReuseIdentifier: MonitorCell.reuseIdentifier)
     }
 
-    let date = ["07/11/2023".toDate()!, "08/11/2023".toDate()!, "09/11/2023".toDate()!]
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.updateData()
+        tableView.reloadData()
+    }
 
-    //  MARK: - Setup views
+    private var viewModel = MonitorViewModel()
 
+    // MARK: - Setup views
     private func setupViews() {
         view.addSubview(tableView)
     }
@@ -53,7 +60,7 @@ extension MonitorViewController: UITableViewDelegate {
 
 extension MonitorViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        viewModel.dateWithActivity.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,14 +68,10 @@ extension MonitorViewController: UITableViewDataSource {
             print("erreur de cell")
             return UITableViewCell()
         }
-        // test
-        if indexPath.row == 0 {
-            cell.setupCell(with: date[indexPath.row], elements: [], style: .rod)
-        } else if indexPath.row == 1  {
-            cell.setupCell(with: date[indexPath.row], elements: [], style: .round)
-        } else {
-            cell.setupCell(with: date[indexPath.row], elements: [], style: .ligne)
-        }
+
+        let stringDate = viewModel.dateWithActivity[indexPath.row].toStringWithDayMonthYear()
+
+        cell.setupCell(with:  viewModel.dateWithActivity[indexPath.row], elementsToGraph: viewModel.graphActivities[stringDate]!, style: .rod, elementsToLegend: ["biberon": "Bonjour"])
         return cell
     }
 }

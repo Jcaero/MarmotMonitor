@@ -13,7 +13,7 @@ enum ActivityType {
     case breast(duration: BreastDuration)
     case sleep(duration: Int)
     case growth(data: GrowthData)
-    case solide(composition: SolidQuantity)
+    case solid(composition: SolidQuantity)
 
     static var allTitle : [String] {
         return ["Couche", "Biberon", "Allaitement", "Sommeil", "Croissance", "Repas"]
@@ -31,7 +31,7 @@ enum ActivityType {
                return "Un temps de sommeil a déjà été enregistrée à cette date."
            case .growth:
                return "Une mesure de croissance a déjà été enregistrée à cette date."
-           case .solide:
+           case .solid:
                return "Un repas a déjà été enregistrée à cette date."
            }
        }

@@ -361,7 +361,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
     // MARK: - Activity Type Solid
     func testCoreDataHaveNoData_WhenSaveActivityOfSolid_CoreDataHaveData() {
 
-        marmotMonitorSaveManager.saveActivity(.solide(composition: solidData1), 
+        marmotMonitorSaveManager.saveActivity(.solid(composition: mockSolidQuantity1), 
                                               date: testFirstDateSeven,
                                               onSuccess: { saveActivity2 = true},
                                               onError: {alerteMessage in alerteDescription = alerteMessage})
@@ -375,13 +375,13 @@ final class MarmotMonitoSaveManagerTest: TestCase {
     }
 
     func testCoreDataHaveData_WhenSaveActivityOfSolid_ShowAlerteAndNotSave() {
-        marmotMonitorSaveManager.saveActivity(.solide(composition: solidData1), 
+        marmotMonitorSaveManager.saveActivity(.solid(composition: mockSolidQuantity1), 
                                               date: testFirstDateSeven,
                                               onSuccess: { saveActivity2 = true},
                                               onError: {alerteMessage in alerteDescription = alerteMessage})
         XCTAssertEqual(alerteDescription, "")
 
-        marmotMonitorSaveManager.saveActivity(.solide(composition: solidData2), 
+        marmotMonitorSaveManager.saveActivity(.solid(composition: mockSolidQuantity2), 
                                               date: testFirstDateSeven,
                                               onSuccess: { saveActivity2 = true},
                                               onError: {alerteMessage in alerteDescription = alerteMessage})
@@ -392,7 +392,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
 
         let vegetable = (dateActivities.first?.activityArray.first as! Solid).vegetable
         XCTAssertEqual(vegetable, 250)
-        XCTAssertEqual(alerteDescription, ActivityType.solide(composition: solidData1).alertMessage)
+        XCTAssertEqual(alerteDescription, ActivityType.solid(composition: mockSolidQuantity1).alertMessage)
     }
 
     func testCoreDataHaveDiaperData_WhenSaveActivityOfSolidAtSameDate_CoreDataHaveTwoData() {
@@ -401,7 +401,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
                                               onSuccess: { saveActivity2 = true},
                                               onError: {alerteMessage in alerteDescription = alerteMessage})
 
-        marmotMonitorSaveManager.saveActivity(.solide(composition: solidData1), 
+        marmotMonitorSaveManager.saveActivity(.solid(composition: mockSolidQuantity1), 
                                               date: testFirstDateSeven,
                                               onSuccess: { saveActivity2 = true},
                                               onError: {alerteMessage in alerteDescription = alerteMessage})
@@ -498,7 +498,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
     }
 
     func testCoreDataHaveSolidData_WhenFetchLastActivity_ResultHaveActivity() {
-        marmotMonitorSaveManager.saveActivity(.solide(composition: solidData1),
+        marmotMonitorSaveManager.saveActivity(.solid(composition: mockSolidQuantity1),
                                               date: testSecondDateSix,
                                               onSuccess: { saveActivity1 = true},
                                               onError: {alerteMessage in alerteDescription = alerteMessage})

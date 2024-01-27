@@ -98,7 +98,7 @@ final class SleepViewModel {
             showAlert(title: "Erreur", description: "Aucune durée rentrée")
             return
         }
-
+        
         coreDataManager.saveActivity(.sleep(duration: sleepDuration),
                                      date: date,
                                      onSuccess: { self.delegate?.nextView() },

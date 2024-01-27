@@ -44,22 +44,21 @@ class GraphView: UIView {
     private var labelTexte = ["2", "6", "10", "14", "18", "22"]
 
     private var styleOfGraph: GraphType = .round
-    private var numberOfElements: Int?
     private var numberOfStackViews: Int {
         switch styleOfGraph {
         case .round:
             return 7
         case .rod:
             return 1
-        case .ligne:
-            return numberOfElements ?? 5
         }
     }
 
     // MARK: - INIT
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(style: GraphType) {
+        super.init(frame: .zero)
         self.backgroundColor = .clear
+        styleOfGraph = style
+        setupUI()
     }
 
     required init?(coder: NSCoder) {
@@ -67,14 +66,10 @@ class GraphView: UIView {
     }
 
     // MARK: - Configure
-    func setupGraphView(with elements: [ShowActivity], style: GraphType) {
+    func setupGraphView(with elements: [GraphActivity]) {
         guard !elements.isEmpty else { return }
-        styleOfGraph = style
-        numberOfElements = elements.count
 
-        setupUI()
-
-        elements.enumerated().forEach { index, element in
+        elements.forEach { element in
             let time = element.timeStart.getHourAndMin()
             guard let hour = time.hour else { return}
             var startedTime = hour * 2
@@ -84,17 +79,19 @@ class GraphView: UIView {
             }
 
             let duration = element.duration / 30
-            var endedTime = (startedTime + duration) - 1
+
+            var endedTime: Int
+            if duration <= 1 {
+                endedTime = startedTime
+            } else {
+                endedTime = startedTime + duration
+            }
+
             if endedTime > 48 {
                 endedTime = 48
             }
 
-            switch  styleOfGraph {
-            case .round, .rod:
-                colorGraph(with: element.color, startedIndex: startedTime, endIndex: endedTime)
-            case .ligne:
-                colorGraphNumber(index, with: element.color, startedIndex: startedTime, endIndex: endedTime)
-            }
+            colorGraph(with: element.color, startedIndex: startedTime, endIndex: endedTime)
         }
         setTimeBaseLigne()
     }
@@ -158,8 +155,10 @@ class GraphView: UIView {
                 view.clipsToBounds = true
                 $0.addArrangedSubview(view)
                 view.translatesAutoresizingMaskIntoConstraints = false
-                if styleOfGraph == .round || styleOfGraph == .ligne {
+                if styleOfGraph == .round {
                     view.heightAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+                } else {
+                    view.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
                 }
             }
         }
@@ -189,11 +188,15 @@ class GraphView: UIView {
     private func colorGraph(with color: UIColor, startedIndex: Int, endIndex: Int) {
         guard startedIndex < 48, endIndex <= 48 else {return}
         stackViews.forEach {
-            if $0.arrangedSubviews.count > endIndex {
-                for index in startedIndex...endIndex {
-                    let view = $0.arrangedSubviews[index]
+            if $0.arrangedSubviews.count > endIndex-1 {
+                if startedIndex == endIndex {
+                    let view = $0.arrangedSubviews[startedIndex]
                     view.backgroundColor = color
-                    view.layer.borderColor = color.cgColor
+                } else {
+                    for index in startedIndex...endIndex-1 {
+                        let view = $0.arrangedSubviews[index]
+                        view.backgroundColor = color
+                    }
                 }
             }
         }

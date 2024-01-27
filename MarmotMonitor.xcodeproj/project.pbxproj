@@ -50,6 +50,8 @@
 		475BD8EF2B597FBF003F1158 /* DiaperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475BD8EE2B597FBF003F1158 /* DiaperViewModel.swift */; };
 		475BD8F12B59B43F003F1158 /* DiaperViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475BD8F02B59B43F003F1158 /* DiaperViewModelTest.swift */; };
 		475F9FC02B6109D9001C4A4E /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475F9FBF2B6109D9001C4A4E /* GraphView.swift */; };
+		475F9FC32B6163D9001C4A4E /* LegendGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475F9FC22B6163D9001C4A4E /* LegendGraphView.swift */; };
+		475F9FC52B616A69001C4A4E /* MonitorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475F9FC42B616A69001C4A4E /* MonitorViewModel.swift */; };
 		4767543A2B37912F00C83E6D /* BackGroundActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476754392B37912F00C83E6D /* BackGroundActivity.swift */; };
 		4767543C2B3792BC00C83E6D /* SleepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767543B2B3792BC00C83E6D /* SleepCell.swift */; };
 		476AF6302B27A10100F4935F /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF62F2B27A10100F4935F /* UIButton+.swift */; };
@@ -71,6 +73,7 @@
 		47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8C2B128A5A00C5919A /* UserDefault+.swift */; };
 		47CABD8F2B128D6A00C5919A /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8E2B128D6A00C5919A /* UIApplication.swift */; };
 		47CABD912B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */; };
+		47CE16D12B62987400A51B78 /* MonitorViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE16D02B62987400A51B78 /* MonitorViewModelTest.swift */; };
 		47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */; };
 		47D7895F2B5E96AD00B4912D /* GrowthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7895E2B5E96AD00B4912D /* GrowthViewModel.swift */; };
 		47D789612B5E9B6400B4912D /* GrowthViewmodelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D789602B5E9B6400B4912D /* GrowthViewmodelTest.swift */; };
@@ -166,6 +169,8 @@
 		475BD8EE2B597FBF003F1158 /* DiaperViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaperViewModel.swift; sourceTree = "<group>"; };
 		475BD8F02B59B43F003F1158 /* DiaperViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaperViewModelTest.swift; sourceTree = "<group>"; };
 		475F9FBF2B6109D9001C4A4E /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		475F9FC22B6163D9001C4A4E /* LegendGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendGraphView.swift; sourceTree = "<group>"; };
+		475F9FC42B616A69001C4A4E /* MonitorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorViewModel.swift; sourceTree = "<group>"; };
 		476754392B37912F00C83E6D /* BackGroundActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundActivity.swift; sourceTree = "<group>"; };
 		4767543B2B3792BC00C83E6D /* SleepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCell.swift; sourceTree = "<group>"; };
 		476AF62F2B27A10100F4935F /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
@@ -187,6 +192,7 @@
 		47CABD8C2B128A5A00C5919A /* UserDefault+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+.swift"; sourceTree = "<group>"; };
 		47CABD8E2B128D6A00C5919A /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorAuditAccessibility.swift; sourceTree = "<group>"; };
+		47CE16D02B62987400A51B78 /* MonitorViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorViewModelTest.swift; sourceTree = "<group>"; };
 		47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		47D7895E2B5E96AD00B4912D /* GrowthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthViewModel.swift; sourceTree = "<group>"; };
 		47D789602B5E9B6400B4912D /* GrowthViewmodelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthViewmodelTest.swift; sourceTree = "<group>"; };
@@ -418,6 +424,7 @@
 		475071F02B09462100DAB527 /* MarmotMonitorTests */ = {
 			isa = PBXGroup;
 			children = (
+				47CE16CF2B62985100A51B78 /* Monitor */,
 				472848202B58146F00AA6B35 /* Activity */,
 				47CB30012B1F400F0054EAC7 /* started */,
 				470009D52B2E485C00EBEF86 /* home */,
@@ -456,6 +463,16 @@
 				4745DB7A2B501ED7003C440D /* model */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		475F9FC12B615B20001C4A4E /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				475F9FBF2B6109D9001C4A4E /* GraphView.swift */,
+				47F81BA02B605F610042A055 /* GraphType.swift */,
+				475F9FC22B6163D9001C4A4E /* LegendGraphView.swift */,
+			);
+			name = Graph;
 			sourceTree = "<group>";
 		};
 		4777ABED2B2500D40055DF4A /* Activity */ = {
@@ -538,6 +555,14 @@
 			path = started;
 			sourceTree = "<group>";
 		};
+		47CE16CF2B62985100A51B78 /* Monitor */ = {
+			isa = PBXGroup;
+			children = (
+				47CE16D02B62987400A51B78 /* MonitorViewModelTest.swift */,
+			);
+			path = Monitor;
+			sourceTree = "<group>";
+		};
 		47D8DA772B4B496100D97CD1 /* CoreDataTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,9 +578,9 @@
 			isa = PBXGroup;
 			children = (
 				47F81B9C2B6058430042A055 /* MonitorViewController.swift */,
+				475F9FC42B616A69001C4A4E /* MonitorViewModel.swift */,
 				47F81B9E2B605AEC0042A055 /* MonitorCell.swift */,
-				475F9FBF2B6109D9001C4A4E /* GraphView.swift */,
-				47F81BA02B605F610042A055 /* GraphType.swift */,
+				475F9FC12B615B20001C4A4E /* Graph */,
 			);
 			path = Monitor;
 			sourceTree = "<group>";
@@ -756,6 +781,7 @@
 				47D8DA662B4B37F000D97CD1 /* Bottle+CoreDataProperties.swift in Sources */,
 				47494BD52B35ADAD002A0A93 /* ActivityController.swift in Sources */,
 				47D8DA682B4B37F000D97CD1 /* Activity+CoreDataProperties.swift in Sources */,
+				475F9FC52B616A69001C4A4E /* MonitorViewModel.swift in Sources */,
 				475F9FC02B6109D9001C4A4E /* GraphView.swift in Sources */,
 				4767543A2B37912F00C83E6D /* BackGroundActivity.swift in Sources */,
 				4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */,
@@ -789,6 +815,7 @@
 				47D7895F2B5E96AD00B4912D /* GrowthViewModel.swift in Sources */,
 				4711F7742B1E70AB00869A27 /* Person.swift in Sources */,
 				477B86932B3384D100333768 /* meal.swift in Sources */,
+				475F9FC32B6163D9001C4A4E /* LegendGraphView.swift in Sources */,
 				4712D43D2B0A9BC50085035C /* UIView+.swift in Sources */,
 				475071DA2B09462000DAB527 /* SceneDelegate.swift in Sources */,
 			);
@@ -807,6 +834,7 @@
 				4748658A2B49F1AF00CB5E29 /* UserDefaultsManagerMock.swift in Sources */,
 				4779579D2B547ADD0021178D /* BenchMarkTest.swift in Sources */,
 				472848262B5824AB00AA6B35 /* SleepViewModelTest.swift in Sources */,
+				47CE16D12B62987400A51B78 /* MonitorViewModelTest.swift in Sources */,
 				47D789612B5E9B6400B4912D /* GrowthViewmodelTest.swift in Sources */,
 				4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */,
 				4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */,
@@ -1042,6 +1070,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZRWFG582AN;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
@@ -1061,6 +1090,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZRWFG582AN;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
@@ -1077,8 +1107,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZRWFG582AN;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pierrick.MarmotMonitorUITests;
@@ -1094,8 +1126,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZRWFG582AN;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pierrick.MarmotMonitorUITests;

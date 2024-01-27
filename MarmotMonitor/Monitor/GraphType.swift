@@ -7,7 +7,8 @@
 
 import UIKit
 
-struct ShowActivity {
+struct GraphActivity {
+    let type: ShowActivityType
     let color: UIColor
     let timeStart: Date
     let duration: Int
@@ -16,5 +17,12 @@ struct ShowActivity {
 enum GraphType {
     case round
     case rod
-    case ligne
+}
+
+enum ShowActivityType {
+    case diaper
+    case breast
+    case bottle
+    case solid
+    case sleep
 }
