@@ -13,7 +13,7 @@ class LegendGraphView: UIView {
         label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
         label.textColor = .label
         label.textAlignment = .left
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.backgroundColor = .clear
         label.setAccessibility(with: .header, label: "resumé", hint: "")
         return label
@@ -30,28 +30,36 @@ class LegendGraphView: UIView {
             imageActivity.image = image
         }
 
-        setupContrainte()
+        setupUI()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupContrainte() {
-        information.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            information.topAnchor.constraint(equalTo: topAnchor, constant: 2),
-            information.rightAnchor.constraint(equalTo: rightAnchor, constant: -2),
-            information.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2)
-        ])
+    private func setupUI() {
+        [information, imageActivity].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            addSubview($0)
+        }
+        setupContrainte()
+    }
 
-        imageActivity.translatesAutoresizingMaskIntoConstraints = false
+    private func setupContrainte() {
+
         NSLayoutConstraint.activate([
-            imageActivity.topAnchor.constraint(equalTo: information.topAnchor),
-            imageActivity.bottomAnchor.constraint(equalTo: information.bottomAnchor),
+            imageActivity.topAnchor.constraint(equalTo: topAnchor, constant: 2),
             imageActivity.widthAnchor.constraint(equalTo: imageActivity.heightAnchor),
             imageActivity.leftAnchor.constraint(equalTo: leftAnchor, constant: 2),
-            information.leftAnchor.constraint(equalTo: imageActivity.rightAnchor, constant: 5)
+            imageActivity.heightAnchor.constraint(equalToConstant: 30)
         ])
+
+        NSLayoutConstraint.activate([
+            information.topAnchor.constraint(equalTo: imageActivity.topAnchor),
+            information.rightAnchor.constraint(equalTo: rightAnchor, constant: -2),
+            information.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),
+            information.leftAnchor.constraint(equalTo: imageActivity.rightAnchor, constant: 5 )
+        ])
+
     }
 }

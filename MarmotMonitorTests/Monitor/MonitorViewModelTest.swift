@@ -76,7 +76,7 @@ final class MonitorViewModelTest: TestCase {
         let graphInfo = viewModel.graphActivities["07/01/2024"]?.first
         
         XCTAssertEqual(graphInfo?.color, .red)
-        XCTAssertEqual(graphInfo?.duration, 25)
+        XCTAssertEqual(graphInfo?.duration, 0)
         XCTAssertEqual(graphInfo?.timeStart, testFirstDateSeven)
         XCTAssertEqual(graphInfo?.type, .breast)
     }
@@ -110,7 +110,7 @@ final class MonitorViewModelTest: TestCase {
         let graphInfo = viewModel.graphActivities["07/01/2024"]?.first
         
         XCTAssertEqual(graphInfo?.color, .purple)
-        XCTAssertEqual(graphInfo?.duration, 360)
+        XCTAssertEqual(graphInfo?.duration, 6)
         XCTAssertEqual(graphInfo?.timeStart, testFirstDateSeven)
         XCTAssertEqual(graphInfo?.type, .sleep)
     }
@@ -130,13 +130,13 @@ final class MonitorViewModelTest: TestCase {
         let graphInfo = viewModel.graphActivities["07/01/2024"]?.first
         
         XCTAssertEqual(graphInfo?.color, .purple)
-        XCTAssertEqual(graphInfo?.duration, 80)
+        XCTAssertEqual(graphInfo?.duration, 1)
         XCTAssertEqual(graphInfo?.timeStart, testFirstDateSevenAtFive)
         XCTAssertEqual(graphInfo?.type, .sleep)
 
         let graphInfo2 = viewModel.graphActivities["07/01/2024"]?[1]
         XCTAssertEqual(graphInfo2?.color, .purple)
-        XCTAssertEqual(graphInfo2?.duration, 360)
+        XCTAssertEqual(graphInfo2?.duration, 6)
         XCTAssertEqual(graphInfo2?.timeStart, testFirstDateSeven)
         XCTAssertEqual(graphInfo2?.type, .sleep)
     }
@@ -150,6 +150,35 @@ final class MonitorViewModelTest: TestCase {
         
         XCTAssertEqual(viewModel.dateWithActivity.count, 0)
         XCTAssertEqual(viewModel.graphActivities.count, 0)
+    
+    }
+
+    //MARK: - test Summary Activity
+    func testCoreDataHaveData_WhenSummary_ViewModelHaveSummary() {
+        coreDatatManager.saveActivity(.breast(duration: mockBreastDurationFifteenAndTen), date: testFirstDateSeven, onSuccess: {isSave = true }, onError: {_ in })
+        
+        viewModel.updateData()
+        
+        XCTAssertTrue(viewModel.dateWithActivity.count == 1)
+        XCTAssertEqual(viewModel.dateWithActivity[0], "07/01/2024".toDate())
+        XCTAssertEqual(viewModel.graphActivities.count, 1)
+        
+        let summaryOfSeven = viewModel.summaryActivities["07/01/2024"]
+        XCTAssertEqual(summaryOfSeven![ActivityIconName.meal.rawValue], "25 min\n1 fois")
+    
+    }
+
+    func testCoreDataHaveSleepData_WhenSummary_ViewModelHaveSummary() {
+        coreDatatManager.saveActivity(.sleep(duration: 10800), date: testFirstDateSeven, onSuccess: {isSave = true }, onError: {_ in })
+        
+        viewModel.updateData()
+        
+        XCTAssertTrue(viewModel.dateWithActivity.count == 1)
+        XCTAssertEqual(viewModel.dateWithActivity[0], "07/01/2024".toDate())
+        XCTAssertEqual(viewModel.graphActivities.count, 1)
+        
+        let summaryOfSeven = viewModel.summaryActivities["07/01/2024"]
+        XCTAssertEqual(summaryOfSeven![ActivityIconName.sleep.rawValue], "03 H\n1 fois")
     
     }
 }

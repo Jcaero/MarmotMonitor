@@ -56,6 +56,9 @@ class MonitorViewController: BackgroundViewController {
 }
 
 extension MonitorViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension MonitorViewController: UITableViewDataSource {
@@ -70,8 +73,9 @@ extension MonitorViewController: UITableViewDataSource {
         }
 
         let stringDate = viewModel.dateWithActivity[indexPath.row].toStringWithDayMonthYear()
+        let legend = viewModel.summaryActivities[stringDate] ?? [:]
 
-        cell.setupCell(with:  viewModel.dateWithActivity[indexPath.row], elementsToGraph: viewModel.graphActivities[stringDate]!, style: .rod, elementsToLegend: ["biberon": "Bonjour"])
+        cell.setupCell(with:  viewModel.dateWithActivity[indexPath.row], elementsToGraph: viewModel.graphActivities[stringDate]!, style: .rod, elementsToLegend: legend)
         return cell
     }
 }

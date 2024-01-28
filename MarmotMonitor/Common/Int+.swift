@@ -8,6 +8,7 @@
 import Foundation
 
 extension Int {
+    /// Convert the Int of minute  into a String with the format HH:MM
     func toTimeString() -> String {
         let minutes = (self / 60) % 60
         let hours = self / 3600
@@ -15,7 +16,11 @@ extension Int {
         if hours == 0 {
             return String(format: "%02d min", minutes)
         } else {
-            return String(format: "%02d H %02d min", hours, minutes)
+            if minutes == 0 {
+                return String(format: "%02d H", hours)
+            } else {
+                return String(format: "%02d H %02d min", hours, minutes)
+            }
         }
     }
 }

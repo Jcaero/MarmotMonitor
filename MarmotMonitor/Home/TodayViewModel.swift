@@ -18,10 +18,10 @@ class TodayViewModel {
     private let marmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol!
 
     var activities: [ActivityData] = [
-           ActivityData(imageName: "biberon", cellTitle: "Dernière tétée/biberon", cellSubTitle: "Saisir la tétée/le biberon"),
-           ActivityData(imageName: "sommeil", cellTitle: "Dernier sommeil", cellSubTitle: "Saisir le sommeil"),
-           ActivityData(imageName: "couche", cellTitle: "Dernière couche", cellSubTitle: "Saisir la couche"),
-           ActivityData(imageName: "croissance", cellTitle: "Croissance", cellSubTitle: "Ajouter une mesure")
+        ActivityData(imageName: ActivityIconName.meal.rawValue , cellTitle: "Dernière tétée/biberon", cellSubTitle: "Saisir la tétée/le biberon"),
+           ActivityData(imageName: ActivityIconName.sleep.rawValue, cellTitle: "Dernier sommeil", cellSubTitle: "Saisir le sommeil"),
+           ActivityData(imageName: ActivityIconName.diaper.rawValue, cellTitle: "Dernière couche", cellSubTitle: "Saisir la couche"),
+           ActivityData(imageName: ActivityIconName.growth.rawValue, cellTitle: "Croissance", cellSubTitle: "Ajouter une mesure")
        ]
 
     init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager(), marmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol = MarmotMonitorSaveManager()) {

@@ -10,6 +10,8 @@ import Foundation
 class MonitorViewModel {
     private let saveManager: MarmotMonitorSaveManagerProtocol!
     var graphActivities: [String: [GraphActivity]] = [:]
+    var summaryActivities: [String: [String: String]] = [:]
+
     private var dateWithActivitySet: Set<Date> = []
     var dateWithActivity: [Date] {
         Array(dateWithActivitySet).sorted(by: { $0 > $1 })
@@ -22,8 +24,57 @@ class MonitorViewModel {
     func updateData() {
         let activities = saveManager.fetchAllActivity()
         graphActivities = createGraphElements(with: activities)
+        summaryActivities = createSummaryActivities(with: activities)
     }
 
+    func createSummaryActivities(with dateActivities: [DateActivity]) -> [String: [String: String]] {
+        var values: [String: [String: String]] = [:]
+
+        dateActivities.forEach { activities in
+            let frenchDate = activities.date.convertToFrenchTimeZone()
+            let stringDate = frenchDate.toStringWithDayMonthYear()
+            values[stringDate] = summaryActivities(activities: activities.activityArray)
+        }
+        return values
+    }
+
+    /// Create the summary of the activities for a date
+    /// - Parameter date: Date of the summary
+    /// - Returns: Dictionary of String with the icon name as key and the summary as value
+    /// - Note: The summary is the number of time for diaper and meal (only bottle and solid)
+    /// - Note: The summary is the number of time and the total time for sleep or breast
+    func summaryActivities(activities: [Activity] ) -> [String : String] {
+        var diaper : ActivitySummary = ActivitySummary()
+        var meal : ActivitySummary = ActivitySummary()
+        var sleep : ActivitySummary = ActivitySummary()
+
+        activities.forEach { activity in
+            switch activity {
+            case is Diaper:
+                diaper.count += 1
+            case is Solid, is Bottle:
+                meal.count += 1
+            case is Breast:
+                let breastActivity = activity as! Breast
+                meal.totalTime += breastActivity.totalDuration
+                meal.count += 1
+            case is Sleep:
+                let sleepActivity = activity as! Sleep
+                sleep.totalTime += Int(sleepActivity.duration)
+                sleep.count += 1
+            default:
+                break
+            }
+        }
+
+        return [
+            ActivityIconName.diaper.rawValue: transformInString(activity: diaper),
+            ActivityIconName.meal.rawValue: transformInString(activity: meal),
+            ActivityIconName.sleep.rawValue: transformInString(activity: sleep)
+        ]
+    }
+
+    // MARK: - Private
     /// Create the graph elements from the activities
     /// - Parameter dateActivities: Array of DateActivity
     /// - Returns: Dictionary of GraphActivity with the date as key
@@ -78,4 +129,19 @@ class MonitorViewModel {
             return nil
         }
     }
+
+    private func transformInString( activity: ActivitySummary) -> String {
+        if activity.totalTime == 0 {
+            return "\(activity.count) fois"
+        } else {
+            let totalTime = activity.totalTime.toTimeString()
+            return totalTime + "\n\(activity.count) fois"
+        }
+    }
+}
+
+// MARK: - ActivitySummary
+struct ActivitySummary: Equatable {
+    var count = 0
+    var totalTime = 0
 }

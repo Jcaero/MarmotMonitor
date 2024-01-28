@@ -99,6 +99,7 @@
 		47D8DA792B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA782B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift */; };
 		47D8DA7B2B4B4A0100D97CD1 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA7A2B4B4A0100D97CD1 /* TestCase.swift */; };
 		47E2A40B2B49848B008E75DD /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E2A40A2B49848B008E75DD /* UserDefaultManager.swift */; };
+		47E45E1B2B65ADA9005E5268 /* imageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E45E1A2B65ADA9005E5268 /* imageName.swift */; };
 		47F81B9D2B6058430042A055 /* MonitorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81B9C2B6058430042A055 /* MonitorViewController.swift */; };
 		47F81B9F2B605AEC0042A055 /* MonitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81B9E2B605AEC0042A055 /* MonitorCell.swift */; };
 		47F81BA12B605F610042A055 /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81BA02B605F610042A055 /* GraphType.swift */; };
@@ -218,6 +219,7 @@
 		47D8DA782B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitoSaveManagerTest.swift; sourceTree = "<group>"; };
 		47D8DA7A2B4B4A0100D97CD1 /* TestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
 		47E2A40A2B49848B008E75DD /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		47E45E1A2B65ADA9005E5268 /* imageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageName.swift; sourceTree = "<group>"; };
 		47F81B9C2B6058430042A055 /* MonitorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorViewController.swift; sourceTree = "<group>"; };
 		47F81B9E2B605AEC0042A055 /* MonitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorCell.swift; sourceTree = "<group>"; };
 		47F81BA02B605F610042A055 /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				472DDABC2B2DEF1600812024 /* UISegmented+.swift */,
 				471480AE2B513AF20084589B /* ActivityType.swift */,
 				479FC9582B56D550001BAC22 /* timeInterval+.swift */,
+				47E45E1A2B65ADA9005E5268 /* imageName.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -779,6 +782,7 @@
 				47F81BA12B605F610042A055 /* GraphType.swift in Sources */,
 				4767543C2B3792BC00C83E6D /* SleepCell.swift in Sources */,
 				47D8DA662B4B37F000D97CD1 /* Bottle+CoreDataProperties.swift in Sources */,
+				47E45E1B2B65ADA9005E5268 /* imageName.swift in Sources */,
 				47494BD52B35ADAD002A0A93 /* ActivityController.swift in Sources */,
 				47D8DA682B4B37F000D97CD1 /* Activity+CoreDataProperties.swift in Sources */,
 				475F9FC52B616A69001C4A4E /* MonitorViewModel.swift in Sources */,

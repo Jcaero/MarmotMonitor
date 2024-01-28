@@ -19,7 +19,7 @@ class MonitorCell: UITableViewCell {
         return label
     }()
 
-    let graph = GraphView(style: .rod)
+    let graph = GraphView(style: .round)
 
     private let stackViewActivities: UIStackView = {
         let view = UIStackView()
@@ -63,8 +63,8 @@ class MonitorCell: UITableViewCell {
             stackViewActivities.topAnchor.constraint(equalTo: graph.bottomAnchor, constant: 10),
             stackViewActivities.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             stackViewActivities.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            stackViewActivities.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
-            stackViewActivities.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            stackViewActivities.heightAnchor.constraint(greaterThanOrEqualToConstant: 10),
+            stackViewActivities.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
         ])
     }
 
@@ -72,13 +72,16 @@ class MonitorCell: UITableViewCell {
     func setupCell(with date: Date, elementsToGraph: [GraphActivity], style: GraphType, elementsToLegend: [String:String]) {
         activities = elementsToGraph
         self.date.text = date.toStringWithDayMonthYear()
-        graph.setupGraphView(with: elementsToGraph)
 
-//        updateLegend(with: elementsToLegend)
+        graph.setupGraphView(with: elementsToGraph)
+        updateLegend(with: elementsToLegend)
     }
 
     private func updateLegend(with elements: [String:String]) {
-        elements.forEach { element in
+        stackViewActivities.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        let list = elements.sorted(by: { $0.key < $1.key })
+
+        list.forEach { element in
             let view = LegendGraphView(information: element.value, imageName: element.key)
             view.translatesAutoresizingMaskIntoConstraints = false
             stackViewActivities.addArrangedSubview(view)

@@ -39,7 +39,7 @@ class TestCase: XCTestCase {
     
     // MARK: - Mock ActivityType Breast
     let mockBreastFifteenAndTen = ActivityType.breast(duration: BreastDuration(leftDuration: 15, rightDuration: 10))
-    let mockBreastDurationFifteenAndTen = BreastDuration(leftDuration: 15, rightDuration: 10)
+    let mockBreastDurationFifteenAndTen = BreastDuration(leftDuration: 900, rightDuration: 600)
     
     //MARK: - Mock Growth Data
     let mockGrowthData = GrowthData(weight: 10, height: 5.5, headCircumference: 20)
