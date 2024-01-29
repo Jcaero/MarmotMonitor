@@ -19,6 +19,16 @@ class MonitorCell: UITableViewCell {
         return label
     }()
 
+    let area: UIView = {
+        let view = UIView()
+        view.backgroundColor = .colorForPastelArea
+        view.layer.cornerRadius = 20
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.3
+        view.layer.shadowOffset = .zero
+        return view
+    }()
+
     let graph = GraphView(style: .round)
 
     private let stackViewActivities: UIStackView = {
@@ -45,26 +55,34 @@ class MonitorCell: UITableViewCell {
     }
 
     private func setupUI() {
+        area.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(area)
+
         [date, graph, stackViewActivities].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview($0)
+            area.addSubview($0)
         }
 
         NSLayoutConstraint.activate([
-            date.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            date.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            area.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            area.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
+            area.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
+            area.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+
+            date.topAnchor.constraint(equalTo: area.topAnchor, constant: 10),
+            date.leadingAnchor.constraint(equalTo: area.leadingAnchor, constant: 10),
             date.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
 
             graph.topAnchor.constraint(equalTo: date.bottomAnchor, constant: 10),
-            graph.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            graph.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            graph.leadingAnchor.constraint(equalTo: area.leadingAnchor, constant: 10),
+            graph.trailingAnchor.constraint(equalTo: area.trailingAnchor, constant: -10),
             graph.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
 
-            stackViewActivities.topAnchor.constraint(equalTo: graph.bottomAnchor, constant: 10),
-            stackViewActivities.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            stackViewActivities.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            stackViewActivities.topAnchor.constraint(equalTo: graph.bottomAnchor, constant: 4),
+            stackViewActivities.leadingAnchor.constraint(equalTo: area.leadingAnchor, constant: 10),
+            stackViewActivities.trailingAnchor.constraint(equalTo: area.trailingAnchor, constant: -10),
             stackViewActivities.heightAnchor.constraint(greaterThanOrEqualToConstant: 10),
-            stackViewActivities.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
+            stackViewActivities.bottomAnchor.constraint(equalTo: area.bottomAnchor, constant: -5)
         ])
     }
 

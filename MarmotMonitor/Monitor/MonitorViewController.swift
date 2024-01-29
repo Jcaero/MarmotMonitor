@@ -12,7 +12,7 @@ class MonitorViewController: BackgroundViewController {
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.backgroundColor = .colorForPastelArea
+        tableView.backgroundColor = .clear
         tableView.isScrollEnabled = false
         tableView.separatorStyle = .singleLine
         tableView.layer.cornerRadius = 20
