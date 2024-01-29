@@ -42,22 +42,12 @@ class GraphView: UIView {
     // MARK: - Properties
     private var stackViews: [UIStackView] = []
     private var labelTexte = ["2", "6", "10", "14", "18", "22"]
-
-    private var styleOfGraph: GraphType = .round
-    private var numberOfStackViews: Int {
-        switch styleOfGraph {
-        case .round:
-            return 7
-        case .rod:
-            return 1
-        }
-    }
+    private let numberOfHalfHour = 48
 
     // MARK: - INIT
-    init(style: GraphType) {
+    init() {
         super.init(frame: .zero)
         self.backgroundColor = .clear
-        styleOfGraph = style
         setupUI()
     }
 
@@ -66,33 +56,37 @@ class GraphView: UIView {
     }
 
     // MARK: - Configure
-    func setupGraphView(with elements: [GraphActivity]) {
+    func setupGraphView(with elements: [GraphActivity], style: GraphType) {
         guard !elements.isEmpty else { return }
+
+        setupStyleOfGraph(with: style)
         cleanGraph()
+
         elements.forEach { element in
             let (startedTime, endedTime) = calculateStartAndEndTime(for: element)
             colorGraph(with: element.color, startedIndex: startedTime, endIndex: endedTime)
         }
+
         setTimeBaseLigne()
     }
 
     // MARK: - Setup UI
     private func setupUI() {
         setupStackViews()
-        setupStackViewHourLabels()
+        setupAbscissaAxisLegend()
         addStackViewsToSuperview()
-        setupHourlyViewInStackView()
+        setupHourlyView()
         setupContrainte()
     }
 
     private func setupStackViews() {
-        for _ in 1...numberOfStackViews {
+        for _ in 1...7 {
             let stackView = createStackView(axis: .horizontal, distribution: .fillEqually, spacing: 2)
             stackViews.append(stackView)
         }
     }
 
-    private func setupStackViewHourLabels() {
+    private func setupAbscissaAxisLegend() {
         labelTexte.forEach { text in
             let label = createLabelWithText(text)
             stackViewLabelHour.addArrangedSubview(label)
@@ -101,10 +95,10 @@ class GraphView: UIView {
 
     private func addStackViewsToSuperview() {
         addSubview(stackViewForDay)
-        stackViews.forEach {
-            stackViewForDay.addArrangedSubview($0)
-        }
         addSubview(stackViewLabelHour)
+
+        guard !stackViews.isEmpty else { return }
+        stackViewForDay.addArrangedSubview(stackViews.first!)
     }
 
     private func setupContrainte() {
@@ -124,20 +118,46 @@ class GraphView: UIView {
         ])
     }
 
-    private func setupHourlyViewInStackView () {
+    private func setupHourlyView () {
         stackViews.forEach {
-            for _ in 1...48 {
+            for _ in 1...numberOfHalfHour {
                 let view = UIView()
                 view.backgroundColor = .systemGray6
                 view.layer.cornerRadius = 3
                 view.clipsToBounds = true
                 $0.addArrangedSubview(view)
                 view.translatesAutoresizingMaskIntoConstraints = false
-                if styleOfGraph == .round {
-                    view.heightAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-                } else {
-                    view.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
-                }
+            }
+        }
+    }
+
+    private func setupStyleOfGraph(with style: GraphType) {
+        switch style {
+        case .round:
+            setupRoundGraph()
+        case .rod:
+            setupRodGraph()
+        case .ligne:
+            return
+        }
+    }
+
+    private func setupRoundGraph() {
+        stackViews.forEach {
+            $0.arrangedSubviews.forEach {view  in
+                view.heightAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            }
+        }
+
+        for index in 1..<stackViews.count-1 {
+            stackViewForDay.addArrangedSubview(stackViews[index])
+        }
+    }
+
+    private func setupRodGraph() {
+        stackViews.forEach {
+            $0.arrangedSubviews.forEach {view  in
+                view.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
             }
         }
     }
@@ -164,7 +184,7 @@ class GraphView: UIView {
 
     // MARK: - Color graph
     private func colorGraph(with color: UIColor, startedIndex: Int, endIndex: Int) {
-        guard startedIndex < 48, endIndex <= 48 else {return}
+        guard startedIndex < numberOfHalfHour, endIndex <= numberOfHalfHour else {return}
         stackViews.forEach {
             if $0.arrangedSubviews.count > endIndex-1 {
                 if startedIndex == endIndex {
@@ -191,18 +211,17 @@ class GraphView: UIView {
 
     private func cleanGraph() {
         stackViews.forEach {
-            for index in 0...$0.arrangedSubviews.count-1 {
-                let view = $0.arrangedSubviews[index]
+            $0.arrangedSubviews.forEach {view  in
                 view.backgroundColor = .systemGray5
             }
         }
     }
 
     private func calculateStartAndEndTime( for element: GraphActivity) -> (start: Int, end: Int) {
-        var startedTime = element.timeStart.inMinute() / 30
+        let startedTime = element.timeStart.inMinute() / 30
 
-        var end = startedTime + (element.duration.inMinutes() / 30)
-        var endedTime = min(end, 48)
+        let end = startedTime + (element.duration.inMinutes() / 30)
+        let endedTime = min(end, numberOfHalfHour)
 
         return (startedTime, endedTime)
     }

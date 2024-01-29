@@ -29,7 +29,7 @@ class MonitorCell: UITableViewCell {
         return view
     }()
 
-    let graph = GraphView(style: .round)
+    let graph = GraphView()
 
     private let stackViewActivities: UIStackView = {
         let view = UIStackView()
@@ -88,10 +88,9 @@ class MonitorCell: UITableViewCell {
 
     // MARK: - Configure
     func setupCell(with date: Date, elementsToGraph: [GraphActivity], style: GraphType, elementsToLegend: [String:String]) {
-        activities = elementsToGraph
         self.date.text = date.toStringWithDayMonthYear()
 
-        graph.setupGraphView(with: elementsToGraph)
+        graph.setupGraphView(with: elementsToGraph, style: style)
         updateLegend(with: elementsToLegend)
     }
 

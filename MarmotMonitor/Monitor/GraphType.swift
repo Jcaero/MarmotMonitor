@@ -17,6 +17,7 @@ struct GraphActivity {
 enum GraphType {
     case round
     case rod
+    case ligne
 }
 
 enum ShowActivityType {
