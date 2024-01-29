@@ -68,29 +68,9 @@ class GraphView: UIView {
     // MARK: - Configure
     func setupGraphView(with elements: [GraphActivity]) {
         guard !elements.isEmpty else { return }
-
+        cleanGraph()
         elements.forEach { element in
-            let time = element.timeStart.getHourAndMin()
-            guard let hour = time.hour else { return}
-            var startedTime = hour * 2
-
-            if let min = time.min, min >= 30 {
-                startedTime += 1
-            }
-
-            let duration = element.duration / 30
-
-            var endedTime: Int
-            if duration <= 1 {
-                endedTime = startedTime
-            } else {
-                endedTime = startedTime + duration
-            }
-
-            if endedTime > 48 {
-                endedTime = 48
-            }
-
+            let (startedTime, endedTime) = calculateStartAndEndTime(for: element)
             colorGraph(with: element.color, startedIndex: startedTime, endIndex: endedTime)
         }
         setTimeBaseLigne()
@@ -202,17 +182,6 @@ class GraphView: UIView {
         }
     }
 
-    private func colorGraphNumber(_ number: Int, with color: UIColor, startedIndex: Int, endIndex: Int) {
-        guard startedIndex < 48, endIndex <= 48, number < stackViews.count else {return}
-        let currentStackView = stackViews[number]
-        for index in startedIndex...endIndex {
-            let view = currentStackView.arrangedSubviews[index]
-            view.backgroundColor = color
-            view.layer.borderColor = color.cgColor
-        }
-
-    }
-
     private func setTimeBaseLigne() {
         if stackViews.indices.contains(3) {
             let stackView = stackViews[3]
@@ -220,5 +189,23 @@ class GraphView: UIView {
                 view.backgroundColor = .black
             }
         }
+    }
+
+    private func cleanGraph() {
+        stackViews.forEach {
+            for index in 0...$0.arrangedSubviews.count-1 {
+                let view = $0.arrangedSubviews[index]
+                view.backgroundColor = .systemGray6
+            }
+        }
+    }
+
+    private func calculateStartAndEndTime( for element: GraphActivity) -> (start: Int, end: Int) {
+        var startedTime = element.timeStart.inMinute() / 30
+
+        var end = startedTime + (element.duration.inMinutes() / 30)
+        var endedTime = min(end, 48)
+
+        return (startedTime, endedTime)
     }
 }

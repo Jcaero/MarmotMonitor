@@ -24,16 +24,17 @@ class MonitorViewModel {
     func updateData() {
         let activities = saveManager.fetchAllActivity()
         graphActivities = createGraphElements(with: activities)
-        summaryActivities = createSummaryActivities(with: activities)
+        summaryActivities = createSummaryActivities(with: graphActivities)
     }
 
-    func createSummaryActivities(with dateActivities: [DateActivity]) -> [String: [String: String]] {
+    func createSummaryActivities(with graphData: [String: [GraphActivity]]) -> [String: [String: String]] {
         var values: [String: [String: String]] = [:]
+        var dates = graphData.keys.sorted(by: { $0 > $1 })
 
-        dateActivities.forEach { activities in
-            let frenchDate = activities.date.convertToFrenchTimeZone()
-            let stringDate = frenchDate.toStringWithDayMonthYear()
-            values[stringDate] = summaryActivities(activities: activities.activityArray)
+        dates.forEach { date in
+            if let graphActivities = graphData[date] {
+                values[date] = summaryActivities(graphActivities: graphActivities)
+            }
         }
         return values
     }
@@ -43,29 +44,23 @@ class MonitorViewModel {
     /// - Returns: Dictionary of String with the icon name as key and the summary as value
     /// - Note: The summary is the number of time for diaper and meal (only bottle and solid)
     /// - Note: The summary is the number of time and the total time for sleep or breast
-    func summaryActivities(activities: [Activity] ) -> [String : String] {
+    func summaryActivities(graphActivities: [GraphActivity] ) -> [String : String] {
         var diaper : ActivitySummary = ActivitySummary()
         var meal : ActivitySummary = ActivitySummary()
         var sleep : ActivitySummary = ActivitySummary()
 
-        activities.forEach { activity in
-            switch activity {
-            case is Diaper:
+        graphActivities.forEach { activity in
+            switch activity.type {
+            case .diaper:
                 diaper.count += 1
-            case is Solid, is Bottle:
+            case .solid, .bottle:
                 meal.count += 1
-            case is Breast:
-                if let breastActivity = activity as? Breast {
-                    meal.totalTime += breastActivity.totalDuration
-                    meal.count += 1
-                }
-            case is Sleep:
-                if let sleepActivity = activity as? Sleep {
-                    sleep.totalTime += Int(sleepActivity.duration)
-                    sleep.count += 1
-                }
-            default:
-                break
+            case .breast:
+                meal.totalTime += activity.duration
+                meal.count += 1
+            case .sleep:
+                sleep.totalTime += activity.duration
+                sleep.count += 1
             }
         }
 
@@ -110,23 +105,21 @@ class MonitorViewModel {
         let timeStart = date
         switch activity {
         case is Diaper :
-            return GraphActivity(type: .diaper, color: .yellow, timeStart: timeStart, duration: 29)
+            return GraphActivity(type: .diaper, color: .yellow, timeStart: timeStart, duration: 0)
 
         case is Bottle :
-            return GraphActivity(type: .bottle, color: .blue, timeStart: timeStart, duration: 29)
+            return GraphActivity(type: .bottle, color: .blue, timeStart: timeStart, duration: 0)
 
         case is Breast :
             guard let duration = (activity as? Breast)?.totalDuration else { return nil }
-            let durationBreastInMin = Int(duration) / 60
-            return GraphActivity(type: .breast, color: .red, timeStart: timeStart, duration: durationBreastInMin)
+            return GraphActivity(type: .breast, color: .red, timeStart: timeStart, duration: duration)
 
         case is Solid :
-            return GraphActivity(type: .solid, color: .green, timeStart: timeStart, duration: 29)
+            return GraphActivity(type: .solid, color: .green, timeStart: timeStart, duration: 0)
 
         case is Sleep :
-            guard let durationSleep = (activity as? Sleep)?.duration else { return nil }
-            let durationSleepInMin = Int(durationSleep) / 60
-            return GraphActivity(type: .sleep, color: .purple, timeStart: timeStart, duration: durationSleepInMin)
+            guard let duration = (activity as? Sleep)?.duration else { return nil }
+            return GraphActivity(type: .sleep, color: .purple, timeStart: timeStart, duration: Int(duration))
         default:
             return nil
         }

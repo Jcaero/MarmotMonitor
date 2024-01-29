@@ -45,10 +45,14 @@ extension Date {
         return dateFormatter.string(from: self)
     }
 
-    func getHourAndMin() -> (hour: Int?, min: Int?) {
+    func inMinute() -> Int {
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.hour, .minute], from: self)
-        return (dateComponents.hour, dateComponents.minute)
+
+        let hour = dateComponents.hour ?? 0
+        let minute = dateComponents.minute ?? 0
+
+        return hour * 60 + minute
     }
 
     func dateWithNoTime() -> Date {

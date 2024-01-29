@@ -23,4 +23,9 @@ extension Int {
             }
         }
     }
+
+    // Convert Int value represent seconds to minutes
+    func inMinutes() -> Int {
+           return Int(self) / 60
+       }
 }
