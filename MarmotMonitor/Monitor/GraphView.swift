@@ -59,12 +59,17 @@ class GraphView: UIView {
     func setupGraphView(with elements: [GraphActivity], style: GraphType) {
         guard !elements.isEmpty else { return }
 
-        setupStyleOfGraph(with: style)
+        setupStyleOfGraph(style, with : elements.count)
         cleanGraph()
 
-        elements.forEach { element in
+        for (index, element) in elements.enumerated() {
             let (startedTime, endedTime) = calculateStartAndEndTime(for: element)
-            colorGraph(with: element.color, startedIndex: startedTime, endIndex: endedTime)
+            switch style {
+            case .ligne:
+                colorGraph(number: index, with: element.color, startedIndex: startedTime, endIndex: endedTime)
+            default:
+                colorGraph(with: element.color, startedIndex: startedTime, endIndex: endedTime)
+            }
         }
 
         setTimeBaseLigne()
@@ -131,18 +136,19 @@ class GraphView: UIView {
         }
     }
 
-    private func setupStyleOfGraph(with style: GraphType) {
+    private func setupStyleOfGraph(_ style: GraphType, with numberOfLine: Int) {
         switch style {
         case .round:
             setupRoundGraph()
         case .rod:
             setupRodGraph()
         case .ligne:
-            return
+            setupLigneGraph(with: numberOfLine)
         }
     }
 
     private func setupRoundGraph() {
+        stackViewForDay.distribution = .equalSpacing
         stackViews.forEach {
             $0.arrangedSubviews.forEach {view  in
                 view.heightAnchor.constraint(equalTo: view.widthAnchor).isActive = true
@@ -155,10 +161,20 @@ class GraphView: UIView {
     }
 
     private func setupRodGraph() {
+        stackViewForDay.distribution = .equalSpacing
         stackViews.forEach {
             $0.arrangedSubviews.forEach {view  in
                 view.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
             }
+        }
+    }
+
+    private func setupLigneGraph(with numberOfLigne: Int) {
+        stackViewForDay.distribution = .fillEqually
+
+        guard numberOfLigne > 1, stackViews.count > numberOfLigne else { return }
+        for index in 1..<numberOfLigne {
+            stackViewForDay.addArrangedSubview(stackViews[index])
         }
     }
 
@@ -195,6 +211,23 @@ class GraphView: UIView {
                         let view = $0.arrangedSubviews[index]
                         view.backgroundColor = color
                     }
+                }
+            }
+        }
+    }
+
+    private func colorGraph(number: Int, with color: UIColor, startedIndex: Int, endIndex: Int) {
+        guard startedIndex < numberOfHalfHour, endIndex <= numberOfHalfHour else {return}
+        guard stackViews.count >= number - 1 else  { return }
+        let stackview = stackViews[number]
+        if stackview.arrangedSubviews.count > endIndex-1 {
+            if startedIndex == endIndex {
+                let view = stackview.arrangedSubviews[startedIndex]
+                view.backgroundColor = color
+            } else {
+                for index in startedIndex...endIndex-1 {
+                    let view = stackview.arrangedSubviews[index]
+                    view.backgroundColor = color
                 }
             }
         }

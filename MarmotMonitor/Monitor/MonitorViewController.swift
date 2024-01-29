@@ -75,12 +75,8 @@ extension MonitorViewController: UITableViewDataSource {
         let stringDate = viewModel.dateWithActivity[indexPath.row].toStringWithDayMonthYear()
         let legend = viewModel.summaryActivities[stringDate] ?? [:]
 
-        #warning("for test")
-        if indexPath.row == 0 {
-            cell.setupCell(with:  viewModel.dateWithActivity[indexPath.row], elementsToGraph: viewModel.graphActivities[stringDate]!, style: .round, elementsToLegend: legend)
-        } else {
-            cell.setupCell(with:  viewModel.dateWithActivity[indexPath.row], elementsToGraph: viewModel.graphActivities[stringDate]!, style: .rod, elementsToLegend: legend)
-        }
+#warning("for test")
+        cell.setupCell(with:  viewModel.dateWithActivity[indexPath.row], elementsToGraph: viewModel.graphActivities[stringDate]!, style: .ligne, elementsToLegend: legend)
         return cell
     }
 }
