@@ -24,7 +24,7 @@ class MonitorCell: UITableViewCell {
     private let stackViewActivities: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.distribution = .equalSpacing
+        view.distribution = .equalCentering
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -79,7 +79,7 @@ class MonitorCell: UITableViewCell {
 
     private func updateLegend(with elements: [String:String]) {
         stackViewActivities.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        let list = elements.sorted(by: { $0.key < $1.key })
+        let list = elements.sorted(by: { $0.key > $1.key })
 
         list.forEach { element in
             if element.value != "\n0 fois" {

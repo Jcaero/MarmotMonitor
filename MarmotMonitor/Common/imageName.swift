@@ -8,7 +8,7 @@
 import Foundation
 
 enum ActivityIconName: String {
-    case meal = "biberon"
+    case meal = "repas"
     case sleep = "sommeil"
     case diaper = "couche"
     case growth = "croissance"

@@ -81,7 +81,7 @@ class TodayViewModel {
         guard let result = marmotMonitorSaveManager.fetchFirstActivity(ofType: Diaper.self), let status = result.activity.state else { return }
         let date = result.date.toStringWithTimeAndDayMonthYear()
         let cellTitle = date + " " + status
-        activities[2]=ActivityData(imageName: "couche", cellTitle: "Dernière couche", cellSubTitle: cellTitle)
+        activities[2]=ActivityData(imageName: ActivityIconName.diaper.rawValue, cellTitle: "Dernière couche", cellSubTitle: cellTitle)
     }
 
     private func fetchFood() {
@@ -127,7 +127,7 @@ class TodayViewModel {
             }
         }
 
-        activities[0] = ActivityData(imageName: "biberon", cellTitle: "Dernière tétée/biberon", cellSubTitle: cellTitle)
+        activities[0] = ActivityData(imageName: ActivityIconName.meal.rawValue, cellTitle: "Dernière tétée/biberon", cellSubTitle: cellTitle)
     }
 
     private func fetchSleep() {
@@ -136,7 +136,7 @@ class TodayViewModel {
         let duration = result.activity.duration
         let stringDuration = Int(duration).toTimeString()
         let cellTitle = date + " " + stringDuration
-        activities[1] = ActivityData(imageName: "sommeil", cellTitle: "Dernier sommeil", cellSubTitle: cellTitle)
+        activities[1] = ActivityData(imageName: ActivityIconName.sleep.rawValue, cellTitle: "Dernier sommeil", cellSubTitle: cellTitle)
     }
 
     private func fetchGrowth() {
@@ -151,6 +151,6 @@ class TodayViewModel {
             cellTitle += "Poids: " + String(result.activity.weight) + " Kg"
         }
 
-        activities[3] = ActivityData(imageName: "croissance", cellTitle: "Croissance", cellSubTitle: cellTitle)
+        activities[3] = ActivityData(imageName: ActivityIconName.growth.rawValue, cellTitle: "Croissance", cellSubTitle: cellTitle)
     }
 }
