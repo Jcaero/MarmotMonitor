@@ -82,9 +82,11 @@ class MonitorCell: UITableViewCell {
         let list = elements.sorted(by: { $0.key < $1.key })
 
         list.forEach { element in
-            let view = LegendGraphView(information: element.value, imageName: element.key)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            stackViewActivities.addArrangedSubview(view)
+            if element.value != "\n0 fois" {
+                let view = LegendGraphView(information: element.value, imageName: element.key)
+                view.translatesAutoresizingMaskIntoConstraints = false
+                stackViewActivities.addArrangedSubview(view)
+            }
         }
     }
 }

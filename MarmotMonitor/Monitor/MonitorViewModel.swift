@@ -55,13 +55,15 @@ class MonitorViewModel {
             case is Solid, is Bottle:
                 meal.count += 1
             case is Breast:
-                let breastActivity = activity as! Breast
-                meal.totalTime += breastActivity.totalDuration
-                meal.count += 1
+                if let breastActivity = activity as? Breast {
+                    meal.totalTime += breastActivity.totalDuration
+                    meal.count += 1
+                }
             case is Sleep:
-                let sleepActivity = activity as! Sleep
-                sleep.totalTime += Int(sleepActivity.duration)
-                sleep.count += 1
+                if let sleepActivity = activity as? Sleep {
+                    sleep.totalTime += Int(sleepActivity.duration)
+                    sleep.count += 1
+                }
             default:
                 break
             }
@@ -132,7 +134,7 @@ class MonitorViewModel {
 
     private func transformInString( activity: ActivitySummary) -> String {
         if activity.totalTime == 0 {
-            return "\(activity.count) fois"
+            return "\n\(activity.count) fois"
         } else {
             let totalTime = activity.totalTime.toTimeString()
             return totalTime + "\n\(activity.count) fois"

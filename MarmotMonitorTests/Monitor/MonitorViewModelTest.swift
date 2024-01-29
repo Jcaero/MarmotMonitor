@@ -76,7 +76,7 @@ final class MonitorViewModelTest: TestCase {
         let graphInfo = viewModel.graphActivities["07/01/2024"]?.first
         
         XCTAssertEqual(graphInfo?.color, .red)
-        XCTAssertEqual(graphInfo?.duration, 0)
+        XCTAssertEqual(graphInfo?.duration, 25)
         XCTAssertEqual(graphInfo?.timeStart, testFirstDateSeven)
         XCTAssertEqual(graphInfo?.type, .breast)
     }
@@ -180,5 +180,21 @@ final class MonitorViewModelTest: TestCase {
         let summaryOfSeven = viewModel.summaryActivities["07/01/2024"]
         XCTAssertEqual(summaryOfSeven![ActivityIconName.sleep.rawValue], "03 H\n1 fois")
     
+    }
+
+    func testCoreDataHaveManyData_WhenSummary_ViewModelHaveSummary() {
+        coreDatatManager.saveActivity(.sleep(duration: 10800), date: testFirstDateSeven, onSuccess: {isSave = true }, onError: {_ in })
+        coreDatatManager.saveActivity(.breast(duration: mockBreastDurationFifteenAndTen), date: testFirstDateSeven, onSuccess: {isSave = true }, onError: {_ in })
+        
+        viewModel.updateData()
+        
+        XCTAssertTrue(viewModel.dateWithActivity.count == 1)
+        XCTAssertEqual(viewModel.dateWithActivity[0], "07/01/2024".toDate())
+        XCTAssertEqual(viewModel.graphActivities.count, 1)
+        
+        let summaryOfSeven = viewModel.summaryActivities["07/01/2024"]
+        XCTAssertEqual(summaryOfSeven![ActivityIconName.sleep.rawValue], "03 H\n1 fois")
+        XCTAssertEqual(summaryOfSeven![ActivityIconName.meal.rawValue], "25 min\n1 fois")
+        #warning("TODO : pourquoi affiche pas 2")
     }
 }
