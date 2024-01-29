@@ -29,7 +29,7 @@ class MonitorViewModel {
 
     func createSummaryActivities(with graphData: [String: [GraphActivity]]) -> [String: [String: String]] {
         var values: [String: [String: String]] = [:]
-        var dates = graphData.keys.sorted(by: { $0 > $1 })
+        let dates = graphData.keys.sorted(by: { $0 > $1 })
 
         dates.forEach { date in
             if let graphActivities = graphData[date] {
@@ -105,21 +105,21 @@ class MonitorViewModel {
         let timeStart = date
         switch activity {
         case is Diaper :
-            return GraphActivity(type: .diaper, color: .yellow, timeStart: timeStart, duration: 0)
+            return GraphActivity(type: .diaper, color: .colorForDiaper, timeStart: timeStart, duration: 0)
 
         case is Bottle :
-            return GraphActivity(type: .bottle, color: .blue, timeStart: timeStart, duration: 0)
+            return GraphActivity(type: .bottle, color: .colorForMeal, timeStart: timeStart, duration: 0)
 
         case is Breast :
             guard let duration = (activity as? Breast)?.totalDuration else { return nil }
-            return GraphActivity(type: .breast, color: .red, timeStart: timeStart, duration: duration)
+            return GraphActivity(type: .breast, color: .colorForMeal, timeStart: timeStart, duration: duration)
 
         case is Solid :
-            return GraphActivity(type: .solid, color: .green, timeStart: timeStart, duration: 0)
+            return GraphActivity(type: .solid, color: .colorForMeal, timeStart: timeStart, duration: 0)
 
         case is Sleep :
             guard let duration = (activity as? Sleep)?.duration else { return nil }
-            return GraphActivity(type: .sleep, color: .purple, timeStart: timeStart, duration: Int(duration))
+            return GraphActivity(type: .sleep, color: .colorForSleep, timeStart: timeStart, duration: Int(duration))
         default:
             return nil
         }

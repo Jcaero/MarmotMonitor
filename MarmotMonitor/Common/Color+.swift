@@ -38,6 +38,16 @@ extension UIColor {
     static let duckBlueAlpha = UIColor(red: 0.02, green: 0.55, blue: 0.60, alpha: 0.40) // #048B9A
     static let pastelBlue = UIColor(red: 0.52, green: 0.80, blue: 0.86, alpha: 1.00)
     static let darkBlue = UIColor(red: 0.16, green: 0.62, blue: 0.91, alpha: 1.00)
+    static let lightBlue = UIColor(red: 0.68, green: 0.85, blue: 0.90, alpha: 1.00) // #ADD8E6
+    static let dodgerBlue = UIColor(red: 0.12, green: 0.56, blue: 1.00, alpha: 1.00) // #1E90FF
+
+    // MARK: - Red
+    static let peach = UIColor(red: 1.00, green: 0.85, blue: 0.73, alpha: 1.00) // #FFDAB9
+    static let OrangeDark = UIColor(red: 1.00, green: 0.55, blue: 0.00, alpha: 1.00) // #FF8C00
+
+    // MARK: - Green
+    static let pastelGreen = UIColor(red: 0.60, green: 0.98, blue: 0.60, alpha: 1.00) // #98FB98
+    static let greenSea = UIColor(red: 0.18, green: 0.55, blue: 0.34, alpha: 1.00) // #2E8B57
 
     // MARK: - Gradient
     static let colorForGradientStart = themed(light: .pastelBlueNew, dark: .egyptienBlue)
@@ -64,6 +74,11 @@ extension UIColor {
 
     // MARK: - SolideIngredientCell
     static let colorForDuckBlueToClear = themed(light: .duckBlue, dark: .clear)
+
+    // MARK: - GraphActivities
+    static let colorForDiaper = themed(light: .OrangeDark, dark: .peach)
+    static let colorForMeal = themed(light: .greenSea, dark: .pastelGreen)
+    static let colorForSleep = themed(light: .dodgerBlue, dark: .lightBlue)
 }
 
 private func themed(light: UIColor, dark: UIColor) -> UIColor {

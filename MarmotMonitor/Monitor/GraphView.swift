@@ -120,7 +120,7 @@ class GraphView: UIView {
             stackViewForDay.topAnchor.constraint(equalTo: topAnchor),
             stackViewForDay.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackViewForDay.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackViewForDay.heightAnchor.constraint(greaterThanOrEqualToConstant: 10)
+            stackViewForDay.heightAnchor.constraint(greaterThanOrEqualToConstant: 30)
         ])
     }
 
@@ -129,9 +129,7 @@ class GraphView: UIView {
             for _ in 1...48 {
                 let view = UIView()
                 view.backgroundColor = .systemGray6
-                view.layer.cornerRadius = 1
-                view.layer.borderWidth = 1
-                view.layer.borderColor = UIColor.systemGray3.cgColor
+                view.layer.cornerRadius = 3
                 view.clipsToBounds = true
                 $0.addArrangedSubview(view)
                 view.translatesAutoresizingMaskIntoConstraints = false
@@ -195,7 +193,7 @@ class GraphView: UIView {
         stackViews.forEach {
             for index in 0...$0.arrangedSubviews.count-1 {
                 let view = $0.arrangedSubviews[index]
-                view.backgroundColor = .systemGray6
+                view.backgroundColor = .systemGray5
             }
         }
     }
