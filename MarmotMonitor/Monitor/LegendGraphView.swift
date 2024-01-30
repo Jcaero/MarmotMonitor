@@ -20,12 +20,6 @@ class LegendGraphView: UIView {
         return label
     }()
 
-    let imageColor: UIView = {
-        let view = UIView()
-        view.layer.opacity = 0.5
-        return view
-    }()
-
     let imageActivity = UIImageView()
 
     var color: UIColor = .clear
@@ -52,16 +46,13 @@ class LegendGraphView: UIView {
             addSubview($0)
         }
 
-        imageColor.translatesAutoresizingMaskIntoConstraints = false
-        information.addSubview(imageColor)
-
         setupContrainte()
     }
 
     override func layoutSubviews() {
            super.layoutSubviews()
-        imageColor.backgroundColor = color
-        imageColor.layer.cornerRadius = self.frame.height / 2
+        imageActivity.layer.cornerRadius = self.frame.height / 2
+        imageActivity.layer.backgroundColor = color.cgColor
        }
 
     private func setupContrainte() {
@@ -78,13 +69,6 @@ class LegendGraphView: UIView {
             information.rightAnchor.constraint(equalTo: rightAnchor, constant: -2),
             information.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),
             information.leftAnchor.constraint(equalTo: imageActivity.rightAnchor, constant: 5 )
-        ])
-
-        NSLayoutConstraint.activate([
-            imageColor.topAnchor.constraint(equalTo: imageActivity.topAnchor),
-            imageColor.rightAnchor.constraint(equalTo: imageActivity.rightAnchor),
-            imageColor.bottomAnchor.constraint(equalTo: imageActivity.bottomAnchor),
-            imageColor.leftAnchor.constraint(equalTo: imageActivity.leftAnchor)
         ])
     }
 

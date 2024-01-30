@@ -327,6 +327,10 @@ extension TodayViewController: UITableViewDataSource {
         cell.textLabel?.text = activitie.cellTitle
         cell.detailTextLabel?.text = activitie.cellSubTitle
         cell.imageView?.image = UIImage(named: activitie.imageName)
+        cell.imageView?.backgroundColor = .white
+        cell.imageView?.layer.cornerRadius = cell.frame.size.height/2
+        cell.imageView?.layer.borderColor = UIColor.black.cgColor
+        cell.imageView?.layer.borderWidth = 1
         cell.backgroundColor = .clear
         cell.accessoryType = .disclosureIndicator
         return cell
