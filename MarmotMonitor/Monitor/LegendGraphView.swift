@@ -6,6 +6,7 @@
 //
 
 import UIKit
+typealias LegendGraphData = (information: String, imageName: String, color: UIColor)
 
 class LegendGraphView: UIView {
     let information: UILabel = {
@@ -19,17 +20,25 @@ class LegendGraphView: UIView {
         return label
     }()
 
+    let imageColor: UIView = {
+        let view = UIView()
+        view.layer.opacity = 0.5
+        return view
+    }()
+
     let imageActivity = UIImageView()
 
+    var color: UIColor = .clear
+
     // MARK: - INIT
-    init(information: String, imageName: String) {
+    init(data: LegendGraphData) {
         super.init(frame: .zero)
         self.backgroundColor = .clear
-        self.information.text = information
-        if let image = UIImage(named: imageName) {
+        self.information.text = data.information
+        if let image = UIImage(named: data.imageName) {
             imageActivity.image = image
+            color = getImageColor(imageName: data.imageName)
         }
-
         setupUI()
     }
 
@@ -42,8 +51,18 @@ class LegendGraphView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             addSubview($0)
         }
+
+        imageColor.translatesAutoresizingMaskIntoConstraints = false
+        information.addSubview(imageColor)
+
         setupContrainte()
     }
+
+    override func layoutSubviews() {
+           super.layoutSubviews()
+        imageColor.backgroundColor = color
+        imageColor.layer.cornerRadius = self.frame.height / 2
+       }
 
     private func setupContrainte() {
 
@@ -61,5 +80,24 @@ class LegendGraphView: UIView {
             information.leftAnchor.constraint(equalTo: imageActivity.rightAnchor, constant: 5 )
         ])
 
+        NSLayoutConstraint.activate([
+            imageColor.topAnchor.constraint(equalTo: imageActivity.topAnchor),
+            imageColor.rightAnchor.constraint(equalTo: imageActivity.rightAnchor),
+            imageColor.bottomAnchor.constraint(equalTo: imageActivity.bottomAnchor),
+            imageColor.leftAnchor.constraint(equalTo: imageActivity.leftAnchor)
+        ])
+    }
+
+    private func getImageColor(imageName: String) -> UIColor {
+        switch imageName {
+        case ActivityIconName.meal.rawValue :
+            return .colorForMeal
+        case ActivityIconName.diaper.rawValue:
+            return .colorForDiaper
+        case ActivityIconName.sleep.rawValue:
+            return .colorForSleep
+        default:
+            return .clear
+        }
     }
 }

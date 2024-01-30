@@ -45,6 +45,7 @@ class MonitorCell: UITableViewCell {
 
     typealias DataCell = (date: Date, elementsToLegend: [String:String])
     typealias GraphData = (elements: [GraphActivity], style: GraphType)
+    typealias LegendGraphData = (information: String, imageName: String, color: UIColor)
 
     // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -104,7 +105,8 @@ class MonitorCell: UITableViewCell {
 
         list.forEach { element in
             if element.value != "\n0 fois" {
-                let view = LegendGraphView(information: element.value, imageName: element.key)
+                let data = LegendGraphData(information: element.value, imageName: element.key, color: .colorForPastelArea)
+                let view = LegendGraphView(data: data)
                 view.translatesAutoresizingMaskIntoConstraints = false
                 stackViewActivities.addArrangedSubview(view)
             }
