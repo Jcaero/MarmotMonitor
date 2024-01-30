@@ -39,6 +39,14 @@ class GraphView: UIView {
         return view
     }()
 
+    private let stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.distribution = .fillEqually
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     // MARK: - Properties
     private var stackViews: [UIStackView] = []
     private var labelTexte = ["2", "6", "10", "14", "18", "22"]
@@ -100,27 +108,39 @@ class GraphView: UIView {
     }
 
     private func addStackViewsToSuperview() {
-        addSubview(stackViewForDay)
-        addSubview(stackViewLabelHour)
+//        addSubview(stackViewForDay)
+//        addSubview(stackViewLabelHour)
+        addSubview(stackView)
+        stackView.addArrangedSubview(stackViewForDay)
+        stackView.addArrangedSubview(stackViewLabelHour)
 
         guard !stackViews.isEmpty else { return }
         stackViewForDay.addArrangedSubview(stackViews.first!)
     }
 
     private func setupContrainte() {
-        NSLayoutConstraint.activate([
-            stackViewLabelHour.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackViewLabelHour.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackViewLabelHour.heightAnchor.constraint(equalToConstant: 30),
-            stackViewLabelHour.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+
+//        NSLayoutConstraint.activate([
+//            stackViewForDay.topAnchor.constraint(equalTo: topAnchor),
+//            stackViewForDay.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            stackViewForDay.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            stackViewForDay.heightAnchor.constraint(greaterThanOrEqualToConstant: 30)
+//        ])
+//
+//        NSLayoutConstraint.activate([
+//            stackViewLabelHour.topAnchor.constraint(equalTo: stackViewForDay.bottomAnchor),
+//            stackViewLabelHour.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            stackViewLabelHour.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            stackViewLabelHour.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
+//            stackViewLabelHour.bottomAnchor.constraint(equalTo: bottomAnchor)
+//        ])
 
         NSLayoutConstraint.activate([
-            stackViewForDay.bottomAnchor.constraint(equalTo: stackViewLabelHour.topAnchor),
-            stackViewForDay.topAnchor.constraint(equalTo: topAnchor),
-            stackViewForDay.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackViewForDay.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackViewForDay.heightAnchor.constraint(greaterThanOrEqualToConstant: 30)
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 60),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 

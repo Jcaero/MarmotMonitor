@@ -31,7 +31,7 @@ class LegendGraphView: UIView {
         self.information.text = data.information
         if let image = UIImage(named: data.imageName) {
             imageActivity.image = image
-            color = getImageColor(imageName: data.imageName)
+            color = UIColor.colorForIcone(imageName: data.imageName)
         }
         setupUI()
     }
@@ -70,18 +70,5 @@ class LegendGraphView: UIView {
             information.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),
             information.leftAnchor.constraint(equalTo: imageActivity.rightAnchor, constant: 5 )
         ])
-    }
-
-    private func getImageColor(imageName: String) -> UIColor {
-        switch imageName {
-        case ActivityIconName.meal.rawValue :
-            return .colorForMeal
-        case ActivityIconName.diaper.rawValue:
-            return .colorForDiaper
-        case ActivityIconName.sleep.rawValue:
-            return .colorForSleep
-        default:
-            return .clear
-        }
     }
 }

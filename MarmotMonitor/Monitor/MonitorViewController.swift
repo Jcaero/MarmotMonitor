@@ -20,15 +20,22 @@ class MonitorViewController: BackgroundViewController {
         return tableView
     }()
 
+    private let filterStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .equalSpacing
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupContraints()
 
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(MonitorCell.self, forCellReuseIdentifier: MonitorCell.reuseIdentifier)
+        setupTableView()
+        setupFilterStackView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,16 +49,80 @@ class MonitorViewController: BackgroundViewController {
     // MARK: - Setup views
     private func setupViews() {
         view.addSubview(tableView)
+        view.addSubview(filterStackView)
     }
 
     private func setupContraints() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        filterStackView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            filterStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 2),
+            filterStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30),
+            filterStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
+            filterStackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
+
+            tableView.topAnchor.constraint(equalTo: filterStackView.bottomAnchor, constant: 20),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
         ])
+    }
+
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(MonitorCell.self, forCellReuseIdentifier: MonitorCell.reuseIdentifier)
+    }
+}
+
+// MARK: - Setup filter
+extension MonitorViewController {
+
+    private func setupFilterStackView() {
+        [ActivityIconName.sleep.rawValue, ActivityIconName.meal.rawValue, ActivityIconName.diaper.rawValue].enumerated().forEach { (index, iconeName) in
+            let button = UIButton()
+            var configuration = UIButton.Configuration.filled()
+            configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+            configuration.title = iconeName.capitalizeFirstLetter()
+            configuration.baseForegroundColor = .colorForGradientEnd
+            configuration.baseBackgroundColor = UIColor.colorForIcone(imageName: iconeName)
+            configuration.background.cornerRadius = 10
+            configuration.cornerStyle = .large
+            configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
+                var titleAttributes = titleAttributes
+                titleAttributes.font = UIFont.preferredFont(forTextStyle: .body)
+                return titleAttributes
+            }
+            button.configuration = configuration
+            setupShadowOf(button, radius: 1, opacity: 0.5)
+            button.titleLabel?.adjustsFontForContentSizeCategory = true
+            button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+            button.addTarget(self, action: #selector(holdDown), for: .touchDown)
+
+            button.setAccessibility(with: .button, label: iconeName, hint: "Selectionner pour filtrer les activités")
+
+            button.tag = index
+            filterStackView.addArrangedSubview(button)
+        }
+    }
+
+    @objc private func filterButtonTapped(_ sender: UIButton) {
+        sender.transform = .identity
+        sender.layer.shadowOpacity = 0.5
+        print("filterButtonTapped")
+    }
+
+    @objc func holdDown(sender: UIButton) {
+        sender.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
+        sender.layer.shadowOpacity = 0
+    }
+
+    private func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
+        view.layer.shadowOffset = CGSize(width: 0, height: 3)
+        view.layer.shadowColor = UIColor.lightGray.cgColor
+        view.layer.shadowOpacity = opacity
+        view.layer.shadowRadius = radius
     }
 }
 
@@ -80,9 +151,22 @@ extension MonitorViewController: UITableViewDataSource {
         typealias GraphData = (elements: [GraphActivity], style: GraphType)
 
         let dataCell = DataCell(date: viewModel.dateWithActivity[indexPath.row], elementsToLegend: legend)
-        let graphData = GraphData(elements: viewModel.graphActivities[stringDate]!, style: .round)
+        let graphData = GraphData(elements: viewModel.graphActivities[stringDate]!, style: .ligne)
 
         cell.setUp(with: dataCell, graphData: graphData)
         return cell
     }
+}
+
+extension MonitorViewController {
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
+
+        guard currentCategory != previousCategory else { return }
+        let isAccessibilityCategory = currentCategory.isAccessibilityCategory
+        filterStackView.axis = isAccessibilityCategory ? .vertical : .horizontal
+        }
 }

@@ -79,6 +79,19 @@ extension UIColor {
     static let colorForDiaper = themed(light: .OrangeDark, dark: .peach)
     static let colorForMeal = themed(light: .greenSea, dark: .pastelGreen)
     static let colorForSleep = themed(light: .dodgerBlue, dark: .lightBlue)
+
+    static func colorForIcone(imageName: String) -> UIColor {
+        switch imageName {
+        case ActivityIconName.meal.rawValue :
+            return .colorForMeal
+        case ActivityIconName.diaper.rawValue:
+            return .colorForDiaper
+        case ActivityIconName.sleep.rawValue:
+            return .colorForSleep
+        default:
+            return .clear
+        }
+    }
 }
 
 private func themed(light: UIColor, dark: UIColor) -> UIColor {

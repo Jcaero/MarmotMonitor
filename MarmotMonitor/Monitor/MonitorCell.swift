@@ -50,6 +50,7 @@ class MonitorCell: UITableViewCell {
     // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupStackViewAxis()
         setupUI()
         self.backgroundColor = .clear
     }
@@ -90,6 +91,12 @@ class MonitorCell: UITableViewCell {
         ])
     }
 
+    private func setupStackViewAxis() {
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        let isAccessibilityCategory = currentCategory.isAccessibilityCategory
+        stackViewActivities.axis = isAccessibilityCategory ? .vertical : .horizontal
+    }
+
     // MARK: - Configure
     func setUp(with data: DataCell, graphData: GraphData) {
 
@@ -112,4 +119,12 @@ class MonitorCell: UITableViewCell {
             }
         }
     }
+}
+
+extension MonitorCell {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        layoutIfNeeded()
+        }
 }
