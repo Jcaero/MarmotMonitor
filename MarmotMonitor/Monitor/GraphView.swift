@@ -56,15 +56,16 @@ class GraphView: UIView {
     }
 
     // MARK: - Configure
-    func setupGraphView(with elements: [GraphActivity], style: GraphType) {
-        guard !elements.isEmpty else { return }
+    typealias GraphData = (elements: [GraphActivity], style: GraphType)
+    func setUpGraph(with data: GraphData) {
+        guard !data.elements.isEmpty else { return }
 
-        setupStyleOfGraph(style, with : elements.count)
+        setupStyleOfGraph(data.style, with : data.elements.count)
         cleanGraph()
 
-        for (index, element) in elements.enumerated() {
+        for (index, element) in data.elements.enumerated() {
             let (startedTime, endedTime) = calculateStartAndEndTime(for: element)
-            switch style {
+            switch data.style {
             case .ligne:
                 colorGraph(number: index, with: element.color, startedIndex: startedTime, endIndex: endedTime)
             default:

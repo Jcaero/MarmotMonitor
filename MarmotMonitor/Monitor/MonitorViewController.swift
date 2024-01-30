@@ -76,7 +76,13 @@ extension MonitorViewController: UITableViewDataSource {
         let legend = viewModel.summaryActivities[stringDate] ?? [:]
 
 #warning("for test")
-        cell.setupCell(with:  viewModel.dateWithActivity[indexPath.row], elementsToGraph: viewModel.graphActivities[stringDate]!, style: .ligne, elementsToLegend: legend)
+        typealias DataCell = (date: Date, elementsToLegend: [String:String])
+        typealias GraphData = (elements: [GraphActivity], style: GraphType)
+
+        let dataCell = DataCell(date: viewModel.dateWithActivity[indexPath.row], elementsToLegend: legend)
+        let graphData = GraphData(elements: viewModel.graphActivities[stringDate]!, style: .round)
+
+        cell.setUp(with: dataCell, graphData: graphData)
         return cell
     }
 }

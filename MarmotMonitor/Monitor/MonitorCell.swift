@@ -43,6 +43,9 @@ class MonitorCell: UITableViewCell {
     static let reuseIdentifier = "MonitorCell"
     private var activities: [GraphActivity] = []
 
+    typealias DataCell = (date: Date, elementsToLegend: [String:String])
+    typealias GraphData = (elements: [GraphActivity], style: GraphType)
+
     // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -87,11 +90,12 @@ class MonitorCell: UITableViewCell {
     }
 
     // MARK: - Configure
-    func setupCell(with date: Date, elementsToGraph: [GraphActivity], style: GraphType, elementsToLegend: [String:String]) {
-        self.date.text = date.toStringWithDayMonthYear()
+    func setUp(with data: DataCell, graphData: GraphData) {
 
-        graph.setupGraphView(with: elementsToGraph, style: style)
-        updateLegend(with: elementsToLegend)
+        self.date.text = data.date.toStringWithDayMonthYear()
+        updateLegend(with: data.elementsToLegend)
+
+        graph.setUpGraph(with: graphData)
     }
 
     private func updateLegend(with elements: [String:String]) {

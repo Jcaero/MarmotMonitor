@@ -53,7 +53,6 @@ class SolideFeedingController: ActivityController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableOfIngredients.reloadData()
         setupTableViewHeight()
     }
 
