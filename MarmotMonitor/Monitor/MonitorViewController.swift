@@ -94,6 +94,8 @@ extension MonitorViewController {
         sender.layer.shadowOpacity = 0.5
         toggleFilterButtonColor(sender)
         print("filterButtonTapped")
+        viewModel.updateData()
+        tableView.reloadData()
     }
 
     @objc func holdDown(sender: UIButton) {
@@ -113,6 +115,7 @@ extension MonitorViewController {
         let actualColor = sender.configuration?.baseBackgroundColor
         let newColor = actualColor == color ? UIColor.systemGray : color
         sender.configuration?.baseBackgroundColor = newColor
+        viewModel.toggleFilter(for: viewModel.filterButton[sender.tag])
     }
 
     private func createIconeButton(with title: String) -> UIButton {

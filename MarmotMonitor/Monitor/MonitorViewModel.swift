@@ -11,7 +11,11 @@ class MonitorViewModel {
     private let saveManager: MarmotMonitorSaveManagerProtocol!
     var graphActivities: [String: [GraphActivity]] = [:]
     var summaryActivities: [String: [String: String]] = [:]
-    let filterButton = [ActivityIconName.sleep.rawValue, ActivityIconName.meal.rawValue, ActivityIconName.diaper.rawValue]
+
+    var filterStatus: [String : Bool] = [ActivityIconName.sleep.rawValue: false, ActivityIconName.meal.rawValue: false, ActivityIconName.diaper.rawValue: false]
+    var filterButton: [String] {
+        filterStatus.keys.sorted(by: { $0 > $1 })
+    }
 
     private var dateWithActivitySet: Set<Date> = []
     var dateWithActivity: [Date] {
@@ -22,7 +26,13 @@ class MonitorViewModel {
         self.saveManager = saveManager
     }
 
+    private func cleanAllData() {
+        graphActivities = [:]
+        summaryActivities = [:]
+        dateWithActivitySet = []
+    }
     func updateData() {
+        cleanAllData()
         let activities = saveManager.fetchAllActivity()
         graphActivities = createGraphElements(with: activities)
         summaryActivities = createSummaryActivities(with: graphActivities)
@@ -86,9 +96,11 @@ class MonitorViewModel {
             let stringDate = frenchDate.toStringWithDayMonthYear()
 
             activities.activityArray.forEach { activity in
-                if let graphActivity = transformInGraphActivity(with: activity, date: activities.date) {
-                    elements[stringDate, default: []].append(graphActivity)
-                    dateWithActivitySet.insert(frenchDate.dateWithNoTime())
+                if isFilterActive(for: activity) == false {
+                    if let graphActivity = transformInGraphActivity(with: activity, date: activities.date) {
+                        elements[stringDate, default: []].append(graphActivity)
+                        dateWithActivitySet.insert(frenchDate.dateWithNoTime())
+                    }
                 }
             }
         }
@@ -132,6 +144,27 @@ class MonitorViewModel {
         } else {
             let totalTime = activity.totalTime.toTimeString()
             return totalTime + "\n\(activity.count) fois"
+        }
+    }
+}
+
+// MARK: - Filter
+extension MonitorViewModel {
+    func toggleFilter(for filter: String) {
+        guard let currentStatus = filterStatus[filter] else { return }
+        filterStatus[filter] = !currentStatus
+    }
+
+    private func isFilterActive(for activity: Activity) -> Bool {
+        switch activity {
+        case is Diaper :
+            return filterStatus[ActivityIconName.diaper.rawValue] ?? false
+        case is Bottle, is Breast, is Solid :
+            return filterStatus[ActivityIconName.meal.rawValue] ?? false
+        case is Sleep :
+            return filterStatus[ActivityIconName.sleep.rawValue] ?? false
+        default:
+            return false
         }
     }
 }
