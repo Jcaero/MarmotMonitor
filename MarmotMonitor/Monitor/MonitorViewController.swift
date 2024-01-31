@@ -80,29 +80,11 @@ class MonitorViewController: BackgroundViewController {
 extension MonitorViewController {
 
     private func setupFilterStackView() {
-        [ActivityIconName.sleep.rawValue, ActivityIconName.meal.rawValue, ActivityIconName.diaper.rawValue].enumerated().forEach { (index, iconeName) in
-            let button = UIButton()
-            var configuration = UIButton.Configuration.filled()
-            configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-            configuration.title = iconeName.capitalizeFirstLetter()
-            configuration.baseForegroundColor = .colorForGradientEnd
-            configuration.baseBackgroundColor = UIColor.colorForIcone(imageName: iconeName)
-            configuration.background.cornerRadius = 10
-            configuration.cornerStyle = .large
-            configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
-                var titleAttributes = titleAttributes
-                titleAttributes.font = UIFont.preferredFont(forTextStyle: .body)
-                return titleAttributes
-            }
-            button.configuration = configuration
-            setupShadowOf(button, radius: 1, opacity: 0.5)
-            button.titleLabel?.adjustsFontForContentSizeCategory = true
-            button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
-            button.addTarget(self, action: #selector(holdDown), for: .touchDown)
-
+        viewModel.filterButton.enumerated().forEach { (index, iconeName) in
+            let button = createIconeButton(with: iconeName)
             button.setAccessibility(with: .button, label: iconeName, hint: "Selectionner pour filtrer les activités")
-
             button.tag = index
+            button.titleLabel?.adjustsFontForContentSizeCategory = true
             filterStackView.addArrangedSubview(button)
         }
     }
@@ -110,6 +92,7 @@ extension MonitorViewController {
     @objc private func filterButtonTapped(_ sender: UIButton) {
         sender.transform = .identity
         sender.layer.shadowOpacity = 0.5
+        toggleFilterButtonColor(sender)
         print("filterButtonTapped")
     }
 
@@ -123,6 +106,34 @@ extension MonitorViewController {
         view.layer.shadowColor = UIColor.lightGray.cgColor
         view.layer.shadowOpacity = opacity
         view.layer.shadowRadius = radius
+    }
+
+    private func toggleFilterButtonColor(_ sender: UIButton) {
+        let color = UIColor.colorForIcone(imageName: viewModel.filterButton[sender.tag])
+        let actualColor = sender.configuration?.baseBackgroundColor
+        let newColor = actualColor == color ? UIColor.systemGray : color
+        sender.configuration?.baseBackgroundColor = newColor
+    }
+
+    private func createIconeButton(with title: String) -> UIButton {
+        let button = UIButton()
+        var configuration = UIButton.Configuration.filled()
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        configuration.image = UIImage(named: title)
+        configuration.baseForegroundColor = .colorForGradientEnd
+        configuration.baseBackgroundColor = UIColor.colorForIcone(imageName: title)
+        configuration.background.cornerRadius = 10
+        configuration.cornerStyle = .large
+        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
+            var titleAttributes = titleAttributes
+            titleAttributes.font = UIFont.preferredFont(forTextStyle: .body)
+            return titleAttributes
+        }
+        button.configuration = configuration
+        setupShadowOf(button, radius: 1, opacity: 0.5)
+        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(holdDown), for: .touchDown)
+        return button
     }
 }
 
@@ -159,7 +170,6 @@ extension MonitorViewController: UITableViewDataSource {
 }
 
 extension MonitorViewController {
-
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         let currentCategory = traitCollection.preferredContentSizeCategory
@@ -168,5 +178,10 @@ extension MonitorViewController {
         guard currentCategory != previousCategory else { return }
         let isAccessibilityCategory = currentCategory.isAccessibilityCategory
         filterStackView.axis = isAccessibilityCategory ? .vertical : .horizontal
+        filterStackView.subviews.forEach {
+            if let button = $0 as? UIButton {
+                button.configuration?.title = isAccessibilityCategory ? " " + viewModel.filterButton[$0.tag] : nil
+            }
         }
+    }
 }

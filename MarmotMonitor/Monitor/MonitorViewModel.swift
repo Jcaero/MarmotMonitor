@@ -11,6 +11,7 @@ class MonitorViewModel {
     private let saveManager: MarmotMonitorSaveManagerProtocol!
     var graphActivities: [String: [GraphActivity]] = [:]
     var summaryActivities: [String: [String: String]] = [:]
+    let filterButton = [ActivityIconName.sleep.rawValue, ActivityIconName.meal.rawValue, ActivityIconName.diaper.rawValue]
 
     private var dateWithActivitySet: Set<Date> = []
     var dateWithActivity: [Date] {
