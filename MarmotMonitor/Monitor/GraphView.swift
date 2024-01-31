@@ -192,6 +192,9 @@ class GraphView: UIView {
 
     private func setupLigneGraph(with numberOfLigne: Int) {
         stackViewForDay.distribution = .fillEqually
+        while stackViewForDay.arrangedSubviews.count > 1 {
+            stackViewForDay.removeArrangedSubview(stackViewForDay.arrangedSubviews.last!)
+        }
 
         guard numberOfLigne > 1, stackViews.count > numberOfLigne else { return }
         for index in 1..<numberOfLigne {
