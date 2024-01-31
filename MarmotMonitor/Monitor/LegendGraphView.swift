@@ -51,7 +51,7 @@ class LegendGraphView: UIView {
 
     override func layoutSubviews() {
            super.layoutSubviews()
-        imageActivity.layer.cornerRadius = self.frame.height / 2
+        imageActivity.layer.cornerRadius = imageActivity.frame.height / 2
         imageActivity.layer.backgroundColor = color.cgColor
        }
 

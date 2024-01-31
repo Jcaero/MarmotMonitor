@@ -43,6 +43,8 @@ class MonitorCell: UITableViewCell {
     static let reuseIdentifier = "MonitorCell"
     private var activities: [GraphActivity] = []
 
+    private var isAccessibilityCategory: Bool = false
+
     typealias DataCell = (date: Date, elementsToLegend: [String:String])
     typealias GraphData = (elements: [GraphActivity], style: GraphType)
     typealias LegendGraphData = (information: String, imageName: String, color: UIColor)
@@ -50,9 +52,12 @@ class MonitorCell: UITableViewCell {
     // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupStackViewAxis()
         setupUI()
         self.backgroundColor = .clear
+
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        isAccessibilityCategory = currentCategory.isAccessibilityCategory
+        setupStackViewAxis()
     }
 
     required init?(coder: NSCoder) {
@@ -92,8 +97,6 @@ class MonitorCell: UITableViewCell {
     }
 
     private func setupStackViewAxis() {
-        let currentCategory = traitCollection.preferredContentSizeCategory
-        let isAccessibilityCategory = currentCategory.isAccessibilityCategory
         stackViewActivities.axis = isAccessibilityCategory ? .vertical : .horizontal
     }
 
@@ -112,19 +115,14 @@ class MonitorCell: UITableViewCell {
 
         list.forEach { element in
             if element.value != "\n0 fois" {
-                let data = LegendGraphData(information: element.value, imageName: element.key, color: .colorForPastelArea)
+                var information = isAccessibilityCategory ? element.key + ": " : ""
+                information += element.value
+
+                let data = LegendGraphData(information: information, imageName: element.key, color: .colorForPastelArea)
                 let view = LegendGraphView(data: data)
                 view.translatesAutoresizingMaskIntoConstraints = false
                 stackViewActivities.addArrangedSubview(view)
             }
         }
     }
-}
-
-extension MonitorCell {
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        layoutIfNeeded()
-        }
 }
