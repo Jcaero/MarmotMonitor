@@ -64,13 +64,15 @@ class MonitorViewModel {
             switch activity.type {
             case .diaper:
                 diaper.count += 1
-            case .solid, .bottle:
+            case .solid, .breast:
                 meal.count += 1
-            case .breast:
-                meal.totalTime += activity.duration
+            case .bottle:
+                if let quantity = activity.quantity {
+                    meal.quantity += quantity
+                }
                 meal.count += 1
             case .sleep:
-                sleep.totalTime += activity.duration
+                sleep.duration += activity.duration
                 sleep.count += 1
             }
         }
@@ -121,7 +123,8 @@ class MonitorViewModel {
             return GraphActivity(type: .diaper, color: .colorForDiaper, timeStart: timeStart, duration: 0)
 
         case is Bottle :
-            return GraphActivity(type: .bottle, color: .colorForMeal, timeStart: timeStart, duration: 0)
+            guard let quantity = (activity as? Bottle)?.quantity else { return nil }
+            return GraphActivity(type: .bottle, color: .colorForMeal, timeStart: timeStart, duration: 0, quantity: Int(quantity))
 
         case is Breast :
             guard let duration = (activity as? Breast)?.totalDuration else { return nil }
@@ -139,10 +142,12 @@ class MonitorViewModel {
     }
 
     private func transformInString( activity: ActivitySummary) -> String {
-        if activity.totalTime == 0 {
+        if activity.quantity != 0 {
+            return "\(activity.quantity) ml\n\(activity.count) fois"
+        } else if activity.duration == 0 {
             return "\n\(activity.count) fois"
         } else {
-            let totalTime = activity.totalTime.toTimeString()
+            let totalTime = activity.duration.toTimeString()
             return totalTime + "\n\(activity.count) fois"
         }
     }
@@ -172,5 +177,6 @@ extension MonitorViewModel {
 // MARK: - ActivitySummary
 struct ActivitySummary: Equatable {
     var count = 0
-    var totalTime = 0
+    var duration = 0
+    var quantity = 0
 }

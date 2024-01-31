@@ -12,6 +12,7 @@ struct GraphActivity {
     let color: UIColor
     let timeStart: Date
     let duration: Int
+    var quantity: Int?
 }
 
 enum GraphType {

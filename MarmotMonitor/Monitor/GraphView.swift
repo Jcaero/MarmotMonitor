@@ -242,7 +242,7 @@ class GraphView: UIView {
 
     private func colorGraph(number: Int, with color: UIColor, startedIndex: Int, endIndex: Int) {
         guard startedIndex < numberOfHalfHour, endIndex <= numberOfHalfHour else {return}
-        guard stackViews.count >= number - 1 else  { return }
+        guard stackViews.count >= number - 1 else { return }
         let stackview = stackViews[number]
         if stackview.arrangedSubviews.count > endIndex-1 {
             if startedIndex == endIndex {
