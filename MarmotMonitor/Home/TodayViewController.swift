@@ -11,12 +11,13 @@ class TodayViewController: BackgroundViewController {
 
     let currentDate: UILabel = {
         let label = UILabel()
-        label.text = Date().toDateFormat("EEEE dd MMMM")
+        let date = Date().toDateFormat("EEEE dd MMMM")
+        label.text = date
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .colorForDate
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.setAccessibility(with: .header, label: "date du jour", hint: "")
+        label.setAccessibility(with: .header, label: "\(date)", hint: "date du jour")
         return label
     }()
 
@@ -96,7 +97,7 @@ class TodayViewController: BackgroundViewController {
         label.numberOfLines = 0
         label.text = "Mois"
         label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
-        label.setAccessibility(with: .staticText, label: "mois", hint: "")
+//        label.setAccessibility(with: .staticText, label: "", hint: "")
         return label
     }()
 
@@ -153,14 +154,18 @@ class TodayViewController: BackgroundViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        welcomeLabel.text = viewModel.welcomeTexte()
-        welcomeLabel.setAccessibility(with: .staticText, label: "\(String(describing: welcomeLabel.text))", hint: "")
+        let welcomeTexte = viewModel.welcomeTexte()
+        welcomeLabel.text = welcomeTexte
+        welcomeLabel.setAccessibility(with: .staticText, label: welcomeTexte, hint: "")
 
         babyYear.text = viewModel.babyYear()
-        babyYear.setAccessibility(with: .staticText, label: "\(String(describing: babyYear.text))", hint: "année du bébé")
+        if let year = babyYear.text {
+            babyYear.setAccessibility(with: .staticText, label: year + " ans", hint: "")
+        }
         babyMonth.text = viewModel.babyMonth()
-        babyMonth.setAccessibility(with: .staticText, label: "\(String(describing: babyMonth.text))", hint: "mois du bébé")
-
+        if let mois = babyMonth.text {
+            babyMonth.setAccessibility(with: .staticText, label: mois + " mois", hint: "age du bébé")
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
