@@ -109,6 +109,7 @@ final class GenderController: ViewForInformationController {
         nextButton.setTitle("Suivant", for: .normal)
         nextButton.setAccessibility(with: .button, label: "Suivant", hint: "Passer à l'étape suivante")
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
     }
 
     // MARK: - function
@@ -164,7 +165,18 @@ extension GenderController {
 
 extension GenderController {
     // MARK: - Action
-    @objc private func nextButtonTapped() {
+    @objc private func nextButtonTapped(sender: UIButton) {
+        sender.transform = .identity
+        sender.layer.shadowOpacity = 0.5
+        goNextController()
+    }
+
+    @objc func holdDown(sender: UIButton) {
+        sender.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
+        sender.layer.shadowOpacity = 0
+    }
+
+    private func goNextController() {
         userDefaultsManager.saveGender(viewModel.gender)
         navigationController?.pushViewController(ParentNameController(), animated: true)
     }

@@ -80,6 +80,7 @@ final class BabyNameController: ViewForInformationController {
 
     private func setupNextButton() {
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
         nextButton.setTitle("Suivant", for: .normal)
         nextButton.setAccessibility(with: .button, label: "Suivant", hint: "Appuyer pour passer à la suite")
         nextButton.isEnabled = false
@@ -126,7 +127,7 @@ extension BabyNameController: UITextFieldDelegate {
     /// remove keyboard when tap to return button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        nextButtonTapped()
+        goNextController()
         return true
     }
 
@@ -145,7 +146,18 @@ extension BabyNameController: UITextFieldDelegate {
 
 extension BabyNameController {
     // MARK: - Action
-    @objc private func nextButtonTapped() {
+    @objc private func nextButtonTapped(sender: UIButton) {
+        sender.transform = .identity
+        sender.layer.shadowOpacity = 0.5
+        goNextController()
+    }
+
+    @objc func holdDown(sender: UIButton) {
+        sender.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
+        sender.layer.shadowOpacity = 0
+    }
+
+    private func goNextController() {
         userDefaultsManager.saveBabyName(babyName.text)
         navigationController?.pushViewController(GenderController(), animated: true)
     }

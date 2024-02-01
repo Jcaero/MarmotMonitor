@@ -36,6 +36,7 @@ final class WelcomeController: ViewForInformationController {
         setupContraints()
 
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
     }
 
     // MARK: - function
@@ -53,9 +54,16 @@ final class WelcomeController: ViewForInformationController {
     }
 
     // MARK: - Action
-    @objc private func nextButtonTapped() {
+    @objc private func nextButtonTapped(_ sender: UIButton) {
+        sender.transform = .identity
+        sender.layer.shadowOpacity = 0.5
         navigationItem.backButtonDisplayMode = .minimal
         navigationController?.navigationBar.tintColor = .colorForLabelBlackToBlue
         navigationController?.pushViewController(BabyNameController(), animated: true)
+    }
+
+    @objc func holdDown(sender: UIButton) {
+        sender.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
+        sender.layer.shadowOpacity = 0
     }
 }

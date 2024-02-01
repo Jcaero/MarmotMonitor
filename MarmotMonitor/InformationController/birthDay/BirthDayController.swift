@@ -102,6 +102,7 @@ class BirthDayController: ViewForInformationController, BirthDayDelegate {
 
     private func setupNextButton() {
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
         nextButton.setTitle("Suivant", for: .normal)
         nextButton.setAccessibility(with: .button, label: "Suivant", hint: "Appuyer pour passer à la suite")
     }
@@ -109,7 +110,18 @@ class BirthDayController: ViewForInformationController, BirthDayDelegate {
 
 extension BirthDayController {
     // MARK: - Action
-    @objc private func nextButtonTapped() {
+    @objc private func nextButtonTapped(sender: UIButton) {
+        sender.transform = .identity
+        sender.layer.shadowOpacity = 0.5
+        saveData()
+    }
+
+    @objc func holdDown(sender: UIButton) {
+        sender.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
+        sender.layer.shadowOpacity = 0
+    }
+
+    private func saveData() {
         if isPickerHidden {
             viewModel.save(date: .stringDate(birthDayTF.text ?? ""))
         } else {
@@ -169,7 +181,7 @@ extension BirthDayController: UITextFieldDelegate {
     /// remove keyboard when tap to return button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        nextButtonTapped()
+        saveData()
         return true
     }
 }
