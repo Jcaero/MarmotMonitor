@@ -103,13 +103,6 @@ extension MonitorViewController {
         sender.layer.shadowOpacity = 0
     }
 
-    private func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
-        view.layer.shadowOffset = CGSize(width: 0, height: 3)
-        view.layer.shadowColor = UIColor.lightGray.cgColor
-        view.layer.shadowOpacity = opacity
-        view.layer.shadowRadius = radius
-    }
-
     private func toggleFilterButtonColor(_ sender: UIButton) {
         let color = UIColor.colorForIcone(imageName: viewModel.filterButton[sender.tag])
         let actualColor = sender.configuration?.baseBackgroundColor
@@ -133,7 +126,7 @@ extension MonitorViewController {
             return titleAttributes
         }
         button.configuration = configuration
-        setupShadowOf(button, radius: 1, opacity: 0.5)
+        button.setupShadow(radius: 1, opacity: 0.5)
         button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
         button.addTarget(self, action: #selector(holdDown), for: .touchDown)
         return button

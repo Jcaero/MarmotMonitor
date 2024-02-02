@@ -92,6 +92,11 @@ extension UIColor {
             return .clear
         }
     }
+
+    // MARK: - Doctor Graph
+    static let colorForGraphLigne = themed(light: .dodgerBlue, dark: .lightBlue)
+    static let colorForGraphBackground = themed(light: .white, dark: .egyptienBlue)
+    static let colorForAxis = themed(light: .systemGray3, dark: .systemGray3)
 }
 
 private func themed(light: UIColor, dark: UIColor) -> UIColor {

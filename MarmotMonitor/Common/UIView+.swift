@@ -20,4 +20,11 @@ extension UIView {
         self.accessibilityLabel = label
         self.accessibilityHint = hint
     }
+
+    func setupShadow(radius: CGFloat, opacity: Float ) {
+        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        self.layer.shadowColor = UIColor.lightGray.cgColor
+        self.layer.shadowOpacity = opacity
+        self.layer.shadowRadius = radius
+    }
 }
