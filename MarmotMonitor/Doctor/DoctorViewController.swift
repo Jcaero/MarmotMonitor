@@ -30,10 +30,24 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
         xAxis.setLabelCount(6, force: false)
         xAxis.labelTextColor = .label
         xAxis.axisLineColor = .label
-
-        chartView.animate(xAxisDuration: 1.5)
+        xAxis.granularity = 1
+        xAxis.valueFormatter = CustomAxisValueFormatter()
+        xAxis.labelRotationAngle = -45
+        xAxis.centerAxisLabelsEnabled = true
+        #warning("date anterieur a la date de naissance")
+//        chartView.animate(xAxisDuration: 1.5)
 
         return chartView
+    }()
+
+    let selectedGraph: UISegmentedControl = {
+        let control = UISegmentedControl()
+        control.insertSegment(withTitle: "Taille", at: 0, animated: true)
+        control.insertSegment(withTitle: "Poids", at: 1, animated: true)
+        control.selectedSegmentTintColor = .colorForGraphBackground
+        control.selectedSegmentIndex = 0
+        control.setupShadow(radius: 2, opacity: 0.5)
+        return control
     }()
 
     lazy var area: UIView = {
@@ -41,7 +55,7 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
         view.backgroundColor = .colorForGraphBackground
         view.layer.cornerRadius = 10
         view.layer.shadowColor = UIColor.black.cgColor
-        view.setupShadow(radius: 1, opacity: 0.5)
+        view.setupShadow(radius: 2, opacity: 0.5)
         return view
     }()
 
@@ -52,14 +66,17 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
         super.viewDidLoad()
         view.backgroundColor = .white
 
+        viewModel.updateData()
         setupViews()
         setupContraint()
 
-        setData()
+        setDataHeight()
+        selectedGraph.addTarget(self, action: #selector(changeGraph), for: .valueChanged)
     }
 
     // MARK: - setup
     private func setupViews() {
+        view.addSubview(selectedGraph)
         view.addSubview(area)
         area.addSubview(lineChartView)
     }
@@ -67,9 +84,14 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
     private func setupContraint() {
         area.translatesAutoresizingMaskIntoConstraints = false
         lineChartView.translatesAutoresizingMaskIntoConstraints = false
+        selectedGraph.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            area.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            selectedGraph.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            selectedGraph.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            selectedGraph.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+
+            area.topAnchor.constraint(equalTo: selectedGraph.bottomAnchor, constant: 20),
             area.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             area.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             area.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
@@ -81,8 +103,8 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
         ])
     }
 
-    private func setData() {
-        let set1 = LineChartDataSet(entries: viewModel.yValues, label: "")
+    private func setDataHeight() {
+        let set1 = LineChartDataSet(entries: viewModel.heightValues, label: "")
         set1.drawCirclesEnabled = false
         set1.colors = [UIColor.colorForGraphLigne]
         set1.mode = .cubicBezier
@@ -93,5 +115,28 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
         let data = LineChartData(dataSet: set1)
         data.setValueTextColor(.clear)
         lineChartView.data = data
+    }
+
+    private func setDataWeight() {
+        let set2 = LineChartDataSet(entries: viewModel.weightValues, label: "")
+        set2.drawCirclesEnabled = false
+        set2.colors = [UIColor.colorForGraphLigne]
+        set2.mode = .cubicBezier
+        set2.lineWidth = 3
+
+        set2.highlightEnabled = false
+
+        let data = LineChartData(dataSet: set2)
+        data.setValueTextColor(.clear)
+        lineChartView.data = data
+    }
+
+    // MARK: - SagmentedControl
+    @objc private func changeGraph() {
+        if selectedGraph.selectedSegmentIndex == 0 {
+            setDataHeight()
+        } else {
+            setDataWeight()
+        }
     }
 }

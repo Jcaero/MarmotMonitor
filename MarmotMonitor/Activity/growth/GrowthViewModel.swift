@@ -8,7 +8,6 @@
 import Foundation
 
 protocol GrowthDelegate: AnyObject {
-    func updateData()
     func nextView()
     func alert(title: String, description: String)
 }
@@ -32,7 +31,6 @@ final class GrowthViewModel {
 
         guard let value = Double(value ?? "") else { return }
         growthData[category] = value
-        delegate?.updateData()
     }
 
     // MARK: - Core Data

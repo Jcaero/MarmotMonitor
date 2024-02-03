@@ -12,7 +12,7 @@
 //
 import UIKit
 
-class GrowthController: ActivityController {
+class GrowthController: ActivityController, GrowthDelegate {
     let tableOfGrowth: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .singleLine
@@ -48,7 +48,6 @@ class GrowthController: ActivityController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableOfGrowth.reloadData()
         setupTableViewHeight()
     }
 
@@ -153,7 +152,6 @@ extension GrowthController: UITextFieldDelegate {
 
         textFieldActif = nil
         textField.resignFirstResponder()
-        self.tableOfGrowth.reloadData()
     }
 
     @objc func valueChanged(_ textField: UITextField) {
@@ -182,11 +180,5 @@ extension GrowthController {
     @objc func keyboardWillHide(notification: NSNotification) {
         tableOfGrowth.contentInset = .zero
         tableOfGrowth.scrollIndicatorInsets = .zero
-    }
-}
-
-extension GrowthController: GrowthDelegate {
-    func updateData() {
-        tableOfGrowth.reloadData()
     }
 }

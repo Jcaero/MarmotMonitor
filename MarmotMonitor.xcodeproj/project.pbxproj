@@ -106,6 +106,7 @@
 		47F81B9D2B6058430042A055 /* MonitorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81B9C2B6058430042A055 /* MonitorViewController.swift */; };
 		47F81B9F2B605AEC0042A055 /* MonitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81B9E2B605AEC0042A055 /* MonitorCell.swift */; };
 		47F81BA12B605F610042A055 /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81BA02B605F610042A055 /* GraphType.swift */; };
+		47F99B8C2B6E79FA00306A30 /* MyXAxisFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F99B8B2B6E79FA00306A30 /* MyXAxisFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +229,7 @@
 		47F81B9C2B6058430042A055 /* MonitorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorViewController.swift; sourceTree = "<group>"; };
 		47F81B9E2B605AEC0042A055 /* MonitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorCell.swift; sourceTree = "<group>"; };
 		47F81BA02B605F610042A055 /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
+		47F99B8B2B6E79FA00306A30 /* MyXAxisFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyXAxisFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -562,6 +564,7 @@
 			children = (
 				47B231692B6C35C30079B436 /* DoctorViewController.swift */,
 				4722368C2B6D88E800CBF044 /* DoctorViewModel.swift */,
+				47F99B8B2B6E79FA00306A30 /* MyXAxisFormatter.swift */,
 			);
 			path = Doctor;
 			sourceTree = "<group>";
@@ -804,6 +807,7 @@
 				47155BCD2B1DEBDB00775B27 /* TodayViewModel.swift in Sources */,
 				4735B26B2B1140D8000F2B8C /* ViewForInformationController.swift in Sources */,
 				47D8DA712B4B405800D97CD1 /* DateActivity+CoreDataClass.swift in Sources */,
+				47F99B8C2B6E79FA00306A30 /* MyXAxisFormatter.swift in Sources */,
 				47A0E6B62B3B13B400F894A1 /* GrowthController.swift in Sources */,
 				47D8DA602B4B37F000D97CD1 /* Solid+CoreDataProperties.swift in Sources */,
 				474732532B1239CF0064ABB4 /* GenderViewModel.swift in Sources */,

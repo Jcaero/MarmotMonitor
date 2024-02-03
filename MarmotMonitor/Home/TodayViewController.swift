@@ -51,6 +51,7 @@ class TodayViewController: BackgroundViewController {
         imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
+         imageView.setupShadow(radius: 1, opacity: 0.5)
         return imageView
     }()
 
@@ -105,6 +106,7 @@ class TodayViewController: BackgroundViewController {
         let view = UIView()
         view.backgroundColor = .colorForPastelArea
         view.layer.cornerRadius = 20
+        view.setupShadow(radius: 1, opacity: 0.5)
         return view
     }()
 

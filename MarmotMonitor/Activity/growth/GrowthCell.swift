@@ -46,7 +46,7 @@ class GrowthCell: UITableViewCell {
     let unitOfMesure: UILabel = {
         let label = UILabel()
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
-        label.text = "g"
+        label.text = "Kg"
         label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 1
