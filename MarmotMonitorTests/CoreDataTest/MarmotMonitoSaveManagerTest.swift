@@ -521,4 +521,66 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         XCTAssertEqual(date, "06/01/2023 00:00")
         XCTAssertEqual(total, 1500)
     }
+
+    // MARK: - FetchGrowth
+    
+    func testCoreDataHaveGrothData_WhenFetchGrowthActivity_ResultHaveActivity() {
+        marmotMonitorSaveManager.saveActivity(.growth(data: mockGrowthData),
+                                              date: testSecondDateSix,
+                                              onSuccess: { saveActivity1 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        let dateActivities = marmotMonitorSaveManager.fetchGrowthActivity()
+        let activity = dateActivities.first
+
+        XCTAssertEqual(dateActivities.count, 1)
+        XCTAssertTrue((activity != nil))
+        XCTAssertEqual(activity?.1.height , 5.5)
+        XCTAssertEqual(activity?.0 , testSecondDateSix)
+    }
+
+    func testCoreDataHaveData_WhenFetchGrowthActivity_ResultHaveActivity() {
+        marmotMonitorSaveManager.saveActivity(.growth(data: mockGrowthData),
+                                              date: testSecondDateSix,
+                                              onSuccess: { saveActivity1 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        marmotMonitorSaveManager.saveActivity(.bottle(quantity: 100),
+                                              date: testSecondDateSix,
+                                              onSuccess: { saveActivity1 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        let dateActivities = marmotMonitorSaveManager.fetchGrowthActivity()
+        let activity = dateActivities.first
+        
+
+        XCTAssertEqual(dateActivities.count, 1)
+        XCTAssertEqual(activity?.1.height , 5.5)
+        XCTAssertEqual(activity?.0 , testSecondDateSix)
+    }
+
+    func testCoreDataHaveManyData_WhenFetchGrowthActivity_ResultHaveSortedActivity() {
+        marmotMonitorSaveManager.saveActivity(.growth(data: mockGrowthData),
+                                              date: testSecondDateSix,
+                                              onSuccess: { saveActivity1 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        marmotMonitorSaveManager.saveActivity(.growth(data: mockGrowthData2),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { saveActivity1 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        marmotMonitorSaveManager.saveActivity(.bottle(quantity: 100),
+                                              date: testSecondDateSix,
+                                              onSuccess: { saveActivity1 = true},
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        let dateActivities = marmotMonitorSaveManager.fetchGrowthActivity()
+        let activity = dateActivities.first
+        
+
+        XCTAssertEqual(dateActivities.count, 2)
+        XCTAssertEqual(activity?.1.height , 5.5)
+        XCTAssertEqual(activity?.0 , testSecondDateSix)
+    }
 }

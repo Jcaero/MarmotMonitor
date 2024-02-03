@@ -12,6 +12,7 @@ protocol MarmotMonitorSaveManagerProtocol {
     func fetchDateActivitiesWithDate(from startDate: Date, to endDate: Date) -> [DateActivity]
     func fetchFirstActivity<T>(ofType type: T.Type) -> (activity: T, date: Date)? where T:Activity
     func fetchAllActivity() -> [DateActivity]
+    func fetchGrowthActivity() -> [(Date,Growth)]
     func clearDatabase()
 }
 
@@ -198,6 +199,33 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
             }
 
             return fetchedResults
+        }
+    }
+
+    ///  Fetches Growth DateActivity objects
+    ///  - Returns: All DateActivity objects
+    func fetchGrowthActivity() -> [(Date,Growth)] {
+        context.performAndWait {
+            var fetchedResults = [Date:Growth]()
+            let request = NSFetchRequest<DateActivity>(entityName: "DateActivity")
+            request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+
+            do {
+                let results = try self.context.fetch(request)
+                results.forEach { dateActivity in
+                    let date = dateActivity.date
+                    dateActivity.activityArray.forEach {
+                        if let growth = $0 as? Growth {
+                            if fetchedResults[date] == nil {
+                                fetchedResults[date] = growth
+                            }
+                        }
+                    }
+                }
+            } catch {
+                print("Erreur lors de la récupération des activités: \(error)")
+            }
+            return fetchedResults.sorted { $0.key < $1.key }
         }
     }
 
