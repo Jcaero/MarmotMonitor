@@ -19,7 +19,7 @@ class TabBarController: UITabBarController {
         let todayController = UINavigationController(rootViewController: TodayViewController())
         let monitorController = UINavigationController(rootViewController: MonitorViewController())
         let doctorController = UINavigationController(rootViewController: DoctorViewController())
-        let settingsController = UINavigationController(rootViewController: ViewForInformationController())
+        let settingsController = UINavigationController(rootViewController: SettingViewController())
 
         todayController.tabBarItem = UITabBarItem(title: "Auj.", image: UIImage(systemName: "calendar"), tag: 0)
         todayController.tabBarItem.accessibilityHint = "appuyer pour afficher la page du jour"

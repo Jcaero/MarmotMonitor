@@ -166,7 +166,7 @@ class TodayViewModelTest: TestCase {
         let activityTitleAfter = viewModel.activities[1].cellSubTitle
         
         XCTAssertEqual(activityTitle, "Saisir le sommeil")
-        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 01 H 00 min")
+        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 01 H")
     }
 
     func testCoreDataHaveData_WhenFetchGrowthData_TableViewIsUpdate(){

@@ -72,7 +72,7 @@ class MonitorCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             area.addSubview($0)
         }
-
+        #warning("leading ou left")
         NSLayoutConstraint.activate([
             area.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             area.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),

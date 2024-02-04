@@ -12,7 +12,6 @@ class GrowthViewmodelTest: TestCase {
     private var viewModel: GrowthViewModel!
     private var coreDatatManager: MarmotMonitorSaveManager!
     
-    private var isDataUpdate: Bool!
     private var alerteMessage: String!
     private var isNextView: Bool!
     
@@ -20,7 +19,6 @@ class GrowthViewmodelTest: TestCase {
         super.setUp()
         coreDatatManager = MarmotMonitorSaveManager(coreDataManager: CoreDataManagerMock.sharedInstance)
         viewModel = GrowthViewModel(delegate: self, coreDataManager: coreDatatManager)
-        isDataUpdate = false
         alerteMessage = ""
         isNextView = false
     }
@@ -39,7 +37,6 @@ class GrowthViewmodelTest: TestCase {
         XCTAssertEqual(viewModel.growthData[GrowthField.height.title], 25)
         XCTAssertEqual(viewModel.growthData[GrowthField.weight.title], nil)
         XCTAssertEqual(viewModel.growthData[GrowthField.head.title], nil)
-        XCTAssertTrue(isDataUpdate)
     }
 
     func testNoGrowthIsSet_WhenSetGrowthHeight_GrowthIsSetAndUpdateData() {
@@ -48,7 +45,6 @@ class GrowthViewmodelTest: TestCase {
         XCTAssertEqual(viewModel.growthData[GrowthField.height.title], nil)
         XCTAssertEqual(viewModel.growthData[GrowthField.weight.title], 25)
         XCTAssertEqual(viewModel.growthData[GrowthField.head.title], nil)
-        XCTAssertTrue(isDataUpdate)
     }
 
     func testNoGrowthIsSet_WhenSetGrowthHead_GrowthIsSetAndUpdateData() {
@@ -57,7 +53,6 @@ class GrowthViewmodelTest: TestCase {
         XCTAssertEqual(viewModel.growthData[GrowthField.height.title], nil)
         XCTAssertEqual(viewModel.growthData[GrowthField.weight.title], nil)
         XCTAssertEqual(viewModel.growthData[GrowthField.head.title], 25)
-        XCTAssertTrue(isDataUpdate)
     }
 
     func testNoGrowthIsSet_WhenSetAlGrowth_GrowthIsSetAndUpdateData() {
@@ -68,7 +63,6 @@ class GrowthViewmodelTest: TestCase {
         XCTAssertEqual(viewModel.growthData[GrowthField.height.title], 50.0)
         XCTAssertEqual(viewModel.growthData[GrowthField.weight.title], 25.7)
         XCTAssertEqual(viewModel.growthData[GrowthField.head.title], 30)
-        XCTAssertTrue(isDataUpdate)
     }
 
     func testNoGrowthIsSet_WhenSetGrowthOutRange_NoGrowthIsSet() {
@@ -77,7 +71,6 @@ class GrowthViewmodelTest: TestCase {
         XCTAssertEqual(viewModel.growthData[GrowthField.weight.title], nil)
         XCTAssertEqual(viewModel.growthData[GrowthField.height.title], nil)
         XCTAssertEqual(viewModel.growthData[GrowthField.head.title], nil)
-        XCTAssertFalse(isDataUpdate)
     }
 
     // MARK: - save Groth
@@ -127,9 +120,5 @@ extension GrowthViewmodelTest: GrowthDelegate {
     
     func alert(title: String, description: String) {
         alerteMessage = description
-    }
-    
-    func updateData() {
-        isDataUpdate = true
     }
 }

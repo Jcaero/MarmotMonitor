@@ -27,4 +27,23 @@ extension UIView {
         self.layer.shadowOpacity = opacity
         self.layer.shadowRadius = radius
     }
+
+    /// Apply  No corner radius to the view
+    func noCorners() {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize(width: 0, height: 0))
+        let shape = CAShapeLayer()
+        shape.path = path.cgPath
+        layer.mask = shape
+    }
+
+    /// Apply corner radius to the view
+    /// - Parameter corners: the corner to apply the radius
+    /// - Parameter rect: the rect to apply the radius
+    func applyCorners(position: UIRectCorner, with rect: CGRect) {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: position, cornerRadii: CGSize(width: 10, height: 10))
+        let shape = CAShapeLayer()
+        shape.path = path.cgPath
+        layer.mask = shape
+    }
+
 }

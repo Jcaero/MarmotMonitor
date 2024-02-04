@@ -68,7 +68,7 @@ class ViewForInformationController: BackgroundViewController {
         setupViews()
         setupContraints()
 
-        setupShadowOf(nextButton, radius: 1, opacity: 0.5)
+        nextButton.setupShadow(radius: 1, opacity: 0.5)
 
         let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
         setupTopContraintWith(height: isAccessibilityCategory ? view.frame.height / 6 : view.frame.height / 4)
@@ -139,13 +139,6 @@ class ViewForInformationController: BackgroundViewController {
                 nextButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20)
             ])
         }
-
-    private func setupShadowOf(_ view: UIView, radius: CGFloat, opacity: Float ) {
-        view.layer.shadowOffset = CGSize(width: 0, height: 3)
-        view.layer.shadowColor = UIColor.lightGray.cgColor
-        view.layer.shadowOpacity = opacity
-        view.layer.shadowRadius = radius
-    }
 }
 
 extension ViewForInformationController {
