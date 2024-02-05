@@ -74,6 +74,10 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
         selectedGraph.addTarget(self, action: #selector(changeGraph), for: .valueChanged)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.updateData()
+    }
+
     // MARK: - setup
     private func setupViews() {
         view.addSubview(selectedGraph)

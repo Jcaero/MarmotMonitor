@@ -29,11 +29,15 @@ class DoctorViewModel {
             let day = numberOfWeekSinceBirth(date: date)
             let dataHeight = growth.height
             let dataWeight = growth.weight
-            let hValue = ChartDataEntry(x: day, y: dataHeight)
-            heightValues.append(hValue)
+            if dataHeight != 0 {
+                let hValue = ChartDataEntry(x: day, y: dataHeight)
+                heightValues.append(hValue)
+            }
 
-            let wValue = ChartDataEntry(x: day, y: dataWeight)
-            weightValues.append(wValue)
+            if dataWeight != 0 {
+                let wValue = ChartDataEntry(x: day, y: dataWeight)
+                weightValues.append(wValue)
+            }
         }
     }
 

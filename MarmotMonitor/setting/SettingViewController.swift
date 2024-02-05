@@ -29,6 +29,7 @@ class SettingViewController: BackgroundViewController {
         label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .title3)
         label.textColor = .colorForLabelBlackToBlue
         label.textAlignment = .left
+        label.setupShadow(radius: 1, opacity: 0.2)
         label.numberOfLines = 0
         return label
     }()
@@ -47,16 +48,20 @@ class SettingViewController: BackgroundViewController {
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.backgroundColor = .clear
-        tableView.separatorStyle = .singleLine
+        tableView.separatorStyle = .none
         tableView.layer.cornerRadius = 20
         return tableView
     }()
+
+    let viewModel = SettingViewModel()
 
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupContraints()
+
+        viewModel.getUserInformation()
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -85,7 +90,7 @@ class SettingViewController: BackgroundViewController {
             settingTitle.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             settingTitle.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
 
-            tableView.topAnchor.constraint(equalTo:settingTitle.bottomAnchor, constant: 5),
+            tableView.topAnchor.constraint(equalTo:settingTitle.bottomAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10)
@@ -94,7 +99,7 @@ class SettingViewController: BackgroundViewController {
 }
 
 extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
-func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
 
@@ -113,13 +118,8 @@ func numberOfSections(in tableView: UITableView) -> Int {
                 print("erreur de cell")
                 return UITableViewCell()
             }
-            cell.setupTitle(with: "Charlie, 12/10/2018", subtitle: "Fils de Pierrick")
-            cell.backgroundColor = .white
-            cell.layer.cornerRadius = 10
-            cell.clipsToBounds = true
-            cell.setupShadow(radius: 5, opacity: 1)
-            cell.layer.shadowColor = UIColor.black.cgColor
-            cell.layer.shadowPath = UIBezierPath(rect: cell.bounds).cgPath
+            cell.setupTitle(with: viewModel.babyName, birthDay: viewModel.birthDay, parent: viewModel.parentName)
+            cell.backgroundColor = .clear
             return cell
 
         default:
@@ -139,12 +139,13 @@ func numberOfSections(in tableView: UITableView) -> Int {
 
         switch section {
         case 0:
-            headerView.setupTitle(with: "Information")
+            let view = UIView()
+            view.backgroundColor = .clear
+            return view
         default:
             headerView.setupTitle(with: "Header \(section)")
+            return headerView
         }
-
-        return headerView
     }
 
     /// Set the corner radius for the first and last cell of the table view
@@ -158,5 +159,23 @@ func numberOfSections(in tableView: UITableView) -> Int {
         } else {
             cell.noCorners()
         }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch indexPath.row {
+        case 0:
+            let next = InformationViewController()
+            present(next, animated: true, completion: nil)
+        default:
+            break
+        }
+    }
+}
+
+extension SettingViewController {
+ override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        tableView.reloadData()
     }
 }

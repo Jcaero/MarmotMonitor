@@ -158,7 +158,7 @@ extension MonitorViewController: UITableViewDataSource {
         typealias GraphData = (elements: [GraphActivity], style: GraphType)
 
         let dataCell = DataCell(date: viewModel.dateWithActivity[indexPath.row], elementsToLegend: legend)
-        let graphData = GraphData(elements: viewModel.graphActivities[stringDate]!, style: .ligne)
+        let graphData = GraphData(elements: viewModel.graphActivities[stringDate]!, style: .rod)
 
         cell.setUp(with: dataCell, graphData: graphData)
         return cell
