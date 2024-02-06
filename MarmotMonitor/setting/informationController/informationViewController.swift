@@ -24,14 +24,16 @@ class InformationViewController: UIViewController {
     private let buttonStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.distribution = .equalSpacing
+        view.spacing = 10
+        view.distribution = .equalCentering
         return view
     }()
 
     private let informationStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
-        view.distribution = .equalSpacing
+        view.distribution = .fillEqually
+        view.spacing = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -96,16 +98,23 @@ class InformationViewController: UIViewController {
     private var viewModel: InformationViewModel!
     private weak var delegate: InformationViewControllerDelegate!
 
-    // MARK: - INIT
+    // MARK: - Constraints for accessibility
+    private var imageWidthConstraint: NSLayoutConstraint?
+    private var imageWidthNilConstraint: NSLayoutConstraint?
+
+    private var areaRatioContraint: NSLayoutConstraint?
+    private var areaTopContraint: NSLayoutConstraint?
+
+    // MARK: - CYCLE LIFE
     init(delegate: InformationViewControllerDelegate) {
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = InformationViewModel(delegate: self)
@@ -116,14 +125,22 @@ class InformationViewController: UIViewController {
 
         setupViews()
         setupContraints()
+        setupAccessibility()
 
-        cancelButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
-        cancelButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
+        setupTapGesture()
+        setupTextFieldDelegate()
 
-        saveButton.addTarget(self, action: #selector(saveData), for: .touchUpInside)
-        saveButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
+        setupButtonAction()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    // MARK: - Effects
     private func setupBlurEffect() {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.prominent)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -132,6 +149,7 @@ class InformationViewController: UIViewController {
         view.addSubview(blurEffectView)
     }
 
+    // MARK: - Setups
     private func setupUserInfo() {
         viewModel.getUserInformation()
 
@@ -178,16 +196,22 @@ class InformationViewController: UIViewController {
     }
 
     private func setupContraints() {
+        imageWidthConstraint = babyImage.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.2)
+        imageWidthNilConstraint = babyImage.widthAnchor.constraint(equalToConstant: 0)
+
+        areaTopContraint = area.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
+        areaRatioContraint = area.heightAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.5)
+
         NSLayoutConstraint.activate([
             area.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            area.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height * 0.33),
+            area.bottomAnchor.constraint(equalTo: view.centerYAnchor),
             area.widthAnchor.constraint(equalToConstant: view.frame.width * 0.85),
-            area.heightAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.5),
+            areaRatioContraint!,
 
             babyImage.centerYAnchor.constraint(equalTo: area.centerYAnchor),
             babyImage.leftAnchor.constraint(equalTo: area.leftAnchor, constant: 10),
             babyImage.heightAnchor.constraint(equalTo: babyImage.widthAnchor),
-            babyImage.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.2),
+            imageWidthConstraint!,
 
             informationStackView.topAnchor.constraint(equalTo: area.topAnchor, constant: 10),
             informationStackView.leftAnchor.constraint(equalTo: babyImage.rightAnchor, constant: 10),
@@ -204,10 +228,23 @@ class InformationViewController: UIViewController {
         self.name.text = name
         self.birthDay.text = birthDay
         self.parentName.text = parent
+    }
 
+    private func setupTextFieldDelegate() {
+        name.delegate = self
+        birthDay.delegate = self
+        parentName.delegate = self
     }
 
     // MARK: - Actions
+    private func setupButtonAction() {
+        cancelButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
+
+        saveButton.addTarget(self, action: #selector(saveData), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
+    }
+    
     @objc private func closeView(sender: UIButton) {
             sender.transform = .identity
             sender.layer.shadowOpacity = 0.5
@@ -256,5 +293,79 @@ extension InformationViewController {
 extension InformationViewController: InformationViewModelDelegate {
     func showAlert(title: String, description: String) {
         showSimpleAlerte(with: title, message: description)
+    }
+}
+
+// MARK: - Accessibility
+extension InformationViewController {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
+
+        guard currentCategory != previousCategory else { return }
+
+        setupAccessibility()
+    }
+
+    private func setupAccessibility() {
+        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+        switch isAccessibilityCategory {
+        case true:
+            imageWidthConstraint?.isActive = false
+            imageWidthNilConstraint?.isActive = true
+
+            areaRatioContraint?.isActive = false
+            areaTopContraint?.isActive = true
+
+            buttonStackView.axis = .vertical
+        case false:
+            imageWidthNilConstraint?.isActive = false
+            imageWidthConstraint?.isActive = true
+
+            areaTopContraint?.isActive = false
+            areaRatioContraint?.isActive = true
+            buttonStackView.axis = .horizontal
+        }
+    }
+}
+
+// MARk: - Keyboard
+extension InformationViewController: UITextFieldDelegate {
+    /// Check if the keyboard is displayed above textefield  and move the view if necessary
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let textFieldBottomY = genderSegmentedControl.convert(genderSegmentedControl.bounds, to: self.view.window).maxY
+            let screenHeight = UIScreen.main.bounds.height
+            let keyboardTopY = screenHeight - keyboardSize.height
+
+            if textFieldBottomY > keyboardTopY {
+                self.view.frame.origin.y = -(textFieldBottomY - keyboardTopY) - 40
+            }
+        }
+    }
+
+    /// Return view in the origine place
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+
+    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        name.resignFirstResponder()
+        birthDay.resignFirstResponder()
+        parentName.resignFirstResponder()
+    }
+
+    private func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    /// remove keyboard when tap to return button
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
