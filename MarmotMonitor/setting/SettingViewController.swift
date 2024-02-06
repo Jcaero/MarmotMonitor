@@ -165,7 +165,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 0:
-            let next = InformationViewController()
+            let next = InformationViewController(delegate: self)
             present(next, animated: true, completion: nil)
         default:
             break
@@ -176,6 +176,13 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
 extension SettingViewController {
  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+        tableView.reloadData()
+    }
+}
+
+extension SettingViewController: InformationViewControllerDelegate {
+    func updateInformation() {
+        viewModel.getUserInformation()
         tableView.reloadData()
     }
 }

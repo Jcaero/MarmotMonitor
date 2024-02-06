@@ -26,4 +26,9 @@ extension String {
     func capitalizeFirstLetter() -> String {
         return self.prefix(1).uppercased() + self.dropFirst()
     }
+
+    var isLengthValidAndOnlyLetters: Bool {
+        guard self.count > 2 else { return false }
+        return self.allSatisfy { $0.isLetter }
+    }
 }

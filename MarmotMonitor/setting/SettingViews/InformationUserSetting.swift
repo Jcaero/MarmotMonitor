@@ -79,6 +79,8 @@ class InformationUserSetting: UITableViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "nameMarmotte")
         imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
         return imageView
     }()
 

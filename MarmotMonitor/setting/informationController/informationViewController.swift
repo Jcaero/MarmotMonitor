@@ -7,7 +7,12 @@
 
 import UIKit
 
-class InformationViewController: BackgroundViewController {
+protocol InformationViewControllerDelegate: AnyObject {
+    func updateInformation()
+}
+
+class InformationViewController: UIViewController {
+
     private let area: UIView = {
         let view = UIView()
         view.backgroundColor = .colorForGraphBackground
@@ -34,11 +39,20 @@ class InformationViewController: BackgroundViewController {
     private var name: UITextField!
     private var birthDay: UITextField!
     private var parentName: UITextField!
+    private var genderSegmentedControl: UISegmentedControl = {
+        let items = ["Fille", "Garçon"]
+        let control = UISegmentedControl(items: items)
+        control.selectedSegmentTintColor = .colorForDuckBlueToWhite
+        control.selectedSegmentIndex = 0
+        return control
+    }()
 
     private let babyImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "nameMarmotte")
         imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
         return imageView
     }()
 
@@ -79,26 +93,63 @@ class InformationViewController: BackgroundViewController {
     }()
 
     // MARK: - Properties
-    private let viewModel = InformationViewModel()
+    private var viewModel: InformationViewModel!
+    private weak var delegate: InformationViewControllerDelegate!
 
     // MARK: - INIT
+    init(delegate: InformationViewControllerDelegate) {
+        self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        setupTextField()
+        viewModel = InformationViewModel(delegate: self)
+
+        view.backgroundColor = .clear
+        setupUserInfo()
+        setupBlurEffect()
 
         setupViews()
         setupContraints()
+
+        cancelButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
+
+        saveButton.addTarget(self, action: #selector(saveData), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
     }
 
-    private func setupTextField() {
+    private func setupBlurEffect() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.prominent)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
+    }
+
+    private func setupUserInfo() {
         viewModel.getUserInformation()
+
         name = createTextField()
         name.placeholder = viewModel.babyName
         birthDay = createTextField()
         birthDay.placeholder = viewModel.birthDay
         parentName = createTextField()
         parentName.placeholder = viewModel.parentName
+
+        switch viewModel.gender {
+        case "Fille":
+            genderSegmentedControl.selectedSegmentIndex = 0
+        case "Garçon":
+            genderSegmentedControl.selectedSegmentIndex = 1
+        default:
+            genderSegmentedControl.selectedSegmentIndex = 0
+        }
     }
     private func setupViews() {
         view.addSubview(area)
@@ -109,6 +160,12 @@ class InformationViewController: BackgroundViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
+        [name, birthDay, parentName, genderSegmentedControl].forEach {
+            informationStackView.addArrangedSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+
+        // Add the buttons to the stackView
         let empty = UIView()
         let empty2 = UIView()
         let empty3 = UIView()
@@ -116,17 +173,14 @@ class InformationViewController: BackgroundViewController {
             buttonStackView.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-
-        [name, birthDay, parentName].forEach {
-            informationStackView.addArrangedSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
+        view.addSubview(buttonStackView)
+        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setupContraints() {
         NSLayoutConstraint.activate([
             area.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            area.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
+            area.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height * 0.33),
             area.widthAnchor.constraint(equalToConstant: view.frame.width * 0.85),
             area.heightAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.5),
 
@@ -153,6 +207,26 @@ class InformationViewController: BackgroundViewController {
 
     }
 
+    // MARK: - Actions
+    @objc private func closeView(sender: UIButton) {
+            sender.transform = .identity
+            sender.layer.shadowOpacity = 0.5
+            self.dismiss(animated: true, completion: nil)
+    }
+
+    @objc private func saveData(sender: UIButton) {
+            sender.transform = .identity
+            sender.layer.shadowOpacity = 0.5
+        let gender = genderSegmentedControl.selectedSegmentIndex == 0 ? "Fille" : "Garçon"
+        viewModel.saveUserInformation(babyName: name.text, parentName: parentName.text, birthDay: birthDay.text, gender: gender)
+        delegate.updateInformation()
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @objc func holdDown(sender: UIButton) {
+        sender.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
+        sender.layer.shadowOpacity = 0
+    }
 }
 
 extension InformationViewController {
@@ -160,7 +234,7 @@ extension InformationViewController {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(
             string: "0",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.label]
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray3]
         )
         let font = UIFont(name: "Symbol", size: 20)
         let fontMetrics = UIFontMetrics(forTextStyle: .body)
@@ -173,8 +247,14 @@ extension InformationViewController {
         textField.layer.cornerRadius = 10
         textField.keyboardType = .default
         textField.backgroundColor = .clear
-        textField.tintColor = .label
+        textField.tintColor = .systemGray6
         textField.adjustsFontSizeToFitWidth = true
         return textField
+    }
+}
+
+extension InformationViewController: InformationViewModelDelegate {
+    func showAlert(title: String, description: String) {
+        showSimpleAlerte(with: title, message: description)
     }
 }

@@ -14,7 +14,7 @@ class MonitorViewController: BackgroundViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.backgroundColor = .clear
         tableView.isScrollEnabled = false
-        tableView.separatorStyle = .singleLine
+        tableView.separatorStyle = .none
         tableView.layer.cornerRadius = 20
         tableView.isScrollEnabled = true
         return tableView
@@ -93,7 +93,7 @@ extension MonitorViewController {
         sender.transform = .identity
         sender.layer.shadowOpacity = 0.5
         toggleFilterButtonColor(sender)
-        print("filterButtonTapped")
+
         viewModel.updateData()
         tableView.reloadData()
     }
