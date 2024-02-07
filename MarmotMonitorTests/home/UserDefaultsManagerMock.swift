@@ -10,6 +10,13 @@ import Foundation
 @testable import MarmotMonitor
 
 final class UserDefaultsManagerMock: UserDefaultManagerProtocol {
+    func saveGraphType(_ graphType: MarmotMonitor.GraphType) {
+    }
+    
+    func getGraphType() -> String? {
+        return nil
+    }
+    
     
     private var babyName: String?
     private var gender: String?

@@ -19,6 +19,28 @@ enum GraphType {
     case round
     case rod
     case ligne
+
+    var description: String {
+        switch self {
+        case .round:
+            return "pixel"
+        case .rod:
+            return "bar"
+        case .ligne:
+            return "ligne"
+        }
+    }
+
+    var imageNameSynthese: String {
+        switch self {
+        case .round:
+            return "graphRound"
+        case .rod:
+            return "graphRod"
+        case .ligne:
+            return "graphLigne"
+        }
+    }
 }
 
 enum ShowActivityType {

@@ -12,16 +12,19 @@ protocol UserDefaultManagerProtocol {
     func saveGender(_ gender: Gender)
     func saveParentName(_ name: String?)
     func saveDateOfBirth(_ date: String?)
+    func saveGraphType(_ graphType: GraphType)
     func getBabyName() -> String?
     func getGender() -> String?
     func getParentName() -> String?
     func getBirthDay() -> String?
+    func getGraphType() -> String?
 
 //    func save(property: MarmotProperty)
 //    func get(property: MarmotProperty)
 }
 
 final class UserDefaultsManager: UserDefaultManagerProtocol {
+    
     private let defaults: UserDefaults
 
     init(defaults: UserDefaults = UserDefaults.standard) {
@@ -67,6 +70,10 @@ final class UserDefaultsManager: UserDefaultManagerProtocol {
         defaults.set(dateToSave, forKey: UserInfoKey.birthDay.rawValue)
     }
 
+    func saveGraphType(_ graphType: GraphType) {
+        defaults.set(graphType.description, forKey: UserInfoKey.graphType.rawValue)
+    }
+
     // Get Value
     func getBabyName() -> String? {
         return defaults.string(forKey: UserInfoKey.babyName.rawValue)
@@ -82,6 +89,10 @@ final class UserDefaultsManager: UserDefaultManagerProtocol {
 
     func getBirthDay() -> String? {
         return defaults.string(forKey: UserInfoKey.birthDay.rawValue)
+    }
+
+    func getGraphType() -> String? {
+        return defaults.string(forKey: UserInfoKey.graphType.rawValue)
     }
 
 }

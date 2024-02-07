@@ -90,7 +90,6 @@ class GraphTypeSettingCell: UITableViewCell {
             name.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             name.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
-
     }
 
     func setupTitle(with name: String, graph: UIImage) {

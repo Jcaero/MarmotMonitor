@@ -71,7 +71,7 @@ class InformationViewController: UIViewController {
             return titleAttributes
         }
         button.configuration = configuration
-        button.setTitle("Enegistrer", for: .normal)
+        button.setTitle("Enregistrer", for: .normal)
         button.setupShadow(radius: 1, opacity: 0.5)
         return button
     }()
@@ -244,7 +244,7 @@ class InformationViewController: UIViewController {
         saveButton.addTarget(self, action: #selector(saveData), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
     }
-    
+
     @objc private func closeView(sender: UIButton) {
             sender.transform = .identity
             sender.layer.shadowOpacity = 0.5

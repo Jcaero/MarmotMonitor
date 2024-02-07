@@ -12,6 +12,7 @@ class SettingViewModel {
     var babyName: String = ""
     var parentName: String = ""
     var birthDay: String = ""
+    var graphImageName: String = GraphType.rod.imageNameSynthese
 
     init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {
         self.userDefaultsManager = userDefaultsManager
@@ -35,6 +36,16 @@ class SettingViewModel {
             parentName = "Fille de " + parent
         default:
             parentName = "Parent: " + parent
+        }
+
+        let graphType = userDefaultsManager.getGraphType()
+        switch graphType {
+        case GraphType.round.description:
+            graphImageName = GraphType.round.imageNameSynthese
+        case GraphType.ligne.description:
+            graphImageName = GraphType.ligne.imageNameSynthese
+        default:
+            graphImageName = GraphType.rod.imageNameSynthese
         }
     }
 }

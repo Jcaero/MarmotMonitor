@@ -129,7 +129,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                     print("erreur de cell")
                     return UITableViewCell()
                 }
-                cell.setupTitle(with: "Type de Graphique", graph: UIImage(named: "graphRod")!)
+                cell.setupTitle(with: "Type de Graphique", graph: UIImage(named: viewModel.graphImageName)!)
                 cell.backgroundColor = .colorForGraphBackground
                 return cell
             } else {
@@ -172,12 +172,22 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        switch indexPath.row {
-        case 0:
-            let next = InformationViewController(delegate: self)
-            present(next, animated: true, completion: nil)
-        default:
-            break
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                let next = InformationViewController(delegate: self)
+                present(next, animated: true, completion: nil)
+            default:
+                break
+            }
+        } else {
+            switch indexPath.row {
+            case 0:
+                let next = GraphtypeViewController(delegate: self)
+                present(next, animated: true, completion: nil)
+            default:
+                break
+            }
         }
     }
 
