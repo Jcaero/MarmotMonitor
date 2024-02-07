@@ -66,6 +66,7 @@ class SettingViewController: BackgroundViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(InformationUserSetting.self, forCellReuseIdentifier: InformationUserSetting.reuseIdentifier)
+        tableView.register(GraphTypeSettingCell.self, forCellReuseIdentifier: GraphTypeSettingCell.reuseIdentifier)
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
@@ -122,6 +123,22 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             cell.backgroundColor = .clear
             return cell
 
+        case 1:
+            if indexPath.row == 0 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: GraphTypeSettingCell.reuseIdentifier, for: indexPath) as? GraphTypeSettingCell else {
+                    print("erreur de cell")
+                    return UITableViewCell()
+                }
+                cell.setupTitle(with: "Type de Graphique", graph: UIImage(named: "graphRod")!)
+                cell.backgroundColor = .colorForGraphBackground
+                return cell
+            } else {
+                let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+                cell.textLabel?.text = "Row - \(indexPath.row)"
+                cell.backgroundColor = .colorForGraphBackground
+                return cell
+            }
+
         default:
             let kCellId = "kCellId"
             var lCell = tableView.dequeueReusableCell(withIdentifier: kCellId)
@@ -135,17 +152,9 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     internal func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = HeaderSettingView()
-
-        switch section {
-        case 0:
             let view = UIView()
             view.backgroundColor = .clear
             return view
-        default:
-            headerView.setupTitle(with: "Header \(section)")
-            return headerView
-        }
     }
 
     /// Set the corner radius for the first and last cell of the table view
@@ -169,6 +178,15 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             present(next, animated: true, completion: nil)
         default:
             break
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 5
+        default:
+            return 10
         }
     }
 }

@@ -88,7 +88,7 @@ class InformationUserSetting: UITableViewCell {
         let button = UIButton()
         var configuration = UIButton.Configuration.filled()
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
-        configuration.baseBackgroundColor = UIColor.colorForDuckBlueToWhite
+        configuration.baseBackgroundColor = UIColor.duckBlue
         configuration.background.cornerRadius = 10
         configuration.cornerStyle = .large
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
@@ -103,7 +103,7 @@ class InformationUserSetting: UITableViewCell {
     }()
 
     // MARK: - Properties
-    static let reuseIdentifier = "MonitorCell"
+    static let reuseIdentifier = "InformationUserSettingCell"
 
     // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
