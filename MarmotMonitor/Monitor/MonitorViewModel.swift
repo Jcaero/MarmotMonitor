@@ -9,6 +9,8 @@ import Foundation
 
 class MonitorViewModel {
     private let saveManager: MarmotMonitorSaveManagerProtocol!
+    private let userDefaultsManager: UserDefaultManagerProtocol!
+    
     var graphActivities: [String: [GraphActivity]] = [:]
     var summaryActivities: [String: [String: String]] = [:]
 
@@ -22,8 +24,9 @@ class MonitorViewModel {
         Array(dateWithActivitySet).sorted(by: { $0 > $1 })
     }
 
-    init(saveManager: MarmotMonitorSaveManagerProtocol = MarmotMonitorSaveManager()) {
+    init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager(), saveManager: MarmotMonitorSaveManagerProtocol = MarmotMonitorSaveManager()) {
         self.saveManager = saveManager
+        self.userDefaultsManager = userDefaultsManager
     }
 
     private func cleanAllData() {
@@ -171,6 +174,11 @@ extension MonitorViewModel {
         default:
             return false
         }
+    }
+
+    // MARK: - Type Graph
+    func getGraphStyle() -> GraphType {
+        return userDefaultsManager.getGraphType() ?? .rod
     }
 }
 

@@ -17,7 +17,7 @@ protocol UserDefaultManagerProtocol {
     func getGender() -> String?
     func getParentName() -> String?
     func getBirthDay() -> String?
-    func getGraphType() -> String?
+    func getGraphType() -> GraphType?
 
 //    func save(property: MarmotProperty)
 //    func get(property: MarmotProperty)
@@ -91,8 +91,18 @@ final class UserDefaultsManager: UserDefaultManagerProtocol {
         return defaults.string(forKey: UserInfoKey.birthDay.rawValue)
     }
 
-    func getGraphType() -> String? {
-        return defaults.string(forKey: UserInfoKey.graphType.rawValue)
+    func getGraphType() -> GraphType? {
+        let graph =  defaults.string(forKey: UserInfoKey.graphType.rawValue)
+        switch graph {
+        case GraphType.round.description:
+            return .round
+        case GraphType.ligne.description:
+            return .ligne
+        case GraphType.rod.description:
+            return .rod
+        default:
+            return nil
+        }
     }
 
 }

@@ -15,17 +15,7 @@ class GraphtypeViewModel {
     }
 
     func getGraphType() -> GraphType? {
-        let graph = userDefaultsManager.getGraphType()
-        switch graph {
-        case GraphType.round.description:
-            return .round
-        case GraphType.ligne.description:
-            return .ligne
-        case GraphType.rod.description:
-            return .rod
-        default:
-            return nil
-        }
+        return userDefaultsManager.getGraphType()
     }
 
     func setGraphType(graphType: GraphType) {

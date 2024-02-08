@@ -44,7 +44,7 @@ class InformationViewController: UIViewController {
     private var genderSegmentedControl: UISegmentedControl = {
         let items = ["Fille", "Garçon"]
         let control = UISegmentedControl(items: items)
-        control.selectedSegmentTintColor = .colorForDuckBlueToWhite
+        control.selectedSegmentTintColor = .duckBlue
         control.selectedSegmentIndex = 0
         return control
     }()
@@ -62,7 +62,7 @@ class InformationViewController: UIViewController {
         let button = UIButton()
         var configuration = UIButton.Configuration.filled()
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
-        configuration.baseBackgroundColor = UIColor.colorForDuckBlueToWhite
+        configuration.baseBackgroundColor = UIColor.duckBlue
         configuration.background.cornerRadius = 10
         configuration.cornerStyle = .large
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
@@ -80,7 +80,7 @@ class InformationViewController: UIViewController {
         let button = UIButton()
         var configuration = UIButton.Configuration.filled()
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
-        configuration.baseBackgroundColor = UIColor.colorForDuckBlueToWhite
+        configuration.baseBackgroundColor = UIColor.duckBlue
         configuration.background.cornerRadius = 10
         configuration.cornerStyle = .large
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in

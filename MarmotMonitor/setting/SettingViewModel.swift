@@ -40,9 +40,9 @@ class SettingViewModel {
 
         let graphType = userDefaultsManager.getGraphType()
         switch graphType {
-        case GraphType.round.description:
+        case .round:
             graphImageName = GraphType.round.imageNameSynthese
-        case GraphType.ligne.description:
+        case .ligne:
             graphImageName = GraphType.ligne.imageNameSynthese
         default:
             graphImageName = GraphType.rod.imageNameSynthese
