@@ -43,7 +43,7 @@ class DoctorViewModel {
 
     private func numberOfWeekSinceBirth( date: Date) -> Double {
         let birthDate = userDefaultsManager.getBirthDay()?.toDate() ?? Date()
-        guard let day = Calendar.current.dateComponents([.day], from: birthDate, to: date).day 
+        guard let day = Calendar.current.dateComponents([.day], from: birthDate, to: date).day
             else {
                 return 0.0
             }

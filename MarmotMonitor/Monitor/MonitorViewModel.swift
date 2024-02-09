@@ -10,7 +10,7 @@ import Foundation
 class MonitorViewModel {
     private let saveManager: MarmotMonitorSaveManagerProtocol!
     private let userDefaultsManager: UserDefaultManagerProtocol!
-    
+
     var graphActivities: [String: [GraphActivity]] = [:]
     var summaryActivities: [String: [String: String]] = [:]
 

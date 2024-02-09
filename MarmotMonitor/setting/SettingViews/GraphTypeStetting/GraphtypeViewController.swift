@@ -92,23 +92,47 @@ class GraphtypeViewController: BackgroundViewController {
 
             areaStackView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 30),
             areaStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            areaStackView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.8),
+            areaStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
             areaStackView.bottomAnchor.constraint(lessThanOrEqualTo: saveButton.topAnchor, constant: -30),
             saveButton.widthAnchor.constraint(greaterThanOrEqualTo: areaStackView.widthAnchor, multiplier: 0.5)
         ])
     }
 
     private func fillStackView() {
-        let graphType = ["graphRound", "graphRod", "graphLigne"]
-        for (index, type) in graphType.enumerated() {
-            guard let image = UIImage(named: type) else { return }
-            let button = createButton(image)
-            button.tag = index
-            if type == viewModel.getGraphType()?.imageNameSynthese {
-                button.layer.borderWidth = 6
-                button.layer.borderColor = UIColor.red.cgColor
+
+        for index in 0...2 {
+            let view = UIView()
+            view.tag = index
+            view.backgroundColor = .colorForGradientEnd
+            view.layer.cornerRadius = 10
+
+            let graph = GraphView()
+            let activities = viewModel.getGraphData()
+            switch index {
+            case 0:
+                graph.setUpGraph(with: (activities, .round))
+            case 1:
+                graph.setUpGraph(with: (activities, .rod))
+            case 2:
+                graph.setUpGraph(with: (activities, .ligne))
+            default:
+                break
             }
-            areaStackView.addArrangedSubview(button)
+
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
+            view.addGestureRecognizer(tapGesture)
+
+            view.addSubview(graph)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            graph.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                graph.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+                graph.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+                graph.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+                graph.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
+            ])
+
+            areaStackView.addArrangedSubview(view)
         }
     }
 
@@ -123,8 +147,10 @@ class GraphtypeViewController: BackgroundViewController {
         return button
     }
 
-    @objc private func buttonTapped(_ sender: UIButton) {
-        switch sender.tag {
+    @objc private func buttonTapped(_ sender: UITapGestureRecognizer) {
+        guard let view = sender.view else { return }
+
+        switch view.tag {
         case 0:
             viewModel.setGraphType(graphType: .round)
         case 1:
@@ -136,14 +162,13 @@ class GraphtypeViewController: BackgroundViewController {
         }
 
         removeAllBorders()
-        sender.layer.borderWidth = 6
-        sender.layer.borderColor = UIColor.red.cgColor
+        view.layer.borderWidth = 6
+        view.layer.borderColor = UIColor.red.cgColor
     }
 
     private func removeAllBorders() {
         for subview in areaStackView.arrangedSubviews {
-            guard let button = subview as? UIButton else { return }
-            button.layer.borderWidth = 0
+            subview.layer.borderWidth = 0
         }
     }
 

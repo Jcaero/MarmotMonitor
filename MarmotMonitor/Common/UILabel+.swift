@@ -28,11 +28,11 @@ extension UILabel {
         if let boldDescriptor = fontDescriptor.withSymbolicTraits(.traitBold) {
             fontDescriptor = boldDescriptor
         }
-        
+
         let fontMetrics = UIFontMetrics(forTextStyle: style)
         let font = UIFont(descriptor: fontDescriptor, size: size)
         self.font = fontMetrics.scaledFont(for: font)
-        
+
         self.adjustsFontForContentSizeCategory = true
         self.numberOfLines = 0
     }

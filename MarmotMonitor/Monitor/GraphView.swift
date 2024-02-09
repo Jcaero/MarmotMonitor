@@ -66,12 +66,18 @@ class GraphView: UIView {
     typealias GraphData = (elements: [GraphActivity], style: GraphType)
     func setUpGraph(with data: GraphData) {
         guard !data.elements.isEmpty else { return }
+        if data.style == .rod {
+            stackViewForDay.setupShadow(radius: 1, opacity: 0.5)
+        } else {
+            stackViewForDay.layer.shadowOpacity = 0
+        }
+
         setStackViewForDayCount(with: 0)
 
         setupStyleOfGraph(data.style, with : data.elements.count)
         cleanGraph()
 
-        for (index, element) in data.elements.enumerated() {
+        for element in data.elements {
             let (startedTime, endedTime) = calculateStartAndEndTime(for: element)
             switch data.style {
             case .ligne:
@@ -284,7 +290,7 @@ class GraphView: UIView {
         if stackViewForDay.arrangedSubviews.count > 3 {
             if let stackView = stackViewForDay.arrangedSubviews[3] as? UIStackView {
                 for (index, view) in stackView.arrangedSubviews.enumerated() where index % 2 == 0 {
-                    view.backgroundColor = .black
+                    view.backgroundColor = .colorForLabelBlackToBlue
                 }
             }
         }

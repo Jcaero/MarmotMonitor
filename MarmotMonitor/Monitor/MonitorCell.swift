@@ -29,7 +29,10 @@ class MonitorCell: UITableViewCell {
         return view
     }()
 
-    let graph = GraphView()
+    let graph: GraphView = {
+        let graph = GraphView()
+        return graph
+    }()
 
     private let stackViewActivities: UIStackView = {
         let view = UIStackView()

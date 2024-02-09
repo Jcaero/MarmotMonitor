@@ -129,7 +129,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                     print("erreur de cell")
                     return UITableViewCell()
                 }
-                cell.setupTitle(with: "Type de Graphique", graph: UIImage(named: viewModel.graphImageName)!)
+                cell.setupTitle(with: "Type de graphique", type: viewModel.graphType)
                 cell.backgroundColor = .colorForGraphBackground
                 return cell
             } else {

@@ -24,7 +24,7 @@ protocol UserDefaultManagerProtocol {
 }
 
 final class UserDefaultsManager: UserDefaultManagerProtocol {
-    
+
     private let defaults: UserDefaults
 
     init(defaults: UserDefaults = UserDefaults.standard) {
