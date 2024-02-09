@@ -48,8 +48,7 @@ class GraphView: UIView {
     }()
 
     // MARK: - Properties
- 
-    private var labelTexte = ["2", "6", "10", "14", "18", "22"]
+    private var labelTexte = ["2h", "6h", "10h", "14h", "18h", "22h"]
     private let numberOfHalfHour = 48
 
     // MARK: - INIT
@@ -76,7 +75,7 @@ class GraphView: UIView {
             let (startedTime, endedTime) = calculateStartAndEndTime(for: element)
             switch data.style {
             case .ligne:
-                colorGraph(number: index, with: element.color, startedIndex: startedTime, endIndex: endedTime)
+                colorGraph(type: element.type, with: element.color, startedIndex: startedTime, endIndex: endedTime)
             default:
                 colorGraph(with: element.color, startedIndex: startedTime, endIndex: endedTime)
             }
@@ -151,7 +150,7 @@ class GraphView: UIView {
         case .rod:
             setupRodGraph()
         case .ligne:
-            setupLigneGraph(with: numberOfLine)
+            setupLigneGraph()
         }
     }
 
@@ -176,14 +175,19 @@ class GraphView: UIView {
         }
     }
 
-    private func setupLigneGraph(with numberOfLigne: Int) {
+    private func setupLigneGraph() {
+        setStackViewForDayCount(with: 3)
         stackViewForDay.distribution = .fillEqually
-//        setStackViewForDayCount(numberOfStackView: numberOfLigne-1)
+    }
 
-//        while stackViewForDay.arrangedSubviews.count > 1 {
-//            stackViewForDay.removeArrangedSubview(stackViewForDay.arrangedSubviews.last!)
-//        }
-
+    private func setupRoundView() {
+        for stackView in stackViewForDay.arrangedSubviews {
+            if let stackView = stackView as? UIStackView {
+                stackView.arrangedSubviews.forEach {view  in
+                    view.heightAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+                }
+            }
+        }
     }
 
     // MARK: - Create UI
@@ -227,21 +231,32 @@ class GraphView: UIView {
         }
     }
 
-    private func colorGraph(number: Int, with color: UIColor, startedIndex: Int, endIndex: Int) {
-//        guard startedIndex < numberOfHalfHour, endIndex <= numberOfHalfHour else {return}
-//        guard stackViews.count > number else { return }
-//        let stackview = stackViews[number]
-//        if stackview.arrangedSubviews.count > endIndex-1 {
-//            if startedIndex == endIndex {
-//                let view = stackview.arrangedSubviews[startedIndex]
-//                view.backgroundColor = color
-//            } else {
-//                for index in startedIndex...endIndex-1 {
-//                    let view = stackview.arrangedSubviews[index]
-//                    view.backgroundColor = color
-//                }
-//            }
-//        }
+    private func colorGraph(type: ShowActivityType, with color: UIColor, startedIndex: Int, endIndex: Int) {
+        guard startedIndex < numberOfHalfHour, endIndex <= numberOfHalfHour else {return}
+        var index = 0
+        switch type {
+        case .bottle, .breast, .solid:
+            index = 0
+        case .sleep:
+            index = 1
+        case .diaper:
+            index = 2
+        }
+
+        guard stackViewForDay.arrangedSubviews.count - 1 >= index else {return}
+            if let stack = stackViewForDay.arrangedSubviews[index] as? UIStackView {
+                if stack.arrangedSubviews.count > endIndex-1 {
+                    if startedIndex == endIndex {
+                        let view = stack.arrangedSubviews[startedIndex]
+                        view.backgroundColor = color
+                    } else {
+                        for index in startedIndex...endIndex-1 {
+                            let view = stack.arrangedSubviews[index]
+                            view.backgroundColor = color
+                        }
+                    }
+                }
+            }
     }
 
     private func setTimeBaseLigne() {
