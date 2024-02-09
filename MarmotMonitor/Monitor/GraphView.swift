@@ -155,8 +155,10 @@ class GraphView: UIView {
     }
 
     private func setupRoundGraph() {
-        stackViewForDay.distribution = .equalSpacing
         setStackViewForDayCount(with: 7)
+
+        stackViewForDay.distribution = .equalSpacing
+        stackViewForDay.spacing = 0
 
         for stackView in stackViewForDay.arrangedSubviews {
             if let stackView = stackView as? UIStackView {
@@ -169,7 +171,10 @@ class GraphView: UIView {
 
     private func setupRodGraph() {
         setStackViewForDayCount(with: 1)
+
         stackViewForDay.distribution = .equalSpacing
+        stackViewForDay.spacing = 0
+
         stackViewForDay.arrangedSubviews.forEach {view  in
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
         }
@@ -177,7 +182,15 @@ class GraphView: UIView {
 
     private func setupLigneGraph() {
         setStackViewForDayCount(with: 3)
+
         stackViewForDay.distribution = .fillEqually
+        stackViewForDay.spacing = 2
+
+        for stack in stackViewForDay.arrangedSubviews {
+            if let stack = stack as? UIStackView {
+                stack.spacing = 0
+                }
+            }
     }
 
     private func setupRoundView() {
@@ -253,6 +266,14 @@ class GraphView: UIView {
                         for index in startedIndex...endIndex-1 {
                             let view = stack.arrangedSubviews[index]
                             view.backgroundColor = color
+                            view.layer.cornerRadius = 0
+                            if index == startedIndex {
+                                view.layer.cornerRadius = 2
+                                view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+                            } else if index == endIndex-1 {
+                                view.layer.cornerRadius = 2
+                                view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+                            }
                         }
                     }
                 }
