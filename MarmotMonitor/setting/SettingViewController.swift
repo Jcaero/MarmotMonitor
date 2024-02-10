@@ -66,7 +66,7 @@ class SettingViewController: BackgroundViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(InformationUserSetting.self, forCellReuseIdentifier: InformationUserSetting.reuseIdentifier)
-        tableView.register(GraphTypeSettingCell.self, forCellReuseIdentifier: GraphTypeSettingCell.reuseIdentifier)
+        tableView.register(SettingCell.self, forCellReuseIdentifier: SettingCell.reuseIdentifier)
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
@@ -125,11 +125,19 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
 
         case 1:
             if indexPath.row == 0 {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: GraphTypeSettingCell.reuseIdentifier, for: indexPath) as? GraphTypeSettingCell else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.reuseIdentifier, for: indexPath) as? SettingCell else {
                     print("erreur de cell")
                     return UITableViewCell()
                 }
-                cell.setupTitle(with: "Type de graphique", type: viewModel.graphType)
+                cell.setupTitle(with: "Type de graphique", information: viewModel.graphType.description, icone: UIImage(named: "graphIcone")!)
+                cell.backgroundColor = .colorForGraphBackground
+                return cell
+            } else if indexPath.row == 1 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.reuseIdentifier, for: indexPath) as? SettingCell else {
+                    print("erreur de cell")
+                    return UITableViewCell()
+                }
+                cell.setupTitle(with: "Changement d'Icone", information: "", icone: UIImage(named: "iconeBleu")!)
                 cell.backgroundColor = .colorForGraphBackground
                 return cell
             } else {

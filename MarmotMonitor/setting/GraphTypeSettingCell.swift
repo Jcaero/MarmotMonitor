@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GraphTypeSettingCell: UITableViewCell {
+class SettingCell: UITableViewCell {
     private let icone: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = .duckBlue
@@ -15,7 +15,7 @@ class GraphTypeSettingCell: UITableViewCell {
         return view
     }()
 
-    private let name: UILabel = {
+    private let nameTitle: UILabel = {
         let label = UILabel()
         label.setupDynamicBoldTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .colorForDuckBlueToWhite
@@ -24,7 +24,7 @@ class GraphTypeSettingCell: UITableViewCell {
         return label
     }()
 
-    private let graph: UILabel = {
+    private let information: UILabel = {
         let label = UILabel()
         label.setupDynamicBoldTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .colorForDuckBlueToWhite
@@ -41,7 +41,7 @@ class GraphTypeSettingCell: UITableViewCell {
     }()
 
     // MARK: - Properties
-    static let reuseIdentifier = "GraohTypeSettingCell"
+    static let reuseIdentifier = "SettingCell"
 
     private var nameLeadingConstraint: NSLayoutConstraint?
     private var nameLeadingAccesibilityConstraint: NSLayoutConstraint?
@@ -55,8 +55,6 @@ class GraphTypeSettingCell: UITableViewCell {
 
         setupViews()
         setupContraints()
-
-        icone.image = UIImage(named: "graphIcone")
     }
 
     required init?(coder: NSCoder) {
@@ -64,38 +62,35 @@ class GraphTypeSettingCell: UITableViewCell {
     }
 
     private func setupViews() {
-        [name, icone, graph].forEach {
+        [nameTitle, icone, information].forEach {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
 
     private func setupContraints() {
-
-//        nameTrailingConstraint =  name.trailingAnchor.constraint(equalTo: graph.leadingAnchor, constant: -15)
-//        nameTrailingAccessibilityConstraint = name.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
-
         NSLayoutConstraint.activate([
             icone.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             icone.heightAnchor.constraint(equalToConstant: frame.height * 0.65),
             icone.heightAnchor.constraint(equalTo: icone.widthAnchor),
             icone.centerYAnchor.constraint(equalTo: centerYAnchor),
 
-            graph.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            graph.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            graph.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            graph.widthAnchor.constraint(equalToConstant: 100),
+            information.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            information.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            information.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            information.widthAnchor.constraint(equalToConstant: 100),
 
-            name.leadingAnchor.constraint(equalTo: icone.trailingAnchor, constant: 10),
-            name.trailingAnchor.constraint(equalTo: graph.leadingAnchor, constant: -15),
-            name.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            name.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+            nameTitle.leadingAnchor.constraint(equalTo: icone.trailingAnchor, constant: 10),
+            nameTitle.trailingAnchor.constraint(equalTo: information.leadingAnchor, constant: -15),
+            nameTitle.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            nameTitle.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
 
-    func setupTitle(with name: String, type: GraphType) {
-        self.name.text = name
-        self.graph.text = type.description + " >"
+    func setupTitle(with title: String, information: String, icone: UIImage) {
+        self.nameTitle.text = title
+        self.information.text = information + " >"
+        self.icone.image = icone
     }
 
     override func layoutSubviews() {

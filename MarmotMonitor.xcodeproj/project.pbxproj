@@ -19,6 +19,7 @@
 		47155BCA2B1DE97000775B27 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BC92B1DE97000775B27 /* TodayViewController.swift */; };
 		47155BCD2B1DEBDB00775B27 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */; };
 		4719ABE52B0E96380088CBE2 /* BabyNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719ABE42B0E96380088CBE2 /* BabyNameController.swift */; };
+		471D98032B76CB03003C0841 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471D98022B76CB03003C0841 /* AppIcon.swift */; };
 		4722368D2B6D88E800CBF044 /* DoctorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722368C2B6D88E800CBF044 /* DoctorViewModel.swift */; };
 		4726966A2B3D8A18006BC301 /* SleepViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472696692B3D8A18006BC301 /* SleepViewModel.swift */; };
 		472848222B58154700AA6B35 /* BreastFeedingChronoViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472848212B58154700AA6B35 /* BreastFeedingChronoViewModelTest.swift */; };
@@ -149,6 +150,7 @@
 		47155BC92B1DE97000775B27 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 		4719ABE42B0E96380088CBE2 /* BabyNameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyNameController.swift; sourceTree = "<group>"; };
+		471D98022B76CB03003C0841 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		4722368C2B6D88E800CBF044 /* DoctorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewModel.swift; sourceTree = "<group>"; };
 		472696692B3D8A18006BC301 /* SleepViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepViewModel.swift; sourceTree = "<group>"; };
 		472848212B58154700AA6B35 /* BreastFeedingChronoViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoViewModelTest.swift; sourceTree = "<group>"; };
@@ -317,6 +319,14 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		471D98012B76CAE6003C0841 /* AppIcon */ = {
+			isa = PBXGroup;
+			children = (
+				471D98022B76CB03003C0841 /* AppIcon.swift */,
+			);
+			name = AppIcon;
+			sourceTree = "<group>";
+		};
 		472848202B58146F00AA6B35 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,8 +379,9 @@
 		4745E48A2B7031310016C52F /* SettingViews */ = {
 			isa = PBXGroup;
 			children = (
-				479A2A612B739AD5002C4FAF /* GraphTypeStetting */,
+				471D98012B76CAE6003C0841 /* AppIcon */,
 				4745E4882B702AEF0016C52F /* HeaderSettingView.swift */,
+				479A2A612B739AD5002C4FAF /* GraphTypeStetting */,
 				474C243E2B717FC10002AD83 /* informationController */,
 			);
 			path = SettingViews;
@@ -532,6 +543,7 @@
 			children = (
 				475C3AC72B6EE400003E5BA8 /* SettingViewController.swift */,
 				47DB9E7E2B7100F800A58CAB /* SettingViewModel.swift */,
+				479A2A622B739AFA002C4FAF /* GraphTypeSettingCell.swift */,
 				4745E48A2B7031310016C52F /* SettingViews */,
 			);
 			path = setting;
@@ -601,7 +613,6 @@
 		479A2A612B739AD5002C4FAF /* GraphTypeStetting */ = {
 			isa = PBXGroup;
 			children = (
-				479A2A622B739AFA002C4FAF /* GraphTypeSettingCell.swift */,
 				47C8F36B2B741BA500E94668 /* GraphtypeViewController.swift */,
 				47C8F36D2B74280500E94668 /* GraphtypeViewModel.swift */,
 			);
@@ -864,6 +875,7 @@
 				475BD8EF2B597FBF003F1158 /* DiaperViewModel.swift in Sources */,
 				4747324D2B1234BB0064ABB4 /* ParentNameController.swift in Sources */,
 				47D8DA6C2B4B37F000D97CD1 /* Diaper+CoreDataProperties.swift in Sources */,
+				471D98032B76CB03003C0841 /* AppIcon.swift in Sources */,
 				474EE9062B3B69100047054B /* GrowthCell.swift in Sources */,
 				47D8DA762B4B461D00D97CD1 /* MarmotMonitorSaveManager.swift in Sources */,
 				470009D12B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift in Sources */,
@@ -1134,6 +1146,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1169,6 +1182,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
