@@ -63,6 +63,7 @@
 		4767543A2B37912F00C83E6D /* BackGroundActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476754392B37912F00C83E6D /* BackGroundActivity.swift */; };
 		4767543C2B3792BC00C83E6D /* SleepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4767543B2B3792BC00C83E6D /* SleepCell.swift */; };
 		476AF6302B27A10100F4935F /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476AF62F2B27A10100F4935F /* UIButton+.swift */; };
+		4772CA602B781E6000CEBDAE /* IconeSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4772CA5F2B781E6000CEBDAE /* IconeSettingCell.swift */; };
 		4777ABEF2B2501710055DF4A /* BreastFeedingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4777ABEE2B2501710055DF4A /* BreastFeedingController.swift */; };
 		4779579D2B547ADD0021178D /* BenchMarkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4779579C2B547ADD0021178D /* BenchMarkTest.swift */; };
 		477B86932B3384D100333768 /* meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477B86922B3384D100333768 /* meal.swift */; };
@@ -81,6 +82,7 @@
 		47AF89782B3A29E90068FE1F /* diaperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF89772B3A29E90068FE1F /* diaperCell.swift */; };
 		47B2316A2B6C35C30079B436 /* DoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B231692B6C35C30079B436 /* DoctorViewController.swift */; };
 		47B2316D2B6C390E0079B436 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 47B2316C2B6C390E0079B436 /* DGCharts */; };
+		47B984CE2B77833F000DBB80 /* IconSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B984CD2B77833F000DBB80 /* IconSettingViewController.swift */; };
 		47C8F36C2B741BA500E94668 /* GraphtypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8F36B2B741BA500E94668 /* GraphtypeViewController.swift */; };
 		47C8F36E2B74280500E94668 /* GraphtypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8F36D2B74280500E94668 /* GraphtypeViewModel.swift */; };
 		47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8C2B128A5A00C5919A /* UserDefault+.swift */; };
@@ -198,6 +200,7 @@
 		476754392B37912F00C83E6D /* BackGroundActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundActivity.swift; sourceTree = "<group>"; };
 		4767543B2B3792BC00C83E6D /* SleepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCell.swift; sourceTree = "<group>"; };
 		476AF62F2B27A10100F4935F /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		4772CA5F2B781E6000CEBDAE /* IconeSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconeSettingCell.swift; sourceTree = "<group>"; };
 		4777ABEE2B2501710055DF4A /* BreastFeedingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingController.swift; sourceTree = "<group>"; };
 		4779579C2B547ADD0021178D /* BenchMarkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BenchMarkTest.swift; sourceTree = "<group>"; };
 		477B86922B3384D100333768 /* meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = meal.swift; sourceTree = "<group>"; };
@@ -215,6 +218,7 @@
 		47AF89752B3A28200068FE1F /* diaperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diaperController.swift; sourceTree = "<group>"; };
 		47AF89772B3A29E90068FE1F /* diaperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diaperCell.swift; sourceTree = "<group>"; };
 		47B231692B6C35C30079B436 /* DoctorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewController.swift; sourceTree = "<group>"; };
+		47B984CD2B77833F000DBB80 /* IconSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSettingViewController.swift; sourceTree = "<group>"; };
 		47C8F36B2B741BA500E94668 /* GraphtypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphtypeViewController.swift; sourceTree = "<group>"; };
 		47C8F36D2B74280500E94668 /* GraphtypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphtypeViewModel.swift; sourceTree = "<group>"; };
 		47CABD8C2B128A5A00C5919A /* UserDefault+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+.swift"; sourceTree = "<group>"; };
@@ -319,12 +323,14 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		471D98012B76CAE6003C0841 /* AppIcon */ = {
+		471D98012B76CAE6003C0841 /* AppIconCustomizer */ = {
 			isa = PBXGroup;
 			children = (
 				471D98022B76CB03003C0841 /* AppIcon.swift */,
+				47B984CD2B77833F000DBB80 /* IconSettingViewController.swift */,
+				4772CA5F2B781E6000CEBDAE /* IconeSettingCell.swift */,
 			);
-			name = AppIcon;
+			name = AppIconCustomizer;
 			sourceTree = "<group>";
 		};
 		472848202B58146F00AA6B35 /* Activity */ = {
@@ -379,7 +385,7 @@
 		4745E48A2B7031310016C52F /* SettingViews */ = {
 			isa = PBXGroup;
 			children = (
-				471D98012B76CAE6003C0841 /* AppIcon */,
+				471D98012B76CAE6003C0841 /* AppIconCustomizer */,
 				4745E4882B702AEF0016C52F /* HeaderSettingView.swift */,
 				479A2A612B739AD5002C4FAF /* GraphTypeStetting */,
 				474C243E2B717FC10002AD83 /* informationController */,
@@ -918,6 +924,7 @@
 				47DB9E7F2B7100F800A58CAB /* SettingViewModel.swift in Sources */,
 				4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */,
 				474C24402B717FE10002AD83 /* informationViewController.swift in Sources */,
+				47B984CE2B77833F000DBB80 /* IconSettingViewController.swift in Sources */,
 				4726966A2B3D8A18006BC301 /* SleepViewModel.swift in Sources */,
 				47D8DA722B4B405800D97CD1 /* DateActivity+CoreDataProperties.swift in Sources */,
 				4792CB592B3063720010AE38 /* SolideFeedingController.swift in Sources */,
@@ -949,6 +956,7 @@
 				47F81B9D2B6058430042A055 /* MonitorViewController.swift in Sources */,
 				475071E22B09462000DAB527 /* MarmotMonitor.xcdatamodeld in Sources */,
 				47C8F36C2B741BA500E94668 /* GraphtypeViewController.swift in Sources */,
+				4772CA602B781E6000CEBDAE /* IconeSettingCell.swift in Sources */,
 				47D7895F2B5E96AD00B4912D /* GrowthViewModel.swift in Sources */,
 				4711F7742B1E70AB00869A27 /* Person.swift in Sources */,
 				477B86932B3384D100333768 /* meal.swift in Sources */,

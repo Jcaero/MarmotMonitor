@@ -137,7 +137,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                     print("erreur de cell")
                     return UITableViewCell()
                 }
-                cell.setupTitle(with: "Changement d'Icone", information: "", icone: UIImage(named: "iconeBleu")!)
+                cell.setupTitle(with: "Changement d'Icone", information: "", icone: UIImage(named: "iconeBleue")!)
                 cell.backgroundColor = .colorForGraphBackground
                 return cell
             } else {
@@ -192,6 +192,9 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             switch indexPath.row {
             case 0:
                 let next = GraphtypeViewController(delegate: self)
+                present(next, animated: true, completion: nil)
+            case 1:
+                let next = IconSettingViewController()
                 present(next, animated: true, completion: nil)
             default:
                 break
