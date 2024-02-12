@@ -6,8 +6,11 @@
 //
 
 import UIKit
+protocol UpdateInformationControllerDelegate: AnyObject {
+    func updateInformation()
+}
 
-class SettingViewController: BackgroundViewController {
+class SettingViewController: BackgroundViewController, UpdateInformationControllerDelegate {
 
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -137,7 +140,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                     print("erreur de cell")
                     return UITableViewCell()
                 }
-                cell.setupTitle(with: "Changement d'Icone", information: "", icone: UIImage(named: "iconeBleue")!)
+                cell.setupTitle(with: "Couleur d'Icone", information: "", icone: UIImage(named: viewModel.iconImageName)!)
                 cell.backgroundColor = .colorForGraphBackground
                 return cell
             } else {
@@ -194,7 +197,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 let next = GraphtypeViewController(delegate: self)
                 present(next, animated: true, completion: nil)
             case 1:
-                let next = IconSettingViewController()
+                let next = IconSettingViewController(delegate: self)
                 present(next, animated: true, completion: nil)
             default:
                 break

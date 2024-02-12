@@ -24,9 +24,9 @@ extension UILabel {
     }
 
     func setupDynamicBoldTextWith( policeName: String, size: CGFloat, style: UIFont.TextStyle) {
-        let fontDescriptor = UIFont.systemFont(ofSize: size, weight: .bold).fontDescriptor
+        let fontDescriptor = UIFont.systemFont(ofSize: size, weight: .bold).fontDescriptor.withDesign(.rounded)
         let fontMetrics = UIFontMetrics(forTextStyle: style)
-        let font = UIFont(descriptor: fontDescriptor, size: size)
+        let font = UIFont(descriptor: fontDescriptor!, size: size)
         self.font = fontMetrics.scaledFont(for: font)
         self.adjustsFontForContentSizeCategory = true
         self.numberOfLines = 0

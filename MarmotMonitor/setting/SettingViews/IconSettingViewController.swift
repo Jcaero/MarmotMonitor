@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+
 class IconSettingViewController: BackgroundViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     private let scrollView: UIScrollView = {
@@ -24,7 +26,7 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
 
     private let titleView: UILabel = {
         let label = UILabel()
-        label.setupDynamicBoldTextWith(policeName: "New York", size: 40, style: .title3)
+        label.setupDynamicBoldTextWith(policeName: "SF Pro Rounded", size: 40, style: .title3)
         label.textColor = .colorForLabelBlackToBlue
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -33,7 +35,7 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
 
     private let subtitleView: UILabel = {
         let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
+        label.setupDynamicTextWith(policeName: "New York", size: 35, style: .body)
         label.textColor = .colorForLabelBlackToBlue
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -121,10 +123,12 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
 
     // MARK: - Properties
     let viewModel = IconSettingViewModel()
+    private var delegate: UpdateInformationControllerDelegate?
 
 // MARK: - Circle Life
-    init() {
+    init(delegate: UpdateInformationControllerDelegate) {
         super.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
     }
 
     required init?(coder: NSCoder) {
@@ -231,21 +235,29 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
         saveButton.addTarget(self, action: #selector(saveData), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
 
-        cancelButton.addTarget(self, action: #selector(saveData), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
     }
 
     @objc private func saveData(sender: UIButton) {
             sender.transform = .identity
             sender.layer.shadowOpacity = 0.5
-        setIcon(viewModel.iconeName)
+        setIcon(viewModel.iconeName) { [weak self] _ in
+            if let name = self?.viewModel.iconeName {
+                self?.viewModel.saveIconeName(name: name)
+            } else {
+                self?.viewModel.saveIconeName(name: NIAppIconType.defaultIcon.name)
+            }
+
+            self?.delegate?.updateInformation()
+            self?.dismiss(animated: true, completion: nil)
+        }
 
     }
 
     @objc func cancel(sender: UIButton) {
         sender.transform = .identity
         sender.layer.shadowOpacity = 0.5
-
     self.dismiss(animated: true, completion: nil)
     }
 
@@ -255,16 +267,19 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
     }
 
     // MARK: - Icon
-    func setIcon(_ appIconName: String?) {
-            if UIApplication.shared.supportsAlternateIcons {
-                    UIApplication.shared.setAlternateIconName(appIconName) { error in
-                        self.dismiss(animated: true, completion: nil)
-                        if let error = error {
-                            print("Error setting alternate icon : \(error.localizedDescription)")
-                        }
-                    }
+    func setIcon(_ appIconName: String?, completion: @escaping (Error?) -> Void) {
+        if UIApplication.shared.supportsAlternateIcons {
+            UIApplication.shared.setAlternateIconName(appIconName) { error in
+                DispatchQueue.main.async {
+                    completion(error)
                 }
             }
+        } else {
+            DispatchQueue.main.async {
+                completion(nil)
+            }
+        }
+    }
 
     // MARK: - CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
