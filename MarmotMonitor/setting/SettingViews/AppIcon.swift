@@ -8,40 +8,39 @@
 import UIKit
 
 enum NIAppIconType: CaseIterable {
-    case defaultIcon, appiconGreen, appiconBlue
+    case defaultIcon, appiconGreen, appiconBlue, appiconPink, appiconRed, appiconDarkBlue
 
-    var name: String? {
+    var name: String {
         switch self {
         case .defaultIcon:
-            return nil
+            return "AppIcon"
         case .appiconGreen:
-            return "IconeVerte"
+            return "iconeVerte"
         case .appiconBlue:
-            return "IconeBleue"
-        }
-    }
-
-    init(name: String) { 
-        switch name {
-        case "DefaultAppIcon":
-            self = .defaultIcon
-        case "appiconGreen":
-            self = .appiconGreen
-        case "appiconBlue":
-            self = .appiconBlue
-        default:
-            self = .defaultIcon
+            return "iconeBleue"
+        case .appiconPink:
+            return "iconeRose"
+        case .appiconRed:
+            return "iconeRouge"
+        case .appiconDarkBlue:
+            return "iconeBleueFonce"
         }
     }
 
     var alternateIconName: String {
         switch self {
         case .defaultIcon:
-            return "iconeNoire"
+            return "AppIcon"
         case .appiconGreen:
             return "iconeVerte"
         case .appiconBlue:
             return "iconeBleue"
+        case .appiconPink:
+            return "iconeRose"
+        case .appiconRed:
+            return "iconeRouge"
+        case .appiconDarkBlue:
+            return "iconeBleueFonce"
         }
     }
 }

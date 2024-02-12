@@ -59,7 +59,7 @@ class InformationUserSetting: UITableViewCell {
 
     private let birthDay: UILabel = {
         let label = UILabel()
-        label.setupDynamicBoldTextWith(policeName: "Symbol", size: 20, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .colorForLabelBlackToBlue
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -68,7 +68,7 @@ class InformationUserSetting: UITableViewCell {
 
     private let parentName: UILabel = {
         let label = UILabel()
-        label.setupDynamicBoldTextWith(policeName: "Symbol", size: 17, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 17, style: .body)
         label.textColor = .systemGray
         label.textAlignment = .left
         label.numberOfLines = 0

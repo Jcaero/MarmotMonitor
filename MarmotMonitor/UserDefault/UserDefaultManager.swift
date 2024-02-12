@@ -13,11 +13,14 @@ protocol UserDefaultManagerProtocol {
     func saveParentName(_ name: String?)
     func saveDateOfBirth(_ date: String?)
     func saveGraphType(_ graphType: GraphType)
+    func saveAppIconName(_ name: String)
     func getBabyName() -> String?
     func getGender() -> String?
     func getParentName() -> String?
     func getBirthDay() -> String?
     func getGraphType() -> GraphType?
+    func getAppIconName() -> String?
+    
 
 //    func save(property: MarmotProperty)
 //    func get(property: MarmotProperty)
@@ -74,6 +77,10 @@ final class UserDefaultsManager: UserDefaultManagerProtocol {
         defaults.set(graphType.description, forKey: UserInfoKey.graphType.rawValue)
     }
 
+    func saveAppIconName(_ name: String) {
+        defaults.set(name, forKey: UserInfoKey.appIcon.rawValue)
+    }
+
     // Get Value
     func getBabyName() -> String? {
         return defaults.string(forKey: UserInfoKey.babyName.rawValue)
@@ -103,6 +110,10 @@ final class UserDefaultsManager: UserDefaultManagerProtocol {
         default:
             return nil
         }
+    }
+
+    func getAppIconName() -> String? {
+        return defaults.string(forKey: UserInfoKey.appIcon.rawValue)
     }
 
 }

@@ -74,7 +74,7 @@
 		478E79102B138200004157AF /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478E790F2B138200004157AF /* String+.swift */; };
 		4792CB592B3063720010AE38 /* SolideFeedingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4792CB582B3063720010AE38 /* SolideFeedingController.swift */; };
 		4792CB5B2B3068270010AE38 /* SolideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4792CB5A2B3068270010AE38 /* SolideCell.swift */; };
-		479A2A632B739AFA002C4FAF /* GraphTypeSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A2A622B739AFA002C4FAF /* GraphTypeSettingCell.swift */; };
+		479A2A632B739AFA002C4FAF /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A2A622B739AFA002C4FAF /* SettingCell.swift */; };
 		479FC9592B56D550001BAC22 /* timeInterval+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479FC9582B56D550001BAC22 /* timeInterval+.swift */; };
 		47A0E6B62B3B13B400F894A1 /* GrowthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A0E6B52B3B13B400F894A1 /* GrowthController.swift */; };
 		47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A3A3532B0FE7FD00447362 /* WelcomeController.swift */; };
@@ -82,6 +82,7 @@
 		47AF89782B3A29E90068FE1F /* diaperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF89772B3A29E90068FE1F /* diaperCell.swift */; };
 		47B2316A2B6C35C30079B436 /* DoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B231692B6C35C30079B436 /* DoctorViewController.swift */; };
 		47B2316D2B6C390E0079B436 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 47B2316C2B6C390E0079B436 /* DGCharts */; };
+		47B500A02B7910AB0055A4A2 /* IconSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B5009F2B7910AB0055A4A2 /* IconSettingViewModel.swift */; };
 		47B984CE2B77833F000DBB80 /* IconSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B984CD2B77833F000DBB80 /* IconSettingViewController.swift */; };
 		47C8F36C2B741BA500E94668 /* GraphtypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8F36B2B741BA500E94668 /* GraphtypeViewController.swift */; };
 		47C8F36E2B74280500E94668 /* GraphtypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8F36D2B74280500E94668 /* GraphtypeViewModel.swift */; };
@@ -211,13 +212,14 @@
 		478E790F2B138200004157AF /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		4792CB582B3063720010AE38 /* SolideFeedingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolideFeedingController.swift; sourceTree = "<group>"; };
 		4792CB5A2B3068270010AE38 /* SolideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolideCell.swift; sourceTree = "<group>"; };
-		479A2A622B739AFA002C4FAF /* GraphTypeSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTypeSettingCell.swift; sourceTree = "<group>"; };
+		479A2A622B739AFA002C4FAF /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		479FC9582B56D550001BAC22 /* timeInterval+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "timeInterval+.swift"; sourceTree = "<group>"; };
 		47A0E6B52B3B13B400F894A1 /* GrowthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthController.swift; sourceTree = "<group>"; };
 		47A3A3532B0FE7FD00447362 /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
 		47AF89752B3A28200068FE1F /* diaperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diaperController.swift; sourceTree = "<group>"; };
 		47AF89772B3A29E90068FE1F /* diaperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diaperCell.swift; sourceTree = "<group>"; };
 		47B231692B6C35C30079B436 /* DoctorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewController.swift; sourceTree = "<group>"; };
+		47B5009F2B7910AB0055A4A2 /* IconSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSettingViewModel.swift; sourceTree = "<group>"; };
 		47B984CD2B77833F000DBB80 /* IconSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSettingViewController.swift; sourceTree = "<group>"; };
 		47C8F36B2B741BA500E94668 /* GraphtypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphtypeViewController.swift; sourceTree = "<group>"; };
 		47C8F36D2B74280500E94668 /* GraphtypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphtypeViewModel.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 			children = (
 				471D98022B76CB03003C0841 /* AppIcon.swift */,
 				47B984CD2B77833F000DBB80 /* IconSettingViewController.swift */,
+				47B5009F2B7910AB0055A4A2 /* IconSettingViewModel.swift */,
 				4772CA5F2B781E6000CEBDAE /* IconeSettingCell.swift */,
 			);
 			name = AppIconCustomizer;
@@ -549,7 +552,7 @@
 			children = (
 				475C3AC72B6EE400003E5BA8 /* SettingViewController.swift */,
 				47DB9E7E2B7100F800A58CAB /* SettingViewModel.swift */,
-				479A2A622B739AFA002C4FAF /* GraphTypeSettingCell.swift */,
+				479A2A622B739AFA002C4FAF /* SettingCell.swift */,
 				4745E48A2B7031310016C52F /* SettingViews */,
 			);
 			path = setting;
@@ -878,6 +881,7 @@
 			files = (
 				4704F2C32B2F98310060DCEE /* BottleFeedingController.swift in Sources */,
 				47D8DA672B4B37F000D97CD1 /* Activity+CoreDataClass.swift in Sources */,
+				47B500A02B7910AB0055A4A2 /* IconSettingViewModel.swift in Sources */,
 				475BD8EF2B597FBF003F1158 /* DiaperViewModel.swift in Sources */,
 				4747324D2B1234BB0064ABB4 /* ParentNameController.swift in Sources */,
 				47D8DA6C2B4B37F000D97CD1 /* Diaper+CoreDataProperties.swift in Sources */,
@@ -964,7 +968,7 @@
 				4712D43D2B0A9BC50085035C /* UIView+.swift in Sources */,
 				47C8F36E2B74280500E94668 /* GraphtypeViewModel.swift in Sources */,
 				475071DA2B09462000DAB527 /* SceneDelegate.swift in Sources */,
-				479A2A632B739AFA002C4FAF /* GraphTypeSettingCell.swift in Sources */,
+				479A2A632B739AFA002C4FAF /* SettingCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

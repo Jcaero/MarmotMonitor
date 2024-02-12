@@ -5,7 +5,7 @@
 //  Created by pierrick viret on 05/02/2024.
 //
 
-import Foundation
+import UIKit
 
 class SettingViewModel {
     private let userDefaultsManager: UserDefaultManagerProtocol!
@@ -13,6 +13,9 @@ class SettingViewModel {
     var parentName: String = ""
     var birthDay: String = ""
     var graphType: GraphType = .round
+    var saveIconName: String {
+        return userDefaultsManager.getAppIconName() ?? NIAppIconType.defaultIcon.name
+    }
 
     init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {
         self.userDefaultsManager = userDefaultsManager
@@ -40,4 +43,15 @@ class SettingViewModel {
 
         graphType = userDefaultsManager.getGraphType() ?? .round
     }
+
+    // MARK: - Icon
+    func setIcon() {
+            if UIApplication.shared.supportsAlternateIcons {
+                UIApplication.shared.setAlternateIconName(saveIconName) { error in
+                    if let error = error {
+                        print("Error setting alternate icon \(self.saveIconName ): \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
 }

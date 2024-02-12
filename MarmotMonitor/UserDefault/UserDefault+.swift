@@ -8,7 +8,7 @@
 import Foundation
 
 enum UserInfoKey: String {
-    case babyName, gender, parentName, birthDay, graphType
+    case babyName, gender, parentName, birthDay, graphType, appIcon
 
     var rawValue: String {
         switch self {
@@ -22,6 +22,8 @@ enum UserInfoKey: String {
             return "birthDay"
         case .graphType:
             return "graphType"
+        case .appIcon:
+            return "appIcon"
         }
     }
 }

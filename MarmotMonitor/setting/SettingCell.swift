@@ -17,7 +17,7 @@ class SettingCell: UITableViewCell {
 
     private let nameTitle: UILabel = {
         let label = UILabel()
-        label.setupDynamicBoldTextWith(policeName: "Symbol", size: 20, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .colorForDuckBlueToWhite
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -26,7 +26,7 @@ class SettingCell: UITableViewCell {
 
     private let information: UILabel = {
         let label = UILabel()
-        label.setupDynamicBoldTextWith(policeName: "Symbol", size: 20, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .colorForDuckBlueToWhite
         label.textAlignment = .right
         label.numberOfLines = 0
