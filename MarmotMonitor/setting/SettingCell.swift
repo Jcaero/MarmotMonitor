@@ -71,6 +71,7 @@ class SettingCell: UITableViewCell {
 
     private func setupContraints() {
         NSLayoutConstraint.activate([
+            heightAnchor.constraint(greaterThanOrEqualToConstant: 60),
             icone.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             icone.heightAnchor.constraint(equalToConstant: frame.height * 0.65),
             icone.heightAnchor.constraint(equalTo: icone.widthAnchor),

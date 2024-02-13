@@ -53,6 +53,8 @@ class SettingViewController: BackgroundViewController, UpdateInformationControll
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.layer.cornerRadius = 20
+        tableView.setupShadow(radius: 1, opacity: 0.5)
+        tableView.clipsToBounds = true
         return tableView
     }()
 
@@ -96,8 +98,8 @@ class SettingViewController: BackgroundViewController, UpdateInformationControll
 
             tableView.topAnchor.constraint(equalTo:settingTitle.bottomAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10)
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15)
         ])
     }
 }
@@ -111,7 +113,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         if section == 0 {
             return 1
         } else {
-            return 5
+            return 3
         }
     }
 
