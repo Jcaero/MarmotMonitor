@@ -150,7 +150,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                     print("erreur de cell")
                     return UITableViewCell()
                 }
-                cell.setupTitle(with: "Apparence", information: "Auto", icone: UIImage(systemName: "iphone")!)
+                cell.setupTitle(with: "Apparence", information: viewModel.apparenceStyle, icone: UIImage(systemName: "iphone")!)
                 cell.backgroundColor = .colorForGraphBackground
                 return cell
             } else {
@@ -210,7 +210,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 let next = IconSettingViewController(delegate: self)
                 present(next, animated: true, completion: nil)
             case 2:
-                let next = ApparenceSettingViewController()
+                let next = ApparenceSettingViewController(delegate: self)
                 present(next, animated: true, completion: nil)
             default:
                 break

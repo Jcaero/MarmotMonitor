@@ -18,6 +18,18 @@ class SettingViewModel {
         return iconeName + "Image"
     }
 
+    var apparenceStyle: String {
+        let apparence = userDefaultsManager.getApparenceSetting()
+        switch apparence {
+        case .dark:
+            return "Sombre"
+        case .light:
+            return "Clair"
+        default:
+            return "Auto"
+        }
+    }
+
     init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {
         self.userDefaultsManager = userDefaultsManager
     }

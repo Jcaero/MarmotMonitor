@@ -44,7 +44,7 @@ class ApparenceSettingViewController: UIViewController {
     }()
 
     private let selectedMode: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl(items: ["Auto", "Claire", "Sombre"])
+        let segmentedControl = UISegmentedControl(items: ["Auto", "Clair", "Sombre"])
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
@@ -107,8 +107,18 @@ class ApparenceSettingViewController: UIViewController {
     private var scaleY: CGFloat = 0
 
     private var viewModel = ApparenceSettingViewModel()
+    private var delegate: UpdateInformationControllerDelegate?
 
     // MARK: - cycle life
+    init(delegate: UpdateInformationControllerDelegate) {
+        super.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .colorForGradientStartPink
