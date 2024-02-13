@@ -143,6 +143,14 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.setupTitle(with: "Couleur d'Icone", information: "", icone: UIImage(named: viewModel.iconImageName)!)
                 cell.backgroundColor = .colorForGraphBackground
                 return cell
+            } else if indexPath.row == 2 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.reuseIdentifier, for: indexPath) as? SettingCell else {
+                    print("erreur de cell")
+                    return UITableViewCell()
+                }
+                cell.setupTitle(with: "Apparence", information: "Auto", icone: UIImage(systemName: "iphone")!)
+                cell.backgroundColor = .colorForGraphBackground
+                return cell
             } else {
                 let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
                 cell.textLabel?.text = "Row - \(indexPath.row)"
@@ -198,6 +206,9 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 present(next, animated: true, completion: nil)
             case 1:
                 let next = IconSettingViewController(delegate: self)
+                present(next, animated: true, completion: nil)
+            case 2:
+                let next = ApparenceSettingViewController()
                 present(next, animated: true, completion: nil)
             default:
                 break

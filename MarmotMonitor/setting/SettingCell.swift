@@ -10,7 +10,8 @@ import UIKit
 class SettingCell: UITableViewCell {
     private let icone: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = .duckBlue
+        view.backgroundColor = .pastelPink
+        view.tintColor = .black
         view.clipsToBounds = true
         return view
     }()

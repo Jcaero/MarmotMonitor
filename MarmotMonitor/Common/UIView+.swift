@@ -46,4 +46,13 @@ extension UIView {
         layer.mask = shape
     }
 
+    func setupGradient(startColor: UIColor, endColor: UIColor) {
+        self.layer.sublayers?.first { $0 is CAGradientLayer }?.removeFromSuperlayer()
+
+        let gradient = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = [startColor.cgColor, endColor.cgColor]
+        gradient.locations = [0.0, 1.0]
+        self.layer.insertSublayer(gradient, at: 0)
+    }
 }

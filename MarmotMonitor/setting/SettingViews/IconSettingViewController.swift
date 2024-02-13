@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class IconSettingViewController: BackgroundViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     private let scrollView: UIScrollView = {
