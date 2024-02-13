@@ -27,8 +27,9 @@ class ApparenceSettingViewController: UIViewController {
         let label = UILabel()
         label.setupDynamicBoldTextWith(policeName: "SF Pro Rounded", size: 40, style: .title3)
         label.textColor = .label
-        label.textAlignment = .left
+        label.textAlignment = .natural
         label.numberOfLines = 0
+        label.text = "Apparence"
         return label
     }()
 
@@ -38,6 +39,7 @@ class ApparenceSettingViewController: UIViewController {
         label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 0
+        label.text = "Choisissez le mode d'apparence de l'application"
         return label
     }()
 
@@ -85,7 +87,7 @@ class ApparenceSettingViewController: UIViewController {
             return titleAttributes
         }
         button.configuration = configuration
-        button.setTitle("retour", for: .normal)
+        button.setTitle("Retour", for: .normal)
         button.setupShadow(radius: 1, opacity: 0.5)
         button.layer.borderWidth = 2
         button.layer.borderColor = UIColor.systemRed.cgColor
@@ -101,8 +103,10 @@ class ApparenceSettingViewController: UIViewController {
     }()
 
     // MARK: - Properties
-    var scaleX: CGFloat = 0
-    var scaleY: CGFloat = 0
+    private var scaleX: CGFloat = 0
+    private var scaleY: CGFloat = 0
+
+    private var viewModel = ApparenceSettingViewModel()
 
     // MARK: - cycle life
     override func viewDidLoad() {
@@ -110,24 +114,10 @@ class ApparenceSettingViewController: UIViewController {
         view.backgroundColor = .colorForGradientStartPink
         setupViews()
         setupContraints()
-
-        titleView.text = "Apparence"
-        subtitleView.text = "Choisissez le mode d'apparence de l'application"
-        selectedMode.addTarget(self, action: #selector(didChangeMode), for: .valueChanged)
-        selectedMode.setupShadow(radius: 1, opacity: 0.5)
-        self.darkSide.transform = CGAffineTransform(translationX: 200, y: 0)
-
-        self.overrideUserInterfaceStyle = .unspecified
-        if self.traitCollection.userInterfaceStyle == .dark {
-            self.darkSide.isHidden = false
-            UIView.animate(withDuration: 1) {
-                self.darkSide.transform = CGAffineTransform(translationX: 0, y: 0)
-            }
-        } else {
-            self.darkSide.isHidden = true
-        }
-
         setupButtonAction()
+
+        setupSelected()
+        initApparence()
     }
 
     override func viewDidLayoutSubviews() {
@@ -150,6 +140,8 @@ class ApparenceSettingViewController: UIViewController {
         }
         saveButton.layer.cornerRadius = 10
         cancelButton.layer.cornerRadius = 10
+
+        self.darkSide.transform = CGAffineTransform(translationX: 200, y: 0)
     }
 
     private func setupContraints() {
@@ -184,6 +176,32 @@ class ApparenceSettingViewController: UIViewController {
         ])
     }
 
+    private func setupSelected() {
+        selectedMode.addTarget(self, action: #selector(didChangeMode), for: .valueChanged)
+        selectedMode.setupShadow(radius: 1, opacity: 0.5)
+        switch viewModel.apparence {
+        case .light:
+            selectedMode.selectedSegmentIndex = 1
+        case .dark:
+            selectedMode.selectedSegmentIndex = 2
+        default:
+            selectedMode.selectedSegmentIndex = 0
+        }
+    }
+
+    private func initApparence() {
+        self.overrideUserInterfaceStyle = viewModel.apparence
+
+        if self.traitCollection.userInterfaceStyle == .dark {
+            self.darkSide.isHidden = false
+            UIView.animate(withDuration: 1) {
+                self.darkSide.transform = CGAffineTransform(translationX: 0, y: 0)
+            }
+        } else {
+            self.darkSide.isHidden = true
+        }
+    }
+
     // MARK: - segmentedControl
     @objc func didChangeMode(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -194,9 +212,8 @@ class ApparenceSettingViewController: UIViewController {
             self.overrideUserInterfaceStyle = previousApparence
 
             if systemeApparence == .dark {
-                showDarkAnimation {
-                    self.overrideUserInterfaceStyle = .unspecified
-                }
+                self.overrideUserInterfaceStyle = .unspecified
+                showDarkAnimation()
             } else {
                 showLightAnimation {
                     self.overrideUserInterfaceStyle = .unspecified
@@ -209,8 +226,7 @@ class ApparenceSettingViewController: UIViewController {
             }
         case 2:
             self.overrideUserInterfaceStyle = .dark
-            self.showDarkAnimation {
-            }
+            self.showDarkAnimation()
 
         default:
             break
@@ -218,23 +234,19 @@ class ApparenceSettingViewController: UIViewController {
     }
 
     // MARK: - Animation
-    private func showDarkAnimation(completion: @escaping () -> Void) {
+    private func showDarkAnimation() {
         self.darkSide.isHidden = false
 
         UIView.animate(withDuration: 1, animations: {
             self.darkSide.transform = CGAffineTransform(translationX: 0, y: 0)
             self.moon.backgroundColor = .white
-        }, completion: { finished in
-            if finished == true {
-                completion()
-            }
         })
     }
 
     private func showLightAnimation(completion: @escaping () -> Void) {
         UIView.animate(withDuration: 1, animations: {
             self.moon.backgroundColor = .red
-            self.darkSide.transform = CGAffineTransform(translationX: 200, y: 0)
+            self.darkSide.transform = CGAffineTransform(translationX: 250, y: 0)
         }, completion: { finished in
                 if finished == true {
                     self.darkSide.isHidden = true
@@ -248,12 +260,14 @@ class ApparenceSettingViewController: UIViewController {
         super.traitCollectionDidChange(previousTraitCollection)
         if previousTraitCollection?.userInterfaceStyle == .dark {
             if self.traitCollection.userInterfaceStyle == .light {
-                showLightAnimation {
-                }
+                UIView.animate(withDuration: 1, animations: {
+                    self.moon.backgroundColor = .red
+                    self.darkSide.transform = CGAffineTransform(translationX: 300, y: 0)
+                })
             }
         } else {
             if self.traitCollection.userInterfaceStyle == .dark {
-                showDarkAnimation(){}
+                showDarkAnimation()
             }
         }
     }
@@ -268,8 +282,10 @@ class ApparenceSettingViewController: UIViewController {
     }
 
     @objc private func saveData(sender: UIButton) {
-            sender.transform = .identity
-            sender.layer.shadowOpacity = 0.5
+        sender.transform = .identity
+        sender.layer.shadowOpacity = 0.5
+        viewModel.saveAparenceSetting(type: selectedMode.selectedSegmentIndex)
+        self.dismiss(animated: true, completion: nil)
     }
 
     @objc func cancel(sender: UIButton) {

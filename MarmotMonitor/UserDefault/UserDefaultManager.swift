@@ -4,8 +4,7 @@
 //
 //  Created by pierrick viret on 06/01/2024.
 //
-
-import Foundation
+import UIKit
 
 protocol UserDefaultManagerProtocol {
     func saveBabyName(_ name: String?)
@@ -14,16 +13,14 @@ protocol UserDefaultManagerProtocol {
     func saveDateOfBirth(_ date: String?)
     func saveGraphType(_ graphType: GraphType)
     func saveAppIconName(_ name: String)
+    func saveApparenceSetting(_ type: UIUserInterfaceStyle)
     func getBabyName() -> String?
     func getGender() -> String?
     func getParentName() -> String?
     func getBirthDay() -> String?
     func getGraphType() -> GraphType?
     func getAppIconName() -> String?
-    
-
-//    func save(property: MarmotProperty)
-//    func get(property: MarmotProperty)
+    func getApparenceSetting() -> UIUserInterfaceStyle
 }
 
 final class UserDefaultsManager: UserDefaultManagerProtocol {
@@ -81,6 +78,10 @@ final class UserDefaultsManager: UserDefaultManagerProtocol {
         defaults.set(name, forKey: UserInfoKey.appIcon.rawValue)
     }
 
+    func saveApparenceSetting(_ type: UIUserInterfaceStyle) {
+            defaults.set(type.rawValue, forKey: UserInfoKey.apparence.rawValue)
+        }
+
     // Get Value
     func getBabyName() -> String? {
         return defaults.string(forKey: UserInfoKey.babyName.rawValue)
@@ -114,6 +115,10 @@ final class UserDefaultsManager: UserDefaultManagerProtocol {
 
     func getAppIconName() -> String? {
         return defaults.string(forKey: UserInfoKey.appIcon.rawValue)
+    }
+
+    func getApparenceSetting() -> UIUserInterfaceStyle {
+        return UIUserInterfaceStyle(rawValue: defaults.integer(forKey: UserInfoKey.apparence.rawValue)) ?? .unspecified
     }
 
 }

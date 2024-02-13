@@ -35,7 +35,7 @@ class GraphtypeViewController: BackgroundViewController {
         configuration.cornerStyle = .large
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
             var titleAttributes = titleAttributes
-            titleAttributes.font = UIFont.preferredFont(forTextStyle: .footnote)
+            titleAttributes.font = UIFont.preferredFont(forTextStyle: .body)
             return titleAttributes
         }
         button.configuration = configuration
