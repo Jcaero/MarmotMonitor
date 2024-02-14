@@ -295,6 +295,7 @@ class ApparenceSettingViewController: UIViewController {
         sender.transform = .identity
         sender.layer.shadowOpacity = 0.5
         viewModel.saveAparenceSetting(type: selectedMode.selectedSegmentIndex)
+        delegate?.updateInformation()
         self.dismiss(animated: true, completion: nil)
     }
 
