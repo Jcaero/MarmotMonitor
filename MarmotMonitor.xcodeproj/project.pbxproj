@@ -30,6 +30,7 @@
 		4735B26B2B1140D8000F2B8C /* ViewForInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */; };
 		4735B26E2B1145B7000F2B8C /* GenderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4735B26D2B1145B7000F2B8C /* GenderController.swift */; };
 		4738B4D22B287D830041ECF0 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4738B4D12B287D830041ECF0 /* Int+.swift */; };
+		473D95502B7D5F7000B632C6 /* ApparenceViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473D954F2B7D5F7000B632C6 /* ApparenceViewModelTest.swift */; };
 		4745E4892B702AEF0016C52F /* HeaderSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4745E4882B702AEF0016C52F /* HeaderSettingView.swift */; };
 		4745E48C2B70315C0016C52F /* InformationUserSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4745E48B2B70315C0016C52F /* InformationUserSettingCell.swift */; };
 		47467D0E2B5C6114006AB25B /* BottleFeedingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47467D0D2B5C6114006AB25B /* BottleFeedingViewModel.swift */; };
@@ -166,6 +167,7 @@
 		4735B26A2B1140D8000F2B8C /* ViewForInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForInformationController.swift; sourceTree = "<group>"; };
 		4735B26D2B1145B7000F2B8C /* GenderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderController.swift; sourceTree = "<group>"; };
 		4738B4D12B287D830041ECF0 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
+		473D954F2B7D5F7000B632C6 /* ApparenceViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApparenceViewModelTest.swift; sourceTree = "<group>"; };
 		4745E4882B702AEF0016C52F /* HeaderSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSettingView.swift; sourceTree = "<group>"; };
 		4745E48B2B70315C0016C52F /* InformationUserSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationUserSettingCell.swift; sourceTree = "<group>"; };
 		47467D0D2B5C6114006AB25B /* BottleFeedingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedingViewModel.swift; sourceTree = "<group>"; };
@@ -366,6 +368,22 @@
 			path = InformationController;
 			sourceTree = "<group>";
 		};
+		473D954D2B7D5F5100B632C6 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				473D954E2B7D5F5C00B632C6 /* apparence */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		473D954E2B7D5F5C00B632C6 /* apparence */ = {
+			isa = PBXGroup;
+			children = (
+				473D954F2B7D5F7000B632C6 /* ApparenceViewModelTest.swift */,
+			);
+			path = apparence;
+			sourceTree = "<group>";
+		};
 		4745DB7A2B501ED7003C440D /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,6 +520,7 @@
 		475071F02B09462100DAB527 /* MarmotMonitorTests */ = {
 			isa = PBXGroup;
 			children = (
+				473D954D2B7D5F5100B632C6 /* Setting */,
 				475C3AC32B6EDDD9003E5BA8 /* Doctor */,
 				47CE16CF2B62985100A51B78 /* Monitor */,
 				472848202B58146F00AA6B35 /* Activity */,
@@ -1008,6 +1027,7 @@
 				4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */,
 				47D7E1B82B5566950038C6E2 /* CoreDataManagerMock.swift in Sources */,
 				470808222B5D5046004258A5 /* BottleFeedingViewModelTest.swift in Sources */,
+				473D95502B7D5F7000B632C6 /* ApparenceViewModelTest.swift in Sources */,
 				475BD8F12B59B43F003F1158 /* DiaperViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

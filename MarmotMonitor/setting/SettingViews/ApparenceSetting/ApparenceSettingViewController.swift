@@ -9,6 +9,19 @@ import UIKit
 
 class ApparenceSettingViewController: UIViewController {
 
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .clear
+        scrollView.layer.cornerRadius = 20
+        return scrollView
+    }()
+
+    let area: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+
     let moon: UIView = {
         let view = UIView()
         view.backgroundColor = .red
@@ -25,17 +38,18 @@ class ApparenceSettingViewController: UIViewController {
 
     private let titleView: UILabel = {
         let label = UILabel()
-        label.setupDynamicBoldTextWith(policeName: "SF Pro Rounded", size: 40, style: .title3)
+        label.setupDynamicBoldTextWith(policeName: "Symbol", size: 34, style: .largeTitle)
         label.textColor = .label
         label.textAlignment = .natural
         label.numberOfLines = 0
         label.text = "Apparence"
+        label.setAccessibility(with: .header, label: "Apparence", hint: "")
         return label
     }()
 
     private let subtitleView: UILabel = {
         let label = UILabel()
-        label.setupDynamicTextWith(policeName: "New York", size: 35, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .title3)
         label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -45,60 +59,29 @@ class ApparenceSettingViewController: UIViewController {
 
     private let selectedMode: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["Auto", "Clair", "Sombre"])
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)], for: .normal)
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
 
     private let saveButton: UIButton = {
-        let button = UIButton()
-        var configuration = UIButton.Configuration.filled()
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
-        configuration.baseBackgroundColor = .systemGreen.withAlphaComponent(0.95)
-        configuration.baseForegroundColor = UIColor.white
-        configuration.background.cornerRadius = 12
-        configuration.cornerStyle = .large
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
-            var titleAttributes = titleAttributes
-            let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .footnote).withSymbolicTraits(.traitBold)
-            titleAttributes.font = UIFont(descriptor: descriptor!, size: 0)
-            return titleAttributes
-        }
-        button.configuration = configuration
+        let button = UIButton().createActionButton(color: .systemGreen)
         button.setTitle("Valider", for: .normal)
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        button.setupShadow(radius: 1, opacity: 0.5)
-        button.layer.borderWidth = 4
-        button.layer.borderColor = UIColor.systemGreen.cgColor
         return button
     }()
 
     private let cancelButton: UIButton = {
-        let button = UIButton()
-        var configuration = UIButton.Configuration.gray()
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        configuration.baseBackgroundColor = .systemRed.withAlphaComponent(0.95)
-        configuration.baseForegroundColor = UIColor.white
-        configuration.background.cornerRadius = 12
-        configuration.cornerStyle = .large
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
-            var titleAttributes = titleAttributes
-            let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .footnote).withSymbolicTraits(.traitBold)
-            titleAttributes.font = UIFont(descriptor: descriptor!, size: 0)
-            return titleAttributes
-        }
-        button.configuration = configuration
+        let button = UIButton().createActionButton(color: .systemRed)
         button.setTitle("Retour", for: .normal)
-        button.setupShadow(radius: 1, opacity: 0.5)
-        button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.systemRed.cgColor
         return button
     }()
 
     let stackViewButton: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 50
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 30
         return stackView
     }()
 
@@ -108,6 +91,8 @@ class ApparenceSettingViewController: UIViewController {
 
     private var viewModel = ApparenceSettingViewModel()
     private var delegate: UpdateInformationControllerDelegate?
+
+    private var buttonAccessibiltyContraints: [NSLayoutConstraint]?
 
     // MARK: - cycle life
     init(delegate: UpdateInformationControllerDelegate) {
@@ -139,9 +124,15 @@ class ApparenceSettingViewController: UIViewController {
 
     // MARK: - Setup
     private func setupViews() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+
+        area.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(area)
+
         [moon, titleView,subtitleView, selectedMode, darkSide, stackViewButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview($0)
+            area.addSubview($0)
         }
 
         [cancelButton, saveButton].forEach {
@@ -156,57 +147,61 @@ class ApparenceSettingViewController: UIViewController {
 
     private func setupContraints() {
         NSLayoutConstraint.activate([
-            moon.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            moon.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height/4),
-            moon.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: -20),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            scrollView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
+
+            area.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            area.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
+            area.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
+            area.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
+            area.widthAnchor.constraint(equalToConstant: (view.frame.width - 20)),
+            area.heightAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor),
+
+            moon.centerXAnchor.constraint(equalTo: area.centerXAnchor),
+            moon.centerYAnchor.constraint(equalTo: area.topAnchor, constant: view.frame.height/4),
+            moon.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.5),
             moon.heightAnchor.constraint(equalTo: moon.widthAnchor),
 
             darkSide.leftAnchor.constraint(equalTo: moon.leftAnchor, constant: view.frame.width/10),
-            darkSide.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height/4),
-            darkSide.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            darkSide.centerYAnchor.constraint(equalTo: area.topAnchor, constant: view.frame.height/4),
+            darkSide.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.5),
             darkSide.heightAnchor.constraint(equalTo: moon.widthAnchor),
 
             titleView.topAnchor.constraint(equalTo: moon.bottomAnchor, constant: 20),
-            titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            titleView.centerXAnchor.constraint(equalTo: area.centerXAnchor),
+            titleView.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.8),
 
             subtitleView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 20),
-            subtitleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            subtitleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            subtitleView.centerXAnchor.constraint(equalTo: area.centerXAnchor),
+            subtitleView.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.8),
 
             selectedMode.topAnchor.constraint(equalTo: subtitleView.bottomAnchor, constant: 20),
-            selectedMode.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            selectedMode.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            selectedMode.centerXAnchor.constraint(equalTo: area.centerXAnchor),
+            selectedMode.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.8),
+            selectedMode.heightAnchor.constraint(equalTo: cancelButton.heightAnchor),
 
-            stackViewButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            stackViewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackViewButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-            cancelButton.widthAnchor.constraint(equalTo: cancelButton.heightAnchor, multiplier: 2),
-            saveButton.widthAnchor.constraint(equalTo: cancelButton.widthAnchor, multiplier: 2)
+            stackViewButton.topAnchor.constraint(greaterThanOrEqualTo: selectedMode.bottomAnchor, constant: 20),
+            stackViewButton.centerXAnchor.constraint(equalTo: area.centerXAnchor),
+            stackViewButton.bottomAnchor.constraint(lessThanOrEqualTo: area.bottomAnchor, constant: -20),
+            stackViewButton.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.8)
         ])
+
+        setStackViewAxis()
     }
 
     private func setupSelected() {
         selectedMode.addTarget(self, action: #selector(didChangeMode), for: .valueChanged)
         selectedMode.setupShadow(radius: 1, opacity: 0.5)
-        switch viewModel.apparence {
-        case .light:
-            selectedMode.selectedSegmentIndex = 1
-        case .dark:
-            selectedMode.selectedSegmentIndex = 2
-        default:
-            selectedMode.selectedSegmentIndex = 0
-        }
+        selectedMode.selectedSegmentIndex = viewModel.getInitPositionOfSelected()
     }
 
     private func initApparence() {
         self.overrideUserInterfaceStyle = viewModel.apparence
 
         if self.traitCollection.userInterfaceStyle == .dark {
-            self.darkSide.isHidden = false
-            UIView.animate(withDuration: 1) {
-                self.darkSide.transform = CGAffineTransform(translationX: 0, y: 0)
-            }
+            showDarkAnimation()
         } else {
             self.darkSide.isHidden = true
         }
@@ -216,12 +211,7 @@ class ApparenceSettingViewController: UIViewController {
     @objc func didChangeMode(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            let previousApparence = self.traitCollection.userInterfaceStyle
-            self.overrideUserInterfaceStyle = .unspecified
-            let systemeApparence = self.traitCollection.userInterfaceStyle
-            self.overrideUserInterfaceStyle = previousApparence
-
-            if systemeApparence == .dark {
+            if getSystemeApparenceConfiguration() == .dark {
                 self.overrideUserInterfaceStyle = .unspecified
                 showDarkAnimation()
             } else {
@@ -241,6 +231,15 @@ class ApparenceSettingViewController: UIViewController {
         default:
             break
         }
+    }
+
+    private func getSystemeApparenceConfiguration() -> UIUserInterfaceStyle {
+        let previousApparence = self.traitCollection.userInterfaceStyle
+        self.overrideUserInterfaceStyle = .unspecified
+        let systemeApparence = self.traitCollection.userInterfaceStyle
+        self.overrideUserInterfaceStyle = previousApparence
+
+        return systemeApparence
     }
 
     // MARK: - Animation
@@ -268,6 +267,7 @@ class ApparenceSettingViewController: UIViewController {
     // MARK: - TraitCollection
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+        // color animation
         if previousTraitCollection?.userInterfaceStyle == .dark {
             if self.traitCollection.userInterfaceStyle == .light {
                 UIView.animate(withDuration: 1, animations: {
@@ -279,6 +279,23 @@ class ApparenceSettingViewController: UIViewController {
             if self.traitCollection.userInterfaceStyle == .dark {
                 showDarkAnimation()
             }
+        }
+
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
+        guard currentCategory != previousCategory else { return }
+        setStackViewAxis()
+    }
+
+    private func setStackViewAxis() {
+        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+        switch isAccessibilityCategory {
+        case true:
+            stackViewButton.axis = .vertical
+            selectedMode.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 25)], for: .normal)
+        case false:
+            stackViewButton.axis = .horizontal
+            selectedMode.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)], for: .normal)
         }
     }
 

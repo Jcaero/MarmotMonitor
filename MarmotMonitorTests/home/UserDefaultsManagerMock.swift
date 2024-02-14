@@ -6,28 +6,24 @@
 //
 
 
-import Foundation
+import UIKit
 @testable import MarmotMonitor
 
 final class UserDefaultsManagerMock: UserDefaultManagerProtocol {
-    func saveGraphType(_ graphType: MarmotMonitor.GraphType) {
-    }
-    
-    func getGraphType() -> String? {
-        return nil
-    }
-    
-    
     private var babyName: String?
     private var gender: String?
     private var parentName: String?
     private var birthDay: String?
+    private var appIconName: String?
+    private var appTheme: Int?
     
     init(mockPerson: Person) {
         self.babyName = mockPerson.name
         self.gender = mockPerson.gender
         self.birthDay = mockPerson.birthDay
         self.parentName = mockPerson.parentName
+        self.appIconName = "AppIcon"
+        self.appTheme = 0
     }
 
     // Set Value
@@ -69,6 +65,34 @@ final class UserDefaultsManagerMock: UserDefaultManagerProtocol {
 
     func getBirthDay() -> String? {
         return birthDay
+    }
+
+    func saveAppIconName(_ name: String) {
+        self.appIconName = name
+    }
+    
+    func saveApparenceSetting(_ type: UIUserInterfaceStyle) {
+        self.appTheme = type.rawValue
+    }
+    
+    func getGraphType() -> MarmotMonitor.GraphType? {
+        return nil
+    }
+    
+    func getAppIconName() -> String? {
+        return self.appIconName
+    }
+    
+    func getApparenceSetting() -> UIUserInterfaceStyle {
+        guard let appTheme = appTheme else { return .unspecified }
+        return UIUserInterfaceStyle(rawValue: appTheme) ?? .unspecified
+    }
+    
+    func saveGraphType(_ graphType: MarmotMonitor.GraphType) {
+    }
+    
+    func getGraphType() -> String? {
+        return nil
     }
 }
 

@@ -42,4 +42,15 @@ class ApparenceSettingViewModel {
         return userDefaultsManager.getApparenceSetting()
     }
 
+    func getInitPositionOfSelected() -> Int {
+        switch apparence {
+        case .light:
+            return 1
+        case .dark:
+            return 2
+        default:
+            return 0
+        }
+    }
+
 }
