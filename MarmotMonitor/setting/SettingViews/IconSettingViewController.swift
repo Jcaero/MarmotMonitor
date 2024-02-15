@@ -24,19 +24,22 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
 
     private let titleView: UILabel = {
         let label = UILabel()
-        label.setupDynamicBoldTextWith(policeName: "SF Pro Rounded", size: 40, style: .title3)
-        label.textColor = .colorForLabelBlackToBlue
+        label.setupDynamicBoldTextWith(policeName: "Symbol", size: 34, style: .largeTitle)
+        label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 0
+        label.text = "Icone"
+        label.setAccessibility(with: .header, label: "Icone", hint: "")
         return label
     }()
 
     private let subtitleView: UILabel = {
         let label = UILabel()
-        label.setupDynamicTextWith(policeName: "New York", size: 35, style: .body)
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .title3)
         label.textColor = .colorForLabelBlackToBlue
         label.textAlignment = .left
         label.numberOfLines = 0
+        label.text = "Choisissez la couleur"
         return label
     }()
 
@@ -59,55 +62,23 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
     }()
 
     private let saveButton: UIButton = {
-        let button = UIButton()
-        var configuration = UIButton.Configuration.filled()
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
-        configuration.baseBackgroundColor = .systemGreen.withAlphaComponent(0.95)
-        configuration.baseForegroundColor = UIColor.white
-        configuration.background.cornerRadius = 12
-        configuration.cornerStyle = .large
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
-            var titleAttributes = titleAttributes
-            let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .footnote).withSymbolicTraits(.traitBold)
-            titleAttributes.font = UIFont(descriptor: descriptor!, size: 0)
-            return titleAttributes
-        }
-        button.configuration = configuration
+        let button = UIButton().createActionButton(color: .systemGreen)
         button.setTitle("Valider", for: .normal)
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        button.setupShadow(radius: 1, opacity: 0.5)
-        button.layer.borderWidth = 4
-        button.layer.borderColor = UIColor.systemGreen.cgColor
         return button
     }()
 
     private let cancelButton: UIButton = {
-        let button = UIButton()
-        var configuration = UIButton.Configuration.gray()
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        configuration.baseBackgroundColor = .systemRed.withAlphaComponent(0.95)
-        configuration.baseForegroundColor = UIColor.white
-        configuration.background.cornerRadius = 12
-        configuration.cornerStyle = .large
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
-            var titleAttributes = titleAttributes
-            let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .footnote).withSymbolicTraits(.traitBold)
-            titleAttributes.font = UIFont(descriptor: descriptor!, size: 0)
-            return titleAttributes
-        }
-        button.configuration = configuration
-        button.setTitle("retour", for: .normal)
-        button.setupShadow(radius: 1, opacity: 0.5)
-        button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.systemRed.cgColor
+        let button = UIButton().createActionButton(color: .systemRed)
+        button.setTitle("Retour", for: .normal)
         return button
     }()
 
     let stackViewButton: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 50
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 30
         return stackView
     }()
 
@@ -122,6 +93,9 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
     // MARK: - Properties
     let viewModel = IconSettingViewModel()
     private var delegate: UpdateInformationControllerDelegate?
+
+    private var iconeWidthContrainte: NSLayoutConstraint?
+    private var iconeWidthAccessibilityContrainte: NSLayoutConstraint?
 
 // MARK: - Circle Life
     init(delegate: UpdateInformationControllerDelegate) {
@@ -175,6 +149,9 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
     }
 
     private func setupContraints() {
+        iconeWidthContrainte = icone.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.35)
+        iconeWidthAccessibilityContrainte = icone.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.7)
+        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: -20),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
@@ -205,26 +182,25 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
 
             icone.topAnchor.constraint(equalTo: subtitleView.bottomAnchor, constant: 40),
             icone.centerXAnchor.constraint(equalTo: area.centerXAnchor),
-            icone.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.5),
+//            icone.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.4),
+            iconeWidthContrainte!,
             icone.heightAnchor.constraint(equalTo: icone.widthAnchor),
 
             colors.topAnchor.constraint(equalTo: icone.bottomAnchor, constant: 20),
             colors.centerXAnchor.constraint(equalTo: area.centerXAnchor),
-            colors.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.9),
-            colors.heightAnchor.constraint(equalTo: colors.widthAnchor, multiplier: 0.2),
+            colors.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.8),
+            colors.heightAnchor.constraint(equalTo: saveButton.heightAnchor),
 
             stackViewButton.topAnchor.constraint(greaterThanOrEqualTo: colors.bottomAnchor, constant: 20),
             stackViewButton.centerXAnchor.constraint(equalTo: area.centerXAnchor),
             stackViewButton.bottomAnchor.constraint(lessThanOrEqualTo: area.bottomAnchor, constant: -20),
-            stackViewButton.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.8),
-            cancelButton.widthAnchor.constraint(equalTo: cancelButton.heightAnchor, multiplier: 2),
-            saveButton.widthAnchor.constraint(equalTo: cancelButton.widthAnchor, multiplier: 2)
+            stackViewButton.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.8)
         ])
+
+        setupAccessibilityUI()
     }
 
     private func setupViewInformation() {
-        titleView.text = "Icone"
-        subtitleView.text = "Choisissez la couleur"
         icone.image = UIImage(named: viewModel.getIconeImageName())
     }
 
@@ -342,5 +318,29 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width / 6 - 9
         return CGSize(width: width, height: width)
+    }
+
+    // MARK: - TraitCollection
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
+        guard currentCategory != previousCategory else { return }
+        setupAccessibilityUI()
+    }
+
+    private func setupAccessibilityUI() {
+        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+        switch isAccessibilityCategory {
+        case true:
+            stackViewButton.axis = .vertical
+            iconeWidthContrainte?.isActive = false
+            iconeWidthAccessibilityContrainte?.isActive = true
+        case false:
+            stackViewButton.axis = .horizontal
+            iconeWidthContrainte?.isActive = true
+            iconeWidthAccessibilityContrainte?.isActive = false
+        }
     }
 }

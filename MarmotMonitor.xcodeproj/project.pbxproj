@@ -412,8 +412,8 @@
 		4745E48A2B7031310016C52F /* SettingViews */ = {
 			isa = PBXGroup;
 			children = (
-				478AA2552B7AB3AC00D4AE7C /* ApparenceSetting */,
 				4745E4882B702AEF0016C52F /* HeaderSettingView.swift */,
+				478AA2552B7AB3AC00D4AE7C /* ApparenceSetting */,
 				471D98012B76CAE6003C0841 /* AppIconCustomizer */,
 				479A2A612B739AD5002C4FAF /* GraphTypeStetting */,
 				474C243E2B717FC10002AD83 /* informationController */,

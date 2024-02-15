@@ -107,11 +107,13 @@ class ApparenceSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = viewModel.colorOfBackground
+
         setupViews()
         setupContraints()
-        setupButtonAction()
 
+        setupButtonAction()
         setupSelected()
+
         initApparence()
     }
 
@@ -211,7 +213,8 @@ class ApparenceSettingViewController: UIViewController {
     @objc func didChangeMode(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            if getSystemeApparenceConfiguration() == .dark {
+            let systemeApparence = getSystemeApparenceConfiguration()
+            if  systemeApparence == .dark {
                 self.overrideUserInterfaceStyle = .unspecified
                 showDarkAnimation()
             } else {
