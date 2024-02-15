@@ -10,13 +10,11 @@ import XCTest
 final class ApparenceViewModelTest: TestCase {
     
     private var viewModel: ApparenceSettingViewModel!
-    private var coreDatatManager: MarmotMonitorSaveManager!
     
     private var isSave: Bool!
     
     override func setUp() {
         super.setUp()
-        coreDatatManager = MarmotMonitorSaveManager(coreDataManager: CoreDataManagerMock.sharedInstance)
         viewModel = ApparenceSettingViewModel()
         
         isSave = false
@@ -25,8 +23,6 @@ final class ApparenceViewModelTest: TestCase {
     override func tearDown() {
         super.tearDown()
         viewModel = nil
-        coreDatatManager.clearDatabase()
-        coreDatatManager = nil
     }
 
     // MARK: - test userdefault

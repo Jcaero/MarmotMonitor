@@ -15,6 +15,7 @@
 		4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D43A2B0A9B5C0085035C /* UILabel+.swift */; };
 		4712D43D2B0A9BC50085035C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D43C2B0A9BC50085035C /* UIView+.swift */; };
 		471480AF2B513AF20084589B /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471480AE2B513AF20084589B /* ActivityType.swift */; };
+		47150DF72B7EA317004A9220 /* IconeSettingViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47150DF62B7EA317004A9220 /* IconeSettingViewControllerTest.swift */; };
 		47155BC82B1DE6E000775B27 /* BackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BC72B1DE6E000775B27 /* BackgroundViewController.swift */; };
 		47155BCA2B1DE97000775B27 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BC92B1DE97000775B27 /* TodayViewController.swift */; };
 		47155BCD2B1DEBDB00775B27 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */; };
@@ -87,7 +88,7 @@
 		47B2316D2B6C390E0079B436 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 47B2316C2B6C390E0079B436 /* DGCharts */; };
 		47B500A02B7910AB0055A4A2 /* IconSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B5009F2B7910AB0055A4A2 /* IconSettingViewModel.swift */; };
 		47B984CE2B77833F000DBB80 /* IconSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B984CD2B77833F000DBB80 /* IconSettingViewController.swift */; };
-		47C4F4312B7E275500DDD807 /* ApparenceAuditAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C4F4302B7E275500DDD807 /* ApparenceAuditAccessibility.swift */; };
+		47C4F4312B7E275500DDD807 /* SettingAuditAccessibility in Sources */ = {isa = PBXBuildFile; fileRef = 47C4F4302B7E275500DDD807 /* SettingAuditAccessibility */; };
 		47C8F36C2B741BA500E94668 /* GraphtypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8F36B2B741BA500E94668 /* GraphtypeViewController.swift */; };
 		47C8F36E2B74280500E94668 /* GraphtypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8F36D2B74280500E94668 /* GraphtypeViewModel.swift */; };
 		47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8C2B128A5A00C5919A /* UserDefault+.swift */; };
@@ -153,6 +154,7 @@
 		4712D43A2B0A9B5C0085035C /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		4712D43C2B0A9BC50085035C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		471480AE2B513AF20084589B /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityType.swift; sourceTree = "<group>"; };
+		47150DF62B7EA317004A9220 /* IconeSettingViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconeSettingViewControllerTest.swift; sourceTree = "<group>"; };
 		47155BC72B1DE6E000775B27 /* BackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewController.swift; sourceTree = "<group>"; };
 		47155BC92B1DE97000775B27 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
@@ -228,7 +230,7 @@
 		47B231692B6C35C30079B436 /* DoctorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewController.swift; sourceTree = "<group>"; };
 		47B5009F2B7910AB0055A4A2 /* IconSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSettingViewModel.swift; sourceTree = "<group>"; };
 		47B984CD2B77833F000DBB80 /* IconSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSettingViewController.swift; sourceTree = "<group>"; };
-		47C4F4302B7E275500DDD807 /* ApparenceAuditAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApparenceAuditAccessibility.swift; sourceTree = "<group>"; };
+		47C4F4302B7E275500DDD807 /* SettingAuditAccessibility */ = {isa = PBXFileReference; lastKnownFileType = text; path = SettingAuditAccessibility; sourceTree = "<group>"; };
 		47C8F36B2B741BA500E94668 /* GraphtypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphtypeViewController.swift; sourceTree = "<group>"; };
 		47C8F36D2B74280500E94668 /* GraphtypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphtypeViewModel.swift; sourceTree = "<group>"; };
 		47CABD8C2B128A5A00C5919A /* UserDefault+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+.swift"; sourceTree = "<group>"; };
@@ -323,6 +325,14 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		47150DF52B7EA300004A9220 /* icone */ = {
+			isa = PBXGroup;
+			children = (
+				47150DF62B7EA317004A9220 /* IconeSettingViewControllerTest.swift */,
+			);
+			path = icone;
+			sourceTree = "<group>";
+		};
 		47155BCB2B1DE9D400775B27 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,6 +383,7 @@
 		473D954D2B7D5F5100B632C6 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				47150DF52B7EA300004A9220 /* icone */,
 				473D954E2B7D5F5C00B632C6 /* apparence */,
 			);
 			path = Setting;
@@ -704,17 +715,9 @@
 		47C4F42E2B7E272400DDD807 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				47C4F42F2B7E272C00DDD807 /* Apparence */,
+				47C4F4302B7E275500DDD807 /* SettingAuditAccessibility */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		47C4F42F2B7E272C00DDD807 /* Apparence */ = {
-			isa = PBXGroup;
-			children = (
-				47C4F4302B7E275500DDD807 /* ApparenceAuditAccessibility.swift */,
-			);
-			path = Apparence;
 			sourceTree = "<group>";
 		};
 		47C8F36F2B7428C000E94668 /* UserDefault */ = {
@@ -1044,6 +1047,7 @@
 				475C3AC52B6EDDF2003E5BA8 /* DoctorViewModeltest.swift in Sources */,
 				4747325A2B12432C0064ABB4 /* GenderViewModelTest.swift in Sources */,
 				4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */,
+				47150DF72B7EA317004A9220 /* IconeSettingViewControllerTest.swift in Sources */,
 				47D7E1B82B5566950038C6E2 /* CoreDataManagerMock.swift in Sources */,
 				470808222B5D5046004258A5 /* BottleFeedingViewModelTest.swift in Sources */,
 				473D95502B7D5F7000B632C6 /* ApparenceViewModelTest.swift in Sources */,
@@ -1057,7 +1061,7 @@
 			files = (
 				47CABD8F2B128D6A00C5919A /* UIApplication.swift in Sources */,
 				475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */,
-				47C4F4312B7E275500DDD807 /* ApparenceAuditAccessibility.swift in Sources */,
+				47C4F4312B7E275500DDD807 /* SettingAuditAccessibility in Sources */,
 				475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */,
 				47CABD912B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift in Sources */,
 			);

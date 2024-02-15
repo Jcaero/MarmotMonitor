@@ -18,12 +18,12 @@ final class UserDefaultsManagerMock: UserDefaultManagerProtocol {
     private var appIconName: String?
     private var appTheme: Int?
     
-    init(mockPerson: Person) {
+    init(mockPerson: Person, iconName: String? = nil) {
         self.babyName = mockPerson.name
         self.gender = mockPerson.gender ?? .none
         self.birthDay = mockPerson.birthDay
         self.parentName = mockPerson.parentName
-        self.appIconName = "AppIcon"
+        self.appIconName = iconName ?? nil
         self.appTheme = 0
     }
 

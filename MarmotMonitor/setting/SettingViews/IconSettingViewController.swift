@@ -48,6 +48,7 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
+        imageView.setAccessibility(with: .image, label: "Icone", hint: "")
         return imageView
     }()
 
@@ -65,12 +66,14 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
         let button = UIButton().createActionButton(color: .systemGreen)
         button.setTitle("Valider", for: .normal)
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        button.setAccessibility(with: .button, label: "Valider", hint: "")
         return button
     }()
 
     private let cancelButton: UIButton = {
         let button = UIButton().createActionButton(color: .systemRed)
         button.setTitle("Retour", for: .normal)
+        button.setAccessibility(with: .button, label: "Retour", hint: "")
         return button
     }()
 
@@ -151,7 +154,7 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
     private func setupContraints() {
         iconeWidthContrainte = icone.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.35)
         iconeWidthAccessibilityContrainte = icone.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.7)
-        
+
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: -20),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
@@ -182,7 +185,6 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
 
             icone.topAnchor.constraint(equalTo: subtitleView.bottomAnchor, constant: 40),
             icone.centerXAnchor.constraint(equalTo: area.centerXAnchor),
-//            icone.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.4),
             iconeWidthContrainte!,
             icone.heightAnchor.constraint(equalTo: icone.widthAnchor),
 
@@ -214,8 +216,8 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
     }
 
     @objc private func saveData(sender: UIButton) {
-            sender.transform = .identity
-            sender.layer.shadowOpacity = 0.5
+        sender.transform = .identity
+        sender.layer.shadowOpacity = 0.5
         setIcon(viewModel.iconeName) { [weak self] _ in
             if let name = self?.viewModel.iconeName {
                 self?.viewModel.saveIconeName(name: name)
@@ -226,13 +228,12 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
             self?.delegate?.updateInformation()
             self?.dismiss(animated: true, completion: nil)
         }
-
     }
 
     @objc func cancel(sender: UIButton) {
         sender.transform = .identity
         sender.layer.shadowOpacity = 0.5
-    self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
     @objc func holdDown(sender: UIButton) {
@@ -268,16 +269,22 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
         switch indexPath.row {
         case 0:
             cell.setupColor(in: .black)
+            cell.setAccessibility(with: .button, label: "Noir", hint: "")
         case 1:
             cell.setupColor(in: .pastelPink)
+            cell.setAccessibility(with: .button, label: "rose", hint: "")
         case 2:
             cell.setupColor(in: .red)
+            cell.setAccessibility(with: .button, label: "rouge", hint: "")
         case 3:
             cell.setupColor(in: .green)
+            cell.setAccessibility(with: .button, label: "vert", hint: "")
         case 4:
             cell.setupColor(in: .lightBlue)
+            cell.setAccessibility(with: .button, label: "bleu clair", hint: "")
         case 5:
             cell.setupColor(in: .blue)
+            cell.setAccessibility(with: .button, label: "bleu", hint: "")
         default:
             break
         }

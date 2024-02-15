@@ -130,7 +130,8 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
 
         case 1:
-            if indexPath.row == 0 {
+            switch indexPath.row {
+                case 0:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.reuseIdentifier, for: indexPath) as? SettingCell else {
                     print("erreur de cell")
                     return UITableViewCell()
@@ -138,15 +139,18 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.setupTitle(with: "Type de graphique", information: viewModel.graphType.description, icone: UIImage(named: "graphIcone")!)
                 cell.backgroundColor = .colorForGraphBackground
                 return cell
-            } else if indexPath.row == 1 {
+
+            case 1:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.reuseIdentifier, for: indexPath) as? SettingCell else {
                     print("erreur de cell")
                     return UITableViewCell()
                 }
                 cell.setupTitle(with: "Couleur d'Icone", information: "", icone: UIImage(named: viewModel.iconImageName)!)
                 cell.backgroundColor = .colorForGraphBackground
+                cell.accessibilityIdentifier = "MyCell_IconeCouleur"
                 return cell
-            } else if indexPath.row == 2 {
+
+            case 2:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.reuseIdentifier, for: indexPath) as? SettingCell else {
                     print("erreur de cell")
                     return UITableViewCell()
@@ -155,7 +159,8 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.backgroundColor = .colorForGraphBackground
                 cell.accessibilityIdentifier = "MyCell_Apparence"
                 return cell
-            } else {
+
+            default:
                 let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
                 cell.textLabel?.text = "Row - \(indexPath.row)"
                 cell.backgroundColor = .colorForGraphBackground
