@@ -56,7 +56,7 @@ class UserDefaultsManagerTests: XCTestCase {
         userDefaultsManager.saveGender(.none)
 
         let savedGender = userDefaultsManager.getGender()
-        XCTAssertEqual(savedGender, nil)
+        XCTAssertEqual(savedGender, .none)
     }
 
     func testBabyHaveBoyGender_WhenSaveGender_GenderSaveIsBoy() {
@@ -64,7 +64,7 @@ class UserDefaultsManagerTests: XCTestCase {
         userDefaultsManager.saveGender(.boy)
 
         let savedGender = userDefaultsManager.getGender()
-        XCTAssertEqual(savedGender, "Garçon")
+        XCTAssertEqual(savedGender, .boy)
     }
 
     func testBabyHaveGirlGender_WhenSaveGender_GenderSaveIsGirl() {
@@ -72,7 +72,7 @@ class UserDefaultsManagerTests: XCTestCase {
         userDefaultsManager.saveGender(.girl)
 
         let savedGender = userDefaultsManager.getGender()
-        XCTAssertEqual(savedGender, "Fille")
+        XCTAssertEqual(savedGender, .girl)
     }
 
     // MARK: - Parent Name

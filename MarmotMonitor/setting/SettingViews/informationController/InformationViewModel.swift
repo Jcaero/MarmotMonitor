@@ -28,7 +28,7 @@ class InformationViewModel {
         babyName = userDefaultsManager.getBabyName() ?? "Entrer le nom"
         birthDay = userDefaultsManager.getBirthDay() ?? "JJ/MM/YYYY"
         parentName = userDefaultsManager.getParentName() ?? "Entrer le nom du parent"
-        gender = userDefaultsManager.getGender() ?? ""
+        gender = userDefaultsManager.getGender().description
     }
 
     func saveUserInformation(babyName: String?, parentName: String?, birthDay: String?, gender: String) {

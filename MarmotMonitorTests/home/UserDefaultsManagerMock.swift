@@ -10,8 +10,9 @@ import UIKit
 @testable import MarmotMonitor
 
 final class UserDefaultsManagerMock: UserDefaultManagerProtocol {
+    
     private var babyName: String?
-    private var gender: String?
+    private var gender: Gender
     private var parentName: String?
     private var birthDay: String?
     private var appIconName: String?
@@ -19,7 +20,7 @@ final class UserDefaultsManagerMock: UserDefaultManagerProtocol {
     
     init(mockPerson: Person) {
         self.babyName = mockPerson.name
-        self.gender = mockPerson.gender
+        self.gender = mockPerson.gender ?? .none
         self.birthDay = mockPerson.birthDay
         self.parentName = mockPerson.parentName
         self.appIconName = "AppIcon"
@@ -34,11 +35,11 @@ final class UserDefaultsManagerMock: UserDefaultManagerProtocol {
     func saveGender(_ gender: MarmotMonitor.Gender) {
         switch gender {
         case .boy:
-            self.gender = "Garçon"
+            self.gender = .boy
         case .girl:
-            self.gender = "Fille"
+            self.gender = .girl
         case .none:
-            self.gender = nil
+            self.gender = .none
         }
     }
 
@@ -54,8 +55,8 @@ final class UserDefaultsManagerMock: UserDefaultManagerProtocol {
     func getBabyName() -> String? {
         return babyName
     }
-
-    func getGender() -> String? {
+ 
+    func getGender() -> MarmotMonitor.Gender {
         return gender
     }
 

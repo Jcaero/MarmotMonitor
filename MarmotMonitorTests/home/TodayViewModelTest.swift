@@ -35,7 +35,7 @@ class TodayViewModelTest: TestCase {
     // MARK: - test userdefault
     func testUserDefaultHaveData_WhenRequestLabelText_receiveLabeltexte() {
         let date = Date().toStringWithDayMonthYear()
-        let baby = Person(name: "Bébé", gender: "Fille", parentName: "Pierrick", birthDay: date )
+        let baby = Person(name: "Bébé", gender: .girl, parentName: "Pierrick", birthDay: date )
         let viewModel = TodayViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
 
         let texte = viewModel.welcomeTexte()
@@ -54,7 +54,7 @@ class TodayViewModelTest: TestCase {
 
     func testBabyBornToday_WhenRequestAge_receiveAgeForText() {
         let date = Date().toStringWithDayMonthYear()
-        let baby = Person(name: "Bébé", gender: "Fille", parentName: "Pierrick", birthDay: date )
+        let baby = Person(name: "Bébé", gender: .girl, parentName: "Pierrick", birthDay: date )
         let viewModel = TodayViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
 
         let year = viewModel.babyYear()
@@ -69,7 +69,7 @@ class TodayViewModelTest: TestCase {
         let calendar = Calendar.current
         let newDate = calendar.date(byAdding: .month, value: -2, to: date)
         let babyDate = newDate!.toStringWithDayMonthYear()
-        let baby = Person(name: "Bébé", gender: "Fille", parentName: "Pierrick", birthDay: babyDate )
+        let baby = Person(name: "Bébé", gender: .girl, parentName: "Pierrick", birthDay: babyDate )
         let viewModel = TodayViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
 
         let year = viewModel.babyYear()
@@ -85,7 +85,7 @@ class TodayViewModelTest: TestCase {
         let newDate = calendar.date(byAdding: .year, value: -3, to: date)
         let newDate2 = calendar.date(byAdding: .month, value: -2, to: newDate!)
         let babyDate = newDate2!.toStringWithDayMonthYear()
-        let baby = Person(name: "Bébé", gender: "Fille", parentName: "Pierrick", birthDay: babyDate )
+        let baby = Person(name: "Bébé", gender: .girl, parentName: "Pierrick", birthDay: babyDate )
         let viewModel = TodayViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
 
         let year = viewModel.babyYear()

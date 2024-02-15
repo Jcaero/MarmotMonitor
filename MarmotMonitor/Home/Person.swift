@@ -9,7 +9,7 @@ import Foundation
 
 struct Person {
     var name: String
-    var gender: String?
+    var gender: Gender?
     var parentName: String?
     var birthDay: String?
 
@@ -17,7 +17,7 @@ struct Person {
         self.name = name
     }
 
-    init(name: String, gender: String?, parentName: String?, birthDay: String?) {
+    init(name: String, gender: Gender?, parentName: String?, birthDay: String?) {
         self.name = name
         self.gender = gender
         self.parentName = parentName

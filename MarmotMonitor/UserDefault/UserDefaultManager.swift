@@ -15,7 +15,7 @@ protocol UserDefaultManagerProtocol {
     func saveAppIconName(_ name: String)
     func saveApparenceSetting(_ type: UIUserInterfaceStyle)
     func getBabyName() -> String?
-    func getGender() -> String?
+    func getGender() -> Gender
     func getParentName() -> String?
     func getBirthDay() -> String?
     func getGraphType() -> GraphType?
@@ -87,8 +87,15 @@ final class UserDefaultsManager: UserDefaultManagerProtocol {
         return defaults.string(forKey: UserInfoKey.babyName.rawValue)
     }
 
-    func getGender() -> String? {
-        return defaults.string(forKey: UserInfoKey.gender.rawValue)
+    func getGender() -> Gender {
+        switch defaults.string(forKey: UserInfoKey.gender.rawValue) {
+        case "Garçon":
+            return .boy
+        case "Fille":
+            return .girl
+        default:
+            return .none
+        }
     }
 
     func getParentName() -> String? {

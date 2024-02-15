@@ -14,6 +14,15 @@ class ApparenceSettingViewModel {
         return userDefaultsManager.getApparenceSetting()
     }
 
+    var colorOfBackground: UIColor {
+        switch userDefaultsManager.getGender() {
+        case .girl:
+            return .colorForGradientStartPink
+        default:
+            return .colorForGradientStart
+        }
+    }
+
     init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {
         self.userDefaultsManager = userDefaultsManager
     }
@@ -38,10 +47,6 @@ class ApparenceSettingViewModel {
         }
     }
 
-    func getApparenceSetting() -> UIUserInterfaceStyle {
-        return userDefaultsManager.getApparenceSetting()
-    }
-
     func getInitPositionOfSelected() -> Int {
         switch apparence {
         case .light:
@@ -52,5 +57,4 @@ class ApparenceSettingViewModel {
             return 0
         }
     }
-
 }

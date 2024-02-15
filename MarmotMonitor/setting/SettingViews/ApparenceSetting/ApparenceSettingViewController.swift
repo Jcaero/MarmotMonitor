@@ -106,7 +106,7 @@ class ApparenceSettingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .colorForGradientStartPink
+        view.backgroundColor = viewModel.colorOfBackground
         setupViews()
         setupContraints()
         setupButtonAction()
@@ -142,7 +142,7 @@ class ApparenceSettingViewController: UIViewController {
         saveButton.layer.cornerRadius = 10
         cancelButton.layer.cornerRadius = 10
 
-        self.darkSide.transform = CGAffineTransform(translationX: 200, y: 0)
+        self.darkSide.transform = CGAffineTransform(translationX: 250, y: 0)
     }
 
     private func setupContraints() {

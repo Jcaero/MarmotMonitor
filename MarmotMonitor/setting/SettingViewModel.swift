@@ -42,7 +42,7 @@ class SettingViewModel {
         }
 
         let parent = userDefaultsManager.getParentName() ?? ""
-        let gender = userDefaultsManager.getGender() ?? ""
+        let gender = userDefaultsManager.getGender().description
 
         guard parent != "" else {return}
         switch gender {

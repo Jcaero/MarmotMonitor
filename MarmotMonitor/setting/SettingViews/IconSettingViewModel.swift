@@ -11,7 +11,7 @@ class IconSettingViewModel {
     private let userDefaultsManager: UserDefaultManagerProtocol!
     var iconeName: String?
     var gender: String {
-        return userDefaultsManager.getGender() ?? ""
+        return userDefaultsManager.getGender().description ?? ""
     }
 
     init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {

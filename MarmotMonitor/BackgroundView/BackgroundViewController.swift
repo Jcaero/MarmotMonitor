@@ -26,7 +26,7 @@ class BackgroundViewController: UIViewController {
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
         let gender = userDefaultsManager.getGender()
-        if gender == "Fille" {
+        if gender == .girl {
             gradient.colors = [UIColor.colorForGradientStartPink.cgColor, UIColor.colorForGradientEnd.cgColor]
         } else {
             gradient.colors = [UIColor.colorForGradientStart.cgColor, UIColor.colorForGradientEnd.cgColor]
