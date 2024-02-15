@@ -55,6 +55,7 @@ class SettingViewController: BackgroundViewController, UpdateInformationControll
         tableView.layer.cornerRadius = 20
         tableView.setupShadow(radius: 1, opacity: 0.5)
         tableView.clipsToBounds = true
+        tableView.accessibilityIdentifier = "SettingTableView"
         return tableView
     }()
 
@@ -152,6 +153,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 cell.setupTitle(with: "Apparence", information: viewModel.apparenceStyle, icone: UIImage(systemName: "iphone")!)
                 cell.backgroundColor = .colorForGraphBackground
+                cell.accessibilityIdentifier = "MyCell_Apparence"
                 return cell
             } else {
                 let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")

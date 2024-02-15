@@ -30,6 +30,9 @@ final class ApparenceAuditAccessibility: XCTestCase {
         let app = UIApplication()
         app.launch()
         app.buttons["Réglage"].tap()
+        let myTable = app.tables.matching(identifier: "SettingTableView")
+        let cell = myTable.cells.element(matching: .cell, identifier: "MyCell_Apparence")
+        cell.tap()
         if #available(iOS 17.0, *) {
             try app.performAccessibilityAudit()
         } else {
