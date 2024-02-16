@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IconSettingViewModel {
+final class IconSettingViewModel {
     private let userDefaultsManager: UserDefaultManagerProtocol!
     var iconeName: String?
     var gender: String {

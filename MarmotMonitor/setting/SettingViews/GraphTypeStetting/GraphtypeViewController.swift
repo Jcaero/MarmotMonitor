@@ -7,46 +7,79 @@
 
 import UIKit
 
-class GraphtypeViewController: BackgroundViewController {
-
-    private let titleView: UILabel = {
-        let label = UILabel()
-        label.setupDynamicBoldTextWith(policeName: "Symbol", size: 30, style: .title1)
-        label.textColor = .colorForLabelBlackToBlue
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        return label
+ final class GraphtypeViewController: BackgroundViewController {
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .clear
+        scrollView.layer.cornerRadius = 20
+        return scrollView
     }()
 
-    private let areaStackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .vertical
-        view.spacing = 20
-        view.distribution = .fillEqually
+    private let area: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
         return view
     }()
 
+    private let titleView: UILabel = {
+        let label = UILabel()
+        label.setupDynamicBoldTextWith(policeName: "Symbol", size: 34, style: .largeTitle)
+        label.textColor = .label
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.text = "Graph Type"
+        label.setAccessibility(with: .header, label: "Graph Type", hint: "")
+        return label
+    }()
+
+    private let subtitleView: UILabel = {
+        let label = UILabel()
+        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .title3)
+        label.textColor = .colorForLabelBlackToBlue
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.text = "Choisissez le type de graphique"
+        return label
+    }()
+
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(GraphTypeTableViewCell.self, forCellReuseIdentifier: GraphTypeTableViewCell.reuseIdentifier)
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        tableView.layer.cornerRadius = 20
+        tableView.setupShadow(radius: 1, opacity: 0.5)
+        tableView.clipsToBounds = true
+        tableView.isScrollEnabled = false
+        return tableView
+    }()
+
     private let saveButton: UIButton = {
-        let button = UIButton()
-        var configuration = UIButton.Configuration.filled()
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
-        configuration.baseBackgroundColor = UIColor.duckBlue
-        configuration.background.cornerRadius = 10
-        configuration.cornerStyle = .large
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
-            var titleAttributes = titleAttributes
-            titleAttributes.font = UIFont.preferredFont(forTextStyle: .body)
-            return titleAttributes
-        }
-        button.configuration = configuration
-        button.setTitle("Enregistrer", for: .normal)
-        button.setupShadow(radius: 1, opacity: 0.5)
+        let button = UIButton().createActionButton(color: .systemGreen)
+        button.setTitle("Valider", for: .normal)
+        button.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        button.setAccessibility(with: .button, label: "Valider", hint: "")
         return button
+    }()
+
+    private let cancelButton: UIButton = {
+        let button = UIButton().createActionButton(color: .systemRed)
+        button.setTitle("Retour", for: .normal)
+        button.setAccessibility(with: .button, label: "Retour", hint: "")
+        return button
+    }()
+
+    private let stackViewButton: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 30
+        return stackView
     }()
 
     // MARK: - Properties
 
-    let viewModel = GraphtypeViewModel()
+    private let viewModel = GraphtypeViewModel()
     private weak var delegate: InformationViewControllerDelegate!
 
     // MARK: - Circle Life
@@ -67,126 +100,134 @@ class GraphtypeViewController: BackgroundViewController {
 
         setupViews()
         setupContraints()
-        fillStackView()
 
         setupButtonAction()
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        tableView.rowHeight = UITableView.automaticDimension
     }
 
     // MARK: - Setup
     private func setupViews() {
-        [titleView, areaStackView, saveButton].forEach {
-            view.addSubview($0)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+        scrollView.addSubview(area)
+        area.translatesAutoresizingMaskIntoConstraints = false
+
+        [titleView,subtitleView,tableView, stackViewButton].forEach {
+            area.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+
+        [cancelButton, saveButton].forEach {
+            stackViewButton.addArrangedSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+
+        saveButton.layer.cornerRadius = 10
+        cancelButton.layer.cornerRadius = 10
     }
 
     private func setupContraints() {
         NSLayoutConstraint.activate([
-            titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            titleView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
-            titleView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
-            titleView.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: -10),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            scrollView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -10),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
 
-            saveButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            area.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            area.rightAnchor.constraint(equalTo: scrollView.rightAnchor),
+            area.leftAnchor.constraint(equalTo: scrollView.leftAnchor),
+            area.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
+            area.widthAnchor.constraint(equalToConstant: (view.frame.width - 20)),
+            area.heightAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor),
 
-            areaStackView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 30),
-            areaStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            areaStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-            areaStackView.bottomAnchor.constraint(lessThanOrEqualTo: saveButton.topAnchor, constant: -30),
-            saveButton.widthAnchor.constraint(greaterThanOrEqualTo: areaStackView.widthAnchor, multiplier: 0.5)
+            titleView.topAnchor.constraint(equalTo: area.topAnchor, constant: 20),
+            titleView.leadingAnchor.constraint(equalTo: area.leadingAnchor, constant: 40),
+            titleView.trailingAnchor.constraint(equalTo: area.trailingAnchor, constant: -40),
+            titleView.heightAnchor.constraint(greaterThanOrEqualToConstant: 60),
+
+            subtitleView.topAnchor.constraint(equalTo: titleView.bottomAnchor),
+            subtitleView.leadingAnchor.constraint(equalTo: area.leadingAnchor, constant: 40),
+            subtitleView.trailingAnchor.constraint(equalTo: area.trailingAnchor, constant: -40),
+            subtitleView.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
+
+            tableView.topAnchor.constraint(equalTo: subtitleView.bottomAnchor, constant: 40),
+            tableView.centerXAnchor.constraint(equalTo: area.centerXAnchor),
+            tableView.widthAnchor.constraint(equalTo: area.widthAnchor),
+            tableView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.6),
+
+            stackViewButton.topAnchor.constraint(greaterThanOrEqualTo: tableView.bottomAnchor, constant: 10),
+            stackViewButton.centerXAnchor.constraint(equalTo: area.centerXAnchor),
+            stackViewButton.bottomAnchor.constraint(lessThanOrEqualTo: area.bottomAnchor, constant: -20),
+            stackViewButton.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.8)
         ])
-    }
-
-    private func fillStackView() {
-
-        for index in 0...2 {
-            let view = UIView()
-            view.tag = index
-            view.backgroundColor = .colorForGradientEnd
-            view.layer.cornerRadius = 10
-
-            let graph = GraphView()
-            let activities = viewModel.getGraphData()
-            switch index {
-            case 0:
-                graph.setUpGraph(with: (activities, .round))
-            case 1:
-                graph.setUpGraph(with: (activities, .rod))
-            case 2:
-                graph.setUpGraph(with: (activities, .ligne))
-            default:
-                break
-            }
-
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
-            view.addGestureRecognizer(tapGesture)
-
-            view.addSubview(graph)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            graph.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                graph.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-                graph.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-                graph.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-                graph.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
-            ])
-
-            areaStackView.addArrangedSubview(view)
-        }
-    }
-
-    private func createButton(_ image: UIImage) -> UIButton {
-        let button = UIButton()
-        button.backgroundColor = .duckBlue
-        button.setBackgroundImage(image, for: .normal)
-        button.layer.cornerRadius = 20
-        button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 0.5).isActive = true
-        button.clipsToBounds = true
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        return button
-    }
-
-    @objc private func buttonTapped(_ sender: UITapGestureRecognizer) {
-        guard let view = sender.view else { return }
-
-        switch view.tag {
-        case 0:
-            viewModel.setGraphType(graphType: .round)
-        case 1:
-            viewModel.setGraphType(graphType: .rod)
-        case 2:
-            viewModel.setGraphType(graphType: .ligne)
-        default:
-            break
-        }
-
-        removeAllBorders()
-        view.layer.borderWidth = 6
-        view.layer.borderColor = UIColor.red.cgColor
-    }
-
-    private func removeAllBorders() {
-        for subview in areaStackView.arrangedSubviews {
-            subview.layer.borderWidth = 0
-        }
     }
 
     // MARK: - Actions
     private func setupButtonAction() {
         saveButton.addTarget(self, action: #selector(saveData), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
+
+        cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(holdDown), for: .touchDown)
     }
 
     @objc private func saveData(sender: UIButton) {
-            sender.transform = .identity
-            sender.layer.shadowOpacity = 0.5
+        sender.transform = .identity
+        sender.layer.shadowOpacity = 0.5
+        viewModel.saveGraphType()
         delegate.updateInformation()
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @objc func cancel(sender: UIButton) {
+        sender.transform = .identity
+        sender.layer.shadowOpacity = 0.5
         self.dismiss(animated: true, completion: nil)
     }
 
     @objc func holdDown(sender: UIButton) {
         sender.transform = CGAffineTransform(scaleX: 0.97, y: 0.97)
         sender.layer.shadowOpacity = 0
+    }
+}
+
+extension GraphtypeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GraphTypeTableViewCell.reuseIdentifier, for: indexPath) as? GraphTypeTableViewCell else {
+            print("erreur de cell")
+            return UITableViewCell()
+        }
+        let (graphName, graphSelection) = viewModel.graphType[indexPath.row]
+        cell.configure(with: graphName, isSelected: graphSelection)
+        cell.layer.cornerRadius = 20
+        cell.clipsToBounds = true
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.graphTypeSelected(index: indexPath.row)
+        tableView.reloadData()
+    }
+
+    private func tableView(_ tableView: UITableView, heightForRowInSection section: Int) -> CGFloat {
+            return 10
+        }
+
+    // MARK: - TraitCollection
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        let currentCategory = traitCollection.preferredContentSizeCategory
+        let previousCategory = previousTraitCollection?.preferredContentSizeCategory
+        guard currentCategory != previousCategory else { return }
+        let isAccessibilityCategory = currentCategory.isAccessibilityCategory
+        stackViewButton.axis = isAccessibilityCategory ? .vertical : .horizontal
     }
 }

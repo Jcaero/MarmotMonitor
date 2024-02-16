@@ -6,34 +6,53 @@
 //
 
 import Foundation
-class GraphtypeViewModel {
+final class GraphtypeViewModel {
     private let userDefaultsManager: UserDefaultManagerProtocol!
+
+    var graphType: [(String, Bool)] = [("Pixel", false), ("Barre",false), ("Ligne",false)]
 
     // MARK: - Initializer
     init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {
         self.userDefaultsManager = userDefaultsManager
+        initGraphtype()
     }
 
-    func getGraphType() -> GraphType? {
+    private func initGraphtype() {
+        guard let graphType = getGraphType() else { return }
+        switch graphType {
+        case .round:
+            self.graphType[0].1 = true
+        case .rod:
+            self.graphType[1].1 = true
+        case .ligne:
+            self.graphType[2].1 = true
+        }
+    }
+
+    private func getGraphType() -> GraphType? {
         return userDefaultsManager.getGraphType()
     }
 
-    func setGraphType(graphType: GraphType) {
+    private func setGraphType(graphType: GraphType) {
         userDefaultsManager.saveGraphType(graphType)
     }
 
-    func getGraphData() -> [GraphActivity] {
-        var acti: [GraphActivity] = []
+    func graphTypeSelected(index: Int) {
+        graphType = graphType.map { ($0.0, false) }
+        graphType[index].1 = true
+    }
 
-        let sleepMockDate = "07/01/2024 12:00".toDateWithTime() ?? Date()
-        acti.append(GraphActivity(type: .sleep, color: .colorForSleep, timeStart: sleepMockDate, duration: 7200))
-
-        let bottleMockDate = "07/01/2024 10:00".toDateWithTime() ?? Date()
-        acti.append(GraphActivity(type: .bottle, color: .colorForMeal, timeStart: bottleMockDate, duration: 320))
-
-        let diaperMockDate = "07/01/2024 16:00".toDateWithTime() ?? Date()
-        acti.append(GraphActivity(type: .diaper, color: .colorForDiaper, timeStart: diaperMockDate, duration: 320))
-
-        return acti
+    func saveGraphType() {
+        guard let index = graphType.firstIndex(where: { $0.1 == true }) else { return }
+        switch graphType[index].0 {
+        case "Pixel":
+            setGraphType(graphType: .round)
+        case "Barre":
+            setGraphType(graphType: .rod)
+        case "Ligne":
+            setGraphType(graphType: .ligne)
+        default:
+            break
+        }
     }
 }

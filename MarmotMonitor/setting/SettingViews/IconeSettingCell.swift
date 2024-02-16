@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IconeSettingCell: UICollectionViewCell {
+final class IconeSettingCell: UICollectionViewCell {
 
     // MARK: - Properties
     static let reuseIdentifier = "IconeSettingCell"

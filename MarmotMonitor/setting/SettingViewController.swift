@@ -138,6 +138,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 cell.setupTitle(with: "Type de graphique", information: viewModel.graphType.description, icone: UIImage(named: "graphIcone")!)
                 cell.backgroundColor = .colorForGraphBackground
+                cell.accessibilityIdentifier = "MyCell_graphType"
                 return cell
 
             case 1:

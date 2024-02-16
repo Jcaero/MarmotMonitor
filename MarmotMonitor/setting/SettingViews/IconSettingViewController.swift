@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IconSettingViewController: BackgroundViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+final class IconSettingViewController: BackgroundViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -16,7 +16,7 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
         return scrollView
     }()
 
-    let area: UIView = {
+    private let area: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
@@ -43,7 +43,7 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
         return label
     }()
 
-    let icone: UIImageView = {
+    private let icone: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 20
@@ -52,7 +52,7 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
         return imageView
     }()
 
-    let colors: UICollectionView = {
+    private let colors: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -77,7 +77,7 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
         return button
     }()
 
-    let stackViewButton: UIStackView = {
+    private let stackViewButton: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
@@ -85,7 +85,7 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
         return stackView
     }()
 
-    let circleView: UIView = {
+    private let circleView: UIView = {
         let view = UIView()
         view.backgroundColor = .white.withAlphaComponent(0.7)
         view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
@@ -94,7 +94,7 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
     }()
 
     // MARK: - Properties
-    let viewModel = IconSettingViewModel()
+    private let viewModel = IconSettingViewModel()
     private var delegate: UpdateInformationControllerDelegate?
 
     private var iconeWidthContrainte: NSLayoutConstraint?
@@ -191,7 +191,8 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
             colors.topAnchor.constraint(equalTo: icone.bottomAnchor, constant: 20),
             colors.centerXAnchor.constraint(equalTo: area.centerXAnchor),
             colors.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.8),
-            colors.heightAnchor.constraint(equalTo: saveButton.heightAnchor),
+            colors.heightAnchor.constraint(greaterThanOrEqualTo: saveButton.heightAnchor),
+            colors.heightAnchor.constraint(lessThanOrEqualTo: colors.widthAnchor, multiplier: 0.136),
 
             stackViewButton.topAnchor.constraint(greaterThanOrEqualTo: colors.bottomAnchor, constant: 20),
             stackViewButton.centerXAnchor.constraint(equalTo: area.centerXAnchor),
@@ -242,7 +243,7 @@ class IconSettingViewController: BackgroundViewController, UICollectionViewDeleg
     }
 
     // MARK: - Icon
-    func setIcon(_ appIconName: String?, completion: @escaping (Error?) -> Void) {
+    private func setIcon(_ appIconName: String?, completion: @escaping (Error?) -> Void) {
         if UIApplication.shared.supportsAlternateIcons {
             UIApplication.shared.setAlternateIconName(appIconName) { error in
                 DispatchQueue.main.async {

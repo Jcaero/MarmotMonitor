@@ -1,10 +1,9 @@
 //
-//  SettingAuditAccessibility.swift
+//  settingAuditAccessibilityTests.swift
 //  MarmotMonitorUITests
 //
-//  Created by pierrick viret on 15/02/2024.
+//  Created by pierrick viret on 16/02/2024.
 //
-
 import XCTest
 @testable import MarmotMonitor
 
@@ -12,17 +11,6 @@ final class SettingAuditAccessibility: XCTestCase {
     
     override func setUpWithError() throws {
         continueAfterFailure = true
-    }
-    
-    func testAccessibility() throws {
-        
-        let app = XCUIApplication()
-        app.launch()
-        if #available(iOS 17.0, *) {
-            try app.performAccessibilityAudit()
-        } else {
-            // Fallback on earlier versions
-        }
     }
     
     func testAccessibilityApparence() throws {
@@ -45,6 +33,20 @@ final class SettingAuditAccessibility: XCTestCase {
         app.buttons["Réglage"].tap()
         let myTable = app.tables.matching(identifier: "SettingTableView")
         let cell = myTable.cells.element(matching: .cell, identifier: "MyCell_IconeCouleur")
+        cell.tap()
+        if #available(iOS 17.0, *) {
+            try app.performAccessibilityAudit()
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    func testAccessibilityGraph() throws {
+        let app = UIApplication()
+        app.launch()
+        app.buttons["Réglage"].tap()
+        let myTable = app.tables.matching(identifier: "SettingTableView")
+        let cell = myTable.cells.element(matching: .cell, identifier: "MyCell_graphType")
         cell.tap()
         if #available(iOS 17.0, *) {
             try app.performAccessibilityAudit()

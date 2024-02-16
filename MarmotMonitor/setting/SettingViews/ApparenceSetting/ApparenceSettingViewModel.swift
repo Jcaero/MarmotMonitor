@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ApparenceSettingViewModel {
+final class ApparenceSettingViewModel {
     private let userDefaultsManager: UserDefaultManagerProtocol!
 
     var apparence: UIUserInterfaceStyle {

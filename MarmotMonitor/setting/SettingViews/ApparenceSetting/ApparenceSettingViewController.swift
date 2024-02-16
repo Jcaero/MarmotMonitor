@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ApparenceSettingViewController: UIViewController {
+final class ApparenceSettingViewController: UIViewController {
 
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -16,20 +16,20 @@ class ApparenceSettingViewController: UIViewController {
         return scrollView
     }()
 
-    let area: UIView = {
+    private let area: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
     }()
 
-    let moon: UIView = {
+    private let moon: UIView = {
         let view = UIView()
         view.backgroundColor = .red
         view.clipsToBounds = true
         return view
     }()
 
-    let darkSide: UIView = {
+    private let darkSide: UIView = {
         let view = UIView()
         view.backgroundColor = .egyptienBlue
         view.clipsToBounds = true
@@ -77,7 +77,7 @@ class ApparenceSettingViewController: UIViewController {
         return button
     }()
 
-    let stackViewButton: UIStackView = {
+    private let stackViewButton: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
