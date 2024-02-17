@@ -96,6 +96,7 @@
 		47CE16D12B62987400A51B78 /* MonitorViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE16D02B62987400A51B78 /* MonitorViewModelTest.swift */; };
 		47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */; };
 		47D2BBD12B7FF32700095348 /* settingAuditAccessibilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D2BBD02B7FF32700095348 /* settingAuditAccessibilityTests.swift */; };
+		47D2BBD32B7FFA7A00095348 /* textField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D2BBD22B7FFA7A00095348 /* textField+.swift */; };
 		47D7895F2B5E96AD00B4912D /* GrowthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7895E2B5E96AD00B4912D /* GrowthViewModel.swift */; };
 		47D789612B5E9B6400B4912D /* GrowthViewmodelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D789602B5E9B6400B4912D /* GrowthViewmodelTest.swift */; };
 		47D7E1B82B5566950038C6E2 /* CoreDataManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7E1B72B5566950038C6E2 /* CoreDataManagerMock.swift */; };
@@ -238,6 +239,7 @@
 		47CE16D02B62987400A51B78 /* MonitorViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorViewModelTest.swift; sourceTree = "<group>"; };
 		47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		47D2BBD02B7FF32700095348 /* settingAuditAccessibilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingAuditAccessibilityTests.swift; sourceTree = "<group>"; };
+		47D2BBD22B7FFA7A00095348 /* textField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "textField+.swift"; sourceTree = "<group>"; };
 		47D7895E2B5E96AD00B4912D /* GrowthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthViewModel.swift; sourceTree = "<group>"; };
 		47D789602B5E9B6400B4912D /* GrowthViewmodelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthViewmodelTest.swift; sourceTree = "<group>"; };
 		47D7E1B72B5566950038C6E2 /* CoreDataManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerMock.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				471480AE2B513AF20084589B /* ActivityType.swift */,
 				479FC9582B56D550001BAC22 /* timeInterval+.swift */,
 				47E45E1A2B65ADA9005E5268 /* imageName.swift */,
+				47D2BBD22B7FFA7A00095348 /* textField+.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 				47E2A40B2B49848B008E75DD /* UserDefaultManager.swift in Sources */,
 				476AF6302B27A10100F4935F /* UIButton+.swift in Sources */,
 				478AA2572B7AB3D100D4AE7C /* ApparenceSettingViewController.swift in Sources */,
+				47D2BBD32B7FFA7A00095348 /* textField+.swift in Sources */,
 				472DDABD2B2DEF1600812024 /* UISegmented+.swift in Sources */,
 				47D8DA642B4B37F000D97CD1 /* Sleep+CoreDataProperties.swift in Sources */,
 				4750720E2B09576900DAB527 /* TapBarController.swift in Sources */,

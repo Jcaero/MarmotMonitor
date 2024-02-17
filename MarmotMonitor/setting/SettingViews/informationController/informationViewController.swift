@@ -11,31 +11,17 @@ protocol InformationViewControllerDelegate: AnyObject {
     func updateInformation()
 }
 
-class InformationViewController: UIViewController {
+class InformationViewController: BackgroundViewController {
 
-    private let area: UIView = {
-        let view = UIView()
-        view.backgroundColor = .colorForGraphBackground
-        view.layer.cornerRadius = 20
-        view.setupShadow(radius: 1, opacity: 0.5)
-        return view
-    }()
-
-    private let buttonStackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.spacing = 10
-        view.distribution = .equalCentering
-        return view
-    }()
-
-    private let informationStackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .vertical
-        view.distribution = .fillEqually
-        view.spacing = 10
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private let titleView: UILabel = {
+        let label = UILabel()
+        label.setupDynamicBoldTextWith(policeName: "Symbol", size: 34, style: .largeTitle)
+        label.textColor = .label
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.text = "Information"
+        label.setAccessibility(with: .header, label: "Information", hint: "")
+        return label
     }()
 
     private var name: UITextField!
@@ -49,19 +35,10 @@ class InformationViewController: UIViewController {
         return control
     }()
 
-    private let babyImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "nameMarmotte")
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = 10
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-
     private let saveButton: UIButton = {
         let button = UIButton()
-        var configuration = UIButton.Configuration.filled()
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
+        var configuration = UIButton.Configuration.plain()
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
         configuration.baseBackgroundColor = UIColor.duckBlue
         configuration.background.cornerRadius = 10
         configuration.cornerStyle = .large
@@ -78,9 +55,9 @@ class InformationViewController: UIViewController {
 
     private let cancelButton: UIButton = {
         let button = UIButton()
-        var configuration = UIButton.Configuration.filled()
+        var configuration = UIButton.Configuration.tinted()
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
-        configuration.baseBackgroundColor = UIColor.duckBlue
+        configuration.baseBackgroundColor = .clear
         configuration.background.cornerRadius = 10
         configuration.cornerStyle = .large
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
@@ -94,16 +71,15 @@ class InformationViewController: UIViewController {
         return button
     }()
 
+    private let topCloud: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white.withAlphaComponent(0.5)
+        return view
+    }()
+
     // MARK: - Properties
     private var viewModel: InformationViewModel!
     private weak var delegate: InformationViewControllerDelegate!
-
-    // MARK: - Constraints for accessibility
-    private var imageWidthConstraint: NSLayoutConstraint?
-    private var imageWidthNilConstraint: NSLayoutConstraint?
-
-    private var areaRatioContraint: NSLayoutConstraint?
-    private var areaTopContraint: NSLayoutConstraint?
 
     // MARK: - CYCLE LIFE
     init(delegate: InformationViewControllerDelegate) {
@@ -119,16 +95,13 @@ class InformationViewController: UIViewController {
         super.viewDidLoad()
         viewModel = InformationViewModel(delegate: self)
 
-        view.backgroundColor = .clear
+        view.backgroundColor = .white
         setupUserInfo()
-        setupBlurEffect()
 
         setupViews()
         setupContraints()
-        setupAccessibility()
 
         setupTapGesture()
-        setupTextFieldDelegate()
 
         setupButtonAction()
 
@@ -140,29 +113,28 @@ class InformationViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
-    // MARK: - Effects
-    private func setupBlurEffect() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.prominent)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(blurEffectView)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        name.underlined(color: .duckBlue)
+        birthDay.underlined(color: .duckBlue)
+        parentName.underlined(color: .duckBlue)
+        saveButton.applyGradient(colors: [UIColor.duckBlue.cgColor, UIColor.lightBlue.cgColor])
+
+        topCloud.layer.cornerRadius = topCloud.frame.height / 2
     }
 
     // MARK: - Setups
     private func setupUserInfo() {
         viewModel.getUserInformation()
-
         name = createTextField()
         name.placeholder = viewModel.babyName
         birthDay = createTextField()
         birthDay.placeholder = viewModel.birthDay
+        birthDay.keyboardType = .numberPad
         parentName = createTextField()
         parentName.placeholder = viewModel.parentName
 
         switch viewModel.gender {
-        case "Fille":
-            genderSegmentedControl.selectedSegmentIndex = 0
         case "Garçon":
             genderSegmentedControl.selectedSegmentIndex = 1
         default:
@@ -170,70 +142,48 @@ class InformationViewController: UIViewController {
         }
     }
     private func setupViews() {
-        view.addSubview(area)
-        area.translatesAutoresizingMaskIntoConstraints = false
-
-        [babyImage, informationStackView, buttonStackView ].forEach {
-            area.addSubview($0)
+        [topCloud,titleView, cancelButton, saveButton, name, birthDay, parentName, genderSegmentedControl].forEach {
+            view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-
-        [name, birthDay, parentName, genderSegmentedControl].forEach {
-            informationStackView.addArrangedSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-
-        // Add the buttons to the stackView
-        let empty = UIView()
-        let empty2 = UIView()
-        let empty3 = UIView()
-        [empty, cancelButton, empty3, saveButton, empty2].forEach {
-            buttonStackView.addArrangedSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        view.addSubview(buttonStackView)
-        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setupContraints() {
-        imageWidthConstraint = babyImage.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.2)
-        imageWidthNilConstraint = babyImage.widthAnchor.constraint(equalToConstant: 0)
-
-        areaTopContraint = area.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
-        areaRatioContraint = area.heightAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.5)
 
         NSLayoutConstraint.activate([
-            area.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            area.bottomAnchor.constraint(equalTo: view.centerYAnchor),
-            area.widthAnchor.constraint(equalToConstant: view.frame.width * 0.85),
-            areaRatioContraint!,
+            topCloud.centerYAnchor.constraint(equalTo: view.topAnchor),
+            topCloud.centerXAnchor.constraint(equalTo: view.trailingAnchor),
+            topCloud.widthAnchor.constraint(equalTo: topCloud.heightAnchor),
+            topCloud.heightAnchor.constraint(equalTo: view.widthAnchor),
 
-            babyImage.centerYAnchor.constraint(equalTo: area.centerYAnchor),
-            babyImage.leftAnchor.constraint(equalTo: area.leftAnchor, constant: 10),
-            babyImage.heightAnchor.constraint(equalTo: babyImage.widthAnchor),
-            imageWidthConstraint!,
+            titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height * 0.12),
+            titleView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            titleView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
 
-            informationStackView.topAnchor.constraint(equalTo: area.topAnchor, constant: 10),
-            informationStackView.leftAnchor.constraint(equalTo: babyImage.rightAnchor, constant: 10),
-            informationStackView.rightAnchor.constraint(equalTo: area.rightAnchor, constant: -10),
-            informationStackView.bottomAnchor.constraint(equalTo: area.bottomAnchor, constant: -10),
+            name.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 40),
+            name.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            name.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
 
-            buttonStackView.topAnchor.constraint(equalTo: area.bottomAnchor, constant: 10),
-            buttonStackView.leftAnchor.constraint(equalTo: area.leftAnchor, constant: 10),
-            buttonStackView.rightAnchor.constraint(equalTo: area.rightAnchor, constant: -10)
+            birthDay.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 20),
+            birthDay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            birthDay.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+
+            parentName.topAnchor.constraint(equalTo: birthDay.bottomAnchor, constant: 20),
+            parentName.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            parentName.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+
+            genderSegmentedControl.topAnchor.constraint(equalTo: parentName.bottomAnchor, constant: 20),
+            genderSegmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            genderSegmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+
+            saveButton.topAnchor.constraint(equalTo: genderSegmentedControl.bottomAnchor, constant: 50),
+            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            saveButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+
+            cancelButton.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 10),
+            cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            cancelButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
         ])
-    }
-
-    func setupTitle(with name: String, birthDay: String, parent: String) {
-        self.name.text = name
-        self.birthDay.text = birthDay
-        self.parentName.text = parent
-    }
-
-    private func setupTextFieldDelegate() {
-        name.delegate = self
-        birthDay.delegate = self
-        parentName.delegate = self
     }
 
     // MARK: - Actions
@@ -271,23 +221,22 @@ extension InformationViewController {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(
             string: "0",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray3]
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
         )
         let font = UIFont(name: "Symbol", size: 20)
         let fontMetrics = UIFontMetrics(forTextStyle: .body)
         textField.font = fontMetrics.scaledFont(for: font!)
         textField.textColor = .label
         textField.textAlignment = .left
-        textField.borderStyle = .roundedRect
-        textField.layer.borderColor = UIColor.duckBlue.cgColor
-        textField.layer.borderWidth = 2
-        textField.layer.cornerRadius = 10
         textField.keyboardType = .default
         textField.backgroundColor = .clear
-        textField.tintColor = .systemGray6
+        textField.tintColor = .label
         textField.adjustsFontSizeToFitWidth = true
+        textField.adjustsFontForContentSizeCategory = true
+        textField.delegate = self
         return textField
     }
+
 }
 
 extension InformationViewController: InformationViewModelDelegate {
@@ -296,39 +245,36 @@ extension InformationViewController: InformationViewModelDelegate {
     }
 }
 
-// MARK: - Accessibility
+//// MARK: - Accessibility
 extension InformationViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+
         let currentCategory = traitCollection.preferredContentSizeCategory
         let previousCategory = previousTraitCollection?.preferredContentSizeCategory
 
         guard currentCategory != previousCategory else { return }
-
-        setupAccessibility()
-    }
-
-    private func setupAccessibility() {
-        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
-        switch isAccessibilityCategory {
-        case true:
-            imageWidthConstraint?.isActive = false
-            imageWidthNilConstraint?.isActive = true
-
-            areaRatioContraint?.isActive = false
-            areaTopContraint?.isActive = true
-
-            buttonStackView.axis = .vertical
-        case false:
-            imageWidthNilConstraint?.isActive = false
-            imageWidthConstraint?.isActive = true
-
-            areaTopContraint?.isActive = false
-            areaRatioContraint?.isActive = true
-            buttonStackView.axis = .horizontal
-        }
+        name.sizeToFit()
+//        setupAccessibility()
     }
 }
+
+//    private func setupAccessibility() {
+//        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+//        switch isAccessibilityCategory {
+//        case true:
+//            imageWidthConstraint?.isActive = false
+//            imageWidthNilConstraint?.isActive = true
+//
+//            areaRatioContraint?.isActive = false
+//            areaTopContraint?.isActive = true
+//
+//            buttonStackView.axis = .vertical
+//        case false:
+//
+//        }
+//    }
+//}
 
 // MARk: - Keyboard
 extension InformationViewController: UITextFieldDelegate {
