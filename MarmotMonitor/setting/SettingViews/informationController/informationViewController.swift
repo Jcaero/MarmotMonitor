@@ -30,6 +30,8 @@ class InformationViewController: BackgroundViewController {
     private var genderSegmentedControl: UISegmentedControl = {
         let items = ["Fille", "Garçon"]
         let control = UISegmentedControl(items: items)
+        let font = UIFont.preferredFont(forTextStyle: .body)
+        control.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
         control.selectedSegmentTintColor = .duckBlue
         control.selectedSegmentIndex = 0
         return control
@@ -81,6 +83,8 @@ class InformationViewController: BackgroundViewController {
     private var viewModel: InformationViewModel!
     private weak var delegate: InformationViewControllerDelegate!
 
+    private var segmentedControlHeightConstraint: NSLayoutConstraint!
+
     // MARK: - CYCLE LIFE
     init(delegate: InformationViewControllerDelegate) {
         self.delegate = delegate
@@ -121,6 +125,11 @@ class InformationViewController: BackgroundViewController {
         saveButton.applyGradient(colors: [UIColor.duckBlue.cgColor, UIColor.lightBlue.cgColor])
 
         topCloud.layer.cornerRadius = topCloud.frame.height / 2
+
+        let font = UIFont.preferredFont(forTextStyle: .body)
+        genderSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        genderSegmentedControl.apportionsSegmentWidthsByContent = true
+        adjustSegmentedControlHeightWithAutoLayout(control: genderSegmentedControl)
     }
 
     // MARK: - Setups
@@ -151,6 +160,7 @@ class InformationViewController: BackgroundViewController {
 
     private func setupContraints() {
 
+        segmentedControlHeightConstraint = genderSegmentedControl.heightAnchor.constraint(equalToConstant: 40)
         NSLayoutConstraint.activate([
             topCloud.centerYAnchor.constraint(equalTo: view.topAnchor),
             topCloud.centerXAnchor.constraint(equalTo: view.trailingAnchor),
@@ -176,6 +186,7 @@ class InformationViewController: BackgroundViewController {
             genderSegmentedControl.topAnchor.constraint(equalTo: parentName.bottomAnchor, constant: 20),
             genderSegmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             genderSegmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            segmentedControlHeightConstraint!,
 
             saveButton.topAnchor.constraint(equalTo: genderSegmentedControl.bottomAnchor, constant: 50),
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -264,6 +275,18 @@ extension InformationViewController {
         guard currentCategory != previousCategory else { return }
         name.sizeToFit()
 //        setupAccessibility()
+    }
+
+    func adjustSegmentedControlHeightWithAutoLayout(control: UISegmentedControl) {
+        let font = UIFont.preferredFont(forTextStyle: .body)
+        let testLabel = UILabel()
+        testLabel.font = font
+        testLabel.text = "Test"
+        testLabel.sizeToFit()
+        let newHeight = testLabel.frame.size.height + 16 // Ajouter une marge interne
+
+        // Ajuster la contrainte de hauteur
+        segmentedControlHeightConstraint.constant = newHeight
     }
 }
 
