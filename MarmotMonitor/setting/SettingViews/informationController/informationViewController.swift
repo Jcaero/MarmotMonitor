@@ -44,7 +44,7 @@ class InformationViewController: BackgroundViewController {
         configuration.cornerStyle = .large
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
             var titleAttributes = titleAttributes
-            titleAttributes.font = UIFont.preferredFont(forTextStyle: .footnote)
+            titleAttributes.font = UIFont.preferredFont(forTextStyle: .body)
             return titleAttributes
         }
         button.configuration = configuration
@@ -62,7 +62,7 @@ class InformationViewController: BackgroundViewController {
         configuration.cornerStyle = .large
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
             var titleAttributes = titleAttributes
-            titleAttributes.font = UIFont.preferredFont(forTextStyle: .footnote)
+            titleAttributes.font = UIFont.preferredFont(forTextStyle: .body)
             return titleAttributes
         }
         button.configuration = configuration
@@ -131,6 +131,7 @@ class InformationViewController: BackgroundViewController {
         birthDay = createTextField()
         birthDay.placeholder = viewModel.birthDay
         birthDay.keyboardType = .numberPad
+        birthDay.addTarget(self, action: #selector(textFieldEditingDidChange), for: UIControl.Event.editingChanged)
         parentName = createTextField()
         parentName.placeholder = viewModel.parentName
 
@@ -235,6 +236,13 @@ extension InformationViewController {
         textField.adjustsFontForContentSizeCategory = true
         textField.delegate = self
         return textField
+    }
+
+    @objc private func textFieldEditingDidChange(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        if text.count == 2 || text.count == 5 {
+            textField.text = text + "/"
+        }
     }
 
 }
