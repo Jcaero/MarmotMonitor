@@ -206,6 +206,9 @@ extension GraphtypeViewController: UITableViewDelegate, UITableViewDataSource {
         }
         let (graphName, graphSelection) = viewModel.graphType[indexPath.row]
         cell.configure(with: graphName, isSelected: graphSelection)
+        let selected = graphSelection ? "selected" : "not selected"
+        cell.accessibilityTraits = .button
+        cell.accessibilityValue = "graph type " + graphName + " " + selected
         cell.layer.cornerRadius = 20
         cell.clipsToBounds = true
         return cell
