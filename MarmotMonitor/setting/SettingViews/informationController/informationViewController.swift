@@ -11,7 +11,20 @@ protocol InformationViewControllerDelegate: AnyObject {
     func updateInformation()
 }
 
-class InformationViewController: BackgroundViewController {
+final class InformationViewController: BackgroundViewController {
+
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .clear
+        scrollView.layer.cornerRadius = 20
+        return scrollView
+    }()
+
+    private let area: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
 
     private let titleView: UILabel = {
         let label = UILabel()
@@ -30,7 +43,7 @@ class InformationViewController: BackgroundViewController {
     private var genderSegmentedControl: UISegmentedControl = {
         let items = ["Fille", "Garçon"]
         let control = UISegmentedControl(items: items)
-        let font = UIFont.preferredFont(forTextStyle: .body)
+        let font = UIFont.preferredFont(forTextStyle: .caption1)
         control.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
         control.selectedSegmentTintColor = .duckBlue
         control.selectedSegmentIndex = 0
@@ -69,6 +82,7 @@ class InformationViewController: BackgroundViewController {
         }
         button.configuration = configuration
         button.setTitle("annuler", for: .normal)
+        button.setTitleColor(UIColor.buttonCancel, for: .normal)
         button.setupShadow(radius: 1, opacity: 0.5)
         return button
     }()
@@ -84,6 +98,8 @@ class InformationViewController: BackgroundViewController {
     private weak var delegate: InformationViewControllerDelegate!
 
     private var segmentedControlHeightConstraint: NSLayoutConstraint!
+    private var topTitleContraint: NSLayoutConstraint!
+    private var segmentedSize: UIFont.TextStyle = .body
 
     // MARK: - CYCLE LIFE
     init(delegate: InformationViewControllerDelegate) {
@@ -97,7 +113,7 @@ class InformationViewController: BackgroundViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = InformationViewModel(delegate: self)
+        viewModel = InformationViewModel()
 
         view.backgroundColor = .white
         setupUserInfo()
@@ -106,7 +122,6 @@ class InformationViewController: BackgroundViewController {
         setupContraints()
 
         setupTapGesture()
-
         setupButtonAction()
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -119,14 +134,21 @@ class InformationViewController: BackgroundViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        name.underlined(color: .duckBlue)
-        birthDay.underlined(color: .duckBlue)
-        parentName.underlined(color: .duckBlue)
+        addUnderlined(to: [name, birthDay, parentName])
+
         saveButton.applyGradient(colors: [UIColor.duckBlue.cgColor, UIColor.lightBlue.cgColor])
 
         topCloud.layer.cornerRadius = topCloud.frame.height / 2
 
-        let font = UIFont.preferredFont(forTextStyle: .body)
+        setSegmentedSize()
+    }
+
+    private func addUnderlined(to textFields: [UITextField]) {
+        textFields.forEach { $0.underlined(color: .duckBlue) }
+    }
+
+    private func setSegmentedSize() {
+        let font = UIFont.preferredFont(forTextStyle: segmentedSize)
         genderSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
         genderSegmentedControl.apportionsSegmentWidthsByContent = true
         adjustSegmentedControlHeightWithAutoLayout(control: genderSegmentedControl)
@@ -136,24 +158,35 @@ class InformationViewController: BackgroundViewController {
     private func setupUserInfo() {
         viewModel.getUserInformation()
         name = createTextField()
+        name.accessibilityHint = "Nom de l'enfant"
         name.placeholder = viewModel.babyName
+
         birthDay = createTextField()
         birthDay.placeholder = viewModel.birthDay
         birthDay.keyboardType = .numberPad
         birthDay.addTarget(self, action: #selector(textFieldEditingDidChange), for: UIControl.Event.editingChanged)
+        birthDay.accessibilityHint = "Date de naissance"
+
         parentName = createTextField()
         parentName.placeholder = viewModel.parentName
+        parentName.accessibilityHint = "Nom du parent"
 
-        switch viewModel.gender {
-        case "Garçon":
-            genderSegmentedControl.selectedSegmentIndex = 1
-        default:
-            genderSegmentedControl.selectedSegmentIndex = 0
-        }
+        let isBoy = viewModel.gender == "Garçon"
+        genderSegmentedControl.selectedSegmentIndex = isBoy ? 1 : 0
+        genderSegmentedControl.accessibilityHint = "Sélectionner le genre"
     }
+
     private func setupViews() {
-        [topCloud,titleView, cancelButton, saveButton, name, birthDay, parentName, genderSegmentedControl].forEach {
+        [topCloud, scrollView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
+        }
+
+        area.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(area)
+
+        [titleView, cancelButton, saveButton, name, birthDay, parentName, genderSegmentedControl].forEach {
+            area.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
@@ -161,40 +194,56 @@ class InformationViewController: BackgroundViewController {
     private func setupContraints() {
 
         segmentedControlHeightConstraint = genderSegmentedControl.heightAnchor.constraint(equalToConstant: 40)
+        topTitleContraint = titleView.topAnchor.constraint(equalTo: area.topAnchor, constant: view.frame.height * 0.2)
+
         NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor , constant: -20),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            scrollView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            scrollView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
+
+            area.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            area.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -30),
+            area.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 30),
+            area.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
+            area.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -60),
+            area.heightAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.heightAnchor),
+
             topCloud.centerYAnchor.constraint(equalTo: view.topAnchor),
-            topCloud.centerXAnchor.constraint(equalTo: view.trailingAnchor),
+            topCloud.centerXAnchor.constraint(equalTo: view.rightAnchor),
             topCloud.widthAnchor.constraint(equalTo: topCloud.heightAnchor),
             topCloud.heightAnchor.constraint(equalTo: view.widthAnchor),
 
-            titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.frame.height * 0.12),
-            titleView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            topTitleContraint!,
+            titleView.leadingAnchor.constraint(equalTo: area.leadingAnchor),
+            titleView.trailingAnchor.constraint(equalTo: area.trailingAnchor),
 
             name.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 40),
-            name.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            name.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            name.centerXAnchor.constraint(equalTo: area.centerXAnchor),
+            name.widthAnchor.constraint(equalTo: area.widthAnchor),
 
             birthDay.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 20),
-            birthDay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            birthDay.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            birthDay.centerXAnchor.constraint(equalTo: area.centerXAnchor),
+            birthDay.widthAnchor.constraint(equalTo: area.widthAnchor),
 
             parentName.topAnchor.constraint(equalTo: birthDay.bottomAnchor, constant: 20),
-            parentName.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            parentName.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            parentName.centerXAnchor.constraint(equalTo: area.centerXAnchor),
+            parentName.widthAnchor.constraint(equalTo: area.widthAnchor),
 
             genderSegmentedControl.topAnchor.constraint(equalTo: parentName.bottomAnchor, constant: 20),
-            genderSegmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            genderSegmentedControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            genderSegmentedControl.centerXAnchor.constraint(equalTo: area.centerXAnchor),
+            genderSegmentedControl.widthAnchor.constraint(equalTo: area.widthAnchor),
             segmentedControlHeightConstraint!,
 
-            saveButton.topAnchor.constraint(equalTo: genderSegmentedControl.bottomAnchor, constant: 50),
-            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            saveButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            saveButton.topAnchor.constraint(greaterThanOrEqualTo: genderSegmentedControl.bottomAnchor, constant: 20),
+            saveButton.centerXAnchor.constraint(equalTo: area.centerXAnchor),
+            saveButton.widthAnchor.constraint(equalTo: area.widthAnchor),
 
             cancelButton.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 10),
-            cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            cancelButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
+            cancelButton.centerXAnchor.constraint(equalTo: area.centerXAnchor),
+            cancelButton.widthAnchor.constraint(equalTo: area.widthAnchor),
+            cancelButton.bottomAnchor.constraint(lessThanOrEqualTo: area.bottomAnchor, constant: -20)
         ])
     }
 
@@ -216,10 +265,19 @@ class InformationViewController: BackgroundViewController {
     @objc private func saveData(sender: UIButton) {
             sender.transform = .identity
             sender.layer.shadowOpacity = 0.5
-        let gender = genderSegmentedControl.selectedSegmentIndex == 0 ? "Fille" : "Garçon"
-        viewModel.saveUserInformation(babyName: name.text, parentName: parentName.text, birthDay: birthDay.text, gender: gender)
-        delegate.updateInformation()
-        self.dismiss(animated: true, completion: nil)
+
+        let gender = genderSegmentedControl.selectedSegmentIndex == 0 ? Gender.girl : Gender.boy
+        let person = Person(name: name.text, gender: gender, parentName: parentName.text, birthDay:birthDay.text)
+
+        viewModel.saveUserInformation(person: person) { [weak self] result in
+            switch result {
+            case .success:
+                self?.delegate.updateInformation()
+                self?.dismiss(animated: true, completion: nil)
+            case .failure(let error):
+                self?.showAlert(title: "Erreur", description: error.description)
+            }
+        }
     }
 
     @objc func holdDown(sender: UIButton) {
@@ -229,6 +287,8 @@ class InformationViewController: BackgroundViewController {
 }
 
 extension InformationViewController {
+   /// Create a textfield with the right configuration
+    /// - Returns: a textfield
     private func createTextField() -> UITextField {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(
@@ -249,6 +309,8 @@ extension InformationViewController {
         return textField
     }
 
+    /// Insert automatically the "/" in the date textfield
+    /// - Parameter textField: the textfield to edit
     @objc private func textFieldEditingDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
         if text.count == 2 || text.count == 5 {
@@ -256,16 +318,12 @@ extension InformationViewController {
         }
     }
 
-}
-
-extension InformationViewController: InformationViewModelDelegate {
+    // MARK: - Alert
     func showAlert(title: String, description: String) {
         showSimpleAlerte(with: title, message: description)
     }
-}
 
-//// MARK: - Accessibility
-extension InformationViewController {
+// MARK: - Accessibility
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
 
@@ -273,41 +331,28 @@ extension InformationViewController {
         let previousCategory = previousTraitCollection?.preferredContentSizeCategory
 
         guard currentCategory != previousCategory else { return }
+        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+        topTitleContraint.constant = isAccessibilityCategory ? 40 : view.frame.height * 0.2
+        segmentedSize = isAccessibilityCategory ? .caption2 : .body
         name.sizeToFit()
-//        setupAccessibility()
     }
 
+    /// Adjust the segmented control height with auto layout
+    /// - Parameter control: the segmented control to adjust
+    /// - Note: The segmented control height is adjusted with the font size
     func adjustSegmentedControlHeightWithAutoLayout(control: UISegmentedControl) {
         let font = UIFont.preferredFont(forTextStyle: .body)
         let testLabel = UILabel()
         testLabel.font = font
         testLabel.text = "Test"
         testLabel.sizeToFit()
-        let newHeight = testLabel.frame.size.height + 16 // Ajouter une marge interne
+        let newHeight = testLabel.frame.size.height + 16
 
-        // Ajuster la contrainte de hauteur
         segmentedControlHeightConstraint.constant = newHeight
     }
 }
 
-//    private func setupAccessibility() {
-//        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
-//        switch isAccessibilityCategory {
-//        case true:
-//            imageWidthConstraint?.isActive = false
-//            imageWidthNilConstraint?.isActive = true
-//
-//            areaRatioContraint?.isActive = false
-//            areaTopContraint?.isActive = true
-//
-//            buttonStackView.axis = .vertical
-//        case false:
-//
-//        }
-//    }
-//}
-
-// MARk: - Keyboard
+// MARK: - Keyboard
 extension InformationViewController: UITextFieldDelegate {
     /// Check if the keyboard is displayed above textefield  and move the view if necessary
     @objc func keyboardWillShow(notification: NSNotification) {

@@ -127,6 +127,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             }
             cell.setupTitle(with: viewModel.babyName, birthDay: viewModel.birthDay, parent: viewModel.parentName)
             cell.backgroundColor = .clear
+            cell.accessibilityIdentifier = "MyCell_Information"
             return cell
 
         case 1:

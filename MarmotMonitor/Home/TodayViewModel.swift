@@ -45,7 +45,7 @@ class TodayViewModel {
         guard let person = requestPersonData() else {return ""}
 
         if let parentName = person.parentName {
-            return "Bonjour \(parentName.capitalizeFirstLetter()) et \(person.name.capitalizeFirstLetter())"
+            return "Bonjour \(parentName.capitalizeFirstLetter()) et \(person.name!.capitalizeFirstLetter())"
         } else {
             return "Bonjour \(person.name)"
         }

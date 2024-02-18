@@ -5,13 +5,8 @@
 //  Created by pierrick viret on 05/02/2024.
 //
 
-protocol InformationViewModelDelegate: AnyObject {
-    func showAlert(title: String, description: String)
-}
-
 import Foundation
 class InformationViewModel {
-    private weak var delegate: InformationViewModelDelegate?
     private let userDefaultsManager: UserDefaultManagerProtocol!
 
     var babyName: String = ""
@@ -19,9 +14,8 @@ class InformationViewModel {
     var birthDay: String = ""
     var gender: String = ""
 
-    init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager(), delegate: InformationViewModelDelegate?) {
+    init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {
         self.userDefaultsManager = userDefaultsManager
-        self.delegate = delegate
     }
 
     func getUserInformation() {
@@ -31,53 +25,55 @@ class InformationViewModel {
         gender = userDefaultsManager.getGender().description
     }
 
-    func saveUserInformation(babyName: String?, parentName: String?, birthDay: String?, gender: String) {
-        if babyName != "" {
+    func saveUserInformation(person: Person, completionHandler: @escaping (Result<Void, ErrorSetting>) -> Void) {
+        let babyName = person.name
+        if babyName != "" && babyName != nil {
             if babyName!.isLengthValidAndOnlyLetters {
                 userDefaultsManager.saveBabyName(babyName)
             } else {
-                delegate?.showAlert(title: "Erreur", description: "Le nom de l'enfant doit contenir au moins 3 lettres")
+                completionHandler(.failure(.invalideNameLength))
+                return
             }
         }
 
+        let birthDay = person.birthDay
         if birthDay != "" {
-            let birthDayDate = transformInDate(birthDay)
-            if birthDayDate != nil {
-                userDefaultsManager.saveDateOfBirth(birthDayDate)
+            saveDate(birthDay) { result in
+                switch result {
+                case .success:
+                    break
+                case .failure(let error):
+                    completionHandler(.failure(error))
+                    return
+                }
             }
         }
 
+        let parentName = person.parentName
         if parentName != "" {
             userDefaultsManager.saveParentName(parentName)
         }
 
-        let gender = transformInGender(gender)
-        userDefaultsManager.saveGender(gender)
-    }
-}
-
-extension InformationViewModel {
-    private func transformInDate(_ dateString: String?) -> String? {
-        guard let date = dateString?.toDate() else {
-            delegate?.showAlert(title: "Erreur", description: "Le format de la date de naissance n'est pas valide")
-            return nil
-        }
-
-        guard date <= Date() else {
-            delegate?.showAlert(title: "Erreur", description: "Veuillez entrer une date de naissance antérieure à la date d'aujourd'hui.")
-            return nil
-        }
-        return date.toStringWithDayMonthYear()
+        userDefaultsManager.saveGender(person.gender ?? .none)
+        completionHandler(.success(()))
     }
 
-    private func transformInGender(_ gender: String) -> Gender {
-        switch gender {
-        case "Fille":
-            return .girl
-        case "Garçon":
-            return .boy
-        default:
-            return .none
+    /// Transform the date in the correct format
+    /// - Parameter dateString: the date to transform
+    /// - Returns: the date in the correct format and an error if there is one
+    private func saveDate(_ dateString: String?, completionHandler: @escaping (Result<Void, ErrorSetting>) -> Void) {
+        guard let dateString = dateString, let date = dateString.toDate() else {
+            completionHandler(.failure(.invalidDateFormat))
+            return
         }
+
+        if date > Date() {
+            completionHandler(.failure(.invalidDateBirth))
+            return
+        }
+
+        let birthDayDate = date.toStringWithDayMonthYear()
+        userDefaultsManager.saveDateOfBirth(birthDayDate)
+        completionHandler(.success(()))
     }
 }

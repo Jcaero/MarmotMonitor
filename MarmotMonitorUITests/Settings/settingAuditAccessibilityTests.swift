@@ -54,4 +54,18 @@ final class SettingAuditAccessibility: XCTestCase {
             // Fallback on earlier versions
         }
     }
+
+    func testAccessibilityInfo() throws {
+        let app = UIApplication()
+        app.launch()
+        app.buttons["Réglage"].tap()
+        let myTable = app.tables.matching(identifier: "SettingTableView")
+        let cell = myTable.cells.element(matching: .cell, identifier: "MyCell_Information")
+        cell.tap()
+        if #available(iOS 17.0, *) {
+            try app.performAccessibilityAudit()
+        } else {
+            // Fallback on earlier versions
+        }
+    }
 }
