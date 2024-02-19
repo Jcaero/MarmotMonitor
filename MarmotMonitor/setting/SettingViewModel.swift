@@ -6,7 +6,6 @@
 //
 
 import UIKit
-#warning("TODO: Add documentation and test")
 class SettingViewModel {
     private let userDefaultsManager: UserDefaultManagerProtocol!
 
@@ -58,8 +57,15 @@ class SettingViewModel {
         }
     }
 
+    private var coreDataManager: MarmotMonitorSaveManager!
+
     // MARK: - INIT
-    init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {
+    init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager(), coreDataManager: MarmotMonitorSaveManager = MarmotMonitorSaveManager()) {
         self.userDefaultsManager = userDefaultsManager
+        self.coreDataManager = coreDataManager
+    }
+
+    func clearCoreData() {
+        coreDataManager.clearDatabase()
     }
 }

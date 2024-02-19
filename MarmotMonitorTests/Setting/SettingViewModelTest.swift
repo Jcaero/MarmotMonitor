@@ -10,14 +10,18 @@ import XCTest
 
 final class SettingViewModelTest: TestCase {
     private var viewModel: SettingViewModel!
+    private var coreDatatManager: MarmotMonitorSaveManager!
     
     override func setUp() {
         super.setUp()
+        coreDatatManager = MarmotMonitorSaveManager(coreDataManager: CoreDataManagerMock.sharedInstance)
     }
     
     override func tearDown() {
         super.tearDown()
         viewModel = nil
+        coreDatatManager.clearDatabase()
+        coreDatatManager = nil
     }
 
     // MARK: - test Update info
@@ -86,6 +90,27 @@ final class SettingViewModelTest: TestCase {
         viewModel = SettingViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby, iconName: "testIcone", graphType: .ligne, appTheme: 2))
         
         XCTAssertEqual("Sombre" , viewModel.apparenceStyle)
+    }
+
+    //MARK: - test clear core data
+    func testUserHaveDataSaved_WhenRequestclear_ClearCoreData() {
+        coreDatatManager.saveActivity(.diaper(state: .wet),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { } ,
+                                              onError: { _ in })
+
+        let activity = coreDatatManager.fetchDateActivitiesWithDate(from: activityStartDateSix, to: activityEndDateEight)
+        
+        XCTAssertNotNil(activity)
+        
+        let baby = Person(name: nil, gender: .girl, parentName: "test", birthDay: nil )
+        viewModel = SettingViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby), coreDataManager: MarmotMonitorSaveManager(coreDataManager: CoreDataManagerMock.sharedInstance))
+        
+        viewModel.clearCoreData()
+        let activityClear = coreDatatManager.fetchDateActivitiesWithDate(from: activityStartDateSix, to: activityEndDateEight)
+        
+        XCTAssertEqual([], activityClear)
+        
     }
     
 }

@@ -82,7 +82,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : 3
+        return section == 0 ? 1 : 4
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -94,12 +94,12 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             switch indexPath.row {
             case 0:
                 return configureGraphCell(for: indexPath)
-
             case 1:
                 return configureIconeCell(for: indexPath)
             case 2:
                 return configureApparenceCell(for: indexPath)
-
+            case 3:
+                return configureClearCoreDataCell(for: indexPath)
             default:
                 return UITableViewCell()
             }
@@ -153,6 +153,16 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
+    private func configureClearCoreDataCell(for indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.reuseIdentifier, for: indexPath) as? SettingCell else {
+            return UITableViewCell()
+        }
+        cell.setupTitle(with: "Effacer les Données", information: "", icone: UIImage(systemName: "eraser")!)
+        cell.backgroundColor = .colorForGraphBackground
+        cell.accessibilityIdentifier = "MyCell_ClearALLData"
+        return cell
+    }
+
     // MARK: - tableViewSetting
     internal func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
             let view = UIView()
@@ -194,6 +204,8 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             case 2:
                 let next = ApparenceSettingViewController(delegate: self)
                 present(next, animated: true, completion: nil)
+            case 3:
+                clearCoreData()
             default:
                 break
             }
@@ -207,6 +219,16 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         default:
             return 10
         }
+    }
+
+    // MARK: - core data clear
+    private func clearCoreData() {
+        let alert = UIAlertController(title: "Effacer les données", message: "Voulez-vous vraiment effacer toutes les données ?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Oui", style: .destructive, handler: { _ in
+            self.viewModel.clearCoreData()
+        }))
+        alert.addAction(UIAlertAction(title: "Non", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
 
