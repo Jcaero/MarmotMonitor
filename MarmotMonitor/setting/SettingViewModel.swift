@@ -6,13 +6,41 @@
 //
 
 import UIKit
-
+#warning("TODO: Add documentation and test")
 class SettingViewModel {
     private let userDefaultsManager: UserDefaultManagerProtocol!
-    var babyName: String = ""
-    var parentName: String = ""
-    var birthDay: String = ""
-    var graphType: GraphType = .round
+
+    var babyName: String {
+        return userDefaultsManager.getBabyName() ?? ""
+    }
+
+    var parentName: String {
+        let parent = userDefaultsManager.getParentName() ?? ""
+        let gender = userDefaultsManager.getGender().description
+
+        guard parent != "" else {return ""}
+        switch gender {
+        case Gender.boy.description:
+            return "Fils de " + parent
+        case Gender.girl.description:
+            return "Fille de " + parent
+        default:
+            return "Parent: " + parent
+        }
+    }
+
+    var birthDay: String {
+        var day = userDefaultsManager.getBirthDay() ?? ""
+        if day != "" {
+            day = "Né le: " + day
+        }
+        return day
+    }
+
+    var graphType: GraphType {
+        return userDefaultsManager.getGraphType() ?? .round
+    }
+
     var iconImageName: String {
         let iconeName = userDefaultsManager.getAppIconName() ?? NIAppIconType.defaultIcon.name
         return iconeName + "Image"
@@ -30,30 +58,8 @@ class SettingViewModel {
         }
     }
 
+    // MARK: - INIT
     init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {
         self.userDefaultsManager = userDefaultsManager
-    }
-
-    func getUserInformation() {
-        babyName = userDefaultsManager.getBabyName() ?? ""
-        let day = userDefaultsManager.getBirthDay() ?? ""
-        if day != "" {
-            birthDay = "Né le: " + day
-        }
-
-        let parent = userDefaultsManager.getParentName() ?? ""
-        let gender = userDefaultsManager.getGender().description
-
-        guard parent != "" else {return}
-        switch gender {
-        case Gender.boy.description:
-            parentName = "Fils de " + parent
-        case Gender.girl.description:
-            parentName = "Fille de " + parent
-        default:
-            parentName = "Parent: " + parent
-        }
-
-        graphType = userDefaultsManager.getGraphType() ?? .round
     }
 }

@@ -65,7 +65,7 @@ extension UIButton {
 
         self.layer.insertSublayer(gradientLayer, at: 0)
         self.contentVerticalAlignment = .center
-        self.setTitleColor(UIColor.buttonValidate, for: .normal)
+        self.setTitleColor(.white, for: .normal)
         self.titleLabel?.textColor = UIColor.buttonValidate
     }
 }

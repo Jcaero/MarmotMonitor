@@ -86,7 +86,7 @@ class InformationUserSetting: UITableViewCell {
 
     private let modifierButton: UIButton = {
         let button = UIButton()
-        var configuration = UIButton.Configuration.filled()
+        var configuration = UIButton.Configuration.plain()
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
         configuration.baseBackgroundColor = UIColor.duckBlue
         configuration.background.cornerRadius = 10
@@ -98,6 +98,7 @@ class InformationUserSetting: UITableViewCell {
         }
         button.configuration = configuration
         button.setTitle("Modifier", for: .normal)
+        button.setTitleColor(UIColor.buttonCancel, for: .normal)
         button.setupShadow(radius: 1, opacity: 0.5)
         return button
     }()
@@ -108,8 +109,9 @@ class InformationUserSetting: UITableViewCell {
     // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViews()
         self.backgroundColor = .clear
+
+        setupViews()
         setupContraints()
     }
 

@@ -10,7 +10,7 @@ import UIKit
 class SettingCell: UITableViewCell {
     private let icone: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = .pastelPink
+        view.backgroundColor = .clearToWhite
         view.tintColor = .black
         view.clipsToBounds = true
         return view
@@ -21,7 +21,6 @@ class SettingCell: UITableViewCell {
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .colorForDuckBlueToWhite
         label.textAlignment = .left
-        label.numberOfLines = 0
         return label
     }()
 
@@ -30,24 +29,26 @@ class SettingCell: UITableViewCell {
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .colorForDuckBlueToWhite
         label.textAlignment = .right
-        label.numberOfLines = 0
         return label
     }()
 
     private let areaStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.distribution = .equalSpacing
+        view.alignment = .center
+        view.spacing = 5
+        view.distribution = .fillProportionally
         return view
     }()
 
     // MARK: - Properties
     static let reuseIdentifier = "SettingCell"
 
-    private var nameLeadingConstraint: NSLayoutConstraint?
-    private var nameLeadingAccesibilityConstraint: NSLayoutConstraint?
-    private var nameTrailingConstraint: NSLayoutConstraint?
-    private var nameTrailingAccessibilityConstraint: NSLayoutConstraint?
+    private var iconeWidth: NSLayoutConstraint?
+
+    private var isAccessibility: Bool {
+        return traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+    }
 
     // MARK: - INIT
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -56,6 +57,8 @@ class SettingCell: UITableViewCell {
 
         setupViews()
         setupContraints()
+
+        information.isHidden = isAccessibility
     }
 
     required init?(coder: NSCoder) {
@@ -63,36 +66,49 @@ class SettingCell: UITableViewCell {
     }
 
     private func setupViews() {
-        [nameTitle, icone, information].forEach {
+        [icone, areaStackView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
             addSubview($0)
+        }
+
+        [nameTitle, information].forEach {
+            areaStackView.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
 
     private func setupContraints() {
+        iconeWidth = icone.widthAnchor.constraint(equalToConstant: frame.width / 10)
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(greaterThanOrEqualToConstant: 60),
-            icone.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            icone.heightAnchor.constraint(equalToConstant: frame.height * 0.65),
+            heightAnchor.constraint(greaterThanOrEqualToConstant: 10),
+            iconeWidth!,
             icone.heightAnchor.constraint(equalTo: icone.widthAnchor),
+            icone.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             icone.centerYAnchor.constraint(equalTo: centerYAnchor),
 
-            information.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            information.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            information.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            information.widthAnchor.constraint(equalToConstant: 100),
+            information.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2),
+            areaStackView.leadingAnchor.constraint(equalTo: icone.trailingAnchor, constant: 10),
+            areaStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            areaStackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            areaStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
 
-            nameTitle.leadingAnchor.constraint(equalTo: icone.trailingAnchor, constant: 10),
-            nameTitle.trailingAnchor.constraint(equalTo: information.leadingAnchor, constant: -15),
-            nameTitle.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            nameTitle.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+            areaStackView.heightAnchor.constraint(equalTo: nameTitle.heightAnchor)
         ])
     }
 
+    /// Setup the cell with a title, an information and an icone
+    /// - Parameters:
+    ///  - title: the title of the cell
+    ///  - information: the status of the information
+    ///  - icone: the icone
     func setupTitle(with title: String, information: String, icone: UIImage) {
-        self.nameTitle.text = title
+        let titleAccessibility = title + " " + information + " >"
+
+        self.nameTitle.text = isAccessibility ? titleAccessibility : title
         self.information.text = information + " >"
         self.icone.image = icone
+
+        iconeWidth?.constant = isAccessibility ? 0 : frame.width / 10
     }
 
     override func layoutSubviews() {

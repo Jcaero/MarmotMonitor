@@ -11,21 +11,6 @@ protocol UpdateInformationControllerDelegate: AnyObject {
 }
 
 class SettingViewController: BackgroundViewController, UpdateInformationControllerDelegate {
-
-    let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.backgroundColor = .clear
-        scrollView.layer.cornerRadius = 20
-        return scrollView
-    }()
-
-    let pastelArea: UIView = {
-        let view = UIView()
-        view.backgroundColor = .colorForPastelArea
-        view.layer.cornerRadius = 20
-        return view
-    }()
-
     let settingTitle: UILabel = {
         let label = UILabel()
         label.text = "Paramètres"
@@ -33,16 +18,6 @@ class SettingViewController: BackgroundViewController, UpdateInformationControll
         label.textColor = .colorForLabelBlackToBlue
         label.textAlignment = .left
         label.setupShadow(radius: 1, opacity: 0.2)
-        label.numberOfLines = 0
-        return label
-    }()
-
-    let subTitle: UILabel = {
-        let label = UILabel()
-        label.text = "Information"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
-        label.textColor = .label
-        label.textAlignment = .left
         label.numberOfLines = 0
         return label
     }()
@@ -56,6 +31,8 @@ class SettingViewController: BackgroundViewController, UpdateInformationControll
         tableView.setupShadow(radius: 1, opacity: 0.5)
         tableView.clipsToBounds = true
         tableView.accessibilityIdentifier = "SettingTableView"
+        tableView.register(InformationUserSetting.self, forCellReuseIdentifier: InformationUserSetting.reuseIdentifier)
+        tableView.register(SettingCell.self, forCellReuseIdentifier: SettingCell.reuseIdentifier)
         return tableView
     }()
 
@@ -67,13 +44,8 @@ class SettingViewController: BackgroundViewController, UpdateInformationControll
         setupViews()
         setupContraints()
 
-        viewModel.getUserInformation()
-
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(InformationUserSetting.self, forCellReuseIdentifier: InformationUserSetting.reuseIdentifier)
-        tableView.register(SettingCell.self, forCellReuseIdentifier: SettingCell.reuseIdentifier)
-
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
@@ -84,7 +56,6 @@ class SettingViewController: BackgroundViewController, UpdateInformationControll
         [settingTitle, tableView].forEach {
             view.addSubview($0)
         }
-
     }
 
     private func setupContraints() {
@@ -111,76 +82,78 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else {
-            return 3
-        }
+        return section == 0 ? 1 : 3
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: InformationUserSetting.reuseIdentifier, for: indexPath) as? InformationUserSetting else {
-                print("erreur de cell")
-                return UITableViewCell()
-            }
-            cell.setupTitle(with: viewModel.babyName, birthDay: viewModel.birthDay, parent: viewModel.parentName)
-            cell.backgroundColor = .clear
-            cell.accessibilityIdentifier = "MyCell_Information"
-            return cell
+            return configureInformationUserSettingCell(for: indexPath)
 
         case 1:
             switch indexPath.row {
-                case 0:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.reuseIdentifier, for: indexPath) as? SettingCell else {
-                    print("erreur de cell")
-                    return UITableViewCell()
-                }
-                cell.setupTitle(with: "Type de graphique", information: viewModel.graphType.description, icone: UIImage(named: "graphIcone")!)
-                cell.backgroundColor = .colorForGraphBackground
-                cell.accessibilityIdentifier = "MyCell_graphType"
-                return cell
+            case 0:
+                return configureGraphCell(for: indexPath)
 
             case 1:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.reuseIdentifier, for: indexPath) as? SettingCell else {
-                    print("erreur de cell")
-                    return UITableViewCell()
-                }
-                cell.setupTitle(with: "Couleur d'Icone", information: "", icone: UIImage(named: viewModel.iconImageName)!)
-                cell.backgroundColor = .colorForGraphBackground
-                cell.accessibilityIdentifier = "MyCell_IconeCouleur"
-                return cell
-
+                return configureIconeCell(for: indexPath)
             case 2:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.reuseIdentifier, for: indexPath) as? SettingCell else {
-                    print("erreur de cell")
-                    return UITableViewCell()
-                }
-                cell.setupTitle(with: "Apparence", information: viewModel.apparenceStyle, icone: UIImage(systemName: "iphone")!)
-                cell.backgroundColor = .colorForGraphBackground
-                cell.accessibilityIdentifier = "MyCell_Apparence"
-                return cell
+                return configureApparenceCell(for: indexPath)
 
             default:
-                let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-                cell.textLabel?.text = "Row - \(indexPath.row)"
-                cell.backgroundColor = .colorForGraphBackground
-                return cell
+                return UITableViewCell()
             }
 
         default:
-            let kCellId = "kCellId"
-            var lCell = tableView.dequeueReusableCell(withIdentifier: kCellId)
-            if lCell == nil {
-                lCell = UITableViewCell(style: .default, reuseIdentifier: kCellId)
-                lCell?.textLabel?.text = "Row - \(indexPath.row)"
-            }
-            lCell?.backgroundColor = .orange
-            return lCell!
+            return UITableViewCell()
         }
     }
 
+    // MARK: - configuration cell
+    private func configureInformationUserSettingCell(for indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: InformationUserSetting.reuseIdentifier, for: indexPath) as? InformationUserSetting else {
+            return UITableViewCell()
+        }
+        cell.setupTitle(with: viewModel.babyName, birthDay: viewModel.birthDay, parent: viewModel.parentName)
+        cell.backgroundColor = .clear
+        cell.accessibilityIdentifier = "MyCell_Information"
+        return cell
+    }
+
+    private func configureGraphCell(for indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.reuseIdentifier, for: indexPath) as? SettingCell else {
+            return UITableViewCell()
+        }
+        cell.setupTitle(with: "Type de graphique", information: viewModel.graphType.description, icone: UIImage(named: "graphIcone")!)
+        cell.backgroundColor = .colorForGraphBackground
+        cell.accessibilityIdentifier = "MyCell_graphType"
+        cell.accessibilityLabel = "Type de graphique actuelement sélectionné : \(viewModel.graphType.description)"
+        cell.layoutIfNeeded()
+        return cell
+    }
+
+    private func configureIconeCell(for indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.reuseIdentifier, for: indexPath) as? SettingCell else {
+            return UITableViewCell()
+        }
+        cell.setupTitle(with: "Couleur d'Icone", information: "", icone: UIImage(named: viewModel.iconImageName)!)
+        cell.accessibilityLabel = "Type d'icone' actuelle : \(viewModel.iconImageName)"
+        cell.backgroundColor = .colorForGraphBackground
+        cell.accessibilityIdentifier = "MyCell_IconeCouleur"
+        return cell
+    }
+
+    private func configureApparenceCell(for indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingCell.reuseIdentifier, for: indexPath) as? SettingCell else {
+            return UITableViewCell()
+        }
+        cell.setupTitle(with: "Apparence", information: viewModel.apparenceStyle, icone: UIImage(systemName: "iphone")!)
+        cell.backgroundColor = .colorForGraphBackground
+        cell.accessibilityIdentifier = "MyCell_Apparence"
+        return cell
+    }
+
+    // MARK: - tableViewSetting
     internal func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
             let view = UIView()
             view.backgroundColor = .clear
@@ -246,7 +219,6 @@ extension SettingViewController {
 
 extension SettingViewController: InformationViewControllerDelegate {
     func updateInformation() {
-        viewModel.getUserInformation()
         tableView.reloadData()
     }
 }

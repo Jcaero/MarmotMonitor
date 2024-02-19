@@ -25,7 +25,10 @@ final class IconSettingViewController: BackgroundViewController, UICollectionVie
     private let titleView: UILabel = {
         let label = UILabel()
         label.setupDynamicBoldTextWith(policeName: "Symbol", size: 34, style: .largeTitle)
-        label.textColor = .label
+        label.textColor = .black
+//        label.backgroundColor = .clearToEgiptienBlue
+//        label.layer.cornerRadius = 20
+//        label.clipsToBounds = true
         label.textAlignment = .left
         label.numberOfLines = 0
         label.text = "Icone"
@@ -36,10 +39,13 @@ final class IconSettingViewController: BackgroundViewController, UICollectionVie
     private let subtitleView: UILabel = {
         let label = UILabel()
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .title3)
-        label.textColor = .colorForLabelBlackToBlue
+        label.textColor = .black
+        label.backgroundColor = .clearToEgiptienSoft
+        label.layer.cornerRadius = 20
+        label.clipsToBounds = true
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.text = "Choisissez la couleur"
+        label.text = "  Choisissez la couleur  "
         return label
     }()
 
@@ -175,12 +181,12 @@ final class IconSettingViewController: BackgroundViewController, UICollectionVie
 
             titleView.topAnchor.constraint(equalTo: area.topAnchor, constant: 20),
             titleView.leadingAnchor.constraint(equalTo: area.leadingAnchor, constant: 40),
-            titleView.trailingAnchor.constraint(equalTo: area.trailingAnchor, constant: -40),
+            titleView.trailingAnchor.constraint(lessThanOrEqualTo: area.trailingAnchor, constant: -40),
             titleView.heightAnchor.constraint(greaterThanOrEqualToConstant: 60),
 
             subtitleView.topAnchor.constraint(equalTo: titleView.bottomAnchor),
             subtitleView.leadingAnchor.constraint(equalTo: area.leadingAnchor, constant: 40),
-            subtitleView.trailingAnchor.constraint(equalTo: area.trailingAnchor, constant: -40),
+            subtitleView.trailingAnchor.constraint(lessThanOrEqualTo: area.trailingAnchor, constant: -40),
             subtitleView.heightAnchor.constraint(greaterThanOrEqualToConstant: 40),
 
             icone.topAnchor.constraint(equalTo: subtitleView.bottomAnchor, constant: 40),

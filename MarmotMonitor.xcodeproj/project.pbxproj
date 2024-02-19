@@ -10,6 +10,7 @@
 		470009D12B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */; };
 		4704F2C32B2F98310060DCEE /* BottleFeedingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */; };
 		470808222B5D5046004258A5 /* BottleFeedingViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470808212B5D5046004258A5 /* BottleFeedingViewModelTest.swift */; };
+		4709E39F2B83757A009F1D27 /* SettingViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709E39E2B83757A009F1D27 /* SettingViewModelTest.swift */; };
 		4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */; };
 		4711F7742B1E70AB00869A27 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F7732B1E70AB00869A27 /* Person.swift */; };
 		4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D43A2B0A9B5C0085035C /* UILabel+.swift */; };
@@ -152,6 +153,7 @@
 		470009D02B2E463B00EBEF86 /* BreastFeedingChronoViewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreastFeedingChronoViewmodel.swift; sourceTree = "<group>"; };
 		4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedingController.swift; sourceTree = "<group>"; };
 		470808212B5D5046004258A5 /* BottleFeedingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedingViewModelTest.swift; sourceTree = "<group>"; };
+		4709E39E2B83757A009F1D27 /* SettingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModelTest.swift; sourceTree = "<group>"; };
 		4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModelTest.swift; sourceTree = "<group>"; };
 		4711F7732B1E70AB00869A27 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		4712D43A2B0A9B5C0085035C /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 		473D954D2B7D5F5100B632C6 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				4709E39E2B83757A009F1D27 /* SettingViewModelTest.swift */,
 				4792E9532B814D3F00993195 /* information */,
 				47150DF52B7EA300004A9220 /* icone */,
 				473D954E2B7D5F5C00B632C6 /* apparence */,
@@ -1054,6 +1057,7 @@
 			files = (
 				47D8DA792B4B49B600D97CD1 /* MarmotMonitoSaveManagerTest.swift in Sources */,
 				472848222B58154700AA6B35 /* BreastFeedingChronoViewModelTest.swift in Sources */,
+				4709E39F2B83757A009F1D27 /* SettingViewModelTest.swift in Sources */,
 				472848242B5819FE00AA6B35 /* SolidFeedingViewModelTest.swift in Sources */,
 				474732582B123F8D0064ABB4 /* UserDefaultsManagerTest.swift in Sources */,
 				47D8DA7B2B4B4A0100D97CD1 /* TestCase.swift in Sources */,

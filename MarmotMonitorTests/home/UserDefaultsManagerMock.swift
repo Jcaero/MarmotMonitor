@@ -17,14 +17,16 @@ final class UserDefaultsManagerMock: UserDefaultManagerProtocol {
     private var birthDay: String?
     private var appIconName: String?
     private var appTheme: Int?
+    private var graphType: GraphType?
     
-    init(mockPerson: Person, iconName: String? = nil) {
+    init(mockPerson: Person, iconName: String? = nil, graphType: GraphType? = nil, appTheme: Int? = nil) {
         self.babyName = mockPerson.name
         self.gender = mockPerson.gender ?? .none
         self.birthDay = mockPerson.birthDay
         self.parentName = mockPerson.parentName
         self.appIconName = iconName ?? nil
-        self.appTheme = 0
+        self.appTheme = appTheme ?? 0
+        self.graphType = graphType
     }
 
     // Set Value
@@ -77,7 +79,7 @@ final class UserDefaultsManagerMock: UserDefaultManagerProtocol {
     }
     
     func getGraphType() -> MarmotMonitor.GraphType? {
-        return nil
+        return self.graphType
     }
     
     func getAppIconName() -> String? {

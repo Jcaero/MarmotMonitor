@@ -30,6 +30,9 @@ final class InformationViewController: BackgroundViewController {
         let label = UILabel()
         label.setupDynamicBoldTextWith(policeName: "Symbol", size: 34, style: .largeTitle)
         label.textColor = .label
+        label.backgroundColor = .clearToEgiptienBlue
+        label.layer.cornerRadius = 20
+        label.clipsToBounds = true
         label.textAlignment = .left
         label.numberOfLines = 0
         label.text = "Information"
@@ -136,7 +139,7 @@ final class InformationViewController: BackgroundViewController {
         super.viewDidLayoutSubviews()
         addUnderlined(to: [name, birthDay, parentName])
 
-        saveButton.applyGradient(colors: [UIColor.duckBlue.cgColor, UIColor.lightBlue.cgColor])
+        saveButton.applyGradient(colors: [UIColor.buttonValidateGradientStarted.cgColor, UIColor.buttonValidateGradientStop.cgColor])
 
         topCloud.layer.cornerRadius = topCloud.frame.height / 2
 
@@ -217,7 +220,7 @@ final class InformationViewController: BackgroundViewController {
 
             topTitleContraint!,
             titleView.leadingAnchor.constraint(equalTo: area.leadingAnchor),
-            titleView.trailingAnchor.constraint(equalTo: area.trailingAnchor),
+            titleView.trailingAnchor.constraint(lessThanOrEqualTo: area.trailingAnchor),
 
             name.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 40),
             name.centerXAnchor.constraint(equalTo: area.centerXAnchor),
