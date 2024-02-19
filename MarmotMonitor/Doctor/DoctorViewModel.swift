@@ -23,6 +23,8 @@ class DoctorViewModel {
     }
 
     func updateData() {
+        heightValues = []
+        weightValues = []
         let data = saveManager.fetchGrowthActivity()
 
         data.forEach { (date,growth) in

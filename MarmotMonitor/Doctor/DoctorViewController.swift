@@ -75,7 +75,11 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.updateData()
+        updateView()
+    }
+
+    override func viewIsAppearing(_ animated: Bool) {
+        updateView()
     }
 
     // MARK: - setup
@@ -108,35 +112,47 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
     }
 
     private func setDataHeight() {
-        let set1 = LineChartDataSet(entries: viewModel.heightValues, label: "")
-        set1.drawCirclesEnabled = false
-        set1.colors = [UIColor.colorForGraphLigne]
-        set1.mode = .cubicBezier
-        set1.lineWidth = 3
+        var dataSetHeight = LineChartDataSet(entries: viewModel.weightValues, label: "")
+        dataSetHeight = setupGraphData(of: dataSetHeight)
 
-        set1.highlightEnabled = false
-
-        let data = LineChartData(dataSet: set1)
+        let data = LineChartData(dataSet: dataSetHeight )
         data.setValueTextColor(.clear)
         lineChartView.data = data
     }
 
     private func setDataWeight() {
-        let set2 = LineChartDataSet(entries: viewModel.weightValues, label: "")
-        set2.drawCirclesEnabled = false
-        set2.colors = [UIColor.colorForGraphLigne]
-        set2.mode = .cubicBezier
-        set2.lineWidth = 3
+        var dataSetWeight = LineChartDataSet(entries: viewModel.weightValues, label: "")
+        dataSetWeight = setupGraphData(of: dataSetWeight)
 
-        set2.highlightEnabled = false
-
-        let data = LineChartData(dataSet: set2)
+        let data = LineChartData(dataSet: dataSetWeight)
         data.setValueTextColor(.clear)
         lineChartView.data = data
     }
 
+    private func setupGraphData(of set: LineChartDataSet) -> LineChartDataSet {
+        let set = set
+        set.drawCirclesEnabled = false
+        set.colors = [UIColor.colorForGraphLigne]
+        set.mode = .cubicBezier
+        set.lineWidth = 3
+
+        set.highlightEnabled = true
+
+        let gradientColors = [UIColor.darkBlue.cgColor, UIColor.lightBlue.cgColor] as CFArray // Colors of the gradient
+        let colorLocations:[CGFloat] = [1.0, 0.0] // Positioning of the gradient
+        let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: gradientColors, locations: colorLocations) // Gradient Object
+        set.fill = LinearGradientFill(gradient: gradient!, angle: 90.0)
+        set.drawFilledEnabled = true // Draw the Gradient
+        return set
+    }
+
     // MARK: - SagmentedControl
     @objc private func changeGraph() {
+        updateView()
+    }
+
+    private func updateView() {
+        viewModel.updateData()
         if selectedGraph.selectedSegmentIndex == 0 {
             setDataHeight()
         } else {
