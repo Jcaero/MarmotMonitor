@@ -19,6 +19,10 @@ class BackgroundViewController: UIViewController {
         initNavigationBar()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        setupGradient()
+    }
+
     // MARK: - function
     private func setupGradient() {
         view.layer.sublayers?.first { $0 is CAGradientLayer }?.removeFromSuperlayer()

@@ -26,9 +26,6 @@ final class IconSettingViewController: BackgroundViewController, UICollectionVie
         let label = UILabel()
         label.setupDynamicBoldTextWith(policeName: "Symbol", size: 34, style: .largeTitle)
         label.textColor = .black
-//        label.backgroundColor = .clearToEgiptienBlue
-//        label.layer.cornerRadius = 20
-//        label.clipsToBounds = true
         label.textAlignment = .left
         label.numberOfLines = 0
         label.text = "Icone"
@@ -69,17 +66,14 @@ final class IconSettingViewController: BackgroundViewController, UICollectionVie
     }()
 
     private let saveButton: UIButton = {
-        let button = UIButton().createActionButton(color: .systemGreen)
-        button.setTitle("Valider", for: .normal)
-        button.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        button.setAccessibility(with: .button, label: "Valider", hint: "")
+        let button = UIButton()
+        button.createActionButton(type: .valider)
         return button
     }()
 
     private let cancelButton: UIButton = {
-        let button = UIButton().createActionButton(color: .systemRed)
-        button.setTitle("Retour", for: .normal)
-        button.setAccessibility(with: .button, label: "Retour", hint: "")
+        let button = UIButton()
+        button.createActionButton(type: .retour)
         return button
     }()
 
@@ -130,6 +124,10 @@ final class IconSettingViewController: BackgroundViewController, UICollectionVie
 
     override func viewWillAppear(_ animated: Bool) {
         circleView.layer.cornerRadius = view.frame.width/2
+    }
+
+    override func viewDidLayoutSubviews() {
+        saveButton.applyGradient(colors: [UIColor.buttonValidateGradientStarted.cgColor, UIColor.buttonValidateGradientStop.cgColor])
     }
 
     // MARK: - Setup

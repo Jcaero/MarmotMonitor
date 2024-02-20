@@ -55,17 +55,14 @@ import UIKit
     }()
 
     private let saveButton: UIButton = {
-        let button = UIButton().createActionButton(color: .systemGreen)
-        button.setTitle("Valider", for: .normal)
-        button.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        button.setAccessibility(with: .button, label: "Valider", hint: "")
+        let button = UIButton()
+        button.createActionButton(type: .valider)
         return button
     }()
 
     private let cancelButton: UIButton = {
-        let button = UIButton().createActionButton(color: .systemRed)
-        button.setTitle("Retour", for: .normal)
-        button.setAccessibility(with: .button, label: "Retour", hint: "")
+        let button = UIButton()
+        button.createActionButton(type: .retour)
         return button
     }()
 
@@ -107,6 +104,10 @@ import UIKit
 
         tableView.rowHeight = UITableView.automaticDimension
     }
+
+     override func viewDidLayoutSubviews() {
+         saveButton.applyGradient(colors: [UIColor.buttonValidateGradientStarted.cgColor, UIColor.buttonValidateGradientStop.cgColor])
+     }
 
     // MARK: - Setup
     private func setupViews() {

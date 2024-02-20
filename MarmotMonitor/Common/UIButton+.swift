@@ -17,25 +17,22 @@ extension UIButton {
         self.titleLabel?.adjustsFontForContentSizeCategory = true
     }
 
-    func createActionButton(color: UIColor) -> UIButton {
-        let button = UIButton()
-        var configuration = UIButton.Configuration.filled()
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5)
-        configuration.baseBackgroundColor = color.withAlphaComponent(0.95)
-        configuration.baseForegroundColor = UIColor.white
-        configuration.background.cornerRadius = 12
+    func createActionButton(type: ButtonTypeAction) {
+        let isValideButton = type == .valider
+        var configuration = isValideButton ? UIButton.Configuration.plain() : UIButton.Configuration.tinted()
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        configuration.baseBackgroundColor = isValideButton ? UIColor.duckBlue : .clear
+        configuration.background.cornerRadius = 10
         configuration.cornerStyle = .large
         configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
             var titleAttributes = titleAttributes
-            let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .footnote).withSymbolicTraits(.traitBold)
-            titleAttributes.font = UIFont(descriptor: descriptor!, size: 0)
+            titleAttributes.font = UIFont.preferredFont(forTextStyle: .body)
             return titleAttributes
         }
-        button.configuration = configuration
-        button.setupShadow(radius: 1, opacity: 0.5)
-        button.layer.borderWidth = 4
-        button.layer.borderColor = color.cgColor
-        return button
+        self.configuration = configuration
+        let title = isValideButton ? "Enregistrer" : "Retour"
+        self.setTitle(title, for: .normal)
+        self.setupShadow(radius: 1, opacity: 0.5)
     }
 
     func applyGradient(colors: [CGColor]) {
@@ -68,4 +65,9 @@ extension UIButton {
         self.setTitleColor(.white, for: .normal)
         self.titleLabel?.textColor = UIColor.buttonValidate
     }
+}
+
+enum ButtonTypeAction {
+    case valider
+    case retour
 }

@@ -65,15 +65,14 @@ final class ApparenceSettingViewController: UIViewController {
     }()
 
     private let saveButton: UIButton = {
-        let button = UIButton().createActionButton(color: .systemGreen)
-        button.setTitle("Valider", for: .normal)
-        button.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        let button = UIButton()
+        button.createActionButton(type: .valider)
         return button
     }()
 
     private let cancelButton: UIButton = {
-        let button = UIButton().createActionButton(color: .systemRed)
-        button.setTitle("Retour", for: .normal)
+        let button = UIButton()
+        button.createActionButton(type: .retour)
         return button
     }()
 
@@ -122,6 +121,8 @@ final class ApparenceSettingViewController: UIViewController {
         moon.layer.cornerRadius = moon.frame.height / 2
         darkSide.layer.cornerRadius = darkSide.frame.height / 2
         selectedMode.layer.cornerRadius = selectedMode.frame.height / 2
+
+        saveButton.applyGradient(colors: [UIColor.buttonValidateGradientStarted.cgColor, UIColor.buttonValidateGradientStop.cgColor])
     }
 
     // MARK: - Setup

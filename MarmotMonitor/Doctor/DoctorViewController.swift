@@ -41,9 +41,9 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
     }()
 
     let selectedGraph: UISegmentedControl = {
-        let control = UISegmentedControl()
-        control.insertSegment(withTitle: "Taille", at: 0, animated: true)
-        control.insertSegment(withTitle: "Poids", at: 1, animated: true)
+        let control = UISegmentedControl(items: ["Taille", "Poids"])
+        let font = UIFont.preferredFont(forTextStyle: .caption1)
+        control.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
         control.selectedSegmentTintColor = .colorForGraphBackground
         control.selectedSegmentIndex = 0
         control.setupShadow(radius: 2, opacity: 0.5)
@@ -59,7 +59,9 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
         return view
     }()
 
+    // MARK: - Properties
     let viewModel = DoctorViewModel()
+    var segmentedControlHeightConstraint: NSLayoutConstraint!
 
     // MARK: - Cycle Life
     override func viewDidLoad() {
@@ -72,13 +74,16 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
 
         setDataHeight()
         selectedGraph.addTarget(self, action: #selector(changeGraph), for: .valueChanged)
+        adjustSegmentedControlHeightWithAutoLayout()
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        adjustSegmentedControlHeightWithAutoLayout()
         updateView()
     }
 
     override func viewIsAppearing(_ animated: Bool) {
+        adjustSegmentedControlHeightWithAutoLayout()
         updateView()
     }
 
@@ -94,10 +99,14 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
         lineChartView.translatesAutoresizingMaskIntoConstraints = false
         selectedGraph.translatesAutoresizingMaskIntoConstraints = false
 
+        segmentedControlHeightConstraint = selectedGraph.heightAnchor.constraint(equalToConstant: 40)
+        adjustSegmentedControlHeightWithAutoLayout()
+
         NSLayoutConstraint.activate([
             selectedGraph.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             selectedGraph.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             selectedGraph.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            segmentedControlHeightConstraint,
 
             area.topAnchor.constraint(equalTo: selectedGraph.bottomAnchor, constant: 20),
             area.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -158,5 +167,27 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
         } else {
             setDataWeight()
         }
+    }
+
+    /// Adjust the segmented control height with auto layout
+    /// - Parameter control: the segmented control to adjust
+    /// - Note: The segmented control height is adjusted with the font size
+    func adjustSegmentedControlHeightWithAutoLayout() {
+        let font = UIFont.preferredFont(forTextStyle: .body)
+        selectedGraph.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        selectedGraph.apportionsSegmentWidthsByContent = true
+
+        let testLabel = UILabel()
+        testLabel.font = font
+        testLabel.text = "Test"
+        testLabel.sizeToFit()
+        let newHeight = testLabel.frame.size.height + 16
+
+        segmentedControlHeightConstraint.constant = newHeight
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        adjustSegmentedControlHeightWithAutoLayout()
     }
 }

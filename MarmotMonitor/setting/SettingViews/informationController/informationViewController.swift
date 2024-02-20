@@ -43,6 +43,7 @@ final class InformationViewController: BackgroundViewController {
     private var name: UITextField!
     private var birthDay: UITextField!
     private var parentName: UITextField!
+
     private var genderSegmentedControl: UISegmentedControl = {
         let items = ["Fille", "Garçon"]
         let control = UISegmentedControl(items: items)
@@ -55,38 +56,13 @@ final class InformationViewController: BackgroundViewController {
 
     private let saveButton: UIButton = {
         let button = UIButton()
-        var configuration = UIButton.Configuration.plain()
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-        configuration.baseBackgroundColor = UIColor.duckBlue
-        configuration.background.cornerRadius = 10
-        configuration.cornerStyle = .large
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
-            var titleAttributes = titleAttributes
-            titleAttributes.font = UIFont.preferredFont(forTextStyle: .body)
-            return titleAttributes
-        }
-        button.configuration = configuration
-        button.setTitle("Enregistrer", for: .normal)
-        button.setupShadow(radius: 1, opacity: 0.5)
+        button.createActionButton(type: .valider)
         return button
     }()
 
     private let cancelButton: UIButton = {
         let button = UIButton()
-        var configuration = UIButton.Configuration.tinted()
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
-        configuration.baseBackgroundColor = .clear
-        configuration.background.cornerRadius = 10
-        configuration.cornerStyle = .large
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
-            var titleAttributes = titleAttributes
-            titleAttributes.font = UIFont.preferredFont(forTextStyle: .body)
-            return titleAttributes
-        }
-        button.configuration = configuration
-        button.setTitle("annuler", for: .normal)
-        button.setTitleColor(UIColor.buttonCancel, for: .normal)
-        button.setupShadow(radius: 1, opacity: 0.5)
+        button.createActionButton(type: .retour)
         return button
     }()
 

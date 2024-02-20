@@ -242,5 +242,6 @@ extension SettingViewController {
 extension SettingViewController: InformationViewControllerDelegate {
     func updateInformation() {
         tableView.reloadData()
+        viewWillAppear(true)
     }
 }
