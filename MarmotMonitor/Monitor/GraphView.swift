@@ -212,7 +212,6 @@ class GraphView: UIView {
     // MARK: - Create UI
     private func createLabelWithText(_ text: String) -> UILabel {
         let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
         label.textColor = .label
         label.textAlignment = .center
         label.numberOfLines = 0

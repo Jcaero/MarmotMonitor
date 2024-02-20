@@ -18,7 +18,8 @@ final class MonitorViewModelTest: TestCase {
     override func setUp() {
         super.setUp()
         coreDatatManager = MarmotMonitorSaveManager(coreDataManager: CoreDataManagerMock.sharedInstance)
-        viewModel = MonitorViewModel(saveManager: coreDatatManager)
+        let baby = Person(name: nil, gender: .girl, parentName: nil, birthDay: nil)
+        viewModel = MonitorViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby, graphType: .rod), saveManager: coreDatatManager)
         
         isSave = false
     }
@@ -195,5 +196,32 @@ final class MonitorViewModelTest: TestCase {
         let summaryOfSeven = viewModel.summaryActivities["07/01/2024"]
         XCTAssertEqual(summaryOfSeven![ActivityIconName.sleep.rawValue], "03 H\n1 fois")
         XCTAssertEqual(summaryOfSeven![ActivityIconName.meal.rawValue], "\n1 fois")
+    }
+
+    //MARK: - test get type graph
+    func testUserDefaulHaveTypeGraph_WhenGetGraph_haveData() {
+        
+        
+        let graph = viewModel.getGraphStyle()
+        
+        XCTAssertTrue(graph == .rod)
+    }
+
+    //MARK: - test togglefilter
+    func test_WhenToggleFilter_filterChange() {
+        viewModel.filterStatus = ["test":true]
+        
+        viewModel.toggleFilter(for: "test")
+        
+        XCTAssertTrue(viewModel.filterStatus["test"] == false)
+    }
+
+    func testfilterStatusHaveData_WhenRequestFilterButton_HaveFilterName() {
+        viewModel.filterStatus = ["test":false, "test2":false]
+        
+        let array = viewModel.filterButton
+        
+        XCTAssertEqual(array, ["test2", "test"])
+        
     }
 }
