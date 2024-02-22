@@ -31,6 +31,15 @@ class DetailGraphViewController: BackgroundViewController, UITableViewDelegate, 
         return tableView
     }()
 
+    private let cancelButton: UIButton = {
+        let button = UIButton()
+        button.createActionButton(type: .retour)
+        button.layer.cornerRadius = 10
+        button.setTitle("Retour", for: .normal)
+        button.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+        return button
+    }()
+
     var viewModel = DetailGraphViewModel()
     private var delegate: UpdateInformationControllerDelegate?
 
@@ -41,6 +50,10 @@ class DetailGraphViewController: BackgroundViewController, UITableViewDelegate, 
         setupContraints()
 
         setupTableView()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
 
     init(title: String, data: [GraphActivity], delegate: UpdateInformationControllerDelegate) {
@@ -56,23 +69,26 @@ class DetailGraphViewController: BackgroundViewController, UITableViewDelegate, 
 
     // MARK: - Setup Views
     private func setupViews() {
-        view.addSubview(tableView)
-        view.addSubview(settingTitle)
+        [cancelButton, tableView, settingTitle].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
 
     private func setupContraints() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        settingTitle.translatesAutoresizingMaskIntoConstraints = false
-
         NSLayoutConstraint.activate([
             settingTitle.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             settingTitle.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30),
             settingTitle.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
 
+            cancelButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            cancelButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30),
+            cancelButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
+
             tableView.topAnchor.constraint(equalTo: settingTitle.bottomAnchor, constant: 10),
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30),
             tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 30),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30)
+            tableView.bottomAnchor.constraint(equalTo: cancelButton.topAnchor)
         ])
     }
 
@@ -83,6 +99,10 @@ class DetailGraphViewController: BackgroundViewController, UITableViewDelegate, 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRow
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,13 +121,19 @@ class DetailGraphViewController: BackgroundViewController, UITableViewDelegate, 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Supprimer") { (_, _, completionHandler) in
 
-            self.viewModel.deleteActivity(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            self.delegate?.updateInformation()
-            completionHandler(true)
+            self.viewModel.deleteActivity(at: indexPath.row) {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.delegate?.updateInformation()
+                completionHandler(true)
+            }
+            completionHandler(false)
         }
 
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 
+    // MARK: - button action
+    @objc func cancel(sender: UIButton) {
+    self.dismiss(animated: true, completion: nil)
+    }
 }

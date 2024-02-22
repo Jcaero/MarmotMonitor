@@ -22,7 +22,7 @@ class DetailGraphCell: UITableViewCell {
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         label.textColor = .label
         label.textAlignment = .left
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.backgroundColor = .clear
         return label
     }()
@@ -33,10 +33,17 @@ class DetailGraphCell: UITableViewCell {
         let label = UILabel()
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         label.textColor = .label
-        label.textAlignment = .left
-        label.numberOfLines = 2
+        label.textAlignment = .right
+        label.numberOfLines = 0
         label.backgroundColor = .clear
         return label
+    }()
+
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        return stackView
     }()
 
     static let reuseIdentifier = "DetailGraphCell"
@@ -61,8 +68,13 @@ class DetailGraphCell: UITableViewCell {
         area.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(area)
 
-        [title, icone, value].forEach { $0.translatesAutoresizingMaskIntoConstraints = false
+        [icone, stackView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
             area.addSubview($0)
+        }
+
+        [title, value].forEach {
+            stackView.addArrangedSubview($0)
         }
 
         NSLayoutConstraint.activate([
@@ -76,15 +88,10 @@ class DetailGraphCell: UITableViewCell {
             icone.widthAnchor.constraint(equalTo: icone.heightAnchor),
             icone.heightAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.15),
 
-            value.topAnchor.constraint(equalTo: area.topAnchor, constant: 5),
-            value.bottomAnchor.constraint(equalTo: area.bottomAnchor, constant: -5),
-            value.trailingAnchor.constraint(equalTo: area.trailingAnchor, constant: -10),
-            value.widthAnchor.constraint(equalTo: area.widthAnchor, multiplier: 0.3),
-
-            title.topAnchor.constraint(equalTo: area.topAnchor, constant: 10),
-            title.bottomAnchor.constraint(equalTo: area.bottomAnchor, constant: -5),
-            title.leadingAnchor.constraint(equalTo: icone.trailingAnchor, constant: 10),
-            title.trailingAnchor.constraint(equalTo: value.leadingAnchor, constant: -10)
+            stackView.topAnchor.constraint(equalTo: area.topAnchor, constant: 5),
+            stackView.bottomAnchor.constraint(equalTo: area.bottomAnchor, constant: -5),
+            stackView.leadingAnchor.constraint(equalTo: icone.trailingAnchor, constant: 10),
+            stackView.trailingAnchor.constraint(equalTo: area.trailingAnchor, constant: -10)
         ])
     }
 
@@ -114,5 +121,7 @@ class DetailGraphCell: UITableViewCell {
 
         icone.image = UIImage(named: iconeName)
         area.backgroundColor = UIColor.colorForIcone(imageName: iconeName).withAlphaComponent(0.2)
+
+        stackView.axis = isAccessibilityCategory ? .vertical : .horizontal
     }
 }
