@@ -60,4 +60,13 @@ extension Date {
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: self)
         return calendar.date(from: dateComponents)!
     }
+
+    func toStringWithOnlyTime() -> String {
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.hour, .minute], from: self)
+        let date = calendar.date(from: dateComponents)!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: date)
+    }
 }

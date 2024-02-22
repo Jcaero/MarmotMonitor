@@ -85,6 +85,8 @@
 		479FC9592B56D550001BAC22 /* timeInterval+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479FC9582B56D550001BAC22 /* timeInterval+.swift */; };
 		47A0E6B62B3B13B400F894A1 /* GrowthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A0E6B52B3B13B400F894A1 /* GrowthController.swift */; };
 		47A3A3542B0FE7FD00447362 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A3A3532B0FE7FD00447362 /* WelcomeController.swift */; };
+		47A6D4502B8619900022FDB8 /* DetailGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A6D44F2B8619900022FDB8 /* DetailGraphViewController.swift */; };
+		47A6D4532B861B5A0022FDB8 /* DetailGraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A6D4522B861B5A0022FDB8 /* DetailGraphCell.swift */; };
 		47AF89762B3A28200068FE1F /* diaperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF89752B3A28200068FE1F /* diaperController.swift */; };
 		47AF89782B3A29E90068FE1F /* diaperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF89772B3A29E90068FE1F /* diaperCell.swift */; };
 		47B2316A2B6C35C30079B436 /* DoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B231692B6C35C30079B436 /* DoctorViewController.swift */; };
@@ -103,6 +105,7 @@
 		47D7895F2B5E96AD00B4912D /* GrowthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7895E2B5E96AD00B4912D /* GrowthViewModel.swift */; };
 		47D789612B5E9B6400B4912D /* GrowthViewmodelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D789602B5E9B6400B4912D /* GrowthViewmodelTest.swift */; };
 		47D7E1B82B5566950038C6E2 /* CoreDataManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D7E1B72B5566950038C6E2 /* CoreDataManagerMock.swift */; };
+		47D89C922B8692F0007548FD /* DetailGraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D89C912B8692F0007548FD /* DetailGraphViewModel.swift */; };
 		47D8DA5F2B4B37F000D97CD1 /* Solid+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA4F2B4B37F000D97CD1 /* Solid+CoreDataClass.swift */; };
 		47D8DA602B4B37F000D97CD1 /* Solid+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA502B4B37F000D97CD1 /* Solid+CoreDataProperties.swift */; };
 		47D8DA632B4B37F000D97CD1 /* Sleep+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8DA532B4B37F000D97CD1 /* Sleep+CoreDataClass.swift */; };
@@ -232,6 +235,8 @@
 		479FC9582B56D550001BAC22 /* timeInterval+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "timeInterval+.swift"; sourceTree = "<group>"; };
 		47A0E6B52B3B13B400F894A1 /* GrowthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthController.swift; sourceTree = "<group>"; };
 		47A3A3532B0FE7FD00447362 /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
+		47A6D44F2B8619900022FDB8 /* DetailGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGraphViewController.swift; sourceTree = "<group>"; };
+		47A6D4522B861B5A0022FDB8 /* DetailGraphCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGraphCell.swift; sourceTree = "<group>"; };
 		47AF89752B3A28200068FE1F /* diaperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diaperController.swift; sourceTree = "<group>"; };
 		47AF89772B3A29E90068FE1F /* diaperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diaperCell.swift; sourceTree = "<group>"; };
 		47B231692B6C35C30079B436 /* DoctorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +254,7 @@
 		47D7895E2B5E96AD00B4912D /* GrowthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthViewModel.swift; sourceTree = "<group>"; };
 		47D789602B5E9B6400B4912D /* GrowthViewmodelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthViewmodelTest.swift; sourceTree = "<group>"; };
 		47D7E1B72B5566950038C6E2 /* CoreDataManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerMock.swift; sourceTree = "<group>"; };
+		47D89C912B8692F0007548FD /* DetailGraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGraphViewModel.swift; sourceTree = "<group>"; };
 		47D8DA4F2B4B37F000D97CD1 /* Solid+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Solid+CoreDataClass.swift"; sourceTree = "<group>"; };
 		47D8DA502B4B37F000D97CD1 /* Solid+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Solid+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		47D8DA532B4B37F000D97CD1 /* Sleep+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sleep+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -705,6 +711,16 @@
 			path = growth;
 			sourceTree = "<group>";
 		};
+		47A6D4512B8619E30022FDB8 /* DetailGraph */ = {
+			isa = PBXGroup;
+			children = (
+				47A6D44F2B8619900022FDB8 /* DetailGraphViewController.swift */,
+				47D89C912B8692F0007548FD /* DetailGraphViewModel.swift */,
+				47A6D4522B861B5A0022FDB8 /* DetailGraphCell.swift */,
+			);
+			name = DetailGraph;
+			sourceTree = "<group>";
+		};
 		47AF89742B3A28110068FE1F /* diaper */ = {
 			isa = PBXGroup;
 			children = (
@@ -783,6 +799,7 @@
 				47F81B9C2B6058430042A055 /* MonitorViewController.swift */,
 				475F9FC42B616A69001C4A4E /* MonitorViewModel.swift */,
 				47F81B9E2B605AEC0042A055 /* MonitorCell.swift */,
+				47A6D4512B8619E30022FDB8 /* DetailGraph */,
 				475F9FC12B615B20001C4A4E /* Graph */,
 			);
 			path = Monitor;
@@ -986,6 +1003,7 @@
 				474C24422B718EFA0002AD83 /* InformationViewModel.swift in Sources */,
 				47D8DA712B4B405800D97CD1 /* DateActivity+CoreDataClass.swift in Sources */,
 				47F99B8C2B6E79FA00306A30 /* MyXAxisFormatter.swift in Sources */,
+				47D89C922B8692F0007548FD /* DetailGraphViewModel.swift in Sources */,
 				47A0E6B62B3B13B400F894A1 /* GrowthController.swift in Sources */,
 				47D8DA602B4B37F000D97CD1 /* Solid+CoreDataProperties.swift in Sources */,
 				475C3AC82B6EE400003E5BA8 /* SettingViewController.swift in Sources */,
@@ -1007,6 +1025,7 @@
 				474C24402B717FE10002AD83 /* informationViewController.swift in Sources */,
 				47B984CE2B77833F000DBB80 /* IconSettingViewController.swift in Sources */,
 				47150DF92B7EAF97004A9220 /* GraphTypeTableViewCell.swift in Sources */,
+				47A6D4532B861B5A0022FDB8 /* DetailGraphCell.swift in Sources */,
 				4726966A2B3D8A18006BC301 /* SleepViewModel.swift in Sources */,
 				47D8DA722B4B405800D97CD1 /* DateActivity+CoreDataProperties.swift in Sources */,
 				4792CB592B3063720010AE38 /* SolideFeedingController.swift in Sources */,
@@ -1022,6 +1041,7 @@
 				478E790B2B137CD1004157AF /* Date+.swift in Sources */,
 				47D8DA742B4B45BE00D97CD1 /* CoreDataManager.swift in Sources */,
 				4745E48C2B70315C0016C52F /* InformationUserSettingCell.swift in Sources */,
+				47A6D4502B8619900022FDB8 /* DetailGraphViewController.swift in Sources */,
 				4792CB5B2B3068270010AE38 /* SolideCell.swift in Sources */,
 				47B2316A2B6C35C30079B436 /* DoctorViewController.swift in Sources */,
 				47494BD32B35A7F9002A0A93 /* SleepController.swift in Sources */,

@@ -264,4 +264,46 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
     func clearDatabase() {
         coreDataManager.clearDatabase()
     }
+
+    func deleteActivity(ofType activityType: ShowActivityType, date: Date, onSuccess: (() -> Void), onError: ((String) -> Void)) {
+        context.performAndWait {
+            guard let dateActivity = self.fetchDateActivity(for: date) else {
+                onError("Aucune activité trouvée pour cette date.")
+                return
+            }
+
+            let activities = dateActivity.activityArray
+
+            switch activityType {
+            case .diaper:
+                if let activityToDelete = activities.first(where: { $0 is Diaper }) {
+                    context.delete(activityToDelete)
+                }
+            case .bottle:
+                if let activityToDelete = activities.first(where: { $0 is Bottle }) {
+                    context.delete(activityToDelete)
+                }
+            case .breast:
+                if let activityToDelete = activities.first(where: { $0 is Breast }) {
+                    context.delete(activityToDelete)
+                }
+            case .sleep:
+                if let activityToDelete = activities.first(where: { $0 is Sleep }) {
+                    context.delete(activityToDelete)
+                }
+            case .solid:
+                if let activityToDelete = activities.first(where: { $0 is Solid }) {
+                    context.delete(activityToDelete)
+                }
+            }
+
+            do {
+                try self.coreDataManager.save()
+                onSuccess()
+            } catch {
+                onError("Impossible de supprimer l'activité.")
+            }
+        }
+    }
+
 }

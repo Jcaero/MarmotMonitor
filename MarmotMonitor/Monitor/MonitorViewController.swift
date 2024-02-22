@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MonitorViewController: BackgroundViewController {
+class MonitorViewController: BackgroundViewController, UpdateInformationControllerDelegate {
 
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -27,6 +27,9 @@ class MonitorViewController: BackgroundViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+
+    typealias DataCell = (date: Date, elementsToLegend: [String:String])
+    typealias GraphData = (elements: [GraphActivity], style: GraphType)
 
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -135,6 +138,11 @@ extension MonitorViewController {
 
 extension MonitorViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let date = viewModel.dateWithActivity[indexPath.row].toStringWithDayMonthYear()
+        let graphData = viewModel.graphActivities[date] ?? []
+
+        let next = DetailGraphViewController(title: date, data: graphData, delegate: self)
+        present(next, animated: true, completion: nil)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -153,19 +161,14 @@ extension MonitorViewController: UITableViewDataSource {
         let stringDate = viewModel.dateWithActivity[indexPath.row].toStringWithDayMonthYear()
         let legend = viewModel.summaryActivities[stringDate] ?? [:]
 
-#warning("for test")
-        typealias DataCell = (date: Date, elementsToLegend: [String:String])
-        typealias GraphData = (elements: [GraphActivity], style: GraphType)
-
         let dataCell = DataCell(date: viewModel.dateWithActivity[indexPath.row], elementsToLegend: legend)
         let graphData = GraphData(elements: viewModel.graphActivities[stringDate]!, style: viewModel.getGraphStyle())
 
         cell.setUp(with: dataCell, graphData: graphData)
         return cell
     }
-}
 
-extension MonitorViewController {
+    // MARK: - Trait collection
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         let currentCategory = traitCollection.preferredContentSizeCategory
@@ -179,5 +182,11 @@ extension MonitorViewController {
                 button.configuration?.title = isAccessibilityCategory ? " " + viewModel.filterButton[$0.tag] : nil
             }
         }
+    }
+
+    // MARK: - Delegate
+    func updateInformation() {
+        viewModel.updateData()
+        tableView.reloadData()
     }
 }

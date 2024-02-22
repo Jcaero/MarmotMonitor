@@ -13,7 +13,7 @@ class MonitorCell: UITableViewCell {
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         label.textColor = .label
         label.textAlignment = .left
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         label.backgroundColor = .clear
         label.setAccessibility(with: .header, label: "jour de la synthese", hint: "")
         return label
@@ -39,6 +39,23 @@ class MonitorCell: UITableViewCell {
         view.axis = .horizontal
         view.distribution = .equalCentering
         view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private let topInformationStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.alignment = .center
+        view.distribution = .fill
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    let editingImage: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
+        view.tintColor = .black
+        view.image = UIImage(systemName: "pencil")
         return view
     }()
 
@@ -71,22 +88,28 @@ class MonitorCell: UITableViewCell {
         area.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(area)
 
-        [date, graph, stackViewActivities].forEach {
+        [graph, stackViewActivities, topInformationStackView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             area.addSubview($0)
         }
-        #warning("leading ou left")
+
+        [date, editingImage].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            topInformationStackView.addArrangedSubview($0)
+        }
+
         NSLayoutConstraint.activate([
             area.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             area.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
             area.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
             area.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
 
-            date.topAnchor.constraint(equalTo: area.topAnchor, constant: 10),
-            date.leadingAnchor.constraint(equalTo: area.leadingAnchor, constant: 10),
-            date.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            topInformationStackView.topAnchor.constraint(equalTo: area.topAnchor, constant: 10),
+            topInformationStackView.leadingAnchor.constraint(equalTo: area.leadingAnchor, constant: 10),
+            topInformationStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            editingImage.heightAnchor.constraint(equalTo: editingImage.widthAnchor),
 
-            graph.topAnchor.constraint(equalTo: date.bottomAnchor, constant: 10),
+            graph.topAnchor.constraint(equalTo: topInformationStackView.bottomAnchor, constant: 10),
             graph.leadingAnchor.constraint(equalTo: area.leadingAnchor, constant: 10),
             graph.trailingAnchor.constraint(equalTo: area.trailingAnchor, constant: -10),
             graph.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
@@ -110,6 +133,8 @@ class MonitorCell: UITableViewCell {
         updateLegend(with: data.elementsToLegend)
 
         graph.setUpGraph(with: graphData)
+
+        setupEditingImage()
     }
 
     private func updateLegend(with elements: [String:String]) {
@@ -127,5 +152,10 @@ class MonitorCell: UITableViewCell {
                 stackViewActivities.addArrangedSubview(view)
             }
         }
+    }
+
+    private func setupEditingImage() {
+        let multiplier = isAccessibilityCategory ? 0.7 : 0.9
+        editingImage.heightAnchor.constraint(equalTo: date.heightAnchor, multiplier: multiplier).isActive = true
     }
 }
