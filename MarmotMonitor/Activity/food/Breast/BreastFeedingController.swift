@@ -42,7 +42,7 @@ class BreastFeedingController: ActivityController {
         label.textColor = .label
         label.textAlignment = .center
         label.backgroundColor = .clear
-        label.setAccessibility(with: .staticText, label: "", hint: "")
+        label.setAccessibility(with: .staticText, label: "0", hint: "temps sur le sein droit")
         return label
     }()
 
@@ -53,7 +53,7 @@ class BreastFeedingController: ActivityController {
         label.textColor = .label
         label.textAlignment = .center
         label.backgroundColor = .clear
-        label.setAccessibility(with: .staticText, label: "", hint: "")
+        label.setAccessibility(with: .staticText, label: "0", hint: "temps sur le sein gauche")
         return label
     }()
 
@@ -120,7 +120,7 @@ class BreastFeedingController: ActivityController {
 
     private func setupTimePickerAndLabel() {
         timeLabel.text = "Tété"
-        timeLabel.setAccessibility(with: .staticText, label: "heure de la tétée", hint: "")
+        timeLabel.setAccessibility(with: .staticText, label: "Tété", hint: "Page pour remplir l'allaitement")
 
         timePicker.setAccessibility(with: .selected, label: "", hint: "choisir heure de la tétée")
     }
@@ -253,23 +253,30 @@ extension BreastFeedingController: BreastFeedingChronoDelegate {
         rightButton.isSelected = state == .stop ? false : true
         rightButton.configuration?.image = UIImage(systemName: rightButton.isSelected ? "pause.fill" : "play.fill")!
             .applyingSymbolConfiguration(.init(pointSize: 30))
+        let information = rightButton.isSelected ? " pause" : " play"
+        leftButton.setAccessibility(with: .button, label: "Gauche" + information, hint: "Appuyer pour changer le chrono")
     }
 
     func updateLeftButtonImage(with state: ButtonState) {
         leftButton.isSelected = state == .stop ? false : true
         leftButton.configuration?.image = UIImage(systemName: leftButton.isSelected ? "pause.fill" : "play.fill")!
             .applyingSymbolConfiguration(.init(pointSize: 30))
+        let information = leftButton.isSelected ? " pause" : " play"
+        leftButton.setAccessibility(with: .button, label: "Gauche" + information, hint: "Appuyer pour changer le chrono")
     }
 
     func updateRightTimeLabel(with text: String) {
         rightTimeLabel.text = "Droit\n" + text
+        rightTimeLabel.setAccessibility(with: .adjustable, label: "Droit" + text, hint: "")
     }
 
     func updateLeftTimeLabel(with text: String) {
         leftTimeLabel.text = "Gauche\n" + text
+        leftTimeLabel.setAccessibility(with: .adjustable, label: "Gauche" + text, hint: "")
     }
 
     func updateTotalTimeLabel(with text: String) {
         totalTimeBreastLabel.text = "Temps Total : " + text
+        totalTimeBreastLabel.setAccessibility(with: .adjustable, label: "Temps Total : " + text, hint: "")
     }
 }

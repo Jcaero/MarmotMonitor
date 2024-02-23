@@ -190,6 +190,7 @@ extension SolideFeedingController: UITextFieldDelegate {
 extension SolideFeedingController: SolideFeedingProtocol {
     func updateTotal(with total: String) {
         totalWeight.text = total
+        totalWeight.setAccessibility(with: .staticText, label: "Poids " + total , hint: "Poids total du repas")
     }
 }
 

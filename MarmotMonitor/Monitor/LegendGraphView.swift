@@ -28,7 +28,12 @@ class LegendGraphView: UIView {
     init(data: LegendGraphData) {
         super.init(frame: .zero)
         self.backgroundColor = .clear
+
         self.information.text = data.information
+
+        let value = data.imageName  + " " + data.information
+        information.setAccessibility(with: .staticText, label: value, hint: "Résumé de l'activité")
+
         if let image = UIImage(named: data.imageName) {
             imageActivity.image = image
             color = UIColor.colorForIcone(imageName: data.imageName)

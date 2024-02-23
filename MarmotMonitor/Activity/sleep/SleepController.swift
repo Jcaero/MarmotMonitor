@@ -15,7 +15,7 @@ class SleepController: BackGroundActivity, SleepDelegate {
         label.textColor = .label
         label.textAlignment = .center
         label.numberOfLines = 1
-        label.setAccessibility(with: .header, label: "Sommeil", hint: "")
+        label.setAccessibility(with: .header, label: "Sommeil", hint: "page de gestion du sommeil")
         return label
     }()
 

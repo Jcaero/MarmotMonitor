@@ -100,6 +100,7 @@ class BottleFeedingController: ActivityController, BottleFeedingDelegate {
         let value = Int(roundedStepValue)
         viewModel.setQuantity(value)
         volumeOfMilkLabel.text = "Volume: \(value) ml"
+        volumeOfMilkLabel.setAccessibility(with: .adjustable, label: "Volume du lait: \(value) ml", hint: "")
     }
 }
 

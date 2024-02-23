@@ -77,7 +77,7 @@ class GrowthController: ActivityController, GrowthDelegate {
 
     private func setupTimePickerAndLabel() {
         timeLabel.text = "Date"
-        timeLabel.setAccessibility(with: .staticText, label: "date de la mesure", hint: "")
+        timeLabel.setAccessibility(with: .staticText, label: "page de gestion de la croissance", hint: "")
 
         timePicker.setAccessibility(with: .selected, label: "", hint: "choisir la date de la mesure")
     }

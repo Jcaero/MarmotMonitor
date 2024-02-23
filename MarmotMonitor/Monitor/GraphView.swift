@@ -216,6 +216,7 @@ class GraphView: UIView {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.text = text
+        label.accessibilityElementsHidden = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }

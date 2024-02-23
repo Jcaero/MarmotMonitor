@@ -18,7 +18,7 @@ class SleepCell: UITableViewCell {
         label.textAlignment = .left
         label.numberOfLines = 0
         label.backgroundColor = .clear
-        label.setAccessibility(with: .header, label: "poids de l'ingredient", hint: "")
+        label.isAccessibilityElement = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -30,7 +30,6 @@ class SleepCell: UITableViewCell {
         label.textColor = .label
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.setAccessibility(with: .header, label: "", hint: "")
         return label
     }()
 
@@ -49,17 +48,6 @@ class SleepCell: UITableViewCell {
         return button
     }()
 
-    let durationLabel: UILabel = {
-        let label = UILabel()
-        label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
-        label.text = ""
-        label.textColor = .label
-        label.textAlignment = .center
-        label.numberOfLines = 1
-        label.setAccessibility(with: .header, label: "", hint: "")
-        return label
-    }()
-
     // MARK: - Properties
     static let reuseIdentifier = "SleepCell"
 
@@ -76,7 +64,7 @@ class SleepCell: UITableViewCell {
     }
     // MARK: - UI
     private func setupUI() {
-        [title, dateLabel, durationLabel, statusButton].forEach {
+        [title, dateLabel, statusButton].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -99,7 +87,6 @@ class SleepCell: UITableViewCell {
 
         NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10),
-//            dateLabel.rightAnchor.constraint(equalTo: statusButton.leftAnchor, constant: -10),
             dateLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.75),
             dateLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
             dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
@@ -119,12 +106,14 @@ class SleepCell: UITableViewCell {
     func setupCell(with title: String, date: String) {
         self.title.text = title
         self.dateLabel.text = date
+        dateLabel.setAccessibility(with: .adjustable, label: title + date, hint: "")
 
         setupButton()
     }
 
     @objc func clearLabel() {
             self.dateLabel.text = "Pas encore de date"
+        dateLabel.setAccessibility(with: .adjustable, label: "Pas encore de date", hint: "")
             setupButton()
         }
 }

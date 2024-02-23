@@ -18,8 +18,8 @@ class SolideCell: UITableViewCell {
         label.textAlignment = .left
         label.numberOfLines = 0
         label.backgroundColor = .clear
-        label.setAccessibility(with: .header, label: "poids de l'ingredient", hint: "")
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isAccessibilityElement = false
         return label
     }()
 
@@ -40,7 +40,6 @@ class SolideCell: UITableViewCell {
         textField.backgroundColor = .clear
         textField.tintColor = .label
         textField.adjustsFontSizeToFitWidth = true
-        textField.setAccessibility(with: .keyboardKey, label: "", hint: "inserer le poids")
         return textField
     }()
 
@@ -51,7 +50,7 @@ class SolideCell: UITableViewCell {
         label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 1
-        label.setAccessibility(with: .header, label: "", hint: "")
+        label.isAccessibilityElement = false
         return label
     }()
 
@@ -124,14 +123,12 @@ class SolideCell: UITableViewCell {
     // MARK: - Setup cell
     func setupCell(with ingredient: Ingredient, value: Int) {
         self.ingredient.text = ingredient.rawValue
-        print("set ingredient : \(ingredient.rawValue)")
         if value == 0 {
             self.poidsTF.placeholder = "0"
-            print("set placeholder: \(String(describing: self.poidsTF.placeholder))")
         } else {
             self.poidsTF.text = String(value)
-            print("set value : \(value)")
         }
+        poidsTF.setAccessibility(with: .keyboardKey, label: "", hint: "inserer le poids de l'ingredient " + ingredient.rawValue)
         self.poidsTF.accessibilityLabel = value == 0 ? "0" : String(value)
     }
 }

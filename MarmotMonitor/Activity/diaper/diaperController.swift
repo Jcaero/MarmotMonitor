@@ -65,7 +65,7 @@ class DiaperController: ActivityController {
 
     private func setupTimePickerAndLabel() {
         timeLabel.text = "Etat de la couche"
-        timeLabel.setAccessibility(with: .staticText, label: "heure de la couche", hint: "")
+        timeLabel.setAccessibility(with: .staticText, label: "Couche", hint: "page de gestion des couches")
 
         timePicker.setAccessibility(with: .selected, label: "", hint: "choisir l'heure de la couche")
     }

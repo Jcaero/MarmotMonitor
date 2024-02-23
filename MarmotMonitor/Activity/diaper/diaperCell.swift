@@ -17,7 +17,7 @@ class DiaperCell: UITableViewCell {
         label.textAlignment = .left
         label.numberOfLines = 0
         label.backgroundColor = .clear
-        label.setAccessibility(with: .header, label: "Etat de la couche", hint: "")
+        label.isAccessibilityElement = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -26,7 +26,6 @@ class DiaperCell: UITableViewCell {
         let image = UIImageView()
         image.image = UIImage(systemName: "square")!
             .applyingSymbolConfiguration(.init(pointSize: 15))
-        image.setAccessibility(with: .button, label: "", hint: "selection de l'etat de la couche")
         image.tintColor = .duckBlue
         return image
     }()
@@ -73,6 +72,8 @@ class DiaperCell: UITableViewCell {
     func setupCell(with title: String, selected: Bool) {
         self.title.text = title
         setupImage(selected)
+        let value = selected ? "selectionné" : "non selectionné"
+        statusImage.setAccessibility(with: .button, label: title + " " + value, hint: "")
     }
 
     private func setupImage(_ selected: Bool) {

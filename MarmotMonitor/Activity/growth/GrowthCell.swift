@@ -18,7 +18,7 @@ class GrowthCell: UITableViewCell {
         label.textAlignment = .left
         label.numberOfLines = 0
         label.backgroundColor = .clear
-        label.setAccessibility(with: .header, label: "categorie", hint: "")
+        label.isAccessibilityElement = false
         return label
     }()
 
@@ -39,7 +39,6 @@ class GrowthCell: UITableViewCell {
         textField.backgroundColor = .clear
         textField.tintColor = .label
         textField.adjustsFontSizeToFitWidth = true
-        textField.setAccessibility(with: .keyboardKey, label: "", hint: "inserer la valeur")
         return textField
     }()
 
@@ -50,7 +49,7 @@ class GrowthCell: UITableViewCell {
         label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 1
-        label.setAccessibility(with: .header, label: "", hint: "")
+        label.isAccessibilityElement = false
         return label
     }()
 
@@ -127,6 +126,8 @@ class GrowthCell: UITableViewCell {
         self.category.text = category.title
         self.unitOfMesure.text = category.unit
         setupTF(with: value)
+        let hint = "Enter la valeur de \(category.title) in \(category.unit)"
+        valueTF.setAccessibility(with: .keyboardKey, label: "", hint: hint)
     }
 
     private func setupTF(with value: Double) {

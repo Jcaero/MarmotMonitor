@@ -56,6 +56,7 @@ class MonitorCell: UITableViewCell {
         view.contentMode = .scaleAspectFit
         view.tintColor = .black
         view.image = UIImage(systemName: "pencil")
+        view.setAccessibility(with: .button, label: "modifier", hint: "")
         return view
     }()
 
@@ -130,6 +131,8 @@ class MonitorCell: UITableViewCell {
     func setUp(with data: DataCell, graphData: GraphData) {
 
         self.date.text = data.date.toStringWithDayMonthYear()
+        date.setAccessibility(with: .header, label: "jour de la synthèse", hint: data.date.toStringWithDayMonthYear())
+
         updateLegend(with: data.elementsToLegend)
 
         graph.setUpGraph(with: graphData)
