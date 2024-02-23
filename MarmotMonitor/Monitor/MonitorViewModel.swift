@@ -24,11 +24,13 @@ class MonitorViewModel {
         Array(dateWithActivitySet).sorted(by: { $0 > $1 })
     }
 
+    // MARK: - Init
     init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager(), saveManager: MarmotMonitorSaveManagerProtocol = MarmotMonitorSaveManager()) {
         self.saveManager = saveManager
         self.userDefaultsManager = userDefaultsManager
     }
 
+    // MARK: - Function
     private func cleanAllData() {
         graphActivities = [:]
         summaryActivities = [:]

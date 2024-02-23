@@ -56,17 +56,28 @@ class TodayViewModel {
         guard let birthDayDate = requestPersonData()?.birthDay?.toDate() else {
             return nil
         }
-        return Calendar.current.dateComponents([.year, .month], from: birthDayDate, to: Date())
+        return Calendar.current.dateComponents([.year, .month, .day], from: birthDayDate, to: Date())
     }
 
-    func babyYear() -> String {
+    func babyFirstElement() -> String {
         guard let age = babyAge() else { return "" }
-        return "\(age.year ?? 0)"
+        if let year = age.year, year > 0 {
+            return "\(year)\nans"
+        } else {
+            guard let month = age.month, month > 0 else { return "" }
+            return "\(month)\nmois"
+        }
     }
 
-    func babyMonth() -> String {
+    func babySecondElement() -> String {
         guard let age = babyAge() else { return "" }
-        return "\(age.month ?? 0)"
+        if let year = age.year, year > 0 {
+            guard let month = age.month else { return "" }
+            return "\(month)\nmois"
+        } else {
+            guard let day = age.day else { return "" }
+            return "\(day)\njours"
+        }
     }
 
     // MARK: - Update Last Value

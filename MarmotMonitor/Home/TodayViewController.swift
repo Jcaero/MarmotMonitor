@@ -24,7 +24,7 @@ class TodayViewController: BackgroundViewController {
     let welcomeLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
+        label.setupDynamicBoldTextWith(policeName: "Symbol", size: 30, style: .title3)
         label.textColor = .label
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -62,7 +62,7 @@ class TodayViewController: BackgroundViewController {
         return gradient
     }()
 
-    let babyYear: UILabel = {
+    let babyYearFirstElement: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .left
@@ -71,34 +71,12 @@ class TodayViewController: BackgroundViewController {
         return label
     }()
 
-    let yearLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .left
-        label.text = "Ans"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
-        label.numberOfLines = 0
-        label.setAccessibility(with: .staticText, label: "année", hint: "")
-        return label
-    }()
-
-    let babyMonth: UILabel = {
+    let bayYearSecondElement: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .right
         label.numberOfLines = 0
         label.setupDynamicTextWith(policeName: "Symbol", size: 40, style: .body)
-        return label
-    }()
-
-    let monthLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .right
-        label.numberOfLines = 0
-        label.text = "Mois"
-        label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
-//        label.setAccessibility(with: .staticText, label: "", hint: "")
         return label
     }()
 
@@ -160,13 +138,13 @@ class TodayViewController: BackgroundViewController {
         welcomeLabel.text = welcomeTexte
         welcomeLabel.setAccessibility(with: .staticText, label: welcomeTexte, hint: "")
 
-        babyYear.text = viewModel.babyYear()
-        if let year = babyYear.text {
-            babyYear.setAccessibility(with: .staticText, label: year + " ans", hint: "")
+        babyYearFirstElement.text = viewModel.babyFirstElement()
+        if let element = babyYearFirstElement.text {
+            babyYearFirstElement.setAccessibility(with: .staticText, label: element, hint: "")
         }
-        babyMonth.text = viewModel.babyMonth()
-        if let mois = babyMonth.text {
-            babyMonth.setAccessibility(with: .staticText, label: mois + " mois", hint: "age du bébé")
+        bayYearSecondElement.text = viewModel.babySecondElement()
+        if let element = bayYearSecondElement.text {
+            bayYearSecondElement.setAccessibility(with: .staticText, label: element, hint: "age du bébé")
         }
     }
 
@@ -176,6 +154,7 @@ class TodayViewController: BackgroundViewController {
 
         viewModel.fetchLastActivities()
         tableView.reloadData()
+        setupTableViewHeight()
     }
 
     override func viewDidLayoutSubviews() {
@@ -193,20 +172,22 @@ class TodayViewController: BackgroundViewController {
 
         // MARK: - Baby Image
         babyImage.layer.addSublayer(imageGradient)
-        babyImage.addSubview(babyYear)
-        babyImage.addSubview(babyMonth)
-        babyImage.addSubview(yearLabel)
-        babyImage.addSubview(monthLabel)
+
+        babyImage.addSubview(babyYearFirstElement)
+        babyImage.addSubview(bayYearSecondElement)
+
         scrollView.addSubview(scrollArea)
         scrollArea.addSubview(babyImage)
+
         tableViewArea.addSubview(tableViewName)
         tableViewArea.addSubview(tableView)
+
         scrollArea.addSubview(tableViewArea)
     }
 
     private func setupContraints() {
         [scrollView, currentDate, welcomeLabel,
-         babyImage, babyYear, babyMonth, yearLabel, monthLabel,
+         babyImage, babyYearFirstElement, bayYearSecondElement,
          scrollArea, tableView, tableViewArea, tableViewName].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -215,66 +196,46 @@ class TodayViewController: BackgroundViewController {
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10)
-        ])
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
 
-        NSLayoutConstraint.activate([
             scrollArea.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0),
             scrollArea.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0),
             scrollArea.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0),
-            scrollArea.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0)
-        ])
+            scrollArea.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0),
 
-        NSLayoutConstraint.activate([
             currentDate.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
             currentDate.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
-            currentDate.topAnchor.constraint(equalTo: scrollArea.topAnchor)
-        ])
+            currentDate.topAnchor.constraint(equalTo: scrollArea.topAnchor),
 
-        NSLayoutConstraint.activate([
             welcomeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
             welcomeLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
             welcomeLabel.topAnchor.constraint(equalTo: currentDate.bottomAnchor, constant: 10),
-            welcomeLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
-        ])
+            welcomeLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
 
-        NSLayoutConstraint.activate([
             babyImage.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor),
             babyImage.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
             babyImage.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
             babyImage.widthAnchor.constraint(equalToConstant: (view.frame.width - 40)),
-            babyImage.heightAnchor.constraint(equalToConstant: ((view.frame.width - 40)/3)*2)
-        ])
+            babyImage.heightAnchor.constraint(equalToConstant: ((view.frame.width - 40)/3)*2),
 
-        NSLayoutConstraint.activate([
-            yearLabel.bottomAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: -2),
-            yearLabel.leftAnchor.constraint(equalTo: babyImage.leftAnchor, constant: 10),
-            babyYear.bottomAnchor.constraint(equalTo: yearLabel.topAnchor, constant: -2),
-            babyYear.leftAnchor.constraint(equalTo: babyImage.leftAnchor, constant: 10)
-        ])
+            babyYearFirstElement.bottomAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: -2),
+            babyYearFirstElement.leftAnchor.constraint(equalTo: babyImage.leftAnchor, constant: 10),
 
-        NSLayoutConstraint.activate([
-            monthLabel.bottomAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: -2),
-            monthLabel.rightAnchor.constraint(equalTo: babyImage.rightAnchor, constant: -10),
-            babyMonth.bottomAnchor.constraint(equalTo: monthLabel.topAnchor, constant: -2),
-            babyMonth.rightAnchor.constraint(equalTo: babyImage.rightAnchor, constant: -10)
-        ])
+            bayYearSecondElement.bottomAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: -2),
+            bayYearSecondElement.rightAnchor.constraint(equalTo: babyImage.rightAnchor, constant: -10),
 
-        NSLayoutConstraint.activate([
             tableViewArea.topAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: 30),
             tableViewArea.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
             tableViewArea.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
             tableViewArea.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -20),
-            tableViewArea.widthAnchor.constraint(equalToConstant: (view.frame.width - 40))
-        ])
+            tableViewArea.widthAnchor.constraint(equalToConstant: (view.frame.width - 40)),
 
-        NSLayoutConstraint.activate([
             tableViewName.topAnchor.constraint(equalTo: tableViewArea.topAnchor, constant: 10),
             tableViewName.rightAnchor.constraint(equalTo: tableViewArea.rightAnchor),
             tableViewName.leftAnchor.constraint(equalTo: tableViewArea.leftAnchor)
         ])
 
-        tableViewHeightConstraint = tableView.heightAnchor.constraint(greaterThanOrEqualToConstant: 300)
+        tableViewHeightConstraint = tableView.heightAnchor.constraint(equalToConstant: 1000)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: tableViewName.bottomAnchor, constant: 5),
             tableView.rightAnchor.constraint(equalTo: tableViewArea.rightAnchor),
@@ -282,12 +243,22 @@ class TodayViewController: BackgroundViewController {
             tableViewHeightConstraint!,
             tableView.bottomAnchor.constraint(equalTo: tableViewArea.bottomAnchor)
         ])
+
+        setupTableViewHeight()
     }
 
+    /// setup the height of the tableview
+    /// - Note: show all cells with big height before celculate
     private func setupTableViewHeight() {
-        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
-        else { return }
-        tableViewHeightConstraint?.constant = cell.frame.size.height * 4
+        tableViewHeightConstraint?.constant = 1000
+
+        var height: CGFloat = 0
+        for index in 0...3 {
+            guard let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0))
+            else { return }
+            height += cell.frame.size.height
+        }
+        tableViewHeightConstraint?.constant = height
         tableView.layoutIfNeeded()
     }
 }
@@ -333,6 +304,7 @@ extension TodayViewController: UITableViewDataSource {
         let activitie = viewModel.activities[indexPath.row]
         cell.textLabel?.text = activitie.cellTitle
         cell.detailTextLabel?.text = activitie.cellSubTitle
+        cell.detailTextLabel?.numberOfLines = 0
         cell.imageView?.image = UIImage(named: activitie.imageName)
         cell.imageView?.backgroundColor = .white
         cell.imageView?.layer.cornerRadius = cell.frame.size.height/2

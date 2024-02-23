@@ -13,6 +13,8 @@
 		4709E39F2B83757A009F1D27 /* SettingViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709E39E2B83757A009F1D27 /* SettingViewModelTest.swift */; };
 		4711F7702B1E6C3B00869A27 /* TodayViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */; };
 		4711F7742B1E70AB00869A27 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F7732B1E70AB00869A27 /* Person.swift */; };
+		471201392B88AE0000E63E8D /* MonitorAuditAccessibily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471201382B88AE0000E63E8D /* MonitorAuditAccessibily.swift */; };
+		4712013B2B88AF6C00E63E8D /* TodayAuditAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712013A2B88AF6C00E63E8D /* TodayAuditAccessibility.swift */; };
 		4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D43A2B0A9B5C0085035C /* UILabel+.swift */; };
 		4712D43D2B0A9BC50085035C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D43C2B0A9BC50085035C /* UIView+.swift */; };
 		471480AF2B513AF20084589B /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471480AE2B513AF20084589B /* ActivityType.swift */; };
@@ -160,6 +162,8 @@
 		4709E39E2B83757A009F1D27 /* SettingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModelTest.swift; sourceTree = "<group>"; };
 		4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModelTest.swift; sourceTree = "<group>"; };
 		4711F7732B1E70AB00869A27 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		471201382B88AE0000E63E8D /* MonitorAuditAccessibily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorAuditAccessibily.swift; sourceTree = "<group>"; };
+		4712013A2B88AF6C00E63E8D /* TodayAuditAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAuditAccessibility.swift; sourceTree = "<group>"; };
 		4712D43A2B0A9B5C0085035C /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		4712D43C2B0A9BC50085035C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		471480AE2B513AF20084589B /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityType.swift; sourceTree = "<group>"; };
@@ -566,6 +570,8 @@
 		475071FA2B09462100DAB527 /* MarmotMonitorUITests */ = {
 			isa = PBXGroup;
 			children = (
+				471201382B88AE0000E63E8D /* MonitorAuditAccessibily.swift */,
+				4712013A2B88AF6C00E63E8D /* TodayAuditAccessibility.swift */,
 				47C4F42E2B7E272400DDD807 /* Settings */,
 				47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */,
 				475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */,
@@ -1109,8 +1115,10 @@
 			files = (
 				47CABD8F2B128D6A00C5919A /* UIApplication.swift in Sources */,
 				475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */,
+				471201392B88AE0000E63E8D /* MonitorAuditAccessibily.swift in Sources */,
 				475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */,
 				47CABD912B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift in Sources */,
+				4712013B2B88AF6C00E63E8D /* TodayAuditAccessibility.swift in Sources */,
 				47D2BBD12B7FF32700095348 /* settingAuditAccessibilityTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

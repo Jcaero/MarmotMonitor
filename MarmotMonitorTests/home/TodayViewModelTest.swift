@@ -57,11 +57,11 @@ class TodayViewModelTest: TestCase {
         let baby = Person(name: "Bébé", gender: .girl, parentName: "Pierrick", birthDay: date )
         let viewModel = TodayViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
 
-        let year = viewModel.babyYear()
-        let month = viewModel.babyMonth()
+        let first = viewModel.babyFirstElement()
+        let second = viewModel.babySecondElement()
 
-        XCTAssertEqual(year, "0")
-        XCTAssertEqual(month, "0")
+        XCTAssertEqual(first, "")
+        XCTAssertEqual(second, "0\njours")
     }
 
     func testBabyBorn2MonthAgo_WhenRequestAge_receiveAgeForText() {
@@ -72,11 +72,11 @@ class TodayViewModelTest: TestCase {
         let baby = Person(name: "Bébé", gender: .girl, parentName: "Pierrick", birthDay: babyDate )
         let viewModel = TodayViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
 
-        let year = viewModel.babyYear()
-        let month = viewModel.babyMonth()
+        let first = viewModel.babyFirstElement()
+        let second = viewModel.babySecondElement()
 
-        XCTAssertEqual(year, "0")
-        XCTAssertEqual(month, "2")
+        XCTAssertEqual(first, "2\nmois")
+        XCTAssertEqual(second, "0\njours")
     }
 
     func testBabyBorn3YearAnd2MonthAgo_WhenRequestAge_receiveAgeForText() {
@@ -88,22 +88,38 @@ class TodayViewModelTest: TestCase {
         let baby = Person(name: "Bébé", gender: .girl, parentName: "Pierrick", birthDay: babyDate )
         let viewModel = TodayViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
 
-        let year = viewModel.babyYear()
-        let month = viewModel.babyMonth()
+        let first = viewModel.babyFirstElement()
+        let second = viewModel.babySecondElement()
 
-        XCTAssertEqual(year, "3")
-        XCTAssertEqual(month, "2")
+        XCTAssertEqual(first, "3\nans")
+        XCTAssertEqual(second, "2\nmois")
+    }
+
+    func testBabyBorn3MonthAnd2dayAgo_WhenRequestAge_receiveAgeForText() {
+        let date = Date()
+        let calendar = Calendar.current
+        let newDate = calendar.date(byAdding: .month, value: -3, to: date)
+        let newDate2 = calendar.date(byAdding: .day, value: -2, to: newDate!)
+        let babyDate = newDate2!.toStringWithDayMonthYear()
+        let baby = Person(name: "Bébé", gender: .girl, parentName: "Pierrick", birthDay: babyDate )
+        let viewModel = TodayViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
+
+        let first = viewModel.babyFirstElement()
+        let second = viewModel.babySecondElement()
+
+        XCTAssertEqual(first, "3\nmois")
+        XCTAssertEqual(second, "2\njours")
     }
 
     func testBabyHaveNoBirthDay_WhenRequestAge_receiveNil() {
         let baby = Person(name: "Bébé")
         let viewModel = TodayViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
 
-        let year = viewModel.babyYear()
-        let month = viewModel.babyMonth()
+        let first = viewModel.babyFirstElement()
+        let second = viewModel.babySecondElement()
 
-        XCTAssertEqual(year, "")
-        XCTAssertEqual(month, "")
+        XCTAssertEqual(first, "")
+        XCTAssertEqual(second, "")
     }
 
     // MARK: - Test coreData
@@ -152,6 +168,60 @@ class TodayViewModelTest: TestCase {
         XCTAssertEqual(activityTitle, "Saisir la tétée/le biberon")
         XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 biberon de 100 ml")
     }
+
+    func testCoreDataHaveManyData_WhenFetchBottleData_TableViewIsUpdate(){
+        coreDatatManager.saveActivity(.bottle(quantity: 100),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { saveActivity1 = true} ,
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+        coreDatatManager.saveActivity(.bottle(quantity: 200),
+                                              date: testSecondDateSix,
+                                              onSuccess: { saveActivity1 = true} ,
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+
+        XCTAssertEqual(alerteDescription, "")
+
+        let activityTitle = viewModel.activities[0].cellSubTitle
+        viewModel.fetchLastActivities()
+        
+        let activityTitleAfter = viewModel.activities[0].cellSubTitle
+        
+        XCTAssertEqual(activityTitle, "Saisir la tétée/le biberon")
+        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 biberon de 100 ml")
+    }
+
+    func testCoreDataHaveData_WhenFetchBreastData_TableViewIsUpdate(){
+        coreDatatManager.saveActivity(.breast(duration: BreastDuration(leftDuration: 500, rightDuration: 500)),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { saveActivity1 = true} ,
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+        XCTAssertEqual(alerteDescription, "")
+
+        let activityTitle = viewModel.activities[0].cellSubTitle
+        viewModel.fetchLastActivities()
+        
+        let activityTitleAfter = viewModel.activities[0].cellSubTitle
+        
+        XCTAssertEqual(activityTitle, "Saisir la tétée/le biberon")
+        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 tétée de 16 min")
+    }
+
+    func testCoreDataHaveData_WhenFetchSolidData_TableViewIsUpdate(){
+        coreDatatManager.saveActivity(.solid(composition: mockSolidQuantity1),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { saveActivity1 = true} ,
+                                              onError: {alerteMessage in alerteDescription = alerteMessage})
+        XCTAssertEqual(alerteDescription, "")
+
+        let activityTitle = viewModel.activities[0].cellSubTitle
+        viewModel.fetchLastActivities()
+        
+        let activityTitleAfter = viewModel.activities[0].cellSubTitle
+        
+        XCTAssertEqual(activityTitle, "Saisir la tétée/le biberon")
+        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 aliments: 1500 g")
+    }
+
 
     func testCoreDataHaveData_WhenFetchSleepData_TableViewIsUpdate(){
         coreDatatManager.saveActivity(.sleep(duration: 3600),
