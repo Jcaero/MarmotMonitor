@@ -8,7 +8,7 @@
 import Foundation
 
 class DetailGraphViewModel {
-    private var coreDataManager: MarmotMonitorSaveManager!
+    private var coreDataManager: MarmotMonitorSaveManagerProtocol!
 
     var data: [GraphActivity] = []
 
@@ -17,7 +17,7 @@ class DetailGraphViewModel {
     }
 
     // MARK: - Init
-    init(coreDataManager: MarmotMonitorSaveManager = MarmotMonitorSaveManager()) {
+    init(coreDataManager: MarmotMonitorSaveManagerProtocol = MarmotMonitorSaveManager()) {
         self.coreDataManager = coreDataManager
     }
 

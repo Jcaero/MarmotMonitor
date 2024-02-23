@@ -47,7 +47,7 @@ class TodayViewModel {
         if let parentName = person.parentName {
             return "Bonjour \(parentName.capitalizeFirstLetter()) et \(person.name!.capitalizeFirstLetter())"
         } else {
-            return "Bonjour \(person.name)"
+            return "Bonjour \(String(describing: person.name!.capitalizeFirstLetter()))"
         }
     }
 

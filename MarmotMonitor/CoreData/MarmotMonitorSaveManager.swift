@@ -14,6 +14,7 @@ protocol MarmotMonitorSaveManagerProtocol {
     func fetchAllActivity() -> [DateActivity]
     func fetchGrowthActivity() -> [(Date,Growth)]
     func clearDatabase()
+    func deleteActivity(ofType activityType: ShowActivityType, date: Date, onSuccess: (() -> Void), onError: ((String) -> Void))
 }
 
 final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {

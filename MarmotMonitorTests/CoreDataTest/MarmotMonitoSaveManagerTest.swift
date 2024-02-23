@@ -583,4 +583,81 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         XCTAssertEqual(activity?.1.height , 5.5)
         XCTAssertEqual(activity?.0 , testSecondDateSix)
     }
+
+    //MARK: - DeleteActivity
+    //MARK: - Test deleteActivity
+    func testDiaperActivity_WhenDeleteActivity_ActivityIsDeleted() {
+        marmotMonitorSaveManager.saveActivity(.diaper(state: .wet),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { } ,
+                                              onError: { _ in})
+        let date = testFirstDateSeven
+
+        marmotMonitorSaveManager.deleteActivity(ofType: .diaper, date: date) {
+            let result = marmotMonitorSaveManager.fetchFirstActivity(ofType: Diaper.self)
+            XCTAssertNil(result)
+        } onError: { _ in
+            XCTFail()
+        }
+    }
+
+    func testBottleActivity_WhenDeleteActivity_ActivityIsDeleted() {
+        marmotMonitorSaveManager.saveActivity(.bottle(quantity: 100),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { } ,
+                                              onError: { _ in})
+        let date = testFirstDateSeven
+
+        marmotMonitorSaveManager.deleteActivity(ofType: .bottle, date: date) {
+            let result = marmotMonitorSaveManager.fetchFirstActivity(ofType: Bottle.self)
+            XCTAssertNil(result)
+        } onError: { _ in
+            XCTFail()
+        }
+    }
+
+    func testBreastActivity_WhenDeleteActivity_ActivityIsDeleted() {
+        marmotMonitorSaveManager.saveActivity(.breast(duration: BreastDuration(leftDuration: 100, rightDuration: 150)),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { } ,
+                                              onError: { _ in})
+        let date = testFirstDateSeven
+
+        marmotMonitorSaveManager.deleteActivity(ofType: .breast, date: date) {
+            let result = marmotMonitorSaveManager.fetchFirstActivity(ofType: Breast.self)
+            XCTAssertNil(result)
+        } onError: { _ in
+            XCTFail()
+        }
+    }
+
+    func testSleepActivity_WhenDeleteActivity_ActivityIsDeleted() {
+        marmotMonitorSaveManager.saveActivity(.sleep(duration: 100),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { } ,
+                                              onError: { _ in})
+        let date = testFirstDateSeven
+
+        marmotMonitorSaveManager.deleteActivity(ofType: .sleep, date: date) {
+            let result = marmotMonitorSaveManager.fetchFirstActivity(ofType: Sleep.self)
+            XCTAssertNil(result)
+        } onError: { _ in
+            XCTFail()
+        }
+    }
+
+    func testSolidActivity_WhenDeleteActivity_ActivityIsDeleted() {
+        marmotMonitorSaveManager.saveActivity(.solid(composition: mockSolidQuantity1),
+                                              date: testFirstDateSeven,
+                                              onSuccess: { } ,
+                                              onError: { _ in})
+        let date = testFirstDateSeven
+
+        marmotMonitorSaveManager.deleteActivity(ofType: .solid, date: date) {
+            let result = marmotMonitorSaveManager.fetchFirstActivity(ofType: Solid  .self)
+            XCTAssertNil(result)
+        } onError: { _ in
+            XCTFail()
+        }
+    }
 }

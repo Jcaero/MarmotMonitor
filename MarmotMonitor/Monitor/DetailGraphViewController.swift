@@ -31,7 +31,7 @@ class DetailGraphViewController: BackgroundViewController, UITableViewDelegate, 
         return tableView
     }()
 
-    private let cancelButton: UIButton = {
+    private lazy var cancelButton: UIButton = {
         let button = UIButton()
         button.createActionButton(type: .retour)
         button.layer.cornerRadius = 10
@@ -50,10 +50,6 @@ class DetailGraphViewController: BackgroundViewController, UITableViewDelegate, 
         setupContraints()
 
         setupTableView()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
     }
 
     init(title: String, data: [GraphActivity], delegate: UpdateInformationControllerDelegate) {
