@@ -82,4 +82,25 @@ final class ApparenceViewModelTest: TestCase {
         XCTAssertEqual(UIUserInterfaceStyle.unspecified , saveApparence)
         XCTAssertEqual(viewModel.getInitPositionOfSelected(), 0)
     }
+
+    // MARK: - test colorOfBackground
+    func testUserIsBoy_WhenGetColorOfBackground_colorIsBlue() {
+        let date = Date().toStringWithDayMonthYear()
+        let baby = Person(name: "Bébé", gender: .boy, parentName: "Pierrick", birthDay: date )
+        let viewModel = ApparenceSettingViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
+        
+        let color = viewModel.colorOfBackground
+
+        XCTAssertEqual(color, .colorForGradientStart)
+    }
+
+    func testUserIsGirl_WhenGetColorOfBackground_colorIsPink() {
+        let date = Date().toStringWithDayMonthYear()
+        let baby = Person(name: "Bébé", gender: .girl, parentName: "Pierrick", birthDay: date )
+        let viewModel = ApparenceSettingViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
+        
+        let color = viewModel.colorOfBackground
+
+        XCTAssertEqual(color, .colorForGradientStartPink)
+    }
 }

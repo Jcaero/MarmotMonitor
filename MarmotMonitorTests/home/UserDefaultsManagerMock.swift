@@ -92,6 +92,7 @@ final class UserDefaultsManagerMock: UserDefaultManagerProtocol {
     }
     
     func saveGraphType(_ graphType: MarmotMonitor.GraphType) {
+        self.graphType = graphType
     }
     
     func getGraphType() -> String? {

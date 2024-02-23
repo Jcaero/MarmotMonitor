@@ -15,6 +15,7 @@
 		4711F7742B1E70AB00869A27 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4711F7732B1E70AB00869A27 /* Person.swift */; };
 		471201392B88AE0000E63E8D /* MonitorAuditAccessibily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471201382B88AE0000E63E8D /* MonitorAuditAccessibily.swift */; };
 		4712013B2B88AF6C00E63E8D /* TodayAuditAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712013A2B88AF6C00E63E8D /* TodayAuditAccessibility.swift */; };
+		4712013D2B88E07B00E63E8D /* GraphTypeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712013C2B88E07B00E63E8D /* GraphTypeViewModelTest.swift */; };
 		4712D43B2B0A9B5C0085035C /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D43A2B0A9B5C0085035C /* UILabel+.swift */; };
 		4712D43D2B0A9BC50085035C /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712D43C2B0A9BC50085035C /* UIView+.swift */; };
 		471480AF2B513AF20084589B /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471480AE2B513AF20084589B /* ActivityType.swift */; };
@@ -164,6 +165,7 @@
 		4711F7732B1E70AB00869A27 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		471201382B88AE0000E63E8D /* MonitorAuditAccessibily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorAuditAccessibily.swift; sourceTree = "<group>"; };
 		4712013A2B88AF6C00E63E8D /* TodayAuditAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAuditAccessibility.swift; sourceTree = "<group>"; };
+		4712013C2B88E07B00E63E8D /* GraphTypeViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTypeViewModelTest.swift; sourceTree = "<group>"; };
 		4712D43A2B0A9B5C0085035C /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		4712D43C2B0A9BC50085035C /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		471480AE2B513AF20084589B /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityType.swift; sourceTree = "<group>"; };
@@ -788,6 +790,7 @@
 			children = (
 				47CE16D02B62987400A51B78 /* MonitorViewModelTest.swift */,
 				47F675882B87DB7A00D65D3B /* DetailGraphViewModelTest.swift */,
+				4712013C2B88E07B00E63E8D /* GraphTypeViewModelTest.swift */,
 			);
 			path = Monitor;
 			sourceTree = "<group>";
@@ -1094,6 +1097,7 @@
 				4748658A2B49F1AF00CB5E29 /* UserDefaultsManagerMock.swift in Sources */,
 				47F675892B87DB7A00D65D3B /* DetailGraphViewModelTest.swift in Sources */,
 				4792E9552B814D5100993195 /* informationViewModelTest.swift in Sources */,
+				4712013D2B88E07B00E63E8D /* GraphTypeViewModelTest.swift in Sources */,
 				4779579D2B547ADD0021178D /* BenchMarkTest.swift in Sources */,
 				472848262B5824AB00AA6B35 /* SleepViewModelTest.swift in Sources */,
 				47CE16D12B62987400A51B78 /* MonitorViewModelTest.swift in Sources */,

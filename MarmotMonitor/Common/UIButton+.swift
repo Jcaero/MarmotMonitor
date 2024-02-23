@@ -65,6 +65,38 @@ extension UIButton {
         self.setTitleColor(.white, for: .normal)
         self.titleLabel?.textColor = UIColor.buttonValidate
     }
+
+    func createBreastManuallyButton() {
+        var configuration = UIButton.Configuration.bordered()
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        configuration.title = "Saisir Manuellement"
+        configuration.titleAlignment = .center
+        configuration.baseForegroundColor = .label
+        configuration.baseBackgroundColor = .duckBlue.withAlphaComponent(0.6)
+        //        configuration.background.strokeColor = .manualyBreastButton
+        configuration.background.strokeWidth = 1
+        configuration.background.cornerRadius = 10
+        configuration.cornerStyle = .large
+        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
+            var titleAttributes = titleAttributes
+            let fontMetrics = UIFontMetrics(forTextStyle: .body)
+            titleAttributes.font = fontMetrics.scaledFont(for: UIFont(name: "Symbol", size: 13)!)
+            return titleAttributes
+        }
+        self.configuration = configuration
+        self.titleLabel?.adjustsFontForContentSizeCategory = true
+    }
+
+    func createTimerPlayBreastButton() {
+        var configuration = UIButton.Configuration.filled()
+        configuration.image = UIImage(systemName: "play.fill")!
+            .applyingSymbolConfiguration(.init(pointSize: 30))
+        configuration.cornerStyle = .capsule
+        configuration.baseBackgroundColor = .duckBlue.withAlphaComponent(0.6)
+        configuration.baseForegroundColor = .label
+        configuration.contentInsets = .zero
+        self.configuration = configuration
+    }
 }
 
 enum ButtonTypeAction {

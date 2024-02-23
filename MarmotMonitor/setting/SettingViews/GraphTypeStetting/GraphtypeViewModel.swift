@@ -17,7 +17,7 @@ final class GraphtypeViewModel {
         initGraphtype()
     }
 
-    private func initGraphtype() {
+    func initGraphtype() {
         guard let graphType = getGraphType() else { return }
         switch graphType {
         case .round:

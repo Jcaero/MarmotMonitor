@@ -21,7 +21,7 @@ class SolideFeedingController: ActivityController {
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .label
         label.textAlignment = .center
-        label.backgroundColor = .duckBlue
+        label.backgroundColor = .duckBlue.withAlphaComponent(0.6)
         label.layer.cornerRadius = 15
         label.clipsToBounds = true
         label.setAccessibility(with: .staticText, label: "total des solides", hint: "")
@@ -139,9 +139,7 @@ extension SolideFeedingController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         let ingredient = viewModel.ingredients[indexPath.row]
-        print("ingredient : \(ingredient)")
         let poids = viewModel.solidFood[ingredient] ?? 0
-        print("poids : \(poids)")
         cell.setupCell(with: ingredient, value: poids)
         cell.layoutMargins = UIEdgeInsets(top: 10, left: 8, bottom: 8, right: 8)
         cell.selectionStyle = .none

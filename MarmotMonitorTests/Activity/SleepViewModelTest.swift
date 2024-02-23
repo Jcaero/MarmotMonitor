@@ -140,7 +140,7 @@ class SleepViewModelTest: TestCase {
     }
 
     // MARK: - Alert
-    func testDiaperIsSave_WhenSaveDiaper_ShowAlerte() {
+    func testSleepIsSave_WhenSaveSleep_ShowAlerte() {
         viewModel.setSelectedLabel(with: 0)
         viewModel.setDate(with: sleeptestCaseStarted)
         viewModel.setSelectedLabel(with: 1)
@@ -153,6 +153,21 @@ class SleepViewModelTest: TestCase {
 
         viewModel.saveSleep()
         XCTAssertEqual(alerteMessage, ActivityType.sleep(duration:  1).alertMessage)
+    }
+
+    func testNoData_WhenSave_ShowAlerte() {
+
+        viewModel.saveSleep()
+        XCTAssertEqual(alerteMessage!, "Aucune date rentrée")
+    }
+
+    func testOneNoData_WhenSave_ShowAlerte() {
+        viewModel.setSelectedLabel(with: 0)
+        viewModel.setDate(with: sleeptestCaseStarted)
+        
+        viewModel.saveSleep()
+ 
+        XCTAssertEqual(alerteMessage!, "Aucune durée rentrée")
     }
 }
 

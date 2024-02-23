@@ -14,7 +14,7 @@ class BottleFeedingController: ActivityController, BottleFeedingDelegate {
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .label
         label.textAlignment = .center
-        label.backgroundColor = .duckBlue
+        label.backgroundColor = .duckBlue.withAlphaComponent(0.6)
         label.layer.cornerRadius = 15
         label.clipsToBounds = true
         label.setAccessibility(with: .staticText, label: "volume du lait", hint: "")

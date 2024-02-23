@@ -45,4 +45,6 @@ class TestCase: XCTestCase {
     let mockGrowthData = GrowthData(weight: 10, height: 5.5, headCircumference: 20)
     let mockGrowthData2 = GrowthData(weight: 20, height: 11, headCircumference: 40)
     
+    //MARK: - Mock Personn
+    let mockNilPerson = Person(name: nil, gender: .girl, parentName: nil, birthDay: nil)
 }

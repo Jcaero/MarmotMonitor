@@ -80,11 +80,6 @@ final class SleepViewModel {
         delegate?.updateDuration(with: "\(duration.toStringWithHourAndMinute())")
     }
 
-    private func isDateValid() -> Bool {
-        guard let startDate = sleepDate.first!, let endDate = sleepDate.last! else {return false}
-        return startDate <= endDate
-    }
-
     // MARK: - Core Data
     func saveSleep() {
         guard let date = sleepDate.first!

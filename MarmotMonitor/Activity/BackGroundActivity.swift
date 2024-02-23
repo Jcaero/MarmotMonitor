@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BackGroundActivity: UIViewController {
+class BackGroundActivity: BackgroundViewController {
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isScrollEnabled = true

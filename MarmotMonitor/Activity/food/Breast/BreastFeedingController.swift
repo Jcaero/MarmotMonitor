@@ -15,36 +15,21 @@ class BreastFeedingController: ActivityController {
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
         label.textColor = .label
         label.textAlignment = .center
-        label.backgroundColor = .duckBlue
-        label.layer.cornerRadius = 15
-        label.clipsToBounds = true
         label.setAccessibility(with: .staticText, label: "temps total en minute", hint: "")
         return label
     }()
 
     let leftButton: UIButton =  {
-        var configuration = UIButton.Configuration.filled()
-        configuration.image = UIImage(systemName: "play.fill")!
-            .applyingSymbolConfiguration(.init(pointSize: 30))
-        configuration.cornerStyle = .capsule
-        configuration.baseBackgroundColor = .duckBlue
-        configuration.baseForegroundColor = .label
-        configuration.contentInsets = .zero
-        let button = UIButton(configuration: configuration)
+        let button = UIButton()
+        button.createTimerPlayBreastButton()
         button.setAccessibility(with: .button, label: "bouton gauche", hint: "lancer le chrono gauche")
         button.tag = 0
         return button
     }()
 
     let rightButton: UIButton =  {
-        var configuration = UIButton.Configuration.filled()
-        configuration.image = UIImage(systemName: "play.fill")!
-            .applyingSymbolConfiguration(.init(pointSize: 30))
-        configuration.cornerStyle = .capsule
-        configuration.baseBackgroundColor = .duckBlue
-        configuration.baseForegroundColor = .label
-        configuration.contentInsets = .zero
-        let button = UIButton(configuration: configuration)
+        let button = UIButton()
+        button.createTimerPlayBreastButton()
         button.setAccessibility(with: .button, label: "bouton droit", hint: "lancer le chrono droit")
         button.tag = 1
         return button
@@ -89,45 +74,13 @@ class BreastFeedingController: ActivityController {
 
     let rightManuallyInput: UIButton =  {
         let button = UIButton()
-        var configuration = UIButton.Configuration.bordered()
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        configuration.title = "Saisir Manuellement"
-        configuration.baseForegroundColor = .duckBlue
-        configuration.baseBackgroundColor = .clear
-        configuration.background.strokeColor = .duckBlue
-        configuration.background.strokeWidth = 1
-        configuration.background.cornerRadius = 10
-        configuration.cornerStyle = .large
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
-            var titleAttributes = titleAttributes
-            let fontMetrics = UIFontMetrics(forTextStyle: .body)
-            titleAttributes.font = fontMetrics.scaledFont(for: UIFont(name: "Symbol", size: 11)!)
-            return titleAttributes
-        }
-        button.configuration = configuration
-        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.createBreastManuallyButton()
         return button
     }()
 
     let leftManuallyInput: UIButton =  {
         let button = UIButton()
-        var configuration = UIButton.Configuration.bordered()
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        configuration.title = "Saisir Manuellement"
-        configuration.baseForegroundColor = .duckBlue
-        configuration.baseBackgroundColor = .clear
-        configuration.background.strokeColor = .duckBlue
-        configuration.background.strokeWidth = 1
-        configuration.background.cornerRadius = 10
-        configuration.cornerStyle = .large
-        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { titleAttributes in
-            var titleAttributes = titleAttributes
-            let fontMetrics = UIFontMetrics(forTextStyle: .body)
-            titleAttributes.font = fontMetrics.scaledFont(for: UIFont(name: "Symbol", size: 11)!)
-            return titleAttributes
-        }
-        button.configuration = configuration
-        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.createBreastManuallyButton()
         return button
     }()
 
