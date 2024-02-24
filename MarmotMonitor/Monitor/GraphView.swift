@@ -21,6 +21,8 @@ import UIKit
 ///  - elements: array of ShowActivity
 ///  - style: type of graph
 
+typealias GraphData = (elements: [GraphActivity], style: GraphType)
+
 class GraphView: UIView {
     private let stackViewForDay: UIStackView = {
         let view = UIStackView()
@@ -63,7 +65,6 @@ class GraphView: UIView {
     }
 
     // MARK: - Configure
-    typealias GraphData = (elements: [GraphActivity], style: GraphType)
     func setUpGraph(with data: GraphData) {
         guard !data.elements.isEmpty else { return }
         if data.style == .rod {
@@ -252,15 +253,7 @@ class GraphView: UIView {
 
     private func colorGraph(type: ShowActivityType, with color: UIColor, startedIndex: Int, endIndex: Int) {
         guard startedIndex < numberOfHalfHour, endIndex <= numberOfHalfHour else {return}
-        var index = 0
-        switch type {
-        case .bottle, .breast, .solid:
-            index = 0
-        case .sleep:
-            index = 1
-        case .diaper:
-            index = 2
-        }
+        let index = getIndexLigneOfType(type)
 
         guard stackViewForDay.arrangedSubviews.count - 1 >= index else {return}
             if let stack = stackViewForDay.arrangedSubviews[index] as? UIStackView {
@@ -284,6 +277,17 @@ class GraphView: UIView {
                     }
                 }
             }
+    }
+
+    private func getIndexLigneOfType( _ type: ShowActivityType) -> Int {
+        switch type {
+        case .bottle, .breast, .solid:
+            return 0
+        case .sleep:
+            return 1
+        case .diaper:
+            return 2
+        }
     }
 
     private func setTimeBaseLigne() {

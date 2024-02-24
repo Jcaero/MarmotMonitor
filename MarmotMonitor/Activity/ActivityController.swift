@@ -34,6 +34,7 @@ class ActivityController: BackGroundActivity {
     }()
 
     // MARK: - PROPERTIES
+    let userDefaults = UserDefaultsManager()
 
     // MARK: - Cycle life
     override func viewDidLoad() {
@@ -41,6 +42,8 @@ class ActivityController: BackGroundActivity {
 
         setupViews()
         setupContraints()
+
+        setupTimePicker()
     }
 
     // MARK: - Setup function
@@ -83,6 +86,12 @@ class ActivityController: BackGroundActivity {
         let alertVC = UIAlertController(title: title, message: description, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
+    }
+
+    func setupTimePicker() {
+        guard let birthDay = userDefaults.getBirthDay() else { return }
+
+        timePicker.minimumDate = birthDay.toDate()
     }
 
 }

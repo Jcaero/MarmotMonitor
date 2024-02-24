@@ -6,7 +6,7 @@
 //
 
 import UIKit
-typealias LegendGraphData = (information: String, imageName: String, color: UIColor)
+typealias LegendGraphData = (information: String, imageName: String)
 
 class LegendGraphView: UIView {
     let information: UILabel = {

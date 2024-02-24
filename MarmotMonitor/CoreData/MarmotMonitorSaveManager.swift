@@ -266,7 +266,7 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
         coreDataManager.clearDatabase()
     }
 
-    func deleteActivity(ofType activityType: ShowActivityType, date: Date, onSuccess: (() -> Void), onError: ((String) -> Void)) {
+    func deleteActivity(ofType showActivityType: ShowActivityType, date: Date, onSuccess: (() -> Void), onError: ((String) -> Void)) {
         context.performAndWait {
             guard let dateActivity = self.fetchDateActivity(for: date) else {
                 onError("Aucune activité trouvée pour cette date.")
@@ -274,37 +274,32 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
             }
 
             let activities = dateActivity.activityArray
+            let activityClass = convertToActivityType(showActivityType)
+            if let activityToDelete = activities.first(where: { type(of: $0) == activityClass }) {
+                context.delete(activityToDelete)
 
-            switch activityType {
-            case .diaper:
-                if let activityToDelete = activities.first(where: { $0 is Diaper }) {
-                    context.delete(activityToDelete)
+                do {
+                    try self.coreDataManager.save()
+                    onSuccess()
+                } catch {
+                    onError("Impossible de supprimer l'activité.")
                 }
-            case .bottle:
-                if let activityToDelete = activities.first(where: { $0 is Bottle }) {
-                    context.delete(activityToDelete)
-                }
-            case .breast:
-                if let activityToDelete = activities.first(where: { $0 is Breast }) {
-                    context.delete(activityToDelete)
-                }
-            case .sleep:
-                if let activityToDelete = activities.first(where: { $0 is Sleep }) {
-                    context.delete(activityToDelete)
-                }
-            case .solid:
-                if let activityToDelete = activities.first(where: { $0 is Solid }) {
-                    context.delete(activityToDelete)
-                }
-            }
-
-            do {
-                try self.coreDataManager.save()
-                onSuccess()
-            } catch {
-                onError("Impossible de supprimer l'activité.")
             }
         }
     }
 
+    private func convertToActivityType(_ type: ShowActivityType) -> Activity.Type {
+        switch type {
+        case .diaper:
+            return Diaper.self
+        case .bottle:
+            return Bottle.self
+        case .breast:
+            return Breast.self
+        case .sleep:
+            return Sleep.self
+        case .solid:
+            return Solid.self
+        }
+    }
 }

@@ -34,8 +34,6 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
         xAxis.valueFormatter = CustomAxisValueFormatter()
         xAxis.labelRotationAngle = -45
         xAxis.centerAxisLabelsEnabled = true
-        #warning("date anterieur a la date de naissance")
-//        chartView.animate(xAxisDuration: 1.5)
         chartView.setAccessibility(with: .image, label: "graphique de l'evolution", hint: "")
         return chartView
     }()

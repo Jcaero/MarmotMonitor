@@ -28,9 +28,6 @@ class MonitorViewController: BackgroundViewController, UpdateInformationControll
         return view
     }()
 
-    typealias DataCell = (date: Date, elementsToLegend: [String:String])
-    typealias GraphData = (elements: [GraphActivity], style: GraphType)
-
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
