@@ -53,7 +53,6 @@ final class BabyNameController: ViewForInformationController {
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        fatalError()
         setupViews()
         setupContraints()
 
