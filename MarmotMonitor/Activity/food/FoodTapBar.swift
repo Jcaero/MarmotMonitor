@@ -11,14 +11,14 @@ import UIKit
 /// This class is used to manage the food tap bar
 /// The user can swith between the different food type
 class FoodTapBar: UITabBarController {
-    // MARK: - Circle life
+    //MARK: - Circle life
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVCs()
         setupTabBar()
     }
 
-    // MARK: - Setup function
+    //MARK: - Setup function
     private func setupVCs() {
         let breastController = UINavigationController(rootViewController: BreastFeedingController())
         let bottleController = UINavigationController(rootViewController: BottleFeedingController())
