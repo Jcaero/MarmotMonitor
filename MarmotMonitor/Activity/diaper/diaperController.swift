@@ -6,8 +6,10 @@
 //
 
 import UIKit
-
-class DiaperController: ActivityController {
+/// DiaperCntroller
+/// This class is used to set diaper
+/// The user can put the date and the status of the diaper
+final class DiaperController: ActivityController {
     let tableOfDiaper: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .singleLine

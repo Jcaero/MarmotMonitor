@@ -6,6 +6,12 @@
 //
 
 import UIKit
+/// BabyNameController
+/// This class is used to ask the user the name of the baby
+/// It is the second step of the application
+/// The user can go to the next step only if he has entered a name
+/// The name is saved in the UserDefaultsManager
+/// The user can go back to the previous step
 
 final class BabyNameController: ViewForInformationController {
     // MARK: - Properties
@@ -161,10 +167,7 @@ extension BabyNameController {
         userDefaultsManager.saveBabyName(babyName.text)
         navigationController?.pushViewController(GenderController(), animated: true)
     }
-}
-
 // MARK: - Accessibility
-extension BabyNameController {
     /// Update the display when the user change the size of the text in the settings
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

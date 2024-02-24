@@ -6,8 +6,11 @@
 //
 
 import UIKit
-
-class DetailGraphViewController: BackgroundViewController, UITableViewDelegate, UITableViewDataSource {
+/// DetailGraphViewController
+/// This class is used to display a detail graph view
+/// It display data of the day
+/// It also allow the user to delete information
+final class DetailGraphViewController: BackgroundViewController, UITableViewDelegate, UITableViewDataSource {
 
     let settingTitle: UILabel = {
         let label = UILabel()
@@ -93,6 +96,7 @@ class DetailGraphViewController: BackgroundViewController, UITableViewDelegate, 
         tableView.dataSource = self
     }
 
+    // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRow
     }

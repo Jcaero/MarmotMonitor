@@ -29,6 +29,7 @@ final class GraphtypeViewModel {
         }
     }
 
+    // MARK: - function
     private func getGraphType() -> GraphType? {
         return userDefaultsManager.getGraphType()
     }

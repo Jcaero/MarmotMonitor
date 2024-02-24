@@ -13,7 +13,7 @@ struct ActivityData {
     let cellSubTitle: String
 }
 
-class TodayViewModel {
+final class TodayViewModel {
     private let userDefaultsManager: UserDefaultManagerProtocol!
     private let marmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol!
 

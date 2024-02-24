@@ -5,8 +5,10 @@
 //  Created by pierrick viret on 18/12/2023.
 //
 import UIKit
-
-class SolideFeedingController: ActivityController {
+/// SolideFeedingController
+/// This class is used to set the solid food
+/// The user can put the weight of the food
+final class SolideFeedingController: ActivityController {
     let tableOfIngredients: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .singleLine
@@ -77,10 +79,8 @@ class SolideFeedingController: ActivityController {
             tableOfIngredients.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 15),
             tableOfIngredients.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
             tableOfIngredients.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
-            tableViewHeightConstraint!
-        ])
+            tableViewHeightConstraint!,
 
-        NSLayoutConstraint.activate([
             totalWeight.topAnchor.constraint(equalTo: tableOfIngredients.bottomAnchor, constant: 10),
             totalWeight.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
             totalWeight.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.75),

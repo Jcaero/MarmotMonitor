@@ -11,8 +11,10 @@
 //  Created by pierrick viret on 18/12/2023.
 //
 import UIKit
-
-class GrowthController: ActivityController, GrowthDelegate {
+/// GrowthController
+/// This class is used to insert growth element
+/// The user can put the weight and the size of the baby
+final class GrowthController: ActivityController, GrowthDelegate {
     let tableOfGrowth: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .singleLine

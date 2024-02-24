@@ -1,12 +1,18 @@
 //
-//  diaperCell.swift
+//  DiaperCell.swift
 //  MarmotMonitor
 //
 //  Created by pierrick viret on 25/12/2023.
 //
 
 import UIKit
-
+/// DiaperCell
+/// This class is used to create diaper Cell
+/// The user can select status
+/// cell have 2 elements:
+/// - title:  diaper status
+/// - statusImage: fill with a square when selected
+/// init with func setupCell(with title: String, selected: Bool)
 class DiaperCell: UITableViewCell {
 
     // MARK: - liste of UI elements
@@ -44,7 +50,7 @@ class DiaperCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    // MARK: - UI
+    // MARK: - setup
     private func setupUI() {
         [title, statusImage].forEach {
             contentView.addSubview($0)
@@ -57,10 +63,8 @@ class DiaperCell: UITableViewCell {
             statusImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             statusImage.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
             statusImage.heightAnchor.constraint(equalTo: statusImage.widthAnchor),
-            statusImage.heightAnchor.constraint(greaterThanOrEqualToConstant: 25)
-        ])
+            statusImage.heightAnchor.constraint(greaterThanOrEqualToConstant: 25),
 
-        NSLayoutConstraint.activate([
             title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             title.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
             title.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),

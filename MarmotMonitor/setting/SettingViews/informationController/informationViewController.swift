@@ -10,7 +10,9 @@ import UIKit
 protocol InformationViewControllerDelegate: AnyObject {
     func updateInformation()
 }
-
+/// InformationViewController
+/// This class is used to display the information of the baby
+/// It is used to display the name, the birthDay and the name of the parent
 final class InformationViewController: BackgroundViewController {
 
     private let scrollView: UIScrollView = {

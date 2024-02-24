@@ -43,6 +43,7 @@ final class SleepViewModel {
         return Int(durationInSeconds)
     }
 
+    // MARK: - init
     init(delegate: SleepDelegate?, coreDataManager: MarmotMonitorSaveManager = MarmotMonitorSaveManager()) {
         self.delegate = delegate
         self.coreDataManager = coreDataManager

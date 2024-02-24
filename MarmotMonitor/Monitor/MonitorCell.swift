@@ -9,6 +9,10 @@ import UIKit
 
 typealias DataCell = (date: Date, elementsToLegend: [String:String])
 
+/// MonitorCell is the cell for the monitor view
+/// It display the data of the monitor in graph
+/// It display date, graph and summary of the day
+/// configure with func setUp(with data: DataCell, graphData: GraphData)
 class MonitorCell: UITableViewCell {
     let date: UILabel = {
         let label = UILabel()
@@ -83,6 +87,7 @@ class MonitorCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - setup
     private func setupUI() {
         area.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(area)

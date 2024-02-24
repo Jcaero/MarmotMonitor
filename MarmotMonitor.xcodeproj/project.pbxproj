@@ -100,7 +100,6 @@
 		47C8F36E2B74280500E94668 /* GraphtypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8F36D2B74280500E94668 /* GraphtypeViewModel.swift */; };
 		47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8C2B128A5A00C5919A /* UserDefault+.swift */; };
 		47CABD8F2B128D6A00C5919A /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8E2B128D6A00C5919A /* UIApplication.swift */; };
-		47CABD912B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */; };
 		47CE16D12B62987400A51B78 /* MonitorViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE16D02B62987400A51B78 /* MonitorViewModelTest.swift */; };
 		47CFD7C02B0CCB3D00CFE4BE /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */; };
 		47D2BBD12B7FF32700095348 /* settingAuditAccessibilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D2BBD02B7FF32700095348 /* settingAuditAccessibilityTests.swift */; };
@@ -253,7 +252,6 @@
 		47C8F36D2B74280500E94668 /* GraphtypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphtypeViewModel.swift; sourceTree = "<group>"; };
 		47CABD8C2B128A5A00C5919A /* UserDefault+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+.swift"; sourceTree = "<group>"; };
 		47CABD8E2B128D6A00C5919A /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
-		47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorAuditAccessibility.swift; sourceTree = "<group>"; };
 		47CE16D02B62987400A51B78 /* MonitorViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorViewModelTest.swift; sourceTree = "<group>"; };
 		47CFD7BF2B0CCB3D00CFE4BE /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		47D2BBD02B7FF32700095348 /* settingAuditAccessibilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingAuditAccessibilityTests.swift; sourceTree = "<group>"; };
@@ -575,7 +573,6 @@
 				471201382B88AE0000E63E8D /* MonitorAuditAccessibily.swift */,
 				4712013A2B88AF6C00E63E8D /* TodayAuditAccessibility.swift */,
 				47C4F42E2B7E272400DDD807 /* Settings */,
-				47CABD902B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift */,
 				475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */,
 				475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */,
 				47CABD8E2B128D6A00C5919A /* UIApplication.swift */,
@@ -1121,7 +1118,6 @@
 				475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */,
 				471201392B88AE0000E63E8D /* MonitorAuditAccessibily.swift in Sources */,
 				475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */,
-				47CABD912B128DBE00C5919A /* MarmotMonitorAuditAccessibility.swift in Sources */,
 				4712013B2B88AF6C00E63E8D /* TodayAuditAccessibility.swift in Sources */,
 				47D2BBD12B7FF32700095348 /* settingAuditAccessibilityTests.swift in Sources */,
 			);

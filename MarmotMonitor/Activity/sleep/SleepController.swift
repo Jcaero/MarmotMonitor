@@ -6,9 +6,11 @@
 //
 
 import UIKit
-
+/// SleepController
+/// This class is used to set the sleep Time
+/// The user can put the start and the end of the sleep
 class SleepController: BackGroundActivity, SleepDelegate {
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.setupDynamicTextWith(policeName: "Symbol", size: 30, style: .body)
         label.text = "Sommeil"
@@ -19,7 +21,7 @@ class SleepController: BackGroundActivity, SleepDelegate {
         return label
     }()
 
-    let tableOfSleepData: UITableView = {
+    private let tableOfSleepData: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = .duckBlue
@@ -27,7 +29,7 @@ class SleepController: BackGroundActivity, SleepDelegate {
         return tableView
     }()
 
-    let durationLabel: UILabel = {
+    private let durationLabel: UILabel = {
         let label = UILabel()
         label.setupDynamicTextWith(policeName: "Symbol", size: 25, style: .body)
         label.text = ""
@@ -38,7 +40,7 @@ class SleepController: BackGroundActivity, SleepDelegate {
         return label
     }()
 
-    let stopTimePicker: UIDatePicker = {
+    private let stopTimePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .dateAndTime
@@ -49,7 +51,7 @@ class SleepController: BackGroundActivity, SleepDelegate {
         return datePicker
     }()
 
-    let doneButton: UIButton = {
+    private let doneButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Done", for: .normal)
         button.setTitleColor(.label, for: .normal)
@@ -57,9 +59,9 @@ class SleepController: BackGroundActivity, SleepDelegate {
     }()
 
     // MARK: - PROPERTIES
-    var viewModel : SleepViewModel!
+    private var viewModel : SleepViewModel!
 
-    var tableViewHeightConstraint: NSLayoutConstraint?
+    private var tableViewHeightConstraint: NSLayoutConstraint?
 
     // MARK: - Cycle life
     override func viewDidLoad() {
@@ -92,21 +94,18 @@ class SleepController: BackGroundActivity, SleepDelegate {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
+        tableViewHeightConstraint = tableOfSleepData.heightAnchor.constraint(greaterThanOrEqualToConstant: 300)
+
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: scrollArea.topAnchor, constant: 50),
             titleLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
-            titleLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10)
-        ])
+            titleLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
 
-        tableViewHeightConstraint = tableOfSleepData.heightAnchor.constraint(greaterThanOrEqualToConstant: 300)
-        NSLayoutConstraint.activate([
             tableOfSleepData.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
             tableOfSleepData.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
             tableOfSleepData.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
-            tableViewHeightConstraint!
-        ])
+            tableViewHeightConstraint!,
 
-        NSLayoutConstraint.activate([
             durationLabel.topAnchor.constraint(equalTo: tableOfSleepData.bottomAnchor, constant: 30),
             durationLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
             durationLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 10),
@@ -144,9 +143,8 @@ class SleepController: BackGroundActivity, SleepDelegate {
     func updateDuration(with duration: String) {
         durationLabel.text = duration
     }
-}
 
-extension SleepController {
+    // MARK: - setup Gesture
     private func setupTapGesture(with label: UILabel) {
         label.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showDatePicker))

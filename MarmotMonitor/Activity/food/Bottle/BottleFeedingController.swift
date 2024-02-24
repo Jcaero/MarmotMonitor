@@ -6,9 +6,11 @@
 //
 
 import UIKit
-
-class BottleFeedingController: ActivityController, BottleFeedingDelegate {
-    let volumeOfMilkLabel: UILabel = {
+/// BottleFeedingController
+/// This class is used to set the bottle food
+/// The user can put the volume of the milk
+final class BottleFeedingController: ActivityController, BottleFeedingDelegate {
+    private let volumeOfMilkLabel: UILabel = {
         let label = UILabel()
         label.text = "Volume: 0"
         label.setupDynamicTextWith(policeName: "Symbol", size: 20, style: .body)
@@ -21,7 +23,7 @@ class BottleFeedingController: ActivityController, BottleFeedingDelegate {
         return label
     }()
 
-    lazy var volumeSlider: UISlider = {
+    private lazy var volumeSlider: UISlider = {
         let slider = UISlider()
         slider.maximumValue = 400
         slider.minimumValue = 0
@@ -35,7 +37,7 @@ class BottleFeedingController: ActivityController, BottleFeedingDelegate {
     }()
 
     // MARK: - PROPERTIES
-    var viewModel : BottleFeedingViewModel!
+    private var viewModel : BottleFeedingViewModel!
 
     // MARK: - Cycle life
     override func viewDidLoad() {
@@ -67,10 +69,8 @@ class BottleFeedingController: ActivityController, BottleFeedingDelegate {
             volumeOfMilkLabel.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 30),
             volumeOfMilkLabel.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
             volumeOfMilkLabel.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.75),
-            volumeOfMilkLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
-        ])
+            volumeOfMilkLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
 
-        NSLayoutConstraint.activate([
             volumeSlider.topAnchor.constraint(equalTo: volumeOfMilkLabel.bottomAnchor, constant: 30),
             volumeSlider.leftAnchor.constraint(equalTo: volumeOfMilkLabel.leftAnchor),
             volumeSlider.rightAnchor.constraint(equalTo: volumeOfMilkLabel.rightAnchor),
@@ -102,10 +102,8 @@ class BottleFeedingController: ActivityController, BottleFeedingDelegate {
         volumeOfMilkLabel.text = "Volume: \(value) ml"
         volumeOfMilkLabel.setAccessibility(with: .adjustable, label: "Volume du lait: \(value) ml", hint: "")
     }
-}
 
 // MARK: - accessibility
-extension BottleFeedingController {
     /// Update the display when the user change the size of the text in the settings
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

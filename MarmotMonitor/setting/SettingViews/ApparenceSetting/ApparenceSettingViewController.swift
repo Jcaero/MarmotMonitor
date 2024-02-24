@@ -6,7 +6,12 @@
 //
 
 import UIKit
-
+/// ApparenceSettingViewController
+/// This class is the view controller for the apparence setting
+/// It allows the user to change the apparence of the app:
+/// - Dark mode
+/// - Light mode
+/// - Automatic mode ( use the system mode)
 final class ApparenceSettingViewController: UIViewController {
 
     private let scrollView: UIScrollView = {

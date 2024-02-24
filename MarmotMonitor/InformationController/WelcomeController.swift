@@ -6,6 +6,9 @@
 //
 
 import UIKit
+/// WelcomeController
+/// This class is the first controller of the application
+/// It is used to welcome the user and to explain the purpose of the application
 
 final class WelcomeController: ViewForInformationController {
     // MARK: - Properties
@@ -40,7 +43,6 @@ final class WelcomeController: ViewForInformationController {
     }
 
     // MARK: - function
-
     private func setupViews() {
         [welcomeTitle, subTitle].forEach {
             stackView.addArrangedSubview($0)

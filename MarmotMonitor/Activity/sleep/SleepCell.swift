@@ -6,10 +6,15 @@
 //
 
 import UIKit
-
-class SleepCell: UITableViewCell {
-
-    // MARK: - liste of UI elements
+/// SleepCell
+/// This class is used to create sleep border
+/// The user can set time
+/// cell have 3 elements:
+/// - title:  hour of stard / finish sleep
+/// - dateLabel: date selted in the picker
+/// - statusButton
+/// init with func setupCell(with title: String, date: String)
+final class SleepCell: UITableViewCell {
     let title: UILabel = {
         let label = UILabel()
         label.setupDynamicTextWith(policeName: "Symbol", size: 15, style: .body)
@@ -74,18 +79,14 @@ class SleepCell: UITableViewCell {
         NSLayoutConstraint.activate([
             title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             title.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.8),
-            title.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10)
-        ])
+            title.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
 
-        NSLayoutConstraint.activate([
             statusButton.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
             statusButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
             statusButton.heightAnchor.constraint(equalTo: statusButton.widthAnchor),
             statusButton.heightAnchor.constraint(lessThanOrEqualTo: contentView.heightAnchor, multiplier: 0.5),
-            statusButton.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.25)
-        ])
+            statusButton.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, multiplier: 0.25),
 
-        NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10),
             dateLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.75),
             dateLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),

@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+/// ActivityController
+/// This class is used to put date in activity controller
 class ActivityController: BackGroundActivity {
     let separator: UIView = {
         let view = UIView()
@@ -61,16 +62,12 @@ class ActivityController: BackGroundActivity {
         NSLayoutConstraint.activate([
             timeLabel.topAnchor.constraint(equalTo: scrollArea.topAnchor),
             timeLabel.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -20),
-            timeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 20)
-        ])
+            timeLabel.leftAnchor.constraint(equalTo: scrollArea.leftAnchor, constant: 20),
 
-        NSLayoutConstraint.activate([
             timePicker.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 15),
             timePicker.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
-            timePicker.leftAnchor.constraint(greaterThanOrEqualTo: scrollArea.leftAnchor, constant: 20)
-        ])
+            timePicker.leftAnchor.constraint(greaterThanOrEqualTo: scrollArea.leftAnchor, constant: 20),
 
-        NSLayoutConstraint.activate([
             separator.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 15),
             separator.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
             separator.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.8),

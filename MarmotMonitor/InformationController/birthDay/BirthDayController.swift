@@ -6,8 +6,12 @@
 //
 
 import UIKit
-
-class BirthDayController: ViewForInformationController, BirthDayDelegate {
+/// BirthDayController
+/// This class is used to ask the user the birthDay of the baby
+/// The user can go to the next step without entered a name
+/// The date is saved in the UserDefaultsManager
+/// The user can go back to the previous step
+final class BirthDayController: ViewForInformationController, BirthDayDelegate {
     let dateTitre: UILabel = {
         let label = UILabel()
         label.text = "Quel est la date de naissance de la marmotte ?"
@@ -106,9 +110,7 @@ class BirthDayController: ViewForInformationController, BirthDayDelegate {
         nextButton.setTitle("Suivant", for: .normal)
         nextButton.setAccessibility(with: .button, label: "Suivant", hint: "Appuyer pour passer à la suite")
     }
-}
 
-extension BirthDayController {
     // MARK: - Action
     @objc private func nextButtonTapped(sender: UIButton) {
         sender.transform = .identity
@@ -142,9 +144,7 @@ extension BirthDayController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
-}
 
-extension BirthDayController {
     // MARK: - Keyboard
     /// Check if the keyboard is displayed above textefield  and move the view if necessary
     @objc func keyboardWillShow(notification: NSNotification) {

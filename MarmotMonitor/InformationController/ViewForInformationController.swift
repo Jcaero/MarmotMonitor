@@ -6,6 +6,8 @@
 //
 import UIKit
 
+/// View controller for the first view of the application
+/// This view is used to display the logo , the button and the scroll view for accessibiity
 class ViewForInformationController: BackgroundViewController {
     // MARK: - Properties
 
@@ -106,32 +108,24 @@ class ViewForInformationController: BackgroundViewController {
                 roundedImage.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
                 roundedImageTopConstraint!,
                 roundedImage.heightAnchor.constraint(equalToConstant: (view.frame.width / 3)),
-                roundedImage.widthAnchor.constraint(equalTo: roundedImage.heightAnchor)
-            ])
+                roundedImage.widthAnchor.constraint(equalTo: roundedImage.heightAnchor),
 
-            NSLayoutConstraint.activate([
                 scrollView.topAnchor.constraint(equalTo: roundedImage.bottomAnchor, constant: -20),
                 scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
                 scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-                scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10)
-            ])
+                scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
 
-            NSLayoutConstraint.activate([
                 pastelArea.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
                 pastelArea.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10),
                 pastelArea.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10),
-                pastelArea.widthAnchor.constraint(equalToConstant: (view.frame.width - 40))
-            ])
+                pastelArea.widthAnchor.constraint(equalToConstant: (view.frame.width - 40)),
 
-            NSLayoutConstraint.activate([
                 stackView.topAnchor.constraint(equalTo: pastelArea.topAnchor, constant: 20),
                 stackView.rightAnchor.constraint(equalTo: pastelArea.rightAnchor, constant: -10),
                 stackView.leftAnchor.constraint(equalTo: pastelArea.leftAnchor, constant: 10),
                 stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
-                stackView.bottomAnchor.constraint(equalTo: pastelArea.bottomAnchor, constant: -20)
-            ])
+                stackView.bottomAnchor.constraint(equalTo: pastelArea.bottomAnchor, constant: -20),
 
-            NSLayoutConstraint.activate([
                 nextButton.topAnchor.constraint(equalTo: pastelArea.bottomAnchor, constant: 20),
                 nextButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10),
                 nextButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
@@ -139,10 +133,8 @@ class ViewForInformationController: BackgroundViewController {
                 nextButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20)
             ])
         }
-}
 
-extension ViewForInformationController {
-
+    // MARK: - Trait Collection
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         let currentCategory = traitCollection.preferredContentSizeCategory

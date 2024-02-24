@@ -6,7 +6,11 @@
 //
 
 import UIKit
-
+/// GenderController
+/// This class is used to ask the user for gender of the baby
+/// The user can go to the next step without select gender
+/// The gender is saved in the UserDefaultsManager
+/// The user can go back to the previous step
 final class GenderController: ViewForInformationController {
 
     let genreTitre: UILabel = {
@@ -74,6 +78,7 @@ final class GenderController: ViewForInformationController {
         girlButton.layer.cornerRadius = boyButton.frame.width / 2
     }
 
+    // MARK: - setups
     private func setupView() {
         [blanck1, boyButton, girlButton, blanck2].forEach {
             genderStackView.addArrangedSubview($0)
@@ -135,10 +140,8 @@ final class GenderController: ViewForInformationController {
         view.layer.shadowOffset = .zero
         view.layer.shadowRadius = 0
     }
-}
 
 // MARK: - Accessibility
-extension GenderController {
     /// Update the display when the user change the size of the text in the settings
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -161,9 +164,7 @@ extension GenderController {
         girlButtonHeightConstraint?.constant = CGFloat(constante)
         view.layoutIfNeeded()
     }
-}
 
-extension GenderController {
     // MARK: - Action
     @objc private func nextButtonTapped(sender: UIButton) {
         sender.transform = .identity

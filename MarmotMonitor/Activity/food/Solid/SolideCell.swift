@@ -6,7 +6,14 @@
 //
 
 import UIKit
-
+/// SolideCell
+/// This class is used to create food cell
+/// The user can put the weight of the food
+/// cell have 3 elements:
+/// - ingredient: name of ingredient
+/// - poidsTF: UITextField to put the weight of the food
+/// - type:  unit f mesure
+/// init with setupCell(with ingredient: Ingredient, value: Int)
 class SolideCell: UITableViewCell {
 
     // MARK: - liste of UI elements
@@ -70,7 +77,7 @@ class SolideCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    // MARK: - UI
+    // MARK: - setup
     private func setupUI() {
         [poidsTF, type].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false

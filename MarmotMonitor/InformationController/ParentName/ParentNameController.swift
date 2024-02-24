@@ -7,7 +7,12 @@
 
 import UIKit
 
-class ParentNameController: ViewForInformationController {
+/// ParentNameController
+/// This class is used to ask the user the name of parent
+/// The user can go to the next step without entered a name
+/// The name is saved in the UserDefaultsManager
+/// The user can go back to the previous step
+final class ParentNameController: ViewForInformationController {
     // MARK: - Properties
     let parentNameTitre: UILabel = {
         let label = UILabel()
@@ -127,9 +132,7 @@ extension ParentNameController: UITextFieldDelegate {
         goNextController()
         return true
     }
-}
 
-extension ParentNameController {
     // MARK: - Action
     @objc private func nextButtonTapped(sender: UIButton) {
         sender.transform = .identity
@@ -146,10 +149,8 @@ extension ParentNameController {
         userDefaultsManager.saveParentName(parentName.text)
         navigationController?.pushViewController(BirthDayController(), animated: true)
     }
-}
 
 // MARK: - Accessibility
-extension ParentNameController {
     /// Update the display when the user change the size of the text in the settings
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)

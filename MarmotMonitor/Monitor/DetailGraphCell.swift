@@ -6,9 +6,14 @@
 //
 
 import UIKit
-
+/// DetailGraphCell
+/// This class is used to create a cell for the detail graph view
+/// It display:
+/// - icone : icone of the activity
+/// - title : title of the activity and time in the day
+/// - value : value of the activity
+/// configure with func configure(with activityType: ShowActivityType, value: String, date: Date)
 class DetailGraphCell: UITableViewCell {
-
     let area: UIView = {
         let view = UIView()
         view.backgroundColor = .colorForPastelArea
@@ -64,6 +69,7 @@ class DetailGraphCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - SETUP
     private func setupUI() {
         area.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(area)

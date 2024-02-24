@@ -23,10 +23,12 @@ final class ApparenceSettingViewModel {
         }
     }
 
+    // MARK: - init
     init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {
         self.userDefaultsManager = userDefaultsManager
     }
 
+    // MARK: - function
     func saveAparenceSetting(type: Int) {
         let localType : UIUserInterfaceStyle
         switch type {

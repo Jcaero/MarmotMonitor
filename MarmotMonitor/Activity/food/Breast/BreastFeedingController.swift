@@ -7,8 +7,12 @@
 
 import UIKit
 
-class BreastFeedingController: ActivityController {
-
+final class BreastFeedingController: ActivityController {
+    /// BreastFeedingController
+    /// This class is used to set the Breast time
+    /// The user can put the time of the breast with
+    /// - set timer
+    /// - set manually
     let totalTimeBreastLabel: UILabel = {
         let label = UILabel()
         label.text = "Temps total: 0"
@@ -210,10 +214,8 @@ class BreastFeedingController: ActivityController {
             stackView.centerXAnchor.constraint(equalTo: scrollArea.centerXAnchor),
             stackView.widthAnchor.constraint(lessThanOrEqualTo: scrollArea.widthAnchor),
             stackView.widthAnchor.constraint(greaterThanOrEqualTo: scrollArea.widthAnchor, multiplier: 0.75),
-            totalTimeBreastLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
-        ])
+            totalTimeBreastLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
 
-        NSLayoutConstraint.activate([
             leftButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
             rightButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
             leftButton.widthAnchor.constraint(equalTo: scrollArea.widthAnchor, multiplier: 0.2),
@@ -221,17 +223,13 @@ class BreastFeedingController: ActivityController {
             rightButton.heightAnchor.constraint(equalTo: rightButton.widthAnchor),
             leftButton.widthAnchor.constraint(equalTo: leftButton.heightAnchor),
             leftTimeLabel.centerXAnchor.constraint(equalTo: leftButton.centerXAnchor),
-            rightTimeLabel.centerXAnchor.constraint(equalTo: rightButton.centerXAnchor)
-        ])
+            rightTimeLabel.centerXAnchor.constraint(equalTo: rightButton.centerXAnchor),
 
-        NSLayoutConstraint.activate([
             leftManuallyInput.centerXAnchor.constraint(equalTo: leftButton.centerXAnchor),
             leftManuallyInput.topAnchor.constraint(equalTo: leftButton.bottomAnchor, constant: 20),
             leftManuallyInput.widthAnchor.constraint(equalTo: totalTimeBreastLabel.widthAnchor, multiplier: 0.47),
-            leftManuallyInput.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -30)
-        ])
+            leftManuallyInput.bottomAnchor.constraint(equalTo: scrollArea.bottomAnchor, constant: -30),
 
-        NSLayoutConstraint.activate([
             rightManuallyInput.centerXAnchor.constraint(equalTo: rightButton.centerXAnchor),
             rightManuallyInput.topAnchor.constraint(equalTo: rightButton.bottomAnchor, constant: 20),
             rightManuallyInput.widthAnchor.constraint(equalTo: totalTimeBreastLabel.widthAnchor, multiplier: 0.47)

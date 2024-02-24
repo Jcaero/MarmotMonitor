@@ -8,7 +8,13 @@
 import UIKit
 
 class GrowthCell: UITableViewCell {
-
+    /// GrowthCell
+    /// This class is used to create Growth Cell
+    /// cell have 3 elements:
+    /// - ingredient: name of the element
+    /// - poidsTF: UITextField to put value
+    /// - type:  unit of mesure
+    /// init with setupCell(with ingredient: Ingredient, value: Int)
     // MARK: - liste of UI elements
     let category: UILabel = {
         let label = UILabel()
@@ -69,7 +75,7 @@ class GrowthCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    // MARK: - UI
+    // MARK: - setup
     private func setupUI() {
         [category, valueTF, unitOfMesure].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false

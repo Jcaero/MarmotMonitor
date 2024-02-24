@@ -6,7 +6,12 @@
 //
 
 import UIKit
-
+/// Cell to show the graph type
+/// The cell is composed by
+/// - a title of the type graph
+/// - a graph to show the type
+/// - a radioButton to show if the type is selected
+/// configure with func configure(with graphType: String, isSelected: Bool)
 final class GraphTypeTableViewCell: UITableViewCell {
     private let subtitleView: UILabel = {
         let label = UILabel()
@@ -47,6 +52,7 @@ final class GraphTypeTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Setup
     private func setupViews() {
         [subtitleView, radioButton, graph].forEach {
             addSubview($0)
@@ -73,6 +79,7 @@ final class GraphTypeTableViewCell: UITableViewCell {
         ])
     }
 
+    // MARK: - Configure
     func configure(with graphType: String, isSelected: Bool) {
 
         subtitleView.text = graphType

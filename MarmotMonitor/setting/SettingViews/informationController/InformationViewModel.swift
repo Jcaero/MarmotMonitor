@@ -14,10 +14,12 @@ class InformationViewModel {
     var birthDay: String = ""
     var gender: String = ""
 
+    // MARK: - Init
     init(userDefaultsManager: UserDefaultManagerProtocol = UserDefaultsManager()) {
         self.userDefaultsManager = userDefaultsManager
     }
 
+    // MARK: - Function
     func getUserInformation() {
         babyName = userDefaultsManager.getBabyName() ?? "Entrer le nom"
         birthDay = userDefaultsManager.getBirthDay() ?? "JJ/MM/YYYY"

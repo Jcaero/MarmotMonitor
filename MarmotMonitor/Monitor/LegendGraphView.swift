@@ -8,6 +8,8 @@
 import UIKit
 typealias LegendGraphData = (information: String, imageName: String)
 
+/// LegendGraphView is the view for the legend of the graph
+/// It display a symbol and a summary of the activity
 class LegendGraphView: UIView {
     let information: UILabel = {
         let label = UILabel()
@@ -66,10 +68,8 @@ class LegendGraphView: UIView {
             imageActivity.topAnchor.constraint(equalTo: topAnchor, constant: 2),
             imageActivity.widthAnchor.constraint(equalTo: imageActivity.heightAnchor),
             imageActivity.leftAnchor.constraint(equalTo: leftAnchor, constant: 2),
-            imageActivity.heightAnchor.constraint(equalToConstant: 30)
-        ])
+            imageActivity.heightAnchor.constraint(equalToConstant: 30),
 
-        NSLayoutConstraint.activate([
             information.topAnchor.constraint(equalTo: imageActivity.topAnchor),
             information.rightAnchor.constraint(equalTo: rightAnchor, constant: -2),
             information.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),

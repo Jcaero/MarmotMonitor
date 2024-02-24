@@ -6,7 +6,7 @@
 //
 
 import UIKit
-class SettingViewModel {
+final class SettingViewModel {
     private let userDefaultsManager: UserDefaultManagerProtocol!
 
     var babyName: String {

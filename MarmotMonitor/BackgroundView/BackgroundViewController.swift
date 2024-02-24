@@ -7,6 +7,11 @@
 
 import UIKit
 
+/// Controller for the background view
+/// This view is the background of all the other views
+/// It's a gradient view that goes from a color to another : blue or pink depending on gender
+/// It's also the place where the navigation bar is configured
+
 class BackgroundViewController: UIViewController {
     // MARK: - Propriete
     private let userDefaultsManager = UserDefaultsManager()

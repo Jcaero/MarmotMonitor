@@ -6,6 +6,11 @@
 //
 
 import UIKit
+/// This class is a cell for the setting view controller
+/// It display setting to modify the app :
+///  - icone: icone of the setting
+///  - nameTitle: title of the setting
+///  - information: information of the setting actually value
 
 class SettingCell: UITableViewCell {
     private let icone: UIImageView = {
@@ -65,6 +70,7 @@ class SettingCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Setup
     private func setupViews() {
         [icone, areaStackView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false

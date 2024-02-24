@@ -6,8 +6,11 @@
 //
 
 import UIKit
-
-class TodayViewController: BackgroundViewController {
+/// HomeViewController
+/// This class is used to display the home screen of the application
+/// The user can see the last date of all activity
+/// the user can select an activity to enter the data
+final class TodayViewController: BackgroundViewController {
 
     let currentDate: UILabel = {
         let label = UILabel()
@@ -164,13 +167,13 @@ class TodayViewController: BackgroundViewController {
         setupTableViewHeight()
     }
 
+    // MARK: - Setup
     private func setupViews() {
 
         [scrollView, currentDate, welcomeLabel].forEach {
             view.addSubview($0)
         }
 
-        // MARK: - Baby Image
         babyImage.layer.addSublayer(imageGradient)
 
         babyImage.addSubview(babyYearFirstElement)

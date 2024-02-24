@@ -6,7 +6,9 @@
 //
 
 import UIKit
-
+/// View controller to manage the icon setting
+/// user can select the app icon background
+///
 final class IconSettingViewController: BackgroundViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     private let scrollView: UIScrollView = {

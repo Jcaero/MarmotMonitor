@@ -10,7 +10,14 @@ protocol UpdateInformationControllerDelegate: AnyObject {
     func updateInformation()
 }
 
-class SettingViewController: BackgroundViewController, UpdateInformationControllerDelegate {
+/// Controller for the setting view
+/// This view is used to change the user information
+/// It also allow the user to:
+/// - Change the app icon
+/// - Change the app theme
+/// - Change the information of the user
+/// - clear database
+final class SettingViewController: BackgroundViewController, UpdateInformationControllerDelegate {
     let settingTitle: UILabel = {
         let label = UILabel()
         label.text = "Paramètres"
@@ -50,6 +57,7 @@ class SettingViewController: BackgroundViewController, UpdateInformationControll
         tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
 
+    // MARK: - Setup
     private func setupViews() {
         view.backgroundColor = .white
 

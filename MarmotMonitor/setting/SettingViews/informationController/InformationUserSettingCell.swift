@@ -6,7 +6,12 @@
 //
 
 import UIKit
-
+/// This class is used to display the user's information in the setting view
+/// It contains :
+/// - the user's name
+/// - the baby name
+/// - the baby birth date
+/// - the baby gender
 class InformationUserSetting: UITableViewCell {
     private let area: UIView = {
         let view = UIView()
@@ -119,6 +124,7 @@ class InformationUserSetting: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - setup
     private func setupViews() {
         addSubview(area)
         area.translatesAutoresizingMaskIntoConstraints = false

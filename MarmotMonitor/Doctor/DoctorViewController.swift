@@ -8,6 +8,8 @@
 import UIKit
 import DGCharts
 
+/// DoctorViewController
+/// This class is show graph of baby growth evolution
 class DoctorViewController: BackgroundViewController, ChartViewDelegate {
 
     lazy var lineChartView: LineChartView = {

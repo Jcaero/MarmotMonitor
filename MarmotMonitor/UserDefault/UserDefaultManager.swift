@@ -31,7 +31,7 @@ final class UserDefaultsManager: UserDefaultManagerProtocol {
         self.defaults = defaults
     }
 
-    // Set Value
+    // MARK: - Save Value
     func saveBabyName(_ name: String?) {
         guard let nameToSave = name, nameToSave != "" else {
             defaults.removeObject(forKey: UserInfoKey.babyName.rawValue)
@@ -82,7 +82,7 @@ final class UserDefaultsManager: UserDefaultManagerProtocol {
             defaults.set(type.rawValue, forKey: UserInfoKey.apparence.rawValue)
         }
 
-    // Get Value
+    // MARK: - Get Value
     func getBabyName() -> String? {
         return defaults.string(forKey: UserInfoKey.babyName.rawValue)
     }

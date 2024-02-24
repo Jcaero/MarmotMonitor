@@ -5,17 +5,21 @@
 //  Created by pierrick viret on 14/12/2023.
 //
 
-import Foundation
 import UIKit
 
+/// FoodTapBar
+/// This class is used to manage the food tap bar
+/// The user can swith between the different food type
 class FoodTapBar: UITabBarController {
+    //MARK: - Circle life
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVCs()
         setupTabBar()
     }
 
-    func setupVCs() {
+    //MARK: - Setup function
+    private func setupVCs() {
         let breastController = UINavigationController(rootViewController: BreastFeedingController())
         let bottleController = UINavigationController(rootViewController: BottleFeedingController())
         let solidController = UINavigationController(rootViewController: SolideFeedingController())
@@ -32,7 +36,7 @@ class FoodTapBar: UITabBarController {
         viewControllers = [breastController, bottleController, solidController]
     }
 
-    func setupTabBar() {
+    private func setupTabBar() {
 
         let appearance = UITabBarAppearance()
         appearance.configureWithTransparentBackground()
@@ -56,6 +60,5 @@ class FoodTapBar: UITabBarController {
 
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = tabBar.standardAppearance
-
     }
 }

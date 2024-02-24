@@ -6,8 +6,12 @@
 //
 
 import UIKit
-
-class MonitorViewController: BackgroundViewController, UpdateInformationControllerDelegate {
+/// MonitorViewController
+/// This class is the view controller for the monitor view
+///  It display the data of the monitor in graph
+///  It also allow the user to filter the data
+///  User can select graph to modify data
+final class MonitorViewController: BackgroundViewController, UpdateInformationControllerDelegate {
 
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -28,6 +32,8 @@ class MonitorViewController: BackgroundViewController, UpdateInformationControll
         return view
     }()
 
+    private var viewModel = MonitorViewModel()
+
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +49,6 @@ class MonitorViewController: BackgroundViewController, UpdateInformationControll
         viewModel.updateData()
         tableView.reloadData()
     }
-
-    private var viewModel = MonitorViewModel()
 
     // MARK: - Setup views
     private func setupViews() {
@@ -74,11 +78,8 @@ class MonitorViewController: BackgroundViewController, UpdateInformationControll
         tableView.dataSource = self
         tableView.register(MonitorCell.self, forCellReuseIdentifier: MonitorCell.reuseIdentifier)
     }
-}
 
 // MARK: - Setup filter
-extension MonitorViewController {
-
     private func setupFilterStackView() {
         viewModel.filterButton.enumerated().forEach { (index, iconeName) in
             let button = createIconeButton(with: iconeName)
