@@ -92,14 +92,9 @@ class MonitorCell: UITableViewCell {
         area.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(area)
 
-        [graph, stackViewActivities, topInformationStackView].forEach {
+        [graph, stackViewActivities, date, editingImage].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             area.addSubview($0)
-        }
-
-        [date, editingImage].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            topInformationStackView.addArrangedSubview($0)
         }
 
         NSLayoutConstraint.activate([
@@ -108,12 +103,15 @@ class MonitorCell: UITableViewCell {
             area.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
             area.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
 
-            topInformationStackView.topAnchor.constraint(equalTo: area.topAnchor, constant: 10),
-            topInformationStackView.leadingAnchor.constraint(equalTo: area.leadingAnchor, constant: 10),
-            topInformationStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            date.topAnchor.constraint(equalTo: area.topAnchor, constant: 10),
+            date.leadingAnchor.constraint(equalTo: area.leadingAnchor, constant: 10),
+            date.trailingAnchor.constraint(equalTo: editingImage.leadingAnchor, constant: -10),
+
+            editingImage.topAnchor.constraint(equalTo: area.topAnchor, constant: 10),
+            editingImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             editingImage.heightAnchor.constraint(equalTo: editingImage.widthAnchor),
 
-            graph.topAnchor.constraint(equalTo: topInformationStackView.bottomAnchor, constant: 10),
+            graph.topAnchor.constraint(equalTo: date.bottomAnchor, constant: 10),
             graph.leadingAnchor.constraint(equalTo: area.leadingAnchor, constant: 10),
             graph.trailingAnchor.constraint(equalTo: area.trailingAnchor, constant: -10),
             graph.heightAnchor.constraint(greaterThanOrEqualToConstant: 30),
@@ -161,7 +159,14 @@ class MonitorCell: UITableViewCell {
     }
 
     private func setupEditingImage() {
-        let multiplier = isAccessibilityCategory ? 0.7 : 0.9
-        editingImage.heightAnchor.constraint(equalTo: date.heightAnchor, multiplier: multiplier).isActive = true
+        let offset: CGFloat = isAccessibilityCategory ? 0 : 10
+
+        let testLabel = UILabel()
+        testLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        testLabel.text = "Test"
+        testLabel.sizeToFit()
+        let newHeight = testLabel.frame.size.height + offset
+
+        editingImage.heightAnchor.constraint(equalToConstant: newHeight).isActive = true
     }
 }
