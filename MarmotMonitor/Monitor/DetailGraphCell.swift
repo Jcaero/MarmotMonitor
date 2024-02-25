@@ -121,7 +121,12 @@ class DetailGraphCell: UITableViewCell {
             iconeName = ActivityIconName.sleep.rawValue
         }
 
-        self.value.text = value
+        if value == "" {
+            self.value.isHidden = true
+        } else {
+            self.value.text = value
+        }
+
         let date = date.toStringWithOnlyTime()
         title.text = date + "\n" + title.text!
 
