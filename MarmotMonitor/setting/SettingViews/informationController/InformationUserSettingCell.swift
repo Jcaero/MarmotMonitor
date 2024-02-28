@@ -103,7 +103,7 @@ class InformationUserSetting: UITableViewCell {
         }
         button.configuration = configuration
         button.setTitle("Modifier", for: .normal)
-        button.setTitleColor(UIColor.buttonCancel, for: .normal)
+        button.setTitleColor(.buttonCancel, for: .normal)
         button.setupShadow(radius: 1, opacity: 0.5)
         return button
     }()
