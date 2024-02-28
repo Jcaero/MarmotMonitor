@@ -121,7 +121,7 @@ class DoctorViewController: BackgroundViewController, ChartViewDelegate {
     }
 
     private func setDataHeight() {
-        var dataSetHeight = LineChartDataSet(entries: viewModel.weightValues, label: "")
+        var dataSetHeight = LineChartDataSet(entries: viewModel.heightValues, label: "")
         dataSetHeight = setupGraphData(of: dataSetHeight)
 
         let data = LineChartData(dataSet: dataSetHeight )
