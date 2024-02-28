@@ -173,13 +173,16 @@ final class MonitorViewModelTest: TestCase {
         coreDatatManager.saveActivity(.sleep(duration: 10800), date: testFirstDateSeven, onSuccess: {isSave = true }, onError: {_ in })
         
         viewModel.updateData()
-        
-        XCTAssertTrue(viewModel.dateWithActivity.count == 1)
-        XCTAssertEqual(viewModel.dateWithActivity[0], "07/01/2024".toDate())
-        XCTAssertEqual(viewModel.graphActivities.count, 1)
+
+        XCTAssertTrue(viewModel.dateWithActivity.count == 2)
+        XCTAssertEqual(viewModel.dateWithActivity[0], "08/01/2024".toDate())
+        XCTAssertEqual(viewModel.graphActivities.count, 2)
         
         let summaryOfSeven = viewModel.summaryActivities["07/01/2024"]
-        XCTAssertEqual(summaryOfSeven![ActivityIconName.sleep.rawValue], "03 H\n1 fois")
+        XCTAssertEqual(summaryOfSeven![ActivityIconName.sleep.rawValue], "01 H 30 min\n1 fois")
+
+        let summaryOfEight = viewModel.summaryActivities["08/01/2024"]
+        XCTAssertEqual(summaryOfEight![ActivityIconName.sleep.rawValue], "01 H 30 min\n1 fois")
     
     }
 
@@ -189,12 +192,12 @@ final class MonitorViewModelTest: TestCase {
         
         viewModel.updateData()
         
-        XCTAssertTrue(viewModel.dateWithActivity.count == 1)
-        XCTAssertEqual(viewModel.dateWithActivity[0], "07/01/2024".toDate())
-        XCTAssertEqual(viewModel.graphActivities.count, 1)
+        XCTAssertTrue(viewModel.dateWithActivity.count == 2)
+        XCTAssertEqual(viewModel.dateWithActivity[1], "07/01/2024".toDate())
+        XCTAssertEqual(viewModel.graphActivities.count, 2)
         
         let summaryOfSeven = viewModel.summaryActivities["07/01/2024"]
-        XCTAssertEqual(summaryOfSeven![ActivityIconName.sleep.rawValue], "03 H\n1 fois")
+        XCTAssertEqual(summaryOfSeven![ActivityIconName.sleep.rawValue], "01 H 30 min\n1 fois")
         XCTAssertEqual(summaryOfSeven![ActivityIconName.meal.rawValue], "\n1 fois")
     }
 
@@ -223,5 +226,23 @@ final class MonitorViewModelTest: TestCase {
         
         XCTAssertEqual(array, ["test2", "test"])
         
+    }
+
+    // MARK: - test activity is to long
+    func testCoreDataHaveBreastAndDurationIsTolong_WhenUpdateData_ViewModelHaveTheData() {
+        coreDatatManager.saveActivity(.breast(duration: mockBreastDurationFifteenAndTen), date: testFourthDateSeven, onSuccess: {isSave = true }, onError: {_ in })
+        print("mock date = \(testFourthDateSeven)")
+        viewModel.updateData()
+        
+        XCTAssertTrue(viewModel.dateWithActivity.count == 2)
+        XCTAssertEqual(viewModel.dateWithActivity[1].toStringWithDayMonthYear(), "07/01/2024")
+        XCTAssertEqual(viewModel.graphActivities.count, 2)
+        
+        let graphInfo = viewModel.graphActivities["07/01/2024"]?.first
+        
+        XCTAssertEqual(graphInfo?.color, .colorForMeal)
+        XCTAssertEqual(graphInfo?.duration, 600)
+        XCTAssertEqual(graphInfo?.timeStart, testFourthDateSeven)
+        XCTAssertEqual(graphInfo?.type, .breast)
     }
 }

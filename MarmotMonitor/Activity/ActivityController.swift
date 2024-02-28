@@ -28,6 +28,7 @@ class ActivityController: BackGroundActivity {
         let datePicker = UIDatePicker()
         datePicker.preferredDatePickerStyle = .compact
         datePicker.datePickerMode = .dateAndTime
+        datePicker.timeZone = TimeZone(identifier: "Europe/Paris")
         datePicker.maximumDate = Date()
         datePicker.tintColor = .label
         datePicker.backgroundColor = .clear

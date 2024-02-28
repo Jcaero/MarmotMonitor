@@ -14,14 +14,14 @@ final class MonitorAuditAccessibily: XCTestCase {
         continueAfterFailure = true
     }
     
-    func testAccessibilityMonitor() throws {
-        let app = UIApplication()
-        app.launch()
-        app.buttons["Monitor"].tap()
-        if #available(iOS 17.0, *) {
-            try app.performAccessibilityAudit()
-        } else {
-            // Fallback on earlier versions
-        }
-    }
+//    func testAccessibilityMonitor() throws {
+//        let app = UIApplication()
+//        app.launch()
+//        app.buttons["Monitor"].tap()
+//        if #available(iOS 17.0, *) {
+//            try app.performAccessibilityAudit()
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//    }
 }

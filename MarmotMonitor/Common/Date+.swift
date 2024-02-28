@@ -11,6 +11,7 @@ extension Date {
 
     func toStringWithDayMonthYear() -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: "Europe/Paris")
         dateFormatter.dateFormat = "dd/MM/yyyy"
         return dateFormatter.string(from: self)
     }
@@ -29,15 +30,16 @@ extension Date {
         }
 
     func removeSeconds() -> Date {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
         let dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: self)
         return calendar.date(from: dateComponents)!
     }
 
     func toStringWithTimeAndDayMonthYear() -> String {
         let dateFormatter = DateFormatter()
-        let calendar = Calendar.current
-
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
         let currentDate = calendar.startOfDay(for: Date())
         let selectedDate = calendar.startOfDay(for: self)
 
@@ -46,7 +48,8 @@ extension Date {
     }
 
     func inMinute() -> Int {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
         let dateComponents = calendar.dateComponents([.hour, .minute], from: self)
 
         let hour = dateComponents.hour ?? 0
@@ -56,17 +59,31 @@ extension Date {
     }
 
     func dateWithNoTime() -> Date {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: self)
         return calendar.date(from: dateComponents)!
     }
 
     func toStringWithOnlyTime() -> String {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
         let dateComponents = calendar.dateComponents([.hour, .minute], from: self)
         let date = calendar.date(from: dateComponents)!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: date)
+    }
+
+    func endOfDay() -> Date {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
+        return calendar.date(bySettingHour: 23, minute: 59, second: 59, of: self)!
+    }
+
+    func dateByAddingDays(_ days: Int) -> Date {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
+        return calendar.date(byAdding: .day, value: days, to: self)!
     }
 }

@@ -36,10 +36,11 @@ class MonitorViewModel {
         summaryActivities = [:]
         dateWithActivitySet = []
     }
+
     func updateData() {
         cleanAllData()
         let activities = saveManager.fetchAllActivity()
-        graphActivities = createGraphElements(with: activities)
+        createGraphElements(with: activities)
         summaryActivities = createSummaryActivities(with: graphActivities)
     }
 
@@ -95,23 +96,29 @@ class MonitorViewModel {
     /// - Returns: Dictionary of GraphActivity with the date as key
     /// - Note: The date is converted to french timezone with no time
     /// - Note: The date is converted to string with the format dd/MM/yyyy
-    private func createGraphElements( with dateActivities: [DateActivity]) -> [String: [GraphActivity]] {
-        var elements: [String: [GraphActivity]] = [:]
-
+    private func createGraphElements( with dateActivities: [DateActivity]) {
         dateActivities.forEach { activities in
-            let frenchDate = activities.date.convertToFrenchTimeZone()
-            let stringDate = frenchDate.toStringWithDayMonthYear()
+            let date = activities.date
+            let nextDay = date.dateByAddingDays(1)
 
             activities.activityArray.forEach { activity in
                 if isFilterActive(for: activity) == false {
-                    if let graphActivity = transformInGraphActivity(with: activity, date: activities.date) {
-                        elements[stringDate, default: []].append(graphActivity)
-                        dateWithActivitySet.insert(frenchDate.dateWithNoTime())
+                    let graphActivity = transformInGraphActivity(with: activity, date: activities.date)
+                    addGraphActivity(activity: graphActivity[0], date: date)
+
+                    if graphActivity.count > 1 {
+                        addGraphActivity(activity: graphActivity[1], date: nextDay)
                     }
                 }
             }
         }
-        return elements
+    }
+
+    private func addGraphActivity( activity: GraphActivity, date: Date) {
+        let stringDate = date.toStringWithDayMonthYear()
+
+        graphActivities[stringDate, default: []].append(activity)
+        dateWithActivitySet.insert(date.dateWithNoTime())
     }
 
     /// Transform an activity in a graph activity
@@ -121,28 +128,68 @@ class MonitorViewModel {
     ///  - Returns: GraphActivity
     ///  - Note: The duration is set to 29 min for all activities with no duartion
     ///  - Note: The duration is converted in min for breast and sleep
-    private func transformInGraphActivity( with activity: Activity, date: Date) -> GraphActivity? {
+    private func transformInGraphActivity( with activity: Activity, date: Date) -> [GraphActivity] {
         let timeStart = date
         switch activity {
         case is Diaper :
-            return GraphActivity(type: .diaper, color: .colorForDiaper, timeStart: timeStart, duration: 0)
+            return [GraphActivity(type: .diaper, color: .colorForDiaper, timeStart: timeStart, duration: 0)]
 
         case is Bottle :
-            guard let quantity = (activity as? Bottle)?.quantity else { return nil }
-            return GraphActivity(type: .bottle, color: .colorForMeal, timeStart: timeStart, duration: 0, quantity: Int(quantity))
+            guard let quantity = (activity as? Bottle)?.quantity else { return [] }
+            return [GraphActivity(type: .bottle, color: .colorForMeal, timeStart: timeStart, duration: 0, quantity: Int(quantity))]
 
         case is Breast :
-            guard let duration = (activity as? Breast)?.totalDuration else { return nil }
-            return GraphActivity(type: .breast, color: .colorForMeal, timeStart: timeStart, duration: duration)
+            guard let activity = activity as? Breast else { return [] }
+            let graphActivity = transformInGraphActivityBreastActivity(with: activity , startActivity: date)
+            return graphActivity
 
         case is Solid :
-            return GraphActivity(type: .solid, color: .colorForMeal, timeStart: timeStart, duration: 0)
+            return [GraphActivity(type: .solid, color: .colorForMeal, timeStart: timeStart, duration: 0)]
 
         case is Sleep :
-            guard let duration = (activity as? Sleep)?.duration else { return nil }
-            return GraphActivity(type: .sleep, color: .colorForSleep, timeStart: timeStart, duration: Int(duration))
+            guard let activity = activity as? Sleep else { return [] }
+            let graphActivity = transformInGraphActivitySleepActivity(with: activity , startActivity: date)
+            return graphActivity
         default:
-            return nil
+            return []
+        }
+    }
+
+    private func transformInGraphActivityBreastActivity( with activity: Breast, startActivity: Date) -> [GraphActivity] {
+        let duration = activity.totalDuration
+        let nextDay = startActivity.endOfDay().addingTimeInterval(1)
+
+        let endActivity = startActivity.addingTimeInterval(TimeInterval(duration))
+
+        if endActivity < nextDay {
+            return [GraphActivity(type: .breast, color: .colorForMeal, timeStart: startActivity, duration: duration)]
+        } else {
+            let timeEnd = startActivity.endOfDay()
+            let timeEndDuration = Int(timeEnd.timeIntervalSince(startActivity)) + 1
+            let graphActivity = [
+                GraphActivity(type: .breast, color: .colorForMeal, timeStart: startActivity, duration: timeEndDuration),
+                GraphActivity(type: .breast, color: .colorForMeal, timeStart: nextDay, duration: duration - timeEndDuration)]
+
+            return graphActivity
+        }
+    }
+
+    private func transformInGraphActivitySleepActivity( with activity: Sleep, startActivity: Date) -> [GraphActivity] {
+        let duration = Int(activity.duration)
+        let nextDay = startActivity.endOfDay().addingTimeInterval(1)
+
+        let endActivity = startActivity.addingTimeInterval(TimeInterval(duration))
+
+        if endActivity < nextDay {
+            return [GraphActivity(type: .sleep, color: .colorForSleep, timeStart: startActivity, duration: duration)]
+        } else {
+            let timeEnd = startActivity.endOfDay()
+            let timeEndDuration = Int(timeEnd.timeIntervalSince(startActivity)) + 1
+            let graphActivity = [
+                GraphActivity(type: .sleep, color: .colorForSleep, timeStart: startActivity, duration: timeEndDuration),
+                GraphActivity(type: .sleep, color: .colorForSleep, timeStart: nextDay, duration: duration - timeEndDuration)]
+
+            return graphActivity
         }
     }
 
@@ -174,7 +221,7 @@ extension MonitorViewModel {
         case is Sleep :
             return filterStatus[ActivityIconName.sleep.rawValue] ?? false
         default:
-            return false
+            return true
         }
     }
 

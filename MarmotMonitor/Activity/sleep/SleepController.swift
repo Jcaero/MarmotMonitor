@@ -44,6 +44,7 @@ class SleepController: BackGroundActivity, SleepDelegate {
         let datePicker = UIDatePicker()
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .dateAndTime
+        datePicker.timeZone = TimeZone(identifier: "Europe/Paris")
         datePicker.maximumDate = Date()
         datePicker.tintColor = .label
         datePicker.backgroundColor = .duckBlue

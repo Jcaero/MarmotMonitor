@@ -14,6 +14,7 @@ class TestCase: XCTestCase {
     let testFirstDateSevenAtFive = "07/01/2024 05:00".toDateWithTime() ?? Date()
     let testSecondDateSix = "06/01/2023".toDate() ?? Date()
     let testThirdDateFive = "05/01/2024".toDate() ?? Date()
+    let testFourthDateSeven = "07/01/2024 23:50".toDateWithTime() ?? Date()
 
     let activityEndDateEight = "08/01/2024".toDate() ?? Date()
     let activityStartDateSix = "06/01/2024".toDate() ?? Date()

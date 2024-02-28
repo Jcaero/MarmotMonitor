@@ -11,14 +11,14 @@ extension String {
 
     func toDate() -> Date? {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.timeZone = TimeZone(identifier: "Europe/Paris")
         dateFormatter.dateFormat = "dd/MM/yyyy"
         return dateFormatter.date(from: self)
     }
 
     func toDateWithTime() -> Date? {
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.timeZone = TimeZone(identifier: "Europe/Paris")
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
         return dateFormatter.date(from: self)
     }
