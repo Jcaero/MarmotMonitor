@@ -47,7 +47,6 @@
 		4748E64A2B30DFDF0082A0CE /* SolideFeedingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4748E6492B30DFDF0082A0CE /* SolideFeedingViewModel.swift */; };
 		47494BD32B35A7F9002A0A93 /* SleepController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47494BD22B35A7F9002A0A93 /* SleepController.swift */; };
 		47494BD52B35ADAD002A0A93 /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47494BD42B35ADAD002A0A93 /* ActivityController.swift */; };
-		474B95E72B8A842600A20298 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 474B95E62B8A842600A20298 /* GoogleService-Info.plist */; };
 		474B95EA2B8A855700A20298 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 474B95E92B8A855700A20298 /* FirebaseAnalytics */; };
 		474B95EC2B8A8D7100A20298 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 474B95EB2B8A8D7100A20298 /* FirebaseCrashlytics */; };
 		474C24402B717FE10002AD83 /* informationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C243F2B717FE10002AD83 /* informationViewController.swift */; };
@@ -101,7 +100,6 @@
 		47B177B12B911E3900730B50 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177B02B911E3900730B50 /* FirebaseAnalyticsSwift */; };
 		47B177B32B911E4600730B50 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177B22B911E4600730B50 /* FirebasePerformance */; };
 		47B177B52B911E5900730B50 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177B42B911E5900730B50 /* FirebasePerformance */; };
-		47B177B62B911EF700730B50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 474B95E62B8A842600A20298 /* GoogleService-Info.plist */; };
 		47B177B82B91256200730B50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 474B95E62B8A842600A20298 /* GoogleService-Info.plist */; };
 		47B177BB2B91341E00730B50 /* FirebaseInAppMessagingSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177BA2B91341E00730B50 /* FirebaseInAppMessagingSwift-Beta */; };
 		47B177BD2B91342800730B50 /* FirebaseInstallations in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177BC2B91342800730B50 /* FirebaseInstallations */; };
@@ -980,7 +978,6 @@
 			files = (
 				475071E72B09462100DAB527 /* LaunchScreen.storyboard in Resources */,
 				475071E42B09462100DAB527 /* Assets.xcassets in Resources */,
-				474B95E72B8A842600A20298 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -988,7 +985,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47B177B62B911EF700730B50 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
