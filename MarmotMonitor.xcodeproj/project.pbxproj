@@ -103,7 +103,7 @@
 		47B177B32B911E4600730B50 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177B22B911E4600730B50 /* FirebasePerformance */; };
 		47B177B52B911E5900730B50 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177B42B911E5900730B50 /* FirebasePerformance */; };
 		47B177B62B911EF700730B50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 474B95E62B8A842600A20298 /* GoogleService-Info.plist */; };
-		47B177B72B911F3400730B50 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 475071E82B09462100DAB527 /* Info.plist */; };
+		47B177B82B91256200730B50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 474B95E62B8A842600A20298 /* GoogleService-Info.plist */; };
 		47B2316A2B6C35C30079B436 /* DoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B231692B6C35C30079B436 /* DoctorViewController.swift */; };
 		47B2316D2B6C390E0079B436 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 47B2316C2B6C390E0079B436 /* DGCharts */; };
 		47B500A02B7910AB0055A4A2 /* IconSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B5009F2B7910AB0055A4A2 /* IconSettingViewModel.swift */; };
@@ -981,7 +981,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47B177B72B911F3400730B50 /* Info.plist in Resources */,
 				47B177B62B911EF700730B50 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -990,6 +989,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47B177B82B91256200730B50 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
