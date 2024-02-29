@@ -59,8 +59,6 @@
 		475071E22B09462000DAB527 /* MarmotMonitor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 475071E02B09462000DAB527 /* MarmotMonitor.xcdatamodeld */; };
 		475071E42B09462100DAB527 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 475071E32B09462100DAB527 /* Assets.xcassets */; };
 		475071E72B09462100DAB527 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 475071E52B09462100DAB527 /* LaunchScreen.storyboard */; };
-		475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */; };
-		475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */; };
 		4750720E2B09576900DAB527 /* TapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750720D2B09576900DAB527 /* TapBarController.swift */; };
 		475BD8EF2B597FBF003F1158 /* DiaperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475BD8EE2B597FBF003F1158 /* DiaperViewModel.swift */; };
 		475BD8F12B59B43F003F1158 /* DiaperViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475BD8F02B59B43F003F1158 /* DiaperViewModelTest.swift */; };
@@ -98,6 +96,9 @@
 		47A6D4532B861B5A0022FDB8 /* DetailGraphCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A6D4522B861B5A0022FDB8 /* DetailGraphCell.swift */; };
 		47AF89762B3A28200068FE1F /* diaperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF89752B3A28200068FE1F /* diaperController.swift */; };
 		47AF89782B3A29E90068FE1F /* diaperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF89772B3A29E90068FE1F /* diaperCell.swift */; };
+		47B177AB2B91165400730B50 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177AA2B91165400730B50 /* DGCharts */; };
+		47B177AD2B91165800730B50 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177AC2B91165800730B50 /* FirebaseAnalytics */; };
+		47B177AF2B91165C00730B50 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177AE2B91165C00730B50 /* FirebaseCrashlytics */; };
 		47B2316A2B6C35C30079B436 /* DoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B231692B6C35C30079B436 /* DoctorViewController.swift */; };
 		47B2316D2B6C390E0079B436 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 47B2316C2B6C390E0079B436 /* DGCharts */; };
 		47B500A02B7910AB0055A4A2 /* IconSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B5009F2B7910AB0055A4A2 /* IconSettingViewModel.swift */; };
@@ -216,8 +217,6 @@
 		475071E82B09462100DAB527 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		475071ED2B09462100DAB527 /* MarmotMonitorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarmotMonitorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		475071F72B09462100DAB527 /* MarmotMonitorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarmotMonitorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITests.swift; sourceTree = "<group>"; };
-		475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarmotMonitorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4750720D2B09576900DAB527 /* TapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBarController.swift; sourceTree = "<group>"; };
 		475BD8EE2B597FBF003F1158 /* DiaperViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaperViewModel.swift; sourceTree = "<group>"; };
 		475BD8F02B59B43F003F1158 /* DiaperViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaperViewModelTest.swift; sourceTree = "<group>"; };
@@ -313,6 +312,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47B177AF2B91165C00730B50 /* FirebaseCrashlytics in Frameworks */,
+				47B177AD2B91165800730B50 /* FirebaseAnalytics in Frameworks */,
+				47B177AB2B91165400730B50 /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,8 +587,6 @@
 				471201382B88AE0000E63E8D /* MonitorAuditAccessibily.swift */,
 				4712013A2B88AF6C00E63E8D /* TodayAuditAccessibility.swift */,
 				47C4F42E2B7E272400DDD807 /* Settings */,
-				475071FB2B09462100DAB527 /* MarmotMonitorUITests.swift */,
-				475071FD2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift */,
 				47CABD8E2B128D6A00C5919A /* UIApplication.swift */,
 			);
 			path = MarmotMonitorUITests;
@@ -877,6 +877,11 @@
 				475071EF2B09462100DAB527 /* PBXTargetDependency */,
 			);
 			name = MarmotMonitorTests;
+			packageProductDependencies = (
+				47B177AA2B91165400730B50 /* DGCharts */,
+				47B177AC2B91165800730B50 /* FirebaseAnalytics */,
+				47B177AE2B91165C00730B50 /* FirebaseCrashlytics */,
+			);
 			productName = MarmotMonitorTests;
 			productReference = 475071ED2B09462100DAB527 /* MarmotMonitorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1161,9 +1166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47CABD8F2B128D6A00C5919A /* UIApplication.swift in Sources */,
-				475071FC2B09462100DAB527 /* MarmotMonitorUITests.swift in Sources */,
 				471201392B88AE0000E63E8D /* MonitorAuditAccessibily.swift in Sources */,
-				475071FE2B09462100DAB527 /* MarmotMonitorUITestsLaunchTests.swift in Sources */,
 				4712013B2B88AF6C00E63E8D /* TodayAuditAccessibility.swift in Sources */,
 				47D2BBD12B7FF32700095348 /* settingAuditAccessibilityTests.swift in Sources */,
 			);
@@ -1253,6 +1256,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = MarmotMonitor;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1309,6 +1313,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = MarmotMonitor;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
@@ -1551,6 +1556,21 @@
 			productName = FirebaseAnalytics;
 		};
 		4795DC232B8F760D00FB3B48 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 474B95E82B8A855700A20298 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		47B177AA2B91165400730B50 /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47B231672B6C353E0079B436 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+		47B177AC2B91165800730B50 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 474B95E82B8A855700A20298 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		47B177AE2B91165C00730B50 /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 474B95E82B8A855700A20298 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
