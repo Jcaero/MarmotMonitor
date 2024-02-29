@@ -13,6 +13,7 @@ struct GraphActivity {
     let timeStart: Date
     let duration: Int
     var quantity: Int?
+    var timeOfOrigine: Date?
 }
 
 enum GraphType {

@@ -45,11 +45,20 @@ class DetailGraphViewModel {
 
     func deleteActivity(at index: Int, completion: @escaping () -> Void) {
         let activity = data[index]
-        coreDataManager.deleteActivity(ofType: activity.type, date: activity.timeStart) {
+        let date = getDateOfActivity(at: index)
+        coreDataManager.deleteActivity(ofType: activity.type, date: date) {
             data.remove(at: index)
             completion()
         } onError: { _ in
             print("erreur de supression")
+        }
+    }
+
+    private func getDateOfActivity(at index: Int) -> Date {
+        if data[index].timeOfOrigine != nil {
+            return data[index].timeOfOrigine!
+        } else {
+            return data[index].timeStart
         }
     }
 }

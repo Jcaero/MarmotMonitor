@@ -68,7 +68,7 @@ final class MarmotMonitorSaveManager: MarmotMonitorSaveManagerProtocol {
 
             case .sleep(duration: let duration):
                 let sleep = Sleep(context: self.context)
-                sleep.duration = Int16(duration)
+                sleep.duration = Int64(duration)
                 activityDate.addToActivity(sleep)
 
             case .growth(data: let growthData):

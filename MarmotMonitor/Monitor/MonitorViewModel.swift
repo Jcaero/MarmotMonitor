@@ -168,7 +168,7 @@ class MonitorViewModel {
             let timeEndDuration = Int(timeEnd.timeIntervalSince(startActivity)) + 1
             let graphActivity = [
                 GraphActivity(type: .breast, color: .colorForMeal, timeStart: startActivity, duration: timeEndDuration),
-                GraphActivity(type: .breast, color: .colorForMeal, timeStart: nextDay, duration: duration - timeEndDuration)]
+                GraphActivity(type: .breast, color: .colorForMeal, timeStart: nextDay, duration: duration - timeEndDuration, timeOfOrigine: startActivity)]
 
             return graphActivity
         }
@@ -187,7 +187,7 @@ class MonitorViewModel {
             let timeEndDuration = Int(timeEnd.timeIntervalSince(startActivity)) + 1
             let graphActivity = [
                 GraphActivity(type: .sleep, color: .colorForSleep, timeStart: startActivity, duration: timeEndDuration),
-                GraphActivity(type: .sleep, color: .colorForSleep, timeStart: nextDay, duration: duration - timeEndDuration)]
+                GraphActivity(type: .sleep, color: .colorForSleep, timeStart: nextDay, duration: duration - timeEndDuration, timeOfOrigine: startActivity)]
 
             return graphActivity
         }

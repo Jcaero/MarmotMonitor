@@ -236,12 +236,12 @@ class GraphView: UIView {
         guard startedIndex < numberOfHalfHour, endIndex <= numberOfHalfHour else {return}
         for stack in stackViewForDay.arrangedSubviews {
             if let stack = stack as? UIStackView {
-                if stack.arrangedSubviews.count > endIndex-1 {
+                if stack.arrangedSubviews.count > endIndex {
                     if startedIndex == endIndex {
                         let view = stack.arrangedSubviews[startedIndex]
                         view.backgroundColor = color
                     } else {
-                        for index in startedIndex...endIndex-1 {
+                        for index in startedIndex...endIndex {
                             let view = stack.arrangedSubviews[index]
                             view.backgroundColor = color
                         }
@@ -257,19 +257,19 @@ class GraphView: UIView {
 
         guard stackViewForDay.arrangedSubviews.count - 1 >= index else {return}
             if let stack = stackViewForDay.arrangedSubviews[index] as? UIStackView {
-                if stack.arrangedSubviews.count > endIndex-1 {
+                if stack.arrangedSubviews.count > endIndex {
                     if startedIndex == endIndex {
                         let view = stack.arrangedSubviews[startedIndex]
                         view.backgroundColor = color
                     } else {
-                        for index in startedIndex...endIndex-1 {
+                        for index in startedIndex...endIndex {
                             let view = stack.arrangedSubviews[index]
                             view.backgroundColor = color
                             view.layer.cornerRadius = 0
                             if index == startedIndex {
                                 view.layer.cornerRadius = 2
                                 view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-                            } else if index == endIndex-1 {
+                            } else if index == endIndex {
                                 view.layer.cornerRadius = 2
                                 view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
                             }
@@ -312,8 +312,8 @@ class GraphView: UIView {
 
     private func calculateStartAndEndTime( for element: GraphActivity) -> (start: Int, end: Int) {
         let startedTime = element.timeStart.inMinute() / 30
-
-        let end = startedTime + (element.duration.inMinutes() / 30)
+        let duration = ceil(Double(element.duration.inMinutes() / 30))
+        let end = startedTime + Int(duration)
         let endedTime = min(end, numberOfHalfHour)
 
         return (startedTime, endedTime)

@@ -85,7 +85,7 @@ final class GraphTypeTableViewCell: UITableViewCell {
         subtitleView.text = graphType
 
         switch graphType {
-        case "pixel":
+        case "Pixel":
             graph.image = UIImage(named: "pixelGraph")
         case "Barre":
             graph.image = UIImage(named: "rodGraph")

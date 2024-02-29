@@ -15,6 +15,6 @@ extension Sleep {
         return NSFetchRequest<Sleep>(entityName: "Sleep")
     }
 
-    @NSManaged public var duration: Int16
+    @NSManaged public var duration: Int64
 
 }
