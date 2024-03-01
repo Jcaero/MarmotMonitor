@@ -141,6 +141,9 @@
 		47E45E1B2B65ADA9005E5268 /* imageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E45E1A2B65ADA9005E5268 /* imageName.swift */; };
 		47F43F762B9216B400CB034A /* (null) in Resources */ = {isa = PBXBuildFile; };
 		47F43F772B9216B700CB034A /* (null) in Resources */ = {isa = PBXBuildFile; };
+		47F43F942B92232000CB034A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47F43F932B92232000CB034A /* GoogleService-Info.plist */; };
+		47F43F952B92232000CB034A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47F43F932B92232000CB034A /* GoogleService-Info.plist */; };
+		47F43F962B92232000CB034A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47F43F932B92232000CB034A /* GoogleService-Info.plist */; };
 		47F675892B87DB7A00D65D3B /* DetailGraphViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F675882B87DB7A00D65D3B /* DetailGraphViewModelTest.swift */; };
 		47F81B9D2B6058430042A055 /* MonitorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81B9C2B6058430042A055 /* MonitorViewController.swift */; };
 		47F81B9F2B605AEC0042A055 /* MonitorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F81B9E2B605AEC0042A055 /* MonitorCell.swift */; };
@@ -969,6 +972,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				475071E72B09462100DAB527 /* LaunchScreen.storyboard in Resources */,
+				47F43F942B92232000CB034A /* GoogleService-Info.plist in Resources */,
 				475071E42B09462100DAB527 /* Assets.xcassets in Resources */,
 				47F43F772B9216B700CB034A /* (null) in Resources */,
 			);
@@ -979,6 +983,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47F43F762B9216B400CB034A /* (null) in Resources */,
+				47F43F952B92232000CB034A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -986,6 +991,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47F43F962B92232000CB034A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
