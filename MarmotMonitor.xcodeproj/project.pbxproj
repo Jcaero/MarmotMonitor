@@ -96,7 +96,6 @@
 		47AF89762B3A28200068FE1F /* diaperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF89752B3A28200068FE1F /* diaperController.swift */; };
 		47AF89782B3A29E90068FE1F /* diaperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF89772B3A29E90068FE1F /* diaperCell.swift */; };
 		47B177AB2B91165400730B50 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177AA2B91165400730B50 /* DGCharts */; };
-		47B177B12B911E3900730B50 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177B02B911E3900730B50 /* FirebaseAnalyticsSwift */; };
 		47B177B52B911E5900730B50 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177B42B911E5900730B50 /* FirebasePerformance */; };
 		47B2316A2B6C35C30079B436 /* DoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B231692B6C35C30079B436 /* DoctorViewController.swift */; };
 		47B2316D2B6C390E0079B436 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 47B2316C2B6C390E0079B436 /* DGCharts */; };
@@ -318,7 +317,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47B177B12B911E3900730B50 /* FirebaseAnalyticsSwift in Frameworks */,
 				47B177AB2B91165400730B50 /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -886,7 +884,6 @@
 			name = MarmotMonitorTests;
 			packageProductDependencies = (
 				47B177AA2B91165400730B50 /* DGCharts */,
-				47B177B02B911E3900730B50 /* FirebaseAnalyticsSwift */,
 			);
 			productName = MarmotMonitorTests;
 			productReference = 475071ED2B09462100DAB527 /* MarmotMonitorTests.xctest */;
@@ -1587,11 +1584,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47B231672B6C353E0079B436 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
-		};
-		47B177B02B911E3900730B50 /* FirebaseAnalyticsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 474B95E82B8A855700A20298 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsSwift;
 		};
 		47B177B42B911E5900730B50 /* FirebasePerformance */ = {
 			isa = XCSwiftPackageProductDependency;
