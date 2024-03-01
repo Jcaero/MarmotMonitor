@@ -298,6 +298,7 @@
 		47E2A40A2B49848B008E75DD /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		47E45E1A2B65ADA9005E5268 /* imageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageName.swift; sourceTree = "<group>"; };
 		47F43F7F2B9218F500CB034A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		47F43F7F2B9218F500CB034A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "/Users/pierrick/Documents/openclassrooms/Projet12/xcode/MarmotMonitor/MarmotMonitor/Ressources/GoogleService-Info.plist"; sourceTree = "<absolute>"; };
 		47F675882B87DB7A00D65D3B /* DetailGraphViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGraphViewModelTest.swift; sourceTree = "<group>"; };
 		47F81B9C2B6058430042A055 /* MonitorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorViewController.swift; sourceTree = "<group>"; };
 		47F81B9E2B605AEC0042A055 /* MonitorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorCell.swift; sourceTree = "<group>"; };
