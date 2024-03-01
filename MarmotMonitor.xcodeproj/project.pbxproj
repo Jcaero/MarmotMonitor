@@ -173,6 +173,7 @@
 		4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedingController.swift; sourceTree = "<group>"; };
 		470808212B5D5046004258A5 /* BottleFeedingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedingViewModelTest.swift; sourceTree = "<group>"; };
 		4709E39E2B83757A009F1D27 /* SettingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModelTest.swift; sourceTree = "<group>"; };
+		470A4C552B926871005795C1 /* MarmotMonitor.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MarmotMonitor.xctestplan; sourceTree = "<group>"; };
 		4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModelTest.swift; sourceTree = "<group>"; };
 		4711F7732B1E70AB00869A27 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		471201382B88AE0000E63E8D /* MonitorAuditAccessibily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorAuditAccessibily.swift; sourceTree = "<group>"; };
@@ -535,6 +536,7 @@
 		475071CB2B09462000DAB527 = {
 			isa = PBXGroup;
 			children = (
+				470A4C552B926871005795C1 /* MarmotMonitor.xctestplan */,
 				475071D62B09462000DAB527 /* MarmotMonitor */,
 				475071F02B09462100DAB527 /* MarmotMonitorTests */,
 				475071FA2B09462100DAB527 /* MarmotMonitorUITests */,
