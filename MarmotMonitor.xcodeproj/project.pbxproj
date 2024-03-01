@@ -104,9 +104,6 @@
 		47B2316D2B6C390E0079B436 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 47B2316C2B6C390E0079B436 /* DGCharts */; };
 		47B500A02B7910AB0055A4A2 /* IconSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B5009F2B7910AB0055A4A2 /* IconSettingViewModel.swift */; };
 		47B984CE2B77833F000DBB80 /* IconSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B984CD2B77833F000DBB80 /* IconSettingViewController.swift */; };
-		47C8AF0C2B9229F600B7B286 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 475071E82B09462100DAB527 /* Info.plist */; };
-		47C8AF0D2B9229F600B7B286 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 475071E82B09462100DAB527 /* Info.plist */; };
-		47C8AF0E2B922A0700B7B286 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 475071E82B09462100DAB527 /* Info.plist */; };
 		47C8F36C2B741BA500E94668 /* GraphtypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8F36B2B741BA500E94668 /* GraphtypeViewController.swift */; };
 		47C8F36E2B74280500E94668 /* GraphtypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8F36D2B74280500E94668 /* GraphtypeViewModel.swift */; };
 		47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8C2B128A5A00C5919A /* UserDefault+.swift */; };
@@ -973,7 +970,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47C8AF0E2B922A0700B7B286 /* Info.plist in Resources */,
 				475071E72B09462100DAB527 /* LaunchScreen.storyboard in Resources */,
 				47F43F942B92232000CB034A /* GoogleService-Info.plist in Resources */,
 				475071E42B09462100DAB527 /* Assets.xcassets in Resources */,
@@ -987,7 +983,6 @@
 			files = (
 				47F43F762B9216B400CB034A /* (null) in Resources */,
 				47F43F952B92232000CB034A /* GoogleService-Info.plist in Resources */,
-				47C8AF0C2B9229F600B7B286 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -995,7 +990,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47C8AF0D2B9229F600B7B286 /* Info.plist in Resources */,
 				47F43F962B92232000CB034A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
