@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "AC6263E5-0DA8-43E0-B915-E693FAC64C00",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:MarmotMonitor.xcodeproj",
+      "identifier" : "475071D32B09462000DAB527",
+      "name" : "MarmotMonitor"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MarmotMonitor.xcodeproj",
+        "identifier" : "475071EC2B09462100DAB527",
+        "name" : "MarmotMonitorTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MarmotMonitor.xcodeproj",
+        "identifier" : "475071F62B09462100DAB527",
+        "name" : "MarmotMonitorUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

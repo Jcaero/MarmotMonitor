@@ -96,10 +96,8 @@
 		47AF89762B3A28200068FE1F /* diaperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF89752B3A28200068FE1F /* diaperController.swift */; };
 		47AF89782B3A29E90068FE1F /* diaperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AF89772B3A29E90068FE1F /* diaperCell.swift */; };
 		47B177AB2B91165400730B50 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177AA2B91165400730B50 /* DGCharts */; };
-		47B177AF2B91165C00730B50 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177AE2B91165C00730B50 /* FirebaseCrashlytics */; };
 		47B177B12B911E3900730B50 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177B02B911E3900730B50 /* FirebaseAnalyticsSwift */; };
 		47B177B52B911E5900730B50 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177B42B911E5900730B50 /* FirebasePerformance */; };
-		47B177BD2B91342800730B50 /* FirebaseInstallations in Frameworks */ = {isa = PBXBuildFile; productRef = 47B177BC2B91342800730B50 /* FirebaseInstallations */; };
 		47B2316A2B6C35C30079B436 /* DoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B231692B6C35C30079B436 /* DoctorViewController.swift */; };
 		47B2316D2B6C390E0079B436 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 47B2316C2B6C390E0079B436 /* DGCharts */; };
 		47B500A02B7910AB0055A4A2 /* IconSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B5009F2B7910AB0055A4A2 /* IconSettingViewModel.swift */; };
@@ -173,6 +171,7 @@
 		4704F2C22B2F98310060DCEE /* BottleFeedingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedingController.swift; sourceTree = "<group>"; };
 		470808212B5D5046004258A5 /* BottleFeedingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleFeedingViewModelTest.swift; sourceTree = "<group>"; };
 		4709E39E2B83757A009F1D27 /* SettingViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModelTest.swift; sourceTree = "<group>"; };
+		470A4C552B926871005795C1 /* MarmotMonitor.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MarmotMonitor.xctestplan; sourceTree = "<group>"; };
 		4711F76F2B1E6C3B00869A27 /* TodayViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModelTest.swift; sourceTree = "<group>"; };
 		4711F7732B1E70AB00869A27 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		471201382B88AE0000E63E8D /* MonitorAuditAccessibily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorAuditAccessibily.swift; sourceTree = "<group>"; };
@@ -320,8 +319,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				47B177B12B911E3900730B50 /* FirebaseAnalyticsSwift in Frameworks */,
-				47B177BD2B91342800730B50 /* FirebaseInstallations in Frameworks */,
-				47B177AF2B91165C00730B50 /* FirebaseCrashlytics in Frameworks */,
 				47B177AB2B91165400730B50 /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -535,6 +532,7 @@
 		475071CB2B09462000DAB527 = {
 			isa = PBXGroup;
 			children = (
+				470A4C552B926871005795C1 /* MarmotMonitor.xctestplan */,
 				475071D62B09462000DAB527 /* MarmotMonitor */,
 				475071F02B09462100DAB527 /* MarmotMonitorTests */,
 				475071FA2B09462100DAB527 /* MarmotMonitorUITests */,
@@ -888,9 +886,7 @@
 			name = MarmotMonitorTests;
 			packageProductDependencies = (
 				47B177AA2B91165400730B50 /* DGCharts */,
-				47B177AE2B91165C00730B50 /* FirebaseCrashlytics */,
 				47B177B02B911E3900730B50 /* FirebaseAnalyticsSwift */,
-				47B177BC2B91342800730B50 /* FirebaseInstallations */,
 			);
 			productName = MarmotMonitorTests;
 			productReference = 475071ED2B09462100DAB527 /* MarmotMonitorTests.xctest */;
@@ -1345,7 +1341,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ZRWFG582AN;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MarmotMonitor/Ressources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
@@ -1385,7 +1381,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ZRWFG582AN;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MarmotMonitor/Ressources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
@@ -1420,7 +1416,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZRWFG582AN;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MarmotMonitor/Ressources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1444,7 +1440,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZRWFG582AN;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MarmotMonitor/Ressources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1592,11 +1588,6 @@
 			package = 47B231672B6C353E0079B436 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
 		};
-		47B177AE2B91165C00730B50 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 474B95E82B8A855700A20298 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
 		47B177B02B911E3900730B50 /* FirebaseAnalyticsSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 474B95E82B8A855700A20298 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -1606,11 +1597,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 474B95E82B8A855700A20298 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebasePerformance;
-		};
-		47B177BC2B91342800730B50 /* FirebaseInstallations */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 474B95E82B8A855700A20298 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseInstallations;
 		};
 		47B2316C2B6C390E0079B436 /* DGCharts */ = {
 			isa = XCSwiftPackageProductDependency;
