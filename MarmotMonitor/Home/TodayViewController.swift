@@ -74,7 +74,7 @@ final class TodayViewController: BackgroundViewController {
         return label
     }()
 
-    let bayYearSecondElement: UILabel = {
+    let babyYearSecondElement: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .right
@@ -145,10 +145,12 @@ final class TodayViewController: BackgroundViewController {
         if let element = babyYearFirstElement.text {
             babyYearFirstElement.setAccessibility(with: .staticText, label: element, hint: "")
         }
-        bayYearSecondElement.text = viewModel.babySecondElement()
-        if let element = bayYearSecondElement.text {
-            bayYearSecondElement.setAccessibility(with: .staticText, label: element, hint: "age du bébé")
+        babyYearSecondElement.text = viewModel.babySecondElement()
+        if let element = babyYearSecondElement.text {
+            babyYearSecondElement.setAccessibility(with: .staticText, label: element, hint: "age du bébé")
         }
+
+        traitCollectionDidChange(nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -177,7 +179,7 @@ final class TodayViewController: BackgroundViewController {
         babyImage.layer.addSublayer(imageGradient)
 
         babyImage.addSubview(babyYearFirstElement)
-        babyImage.addSubview(bayYearSecondElement)
+        babyImage.addSubview(babyYearSecondElement)
 
         scrollView.addSubview(scrollArea)
         scrollArea.addSubview(babyImage)
@@ -190,7 +192,7 @@ final class TodayViewController: BackgroundViewController {
 
     private func setupContraints() {
         [scrollView, currentDate, welcomeLabel,
-         babyImage, babyYearFirstElement, bayYearSecondElement,
+         babyImage, babyYearFirstElement, babyYearSecondElement,
          scrollArea, tableView, tableViewArea, tableViewName].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -223,9 +225,11 @@ final class TodayViewController: BackgroundViewController {
 
             babyYearFirstElement.bottomAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: -2),
             babyYearFirstElement.leftAnchor.constraint(equalTo: babyImage.leftAnchor, constant: 10),
+            babyYearFirstElement.rightAnchor.constraint(equalTo: babyImage.centerXAnchor, constant: -10),
 
-            bayYearSecondElement.bottomAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: -2),
-            bayYearSecondElement.rightAnchor.constraint(equalTo: babyImage.rightAnchor, constant: -10),
+            babyYearSecondElement.bottomAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: -2),
+            babyYearSecondElement.rightAnchor.constraint(equalTo: babyImage.rightAnchor, constant: -10),
+            babyYearSecondElement.leftAnchor.constraint(equalTo: babyImage.centerXAnchor, constant: 10),
 
             tableViewArea.topAnchor.constraint(equalTo: babyImage.bottomAnchor, constant: 30),
             tableViewArea.rightAnchor.constraint(equalTo: scrollArea.rightAnchor, constant: -10),
@@ -316,5 +320,34 @@ extension TodayViewController: UITableViewDataSource {
         cell.backgroundColor = .clear
         cell.accessoryType = .disclosureIndicator
         return cell
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+
+        if isAccessibilityCategory {
+            setupAgeFormatAccessibility()
+        } else {
+            setupAgeFormatNormal()
+        }
+    }
+
+    private func setupAgeFormatNormal() {
+        if let texte = babyYearFirstElement.text {
+            babyYearFirstElement.text = viewModel.convertAgeFormatNormal(originalText: texte)
+        }
+        if let texte = babyYearSecondElement.text {
+            babyYearSecondElement.text = viewModel.convertAgeFormatNormal(originalText: texte)
+        }
+    }
+
+    private func setupAgeFormatAccessibility() {
+        if let texte = babyYearFirstElement.text {
+            babyYearFirstElement.text = viewModel.convertAgeFormatAccessibility(originalText: texte)
+        }
+        if let texte = babyYearSecondElement.text {
+            babyYearSecondElement.text = viewModel.convertAgeFormatAccessibility(originalText: texte)
+        }
     }
 }

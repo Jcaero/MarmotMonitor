@@ -80,6 +80,32 @@ final class TodayViewModel {
         }
     }
 
+    func convertAgeFormatAccessibility(originalText: String) -> String {
+        switch true {
+        case originalText.hasSuffix("ans"):
+            return originalText.replacingOccurrences(of: "ans", with: "A").replacingOccurrences(of: "\n", with: "")
+        case originalText.hasSuffix("mois"):
+            return originalText.replacingOccurrences(of: "mois", with: "M").replacingOccurrences(of: "\n", with: "")
+        case originalText.hasSuffix("jours"):
+            return originalText.replacingOccurrences(of: "jours", with: "J").replacingOccurrences(of: "\n", with: "")
+        default:
+            return originalText
+        }
+    }
+
+    func convertAgeFormatNormal(originalText: String) -> String {
+        switch true {
+        case originalText.hasSuffix("A"):
+            return originalText.replacingOccurrences(of: "A", with: "\nans")
+        case originalText.hasSuffix("M"):
+            return originalText.replacingOccurrences(of: "M", with: "\nmois")
+        case originalText.hasSuffix("J"):
+            return originalText.replacingOccurrences(of: "J", with: "\njours")
+        default:
+            return originalText
+        }
+    }
+
     // MARK: - Update Last Value
     func fetchLastActivities() {
         fetchDiaper()

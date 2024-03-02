@@ -96,14 +96,16 @@ class TodayViewModelTest: TestCase {
     }
 
     func testBabyBorn3MonthAnd2dayAgo_WhenRequestAge_receiveAgeForText() {
-        let date = Date().convertToFrenchTimeZone()
-        print("date \(date)")
+        let date = Date()
         let calendar = Calendar.current
         let newDate = calendar.date(byAdding: .month, value: -3, to: date)
         let newDate2 = calendar.date(byAdding: .day, value: -2, to: newDate!)
-        print("newDate2 \(String(describing: newDate2))")
-        let babyDate = newDate2!.toStringWithDayMonthYear()
-        print("babyDate \(babyDate)")
+//        let babyDate = newDate!.toStringWithDayMonthYear()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let babyDate =  dateFormatter.string(from: newDate2!)
+        
         let baby = Person(name: "Bébé", gender: .girl, parentName: "Pierrick", birthDay: babyDate )
         let viewModel = TodayViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
 
