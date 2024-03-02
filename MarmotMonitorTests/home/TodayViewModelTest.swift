@@ -96,10 +96,14 @@ class TodayViewModelTest: TestCase {
     }
 
     func testBabyBorn3MonthAnd2dayAgo_WhenRequestAge_receiveAgeForText() {
-        let date = Date()
+//        let date = Date()
+
         var calendar = Calendar.current
-        calendar.timeZone = TimeZone(identifier: "Europe/Paris") ?? TimeZone.current
-        let newDate = calendar.date(byAdding: .month, value: -3, to: date)
+        calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
+        let now = Date()
+        let startOfDayInFrance = calendar.startOfDay(for: now)
+
+        let newDate = calendar.date(byAdding: .month, value: -3, to: startOfDayInFrance)
         let newDate2 = calendar.date(byAdding: .day, value: -2, to: newDate!)
         let babyDate = newDate2!.toStringWithDayMonthYear()
         
