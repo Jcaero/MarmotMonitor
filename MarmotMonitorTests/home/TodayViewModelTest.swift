@@ -106,10 +106,14 @@ class TodayViewModelTest: TestCase {
         let date = Date()
 
         var calendar = Calendar.current
-        calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
         let newDate = calendar.date(byAdding: .month, value: -1, to: date)
         let newDate2 = calendar.date(byAdding: .day, value: -2, to: newDate!)
-        let babyDate = newDate2!.toStringWithDayMonthYear()
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier:"GMT")!
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let babyDate = dateFormatter.string(from: newDate2!)
+        
+///*        let babyDate = */newDate2!.toStringWithDayMonthYear()
         
         let baby = Person(name: "Bébé", gender: .girl, parentName: "Pierrick", birthDay: babyDate )
         let viewModel = TodayViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
