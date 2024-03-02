@@ -80,32 +80,33 @@ class TodayViewModelTest: TestCase {
     }
 
     func testBabyBorn3YearAnd2MonthAgo_WhenRequestAge_receiveAgeForText() {
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.timeZone = TimeZone(identifier: "Europe/Paris")
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let dateStringInParis = formatter.string(from: date)
-        let frenchDate = dateStringInParis.toDate()
-        
-        let calendar = Calendar.current
-        let newDate = calendar.date(byAdding: .year, value: -3, to: date)
-        let newDate2 = calendar.date(byAdding: .month, value: -2, to: newDate!)
-        let babyDate = newDate2!.toStringWithDayMonthYear()
-        let baby = Person(name: "Bébé", gender: .girl, parentName: "Pierrick", birthDay: babyDate )
-        let viewModel = TodayViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
+        // Utiliser directement la date actuelle sans conversion inutile
+           let date = Date()
 
-        let first = viewModel.babyFirstElement()
-        let second = viewModel.babySecondElement()
+           var calendar = Calendar.current
+           calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
 
-        XCTAssertEqual(first, "3\nans")
-        XCTAssertEqual(second, "2\nmois")
+           let newDate = calendar.date(byAdding: .year, value: -3, to: date)
+           let newDate2 = calendar.date(byAdding: .month, value: -2, to: newDate!)
+           let babyDate = newDate2!.toStringWithDayMonthYear()
+
+           // Création du bébé et du viewModel
+           let baby = Person(name: "Bébé", gender: .girl, parentName: "Pierrick", birthDay: babyDate)
+           let viewModel = TodayViewModel(userDefaultsManager: UserDefaultsManagerMock(mockPerson: baby))
+
+           // Récupération et test des éléments
+           let first = viewModel.babyFirstElement()
+           let second = viewModel.babySecondElement()
+
+           XCTAssertEqual(first, "3\nans")
+           XCTAssertEqual(second, "2\nmois")
     }
 
     func testBabyBorn3MonthAnd2dayAgo_WhenRequestAge_receiveAgeForText() {
         let date = Date()
 
         var calendar = Calendar.current
-        calendar.timeZone = TimeZone(abbreviation: "")!
+        calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
         let newDate = calendar.date(byAdding: .month, value: -1, to: date)
         let newDate2 = calendar.date(byAdding: .day, value: -2, to: newDate!)
         let babyDate = newDate2!.toStringWithDayMonthYear()
