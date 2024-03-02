@@ -56,7 +56,12 @@ final class TodayViewModel {
         guard let birthDayDate = requestPersonData()?.birthDay?.toDate() else {
             return nil
         }
-        return Calendar.current.dateComponents([.year, .month, .day], from: birthDayDate, to: Date())
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
+        let now = Date() // La date et l'heure actuelles en UTC
+        let startOfDayInFrance = calendar.startOfDay(for: now)
+
+        return Calendar.current.dateComponents([.year, .month, .day], from: birthDayDate, to: startOfDayInFrance)
     }
 
     func babyFirstElement() -> String {
