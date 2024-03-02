@@ -96,7 +96,7 @@ class TodayViewModelTest: TestCase {
     }
 
     func testBabyBorn3MonthAnd2dayAgo_WhenRequestAge_receiveAgeForText() {
-        let date = Date()
+        let date = Date().convertToFrenchTimeZone()
         let calendar = Calendar.current
         let newDate = calendar.date(byAdding: .month, value: -3, to: date)
         let newDate2 = calendar.date(byAdding: .day, value: -2, to: newDate!)
