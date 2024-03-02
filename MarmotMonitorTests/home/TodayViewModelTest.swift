@@ -150,7 +150,7 @@ class TodayViewModelTest: TestCase {
         let activityTitleAfter = viewModel.activities[2].cellSubTitle
         
         XCTAssertEqual(activityTitle, "Saisir la couche")
-        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 Urine")
+        XCTAssertEqual(activityTitleAfter, "\(testFirstDateSeven.toStringWithTimeAndDayMonthYear()) Urine")
     }
 
     func testCoreDataHaveData_WhenFetchBottleData_TableViewIsUpdate(){
@@ -166,7 +166,7 @@ class TodayViewModelTest: TestCase {
         let activityTitleAfter = viewModel.activities[0].cellSubTitle
         
         XCTAssertEqual(activityTitle, "Saisir la tétée/le biberon")
-        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 biberon de 100 ml")
+        XCTAssertEqual(activityTitleAfter, "\(testFirstDateSeven.toStringWithTimeAndDayMonthYear()) biberon de 100 ml")
     }
 
     func testCoreDataHaveManyData_WhenFetchBottleData_TableViewIsUpdate(){
@@ -187,7 +187,7 @@ class TodayViewModelTest: TestCase {
         let activityTitleAfter = viewModel.activities[0].cellSubTitle
         
         XCTAssertEqual(activityTitle, "Saisir la tétée/le biberon")
-        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 biberon de 100 ml")
+        XCTAssertEqual(activityTitleAfter, "\(testFirstDateSeven.toStringWithTimeAndDayMonthYear()) biberon de 100 ml")
     }
 
     func testCoreDataHaveData_WhenFetchBreastData_TableViewIsUpdate(){
@@ -203,7 +203,7 @@ class TodayViewModelTest: TestCase {
         let activityTitleAfter = viewModel.activities[0].cellSubTitle
         
         XCTAssertEqual(activityTitle, "Saisir la tétée/le biberon")
-        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 tétée de 16 min")
+        XCTAssertEqual(activityTitleAfter, "\(testFirstDateSeven.toStringWithTimeAndDayMonthYear()) tétée de 16 min")
     }
 
     func testCoreDataHaveData_WhenFetchSolidData_TableViewIsUpdate(){
@@ -219,7 +219,7 @@ class TodayViewModelTest: TestCase {
         let activityTitleAfter = viewModel.activities[0].cellSubTitle
         
         XCTAssertEqual(activityTitle, "Saisir la tétée/le biberon")
-        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 aliments: 1500 g")
+        XCTAssertEqual(activityTitleAfter, "\(testFirstDateSeven.toStringWithTimeAndDayMonthYear()) aliments: 1500 g")
     }
 
 
@@ -236,7 +236,7 @@ class TodayViewModelTest: TestCase {
         let activityTitleAfter = viewModel.activities[1].cellSubTitle
         
         XCTAssertEqual(activityTitle, "Saisir le sommeil")
-        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 01 H")
+        XCTAssertEqual(activityTitleAfter, "\(testFirstDateSeven.toStringWithTimeAndDayMonthYear()) 01 H")
     }
 
     func testCoreDataHaveData_WhenFetchGrowthData_TableViewIsUpdate(){
@@ -253,6 +253,6 @@ class TodayViewModelTest: TestCase {
         let activityTitleAfter = viewModel.activities[3].cellSubTitle
         
         XCTAssertEqual(activityTitle, "Ajouter une mesure")
-        XCTAssertEqual(activityTitleAfter, "07/01/2024 22:30 Taille: 51.3 cm Poids: 25.0 Kg")
+        XCTAssertEqual(activityTitleAfter, "\(testFirstDateSeven.toStringWithTimeAndDayMonthYear()) Taille: 51.3 cm Poids: 25.0 Kg")
     }
 }

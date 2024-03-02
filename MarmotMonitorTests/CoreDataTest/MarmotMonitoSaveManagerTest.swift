@@ -441,7 +441,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         let date = dateActivities?.date.toStringWithTimeAndDayMonthYear()
         let status = dateActivities?.activity.state
         
-        XCTAssertEqual(date, "07/01/2024 22:30")
+        XCTAssertEqual(date, "\(testFirstDateSeven.toStringWithTimeAndDayMonthYear())")
         XCTAssertEqual(status, "Souillée")
     }
 
@@ -493,7 +493,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         let date = dateActivities?.date.toStringWithTimeAndDayMonthYear()
         let duration = dateActivities?.activity.rightDuration
         
-        XCTAssertEqual(date, "07/01/2024 22:30")
+        XCTAssertEqual(date, testFirstDateSeven.toStringWithTimeAndDayMonthYear())
         XCTAssertEqual(duration, 150)
     }
 
@@ -518,7 +518,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         let date = dateActivities?.date.toStringWithTimeAndDayMonthYear()
         let total = dateActivities?.activity.total
         
-        XCTAssertEqual(date, "06/01/2023 00:00")
+        XCTAssertEqual(date, "\(testSecondDateSix.toStringWithTimeAndDayMonthYear())")
         XCTAssertEqual(total, 1500)
     }
 
