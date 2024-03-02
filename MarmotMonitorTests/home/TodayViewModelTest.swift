@@ -113,7 +113,7 @@ class TodayViewModelTest: TestCase {
         let second = viewModel.babySecondElement()
 
         XCTAssertEqual(first, "3\nmois")
-//        XCTAssertEqual(second, "2\njours")
+        XCTAssertEqual(second, "2\njours")
     }
 
     func testBabyHaveNoBirthDay_WhenRequestAge_receiveNil() {
@@ -260,4 +260,55 @@ class TodayViewModelTest: TestCase {
         XCTAssertEqual(activityTitle, "Ajouter une mesure")
         XCTAssertEqual(activityTitleAfter, "\(testFirstDateSeven.toStringWithTimeAndDayMonthYear()) Taille: 51.3 cm Poids: 25.0 Kg")
     }
+
+    // MARK: - Test Convert Format accessibility
+    func testTitleHaveTexteMonth_WhenConvertData_DataIsConvert(){
+        let title = "2 mois"
+
+        let newTitle = viewModel.convertAgeFormatAccessibility(originalText: title)
+        
+        XCTAssertEqual(newTitle, "2 M")
+    }
+
+    func testTitleHaveTexteYear_WhenConvertData_DataIsConvert(){
+        let title = "2 ans"
+
+        let newTitle = viewModel.convertAgeFormatAccessibility(originalText: title)
+        
+        XCTAssertEqual(newTitle, "2 A")
+    }
+
+    func testTitleHaveTexteDay_WhenConvertData_DataIsConvert(){
+        let title = "2 jours"
+
+        let newTitle = viewModel.convertAgeFormatAccessibility(originalText: title)
+        
+        XCTAssertEqual(newTitle, "2 J")
+    }
+
+    // MARK: - Test Convert Format Normal
+    func testTitleHaveTexteMonth_WhenConvertDataNormaly_DataIsConvert(){
+        let title = "2 M"
+
+        let newTitle = viewModel.convertAgeFormatNormal(originalText: title)
+        
+        XCTAssertEqual(newTitle, "2\nmois")
+    }
+
+    func testTitleHaveTexteYear_WhenConvertDataNormaly_DataIsConvert(){
+        let title = "2 A"
+
+        let newTitle = viewModel.convertAgeFormatNormal(originalText: title)
+        
+        XCTAssertEqual(newTitle, "2\nans")
+    }
+
+    func testTitleHaveTexteDay_WhenConvertDataNormaly_DataIsConvert(){
+        let title = "2 J"
+
+        let newTitle = viewModel.convertAgeFormatNormal(originalText: title)
+        
+        XCTAssertEqual(newTitle, "2\njours")
+    }
+    
 }
