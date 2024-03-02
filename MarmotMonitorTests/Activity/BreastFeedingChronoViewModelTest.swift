@@ -105,13 +105,14 @@ class BreastFeedingChronoViewModelTest: TestCase {
 
         viewModel.buttonPressed(.right)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.2) {
+            self.viewModel.buttonPressed(.right)
+            XCTAssertEqual(self.rightTime, "00:05")
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 7.2) {
             self.viewModel.buttonPressed(.right)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 7.1) {
-            self.viewModel.buttonPressed(.right)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 9.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 9.6) {
             expectation.fulfill()
         }
 
