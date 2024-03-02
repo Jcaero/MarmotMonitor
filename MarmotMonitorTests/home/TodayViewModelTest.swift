@@ -81,6 +81,12 @@ class TodayViewModelTest: TestCase {
 
     func testBabyBorn3YearAnd2MonthAgo_WhenRequestAge_receiveAgeForText() {
         let date = Date()
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(identifier: "Europe/Paris")
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateStringInParis = formatter.string(from: date)
+        let frenchDate = dateStringInParis.toDate()
+        
         let calendar = Calendar.current
         let newDate = calendar.date(byAdding: .year, value: -3, to: date)
         let newDate2 = calendar.date(byAdding: .month, value: -2, to: newDate!)
@@ -96,14 +102,11 @@ class TodayViewModelTest: TestCase {
     }
 
     func testBabyBorn3MonthAnd2dayAgo_WhenRequestAge_receiveAgeForText() {
-//        let date = Date()
+        let date = Date()
 
         var calendar = Calendar.current
-        calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
-        let now = Date()
-        let startOfDayInFrance = calendar.startOfDay(for: now)
-
-        let newDate = calendar.date(byAdding: .month, value: -3, to: startOfDayInFrance)
+        calendar.timeZone = TimeZone(abbreviation: "")!
+        let newDate = calendar.date(byAdding: .month, value: -1, to: date)
         let newDate2 = calendar.date(byAdding: .day, value: -2, to: newDate!)
         let babyDate = newDate2!.toStringWithDayMonthYear()
         
@@ -113,7 +116,7 @@ class TodayViewModelTest: TestCase {
         let first = viewModel.babyFirstElement()
         let second = viewModel.babySecondElement()
 
-        XCTAssertEqual(first, "3\nmois")
+        XCTAssertEqual(first, "1\nmois")
         XCTAssertEqual(second, "2\njours")
     }
 
