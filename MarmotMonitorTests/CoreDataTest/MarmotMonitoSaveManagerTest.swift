@@ -466,7 +466,7 @@ final class MarmotMonitoSaveManagerTest: TestCase {
         let date = dateActivities?.date.toStringWithTimeAndDayMonthYear()
         let quantity = dateActivities?.activity.quantity
         
-        XCTAssertEqual(date, "07/01/2024 22:30")
+        XCTAssertEqual(date, testFirstDateSeven.toStringWithTimeAndDayMonthYear())
         XCTAssertEqual(quantity, 150)
     }
 
