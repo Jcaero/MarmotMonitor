@@ -101,11 +101,11 @@ final class TodayViewModel {
     func convertAgeFormatNormal(originalText: String) -> String {
         switch true {
         case originalText.hasSuffix("A"):
-            return originalText.replacingOccurrences(of: " A", with: "\nans")
+            return originalText.replacingOccurrences(of: "A", with: "\nans")
         case originalText.hasSuffix("M"):
-            return originalText.replacingOccurrences(of: " M", with: "\nmois")
+            return originalText.replacingOccurrences(of: "M", with: "\nmois")
         case originalText.hasSuffix("J"):
-            return originalText.replacingOccurrences(of: " J", with: "\njours")
+            return originalText.replacingOccurrences(of: "J", with: "\njours")
         default:
             return originalText
         }
