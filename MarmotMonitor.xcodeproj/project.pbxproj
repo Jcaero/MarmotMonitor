@@ -24,7 +24,7 @@
 		47155BC82B1DE6E000775B27 /* BackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BC72B1DE6E000775B27 /* BackgroundViewController.swift */; };
 		47155BCA2B1DE97000775B27 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BC92B1DE97000775B27 /* TodayViewController.swift */; };
 		47155BCD2B1DEBDB00775B27 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */; };
-		47181C002B94BB60008507AA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 47181BFF2B94BB60008507AA /* FirebaseAnalytics */; };
+		47181BFE2B94BAB6008507AA /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47181BFD2B94BAB6008507AA /* FirebaseAnalyticsSwift */; };
 		4719ABE52B0E96380088CBE2 /* BabyNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719ABE42B0E96380088CBE2 /* BabyNameController.swift */; };
 		471D98032B76CB03003C0841 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471D98022B76CB03003C0841 /* AppIcon.swift */; };
 		4722368D2B6D88E800CBF044 /* DoctorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722368C2B6D88E800CBF044 /* DoctorViewModel.swift */; };
@@ -303,8 +303,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47181BFE2B94BAB6008507AA /* FirebaseAnalyticsSwift in Frameworks */,
 				474B95EC2B8A8D7100A20298 /* FirebaseCrashlytics in Frameworks */,
-				47181C002B94BB60008507AA /* FirebaseAnalytics in Frameworks */,
 				47B2316D2B6C390E0079B436 /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -856,7 +856,7 @@
 			packageProductDependencies = (
 				47B2316C2B6C390E0079B436 /* DGCharts */,
 				474B95EB2B8A8D7100A20298 /* FirebaseCrashlytics */,
-				47181BFF2B94BB60008507AA /* FirebaseAnalytics */,
+				47181BFD2B94BAB6008507AA /* FirebaseAnalyticsSwift */,
 			);
 			productName = MarmotMonitor;
 			productReference = 475071D42B09462000DAB527 /* MarmotMonitor.app */;
@@ -1548,10 +1548,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		47181BFF2B94BB60008507AA /* FirebaseAnalytics */ = {
+		47181BFD2B94BAB6008507AA /* FirebaseAnalyticsSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 474B95E82B8A855700A20298 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
+			productName = FirebaseAnalyticsSwift;
 		};
 		474B95EB2B8A8D7100A20298 /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
