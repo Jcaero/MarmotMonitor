@@ -295,7 +295,7 @@ class TodayViewModelTest: TestCase {
 
     // MARK: - Test Convert Format Normal
     func testTitleHaveTexteMonth_WhenConvertDataNormaly_DataIsConvert(){
-        let title = "2 M"
+        let title = "2M"
 
         let newTitle = viewModel.convertAgeFormatNormal(originalText: title)
         
@@ -303,7 +303,7 @@ class TodayViewModelTest: TestCase {
     }
 
     func testTitleHaveTexteYear_WhenConvertDataNormaly_DataIsConvert(){
-        let title = "2 A"
+        let title = "2A"
 
         let newTitle = viewModel.convertAgeFormatNormal(originalText: title)
         
@@ -311,7 +311,7 @@ class TodayViewModelTest: TestCase {
     }
 
     func testTitleHaveTexteDay_WhenConvertDataNormaly_DataIsConvert(){
-        let title = "2 J"
+        let title = "2J"
 
         let newTitle = viewModel.convertAgeFormatNormal(originalText: title)
         
