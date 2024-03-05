@@ -24,7 +24,6 @@
 		47155BC82B1DE6E000775B27 /* BackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BC72B1DE6E000775B27 /* BackgroundViewController.swift */; };
 		47155BCA2B1DE97000775B27 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BC92B1DE97000775B27 /* TodayViewController.swift */; };
 		47155BCD2B1DEBDB00775B27 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47155BCC2B1DEBDB00775B27 /* TodayViewModel.swift */; };
-		47181BFE2B94BAB6008507AA /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 47181BFD2B94BAB6008507AA /* FirebaseAnalyticsSwift */; };
 		4719ABE52B0E96380088CBE2 /* BabyNameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719ABE42B0E96380088CBE2 /* BabyNameController.swift */; };
 		471D98032B76CB03003C0841 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471D98022B76CB03003C0841 /* AppIcon.swift */; };
 		4722368D2B6D88E800CBF044 /* DoctorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722368C2B6D88E800CBF044 /* DoctorViewModel.swift */; };
@@ -99,6 +98,7 @@
 		47B2316D2B6C390E0079B436 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 47B2316C2B6C390E0079B436 /* DGCharts */; };
 		47B500A02B7910AB0055A4A2 /* IconSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B5009F2B7910AB0055A4A2 /* IconSettingViewModel.swift */; };
 		47B984CE2B77833F000DBB80 /* IconSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B984CD2B77833F000DBB80 /* IconSettingViewController.swift */; };
+		47C6CC462B97C449002ACE92 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 47C6CC452B97C449002ACE92 /* FirebaseAnalytics */; };
 		47C8F36C2B741BA500E94668 /* GraphtypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8F36B2B741BA500E94668 /* GraphtypeViewController.swift */; };
 		47C8F36E2B74280500E94668 /* GraphtypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8F36D2B74280500E94668 /* GraphtypeViewModel.swift */; };
 		47CABD8D2B128A5A00C5919A /* UserDefault+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CABD8C2B128A5A00C5919A /* UserDefault+.swift */; };
@@ -303,8 +303,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47181BFE2B94BAB6008507AA /* FirebaseAnalyticsSwift in Frameworks */,
 				474B95EC2B8A8D7100A20298 /* FirebaseCrashlytics in Frameworks */,
+				47C6CC462B97C449002ACE92 /* FirebaseAnalytics in Frameworks */,
 				47B2316D2B6C390E0079B436 /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -856,7 +856,7 @@
 			packageProductDependencies = (
 				47B2316C2B6C390E0079B436 /* DGCharts */,
 				474B95EB2B8A8D7100A20298 /* FirebaseCrashlytics */,
-				47181BFD2B94BAB6008507AA /* FirebaseAnalyticsSwift */,
+				47C6CC452B97C449002ACE92 /* FirebaseAnalytics */,
 			);
 			productName = MarmotMonitor;
 			productReference = 475071D42B09462000DAB527 /* MarmotMonitor.app */;
@@ -1548,11 +1548,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		47181BFD2B94BAB6008507AA /* FirebaseAnalyticsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 474B95E82B8A855700A20298 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsSwift;
-		};
 		474B95EB2B8A8D7100A20298 /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 474B95E82B8A855700A20298 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -1577,6 +1572,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47B231672B6C353E0079B436 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
+		};
+		47C6CC452B97C449002ACE92 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 474B95E82B8A855700A20298 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 

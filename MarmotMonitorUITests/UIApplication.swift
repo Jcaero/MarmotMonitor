@@ -11,9 +11,5 @@ import XCTest
 class UIApplication: XCUIApplication {
     var commencerButton: XCUIElement {self.buttons["Commencer"]}
     var nextButton: XCUIElement {self.buttons["Suivant"]}
-//    var clearButton: XCUIElement {self.buttons["Clear"]}
     var input: XCUIElement {self.textFields["babyName"]}
-//    var tabBarSearch: XCUIElement {tabBars.buttons.element(boundBy: 0)}
-//    var tabBarFavorite: XCUIElement {tabBars.buttons.element(boundBy: 1)}
-//    var saveButtonStar: XCUIElement {self.buttons["SaveButtonStar"]}
 }
