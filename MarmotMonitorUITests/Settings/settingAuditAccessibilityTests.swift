@@ -72,4 +72,16 @@ final class SettingAuditAccessibility: XCTestCase {
             // Fallback on earlier versions
         }
     }
+
+//    func testSetting() throws {
+//        let app = UIApplication()
+//        app.launchArguments = ["UI_TESTING"]
+//        app.launch()
+//        app.buttons["Réglage"].tap()
+//        if #available(iOS 17.0, *) {
+//            try app.performAccessibilityAudit()
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//    }
 }
