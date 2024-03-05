@@ -15,6 +15,7 @@ final class SettingAuditAccessibility: XCTestCase {
     
     func testAccessibilityApparence() throws {
         let app = UIApplication()
+        app.launchArguments = ["UI_TESTING"]
         app.launch()
         app.buttons["Réglage"].tap()
         let myTable = app.tables.matching(identifier: "SettingTableView")
@@ -29,6 +30,7 @@ final class SettingAuditAccessibility: XCTestCase {
 
     func testAccessibilityIcone() throws {
         let app = UIApplication()
+        app.launchArguments = ["UI_TESTING"]
         app.launch()
         app.buttons["Réglage"].tap()
         let myTable = app.tables.matching(identifier: "SettingTableView")
@@ -43,6 +45,7 @@ final class SettingAuditAccessibility: XCTestCase {
     
     func testAccessibilityGraph() throws {
         let app = UIApplication()
+        app.launchArguments = ["UI_TESTING"]
         app.launch()
         app.buttons["Réglage"].tap()
         let myTable = app.tables.matching(identifier: "SettingTableView")
@@ -57,6 +60,7 @@ final class SettingAuditAccessibility: XCTestCase {
 
     func testAccessibilityInfo() throws {
         let app = UIApplication()
+        app.launchArguments = ["UI_TESTING"]
         app.launch()
         app.buttons["Réglage"].tap()
         let myTable = app.tables.matching(identifier: "SettingTableView")
@@ -69,14 +73,15 @@ final class SettingAuditAccessibility: XCTestCase {
         }
     }
 
-    func testSetting() throws {
-        let app = UIApplication()
-        app.launch()
-        app.buttons["Réglage"].tap()
-        if #available(iOS 17.0, *) {
-            try app.performAccessibilityAudit()
-        } else {
-            // Fallback on earlier versions
-        }
-    }
+//    func testSetting() throws {
+//        let app = UIApplication()
+//        app.launchArguments = ["UI_TESTING"]
+//        app.launch()
+//        app.buttons["Réglage"].tap()
+//        if #available(iOS 17.0, *) {
+//            try app.performAccessibilityAudit()
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//    }
 }

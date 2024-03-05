@@ -15,6 +15,7 @@ final class TodayAuditAccessibility: XCTestCase {
     
     func testAccessibilityMonitor() throws {
         let app = UIApplication()
+        app.launchArguments = ["UI_TESTING"]
         app.launch()
 
         if #available(iOS 17.0, *) {
