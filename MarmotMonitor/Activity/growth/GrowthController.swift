@@ -146,11 +146,10 @@ extension GrowthController: UITableViewDataSource {
 extension GrowthController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textFieldActif = textField
-        textField.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.removeTarget(self, action: #selector(valueChanged), for: .editingChanged)
+        viewModel.setGrowth(with: textField.text, inPosition: textField.tag)
 
         textFieldActif = nil
         textField.resignFirstResponder()

@@ -29,8 +29,15 @@ final class GrowthViewModel {
         guard position < category.count else { return }
         let category = category[position].title
 
-        guard let value = Double(value ?? "") else { return }
-        growthData[category] = value
+        switch value?.contains(",") == true {
+        case true:
+            let formatedValue = value?.replacingOccurrences(of: ",", with: ".")
+            guard let value = Double(formatedValue ?? "") else { return }
+            growthData[category] = value
+        case false:
+            guard let value = Double(value ?? "") else { return }
+            growthData[category] = value
+        }
     }
 
     // MARK: - Core Data
