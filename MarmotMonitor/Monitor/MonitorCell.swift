@@ -163,5 +163,8 @@ class MonitorCell: UITableViewCell {
     private func setupEditingImage() {
         let multiplier = isAccessibilityCategory ? 0.7 : 0.9
         editingImage.heightAnchor.constraint(equalTo: date.heightAnchor, multiplier: multiplier).isActive = true
+
+        let frame = editingImage.convert(editingImage.bounds, to: nil) // Convertit le cadre en coordonnées de l'écran
+        editingImage.accessibilityFrame = frame.insetBy(dx: -10, dy: -10)
     }
 }
