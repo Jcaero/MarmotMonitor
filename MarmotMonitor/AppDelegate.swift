@@ -15,17 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        let arguments = ProcessInfo.processInfo.arguments
-        for argument in arguments {
-            switch argument {
-            case "UI_TESTING":
+    #if DEBUG
                 UserDefaults.standard.set("Pierrick", forKey: "babyName")
                 UserDefaults.standard.set("Pierrick", forKey: "parentName")
                 UserDefaults.standard.set("18/01/2021", forKey: "birthDay")
-            default:
-                break
-            }
-        }
+    #endif
         return true
     }
 

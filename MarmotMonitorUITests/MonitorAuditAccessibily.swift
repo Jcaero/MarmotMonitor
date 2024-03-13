@@ -16,7 +16,6 @@ final class MonitorAuditAccessibily: XCTestCase {
     
     func testAccessibilityMonitor() throws {
         let app = UIApplication()
-        app.launchArguments = ["UI_TESTING"]
         app.launch()
         app.buttons["Monitor"].tap()
         if #available(iOS 17.0, *) {
